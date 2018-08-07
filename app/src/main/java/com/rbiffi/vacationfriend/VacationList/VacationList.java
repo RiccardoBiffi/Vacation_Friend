@@ -1,6 +1,9 @@
 package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
@@ -23,6 +27,10 @@ public class VacationList extends AppCompatActivity {
     private FragmentAdapter fragmentAdapter;
     private TabLayout tabLayout;
     private Toolbar toolbar;
+    private FloatingActionButton floatingButton;
+
+    //todo da spostare
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,44 @@ public class VacationList extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
+
+        floatingButton = findViewById(R.id.floatingActionButton);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //todo chiama activity per aggiungere nuova vacanza
+                Toast.makeText(getApplicationContext(), "Add", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //todo da spostare nella classe corretta assieme al campo
+        bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.actionHome:
+                        //todo apri attività
+                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.actionItinerario:
+                        //todo apri attività
+                        Toast.makeText(getApplicationContext(), "Itinerario", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.actionSpese:
+                        //todo apri attività
+                        Toast.makeText(getApplicationContext(), "Spese", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.actionListe:
+                        //todo apri attività
+                        Toast.makeText(getApplicationContext(), "Liste", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
     }
 
 
