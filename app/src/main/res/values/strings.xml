@@ -3,4 +3,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="vlTab2">Archivio</string>
     <string name="vlTab1">Le mie vacanze</string>
+    <string name="bnHome">Home</string>
+    <string name="bnItinerario">Itinerario</string>
+    <string name="bnSpese">Spese</string>
+    <string name="bnListe">Liste</string>
 </resources>

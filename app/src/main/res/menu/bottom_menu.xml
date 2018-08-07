@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionHome"
+        android:title="@string/bnHome"
+        android:icon="@drawable/ic_home_white_24dp"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+
+    <item
+        android:id="@+id/actionItinerario"
+        android:title="@string/bnItinerario"
+        android:icon="@drawable/ic_explore_white_24dp"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+
+    <item
+        android:id="@+id/actionSpese"
+        android:title="@string/bnSpese"
+        android:icon="@drawable/ic_attach_money_white_24dp"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+
+    <item
+        android:id="@+id/actionListe"
+        android:title="@string/bnListe"
+        android:icon="@drawable/ic_view_list_white_24px"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+
+</menu>
