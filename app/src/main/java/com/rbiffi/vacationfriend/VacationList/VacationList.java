@@ -41,10 +41,6 @@ public class VacationList extends AppCompatActivity {
     //todo da spostare
     private BottomNavigationView bottomNavigationView;
 
-    private ListView vacationList;
-    private ArrayList dataSource;
-    private ArrayAdapter dataAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,20 +81,6 @@ public class VacationList extends AppCompatActivity {
             }
         });
 
-        // uso un adapter per recuperare i dati da una sorgente e posizionarli nelle giuste posizioni dell'interfaccia
-        // è l'intermediario che visualizza i dati
-        // tipo l'array adapter ha per sorgente un array. (a me serve sia salvarli che leggerli)
-        dataSource = new ArrayList();
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
-
-        vacationList = findViewById(R.id.vacationElList);
-        vacationList.setDivider(null); // rimuovo il divisore dalle liste (perché noi l'abbiamo fatto interno all'elemento
-
-        // gli dico all'adapter dove sono i dati (source) e dove metterli (layout, elemento)
-        dataAdapter = new ArrayAdapter(this, R.layout.vacation_list_row, R.id.rowText, dataSource);
-        vacationList.setAdapter(dataAdapter); // connetto la lista e l'adapter
     }
 
     private void setupSideDrawer() {
