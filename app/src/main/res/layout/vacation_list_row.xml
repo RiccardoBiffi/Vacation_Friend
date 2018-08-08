@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <android.view.View
+            android:id="@+id/rowTab"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            />
+
+        <TextView
+            android:id="@+id/rowText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Reminder text"
+
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <!-- elemento generico base view, per creare aree colorate o separatori -->
+    <android.view.View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lighter_gray"
+        />
+
+</LinearLayout>
