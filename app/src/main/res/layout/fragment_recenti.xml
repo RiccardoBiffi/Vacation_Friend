@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fillViewport="true">
+    android:layout_height="wrap_content"
+    tools:context=".VacationList.VacationList"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/vacationElList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".VacationList.VacationList"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
 
-        <ListView
-            android:id="@+id/vacationElList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            />
-
-    </RelativeLayout>
-</ScrollView>
+</RelativeLayout>
