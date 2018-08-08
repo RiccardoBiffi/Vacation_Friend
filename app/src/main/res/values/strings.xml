@@ -7,4 +7,12 @@
     <string name="bnItinerario">Itinerario</string>
     <string name="bnSpese">Spese</string>
     <string name="bnListe">Liste</string>
+    <string name="sdImpostazioni">Impostazioni</string>
+    <string name="sdNovita">Novità</string>
+    <string name="sdFeedback">Feedback</string>
+    <string name="sdAbout">About</string>
+    <string name="sdOpenMenu">Menù laterale aperto</string>
+    <string name="sdCloseMenu">Menù laterale chiuso</string>
+    <string name="testUserName">Nome Cognome</string>
+    <string name="testUserEmail">useremail@emaildomain.com</string>
 </resources>
