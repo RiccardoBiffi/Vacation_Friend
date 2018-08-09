@@ -57,7 +57,7 @@ public class Recenti extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         vacationList = getView().findViewById(R.id.vacationElList);
-        vacationList.setDivider(null); // rimuovo il divisore dalle liste (perché noi l'abbiamo fatto interno all'elemento
+        vacationList.setDivider(null); // rimuovo il divisore dalle liste (perché noi l'abbiamo fatto interno all'elemento)
 
         // gli dico all'adapter dove sono i dati (source) e dove metterli (layout, elemento)
         dataAdapter = new ArrayAdapter(getContext(), R.layout.vacation_list_row, R.id.rowText, dataSource);
