@@ -18,4 +18,6 @@
     <string name="vlModifica">Modifica</string>
     <string name="vlArchivia">Archivia</string>
     <string name="vlElimina">Elimina</string>
+    <string name="vlImageDescriptionAcc">Vacanza, tocca per dettagli</string>
+    <string name="vlOpzioniAcc">Opzioni</string>
 </resources>

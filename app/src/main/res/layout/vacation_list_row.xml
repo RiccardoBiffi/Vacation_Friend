@@ -6,14 +6,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:padding="16dp">
+    android:paddingTop="16dp"
+    android:paddingStart="16dp"
+    android:paddingLeft="16dp"
+    tools:ignore="RtlSymmetry"
+    android:paddingEnd="16dp">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/vacationImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:scaleType="centerCrop"
+        android:clickable="true"
+        android:focusable="true"
 
         app:srcCompat="@drawable/vacation_photo"
 
@@ -21,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        android:contentDescription="@string/vlImageDescriptionAcc" />
 
     <TextView
         android:id="@+id/rowText"
@@ -36,9 +42,9 @@
         android:textSize="18sp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@id/vacationImage"
         app:layout_constraintEnd_toStartOf="@id/vacationMenu"
-        app:layout_constraintStart_toStartOf="@id/imageView2"
+        app:layout_constraintStart_toStartOf="@id/vacationImage"
         />
 
     <ImageButton
@@ -52,9 +58,9 @@
         android:src="@drawable/ic_more_vert_white_24dp"
 
         app:layout_constraintStart_toEndOf="@id/rowText"
-        app:layout_constraintEnd_toEndOf="@id/imageView2"
-        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintEnd_toEndOf="@id/vacationImage"
+        app:layout_constraintBottom_toBottomOf="@id/vacationImage"
         app:layout_constraintTop_toTopOf="@id/rowText"
-        />
+        android:contentDescription="@string/vlOpzioniAcc" />
 
 </android.support.constraint.ConstraintLayout>
