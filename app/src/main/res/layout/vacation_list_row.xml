@@ -36,23 +36,25 @@
         android:textSize="18sp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintEnd_toStartOf="@id/vacationMenu"
+        app:layout_constraintStart_toStartOf="@id/imageView2"
         />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/vacationMenu"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
 
         android:background="@android:drawable/screen_background_dark_transparent"
         android:src="@drawable/ic_more_vert_white_24dp"
 
-        app:layout_constraintStart_toEndOf="@+id/rowText"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/rowText"
+        app:layout_constraintStart_toEndOf="@id/rowText"
+        app:layout_constraintEnd_toEndOf="@id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintTop_toTopOf="@id/rowText"
         />
 
 </android.support.constraint.ConstraintLayout>

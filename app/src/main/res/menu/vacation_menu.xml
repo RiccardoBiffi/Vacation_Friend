@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionModifica"
+        android:title="Test1"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/actionArchivia"
+        android:title="Test2"
+        android:icon="@drawable/ic_archive_black_24dp"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/actionElimina"
+        android:title="Test2"
+        android:icon="@drawable/ic_delete_black_24dp"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
