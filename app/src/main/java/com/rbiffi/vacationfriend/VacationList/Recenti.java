@@ -1,5 +1,6 @@
 package com.rbiffi.vacationfriend.VacationList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.view.menu.MenuPopupHelper;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,11 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
-
 import com.rbiffi.vacationfriend.R;
-
 import java.util.ArrayList;
 
 public class Recenti extends Fragment{
@@ -67,10 +67,42 @@ public class Recenti extends Fragment{
         dataAdapter = new VacationListAdapter(getContext(), R.layout.vacation_list_row, R.id.rowText, dataSource);
         vacationList.setAdapter(dataAdapter); // connetto la lista e l'adapter
         vacationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                 //todo switch per capire cosa è stato cliccato. 2 soli comportamenti.
-                Toast.makeText(getActivity(), "Click"+i, Toast.LENGTH_SHORT).show();
+
+                PopupMenu popup = new PopupMenu(getActivity(),view);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.actionModifica:
+                                //todo apri modifica vacanza
+                                Toast.makeText(getActivity(), "Modifica"+i, Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.actionArchivia:
+                                // todo archivia vacanza
+                                Toast.makeText(getActivity(), "Archivia"+i, Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.actionElimina:
+                                // todo elimina vacanza
+                                Toast.makeText(getActivity(), "Elimina"+i, Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                Menu menu = popup.getMenu();
+                popup.getMenuInflater().inflate(R.menu.vacation_menu, menu);
+
+                // per rendere visibile l'icona anche nell'overflow menù
+                MenuPopupHelper menuHelper = new MenuPopupHelper(getActivity(), (MenuBuilder) menu, view);
+                menuHelper.setForceShowIcon(true);
+                menuHelper.show();
+
             }
         });
 /*

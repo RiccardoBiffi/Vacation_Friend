@@ -5,21 +5,21 @@
 
     <item
         android:id="@+id/actionModifica"
-        android:title="Test1"
+        android:title="@string/vlModifica"
         android:icon="@drawable/ic_mode_edit_black_24dp"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/actionArchivia"
-        android:title="Test2"
+        android:title="@string/vlArchivia"
         android:icon="@drawable/ic_archive_black_24dp"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/actionElimina"
-        android:title="Test2"
+        android:title="@string/vlElimina"
         android:icon="@drawable/ic_delete_black_24dp"
         app:showAsAction="ifRoom"
         />
