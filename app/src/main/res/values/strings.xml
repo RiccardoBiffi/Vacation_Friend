@@ -15,4 +15,7 @@
     <string name="sdCloseMenu">Menù laterale chiuso</string>
     <string name="testUserName">Nome Cognome</string>
     <string name="testUserEmail">useremail@emaildomain.com</string>
+    <string name="vlModifica">Modifica</string>
+    <string name="vlArchivia">Archivia</string>
+    <string name="vlElimina">Elimina</string>
 </resources>
