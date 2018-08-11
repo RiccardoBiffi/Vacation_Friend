@@ -1,13 +1,24 @@
 package com.rbiffi.vacationfriend.VacationList;
 
+import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.menu.MenuBuilder;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
 
@@ -18,6 +29,8 @@ public class Recenti extends Fragment{
     private ListView vacationList;
     private ArrayList dataSource;
     private ArrayAdapter dataAdapter;
+
+    private ImageButton vacationMenu;
 
     @Nullable
     @Override
@@ -42,15 +55,6 @@ public class Recenti extends Fragment{
         dataSource.add("Oggetto 1");
         dataSource.add("Oggetto 2");
         dataSource.add("Oggetto 3");
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
     }
 
     @Override
@@ -60,8 +64,82 @@ public class Recenti extends Fragment{
         vacationList.setDivider(null); // rimuovo il divisore dalle liste (perché noi l'abbiamo fatto interno all'elemento)
 
         // gli dico all'adapter dove sono i dati (source) e dove metterli (layout, elemento)
-        dataAdapter = new ArrayAdapter(getContext(), R.layout.vacation_list_row, R.id.rowText, dataSource);
+        dataAdapter = new VacationListAdapter(getContext(), R.layout.vacation_list_row, R.id.rowText, dataSource);
         vacationList.setAdapter(dataAdapter); // connetto la lista e l'adapter
+        vacationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //todo switch per capire cosa è stato cliccato. 2 soli comportamenti.
+                Toast.makeText(getActivity(), "Click"+i, Toast.LENGTH_SHORT).show();
+            }
+        });
+/*
+        vacationMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(getActivity(),view);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.actionModifica:
+                                //todo apri modifica vacanza
+                                Toast.makeText(getActivity(), "Modifica", Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.actionArchivia:
+                                // todo archivia vacanza
+                                Toast.makeText(getActivity(), "Archivia", Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.actionElimina:
+                                // todo elimina vacanza
+                                Toast.makeText(getActivity(), "Elimina", Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                MenuInflater inflater = popup.getMenuInflater();
+                inflater.inflate(R.menu.vacation_menu, popup.getMenu());
+                popup.show();
+            }
+        });
+*/
+    }
+
+    //todo devo fare un custom adapter per aggiungere al pulsante l'onclick listener
+    class VacationListAdapter extends ArrayAdapter{
+
+        public VacationListAdapter(@NonNull Context context, int resource) {
+            super(context, resource);
+        }
+
+        public VacationListAdapter(Context context, int vacation_list_row, int rowText, ArrayList dataSource) {
+            super(context, vacation_list_row, rowText, dataSource);
+        }
+
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+            if( convertView == null ){
+                //We must create a View:
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                convertView = inflater.inflate(R.layout.vacation_list_row, parent, false);
+            }
+            //Operazioni da fare alla view
+            ImageButton ib = convertView.findViewById(R.id.vacationMenu);
+            ib.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // rimando l'evento del click al frammento.onItemCLick(). Lo gestirà lui a seconda dell'elemento cliccato
+                    ((ListView) parent).performItemClick(view, position, 0);
+                }
+            });
+
+
+
+            return convertView;
+        }
     }
 
     // logica del frammento qui sotto
