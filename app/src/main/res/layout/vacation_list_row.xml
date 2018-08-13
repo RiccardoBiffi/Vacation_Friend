@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:paddingTop="16dp"
-    android:paddingStart="16dp"
-    android:paddingLeft="16dp"
-    tools:ignore="RtlSymmetry"
-    android:paddingEnd="16dp">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <ImageView
-        android:id="@+id/vacationImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:scaleType="centerCrop"
-        android:clickable="true"
-        android:focusable="true"
-
-        app:srcCompat="@drawable/vacation_photo"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/vlImageDescriptionAcc" />
+        >
 
-    <TextView
-        android:id="@+id/rowText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:ignore="RtlSymmetry"
+            >
 
-        android:background="@android:drawable/screen_background_dark_transparent"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:text="Vacation name"
-        android:textSize="18sp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            <ImageView
+                android:id="@+id/vacationImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:contentDescription="@string/vlImageDescriptionAcc"
+                android:focusable="true"
+                android:orientation="horizontal"
 
-        app:layout_constraintBottom_toBottomOf="@id/vacationImage"
-        app:layout_constraintEnd_toStartOf="@id/vacationMenu"
-        app:layout_constraintStart_toStartOf="@id/vacationImage"
-        />
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/vacation_photo" />
 
-    <ImageButton
-        android:id="@+id/vacationMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:clickable="true"
-        android:focusable="true"
+            <TextView
+                android:id="@+id/rowText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
 
-        android:background="@android:drawable/screen_background_dark_transparent"
-        android:src="@drawable/ic_more_vert_white_24dp"
+                android:background="@android:drawable/screen_background_dark_transparent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:text="Vacation name"
+                android:textSize="18sp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        app:layout_constraintStart_toEndOf="@id/rowText"
-        app:layout_constraintEnd_toEndOf="@id/vacationImage"
-        app:layout_constraintBottom_toBottomOf="@id/vacationImage"
-        app:layout_constraintTop_toTopOf="@id/rowText"
-        android:contentDescription="@string/vlOpzioniAcc" />
+                app:layout_constraintBottom_toBottomOf="@id/vacationImage"
+                app:layout_constraintEnd_toStartOf="@id/vacationMenu"
+                app:layout_constraintStart_toStartOf="@id/vacationImage" />
 
-</android.support.constraint.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/vacationMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@android:drawable/screen_background_dark_transparent"
+                android:clickable="true"
+
+                android:contentDescription="@string/vlOpzioniAcc"
+                android:focusable="true"
+
+                android:src="@drawable/ic_more_vert_white_24dp"
+                app:layout_constraintBottom_toBottomOf="@id/vacationImage"
+                app:layout_constraintEnd_toEndOf="@id/vacationImage"
+                app:layout_constraintStart_toEndOf="@id/rowText"
+                app:layout_constraintTop_toTopOf="@id/rowText" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

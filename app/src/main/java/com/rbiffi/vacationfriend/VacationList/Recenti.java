@@ -2,7 +2,6 @@ package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,7 +160,7 @@ public class Recenti extends Fragment{
             convertView = maybeRecycleView(convertView, parent);
 
             //Operazioni agguntive da fare alla view
-            setOverflowCLickListener(position, convertView, (ListView) parent, R.id.vacationMenu);
+            setOverflowClickListener(position, convertView, (ListView) parent, R.id.vacationMenu);
             setImageClickListener(position, convertView, (ListView) parent);
 
             return convertView;
@@ -179,7 +177,7 @@ public class Recenti extends Fragment{
             });
         }
 
-        private void setOverflowCLickListener(final int position, @NonNull View convertView, @NonNull final ListView parent, int vacationMenu) {
+        private void setOverflowClickListener(final int position, @NonNull View convertView, @NonNull final ListView parent, int vacationMenu) {
             ImageButton ib = convertView.findViewById(vacationMenu);
             ib.setOnClickListener(new View.OnClickListener() {
                 @Override

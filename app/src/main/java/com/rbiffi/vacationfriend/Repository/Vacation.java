@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity(indices = {@Index("id")})
-public class Vacation {
+public class Vacation{
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -35,3 +35,4 @@ public class Vacation {
     */
     public String note;
 }
+
