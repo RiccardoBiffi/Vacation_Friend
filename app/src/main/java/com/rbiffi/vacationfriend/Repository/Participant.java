@@ -13,6 +13,7 @@ public class Participant {
     @NonNull
     public String email;
 
+    //da usare come foreignkey per la relazione con la vacanza
     public int vacationId;
 
     @NonNull
