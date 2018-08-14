@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -34,7 +35,6 @@ public class VacationList extends AppCompatActivity {
     private FragmentAdapter fragmentAdapter;
     private TabLayout tabLayout;
     private Toolbar toolbar;
-    private FloatingActionButton floatingButton;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -49,7 +49,6 @@ public class VacationList extends AppCompatActivity {
         setupFragments();
         setupTabsLabel();
         setupActionBar();
-        setupFloatingButton();
         setupSideDrawer();
 
         //todo da spostare nella classe corretta assieme al campo
@@ -121,17 +120,6 @@ public class VacationList extends AppCompatActivity {
                         return false;
                 }
                 return true;
-            }
-        });
-    }
-
-    private void setupFloatingButton() {
-        floatingButton = findViewById(R.id.floatingActionButton);
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //todo chiama activity per aggiungere nuova vacanza
-                Toast.makeText(getApplicationContext(), "Add", Toast.LENGTH_SHORT).show();
             }
         });
     }
