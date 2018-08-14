@@ -1,10 +1,14 @@
 package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
@@ -21,15 +25,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Vacation;
+import com.rbiffi.vacationfriend.Repository.VacationLite;
+import com.rbiffi.vacationfriend.VacationViewModel;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Recenti extends Fragment{
 
+    private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
+    private VacationViewModel viewModel;
+
+    private FloatingActionButton floatingButton;
+
     private ListView vacationList;
     private ArrayList dataSource;
-    private ArrayAdapter dataAdapter;
+    private VacationListAdapter dataAdapter; // genericizzalo con VacanzeLight
 
-    private ImageButton vacationMenu;
 
     @Nullable
     @Override
@@ -43,10 +58,24 @@ public class Recenti extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
+        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
+
+        // osservo il livedata per reagire quando i dati cambiano
+        viewModel.getAllVacations().observe(this, new Observer<List<VacationLite>>() {
+            @Override
+            public void onChanged(@Nullable List<VacationLite> vacationLites) {
+                // aggiorna la copia cache dei dati
+                for (VacationLite vl : vacationLites) {
+                    dataSource.add(vl);
+                }
+            }
+        });
 
         // uso un adapter per recuperare i dati da una sorgente e posizionarli nelle giuste posizioni dell'interfaccia
         // è l'intermediario che visualizza i dati
         // tipo l'array adapter ha per sorgente un array. (a me serve sia salvarli che leggerli)
+        /*
         dataSource = new ArrayList();
         dataSource.add("Oggetto 1");
         dataSource.add("Oggetto 2");
@@ -54,15 +83,43 @@ public class Recenti extends Fragment{
         dataSource.add("Oggetto 1");
         dataSource.add("Oggetto 2");
         dataSource.add("Oggetto 3");
+        */
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setupFloatingButton();
         setupListWithAdapter();
         setupRowClickListeners();
         setupListFooter();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK){
+            Vacation v = new Vacation();
+            v.name = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.TITLE_FIELD);
+            v.note = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.NOTES_FIELD);
+            viewModel.insert(v);
+        } else {
+            Toast.makeText(getContext(), "Elemento non salvato perché vuoto", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void setupFloatingButton() {
+        floatingButton = getActivity().findViewById(R.id.floatingActionButton);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),NewVacationActivity.class);
+                startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
+            }
+        });
     }
 
     private void setupListFooter() {
@@ -142,6 +199,7 @@ public class Recenti extends Fragment{
             }
         });
     }
+
 
     //Custom adapter per aggiungere l'onclick listener al pulsante ed al resto
     class VacationListAdapter extends ArrayAdapter{

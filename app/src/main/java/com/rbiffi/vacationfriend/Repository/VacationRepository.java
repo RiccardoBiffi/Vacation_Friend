@@ -28,6 +28,7 @@ public class VacationRepository {
         new insertAsyncTask(vacationDao).execute(vacation);
     }
 
+
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private class insertAsyncTask extends AsyncTask<Vacation, Void, Void> {
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:showIn="@layout/activity_vacation_list"
+    tools:showIn="@layout/fragment_recenti"
 
     android:clickable="true"
     android:focusable="true"
