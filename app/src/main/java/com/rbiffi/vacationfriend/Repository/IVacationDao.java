@@ -8,6 +8,9 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.rbiffi.vacationfriend.Utils.VacationLite;
+
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -17,13 +20,13 @@ public interface IVacationDao {
     @Query("SELECT * FROM Vacation WHERE id = :id")
     Vacation getVacationDetails(int id);
 
-    @Query("SELECT * FROM Vacation WHERE name < :startDate")
-    List<VacationLite> getNextVacations(String startDate);
+    @Query("SELECT * FROM Vacation WHERE date('now') < :startDate")
+    List<VacationLite> getNextVacations(Date startDate);
 
-    @Query("SELECT * FROM Vacation WHERE name BETWEEN :startDate AND :endDate")
-    List<VacationLite> getCurrentVacations(String startDate, String endDate);
+    @Query("SELECT * FROM Vacation WHERE date('now') BETWEEN :startDate AND :endDate")
+    List<VacationLite> getCurrentVacations(Date startDate, Date endDate);
 
-    @Query("SELECT * FROM Vacation WHERE name > :endDate")
+    @Query("SELECT * FROM Vacation WHERE date('now') > :endDate")
     List<VacationLite> getEndedVacations(String endDate);
 
     @Query("SELECT * from Vacation ORDER BY name ASC")

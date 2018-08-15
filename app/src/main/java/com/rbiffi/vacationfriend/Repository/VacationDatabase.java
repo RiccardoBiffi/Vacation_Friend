@@ -4,13 +4,25 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Utils.Converters;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 @Database(entities = {
         Vacation.class,
-        Participant.class}, version = 1)
+        Participant.class}, version = 2)
+@TypeConverters({Converters.class})
 public abstract class VacationDatabase extends RoomDatabase {
 
     private static VacationDatabase INSTANCE;
@@ -30,6 +42,7 @@ public abstract class VacationDatabase extends RoomDatabase {
                 if(INSTANCE == null){
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(), VacationDatabase.class,"VacationDB")
+                            .fallbackToDestructiveMigration()
                             .addCallback(roomDbCallback)
                             .build();
                 }
@@ -51,17 +64,46 @@ public abstract class VacationDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... vacations) {
             vDao.deleteAll();
 
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
             Vacation v = new Vacation();
             v.name = "Croazia 2018";
+            String start = "25/08/2017";
+            String end = "02/09/2017";
+            try {
+                v.startDate = format.parse(start);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                v.endDate = format.parse(end);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
             v.note = "Prima prova";
             vDao.insert(v);
 
             v = new Vacation();
             v.name = "Ferragosto 2018";
+            start = "12/08/2017";
+            end = "17/08/2017";
+            try {
+                v.startDate = format.parse(start);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                v.endDate = format.parse(end);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo1);
             v.note = "Seconda prova";
             vDao.insert(v);
 
             return null;
         }
     }
+
 }

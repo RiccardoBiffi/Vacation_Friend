@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="16dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
@@ -42,7 +42,7 @@
                 app:srcCompat="@drawable/vacation_photo" />
 
             <TextView
-                android:id="@+id/rowText"
+                android:id="@+id/vacation_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -71,8 +71,8 @@
                 android:src="@drawable/ic_more_vert_white_24dp"
                 app:layout_constraintBottom_toBottomOf="@id/vacationImage"
                 app:layout_constraintEnd_toEndOf="@id/vacationImage"
-                app:layout_constraintStart_toEndOf="@id/rowText"
-                app:layout_constraintTop_toTopOf="@id/rowText" />
+                app:layout_constraintStart_toEndOf="@id/vacation_title"
+                app:layout_constraintTop_toTopOf="@id/vacation_title" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
