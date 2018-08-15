@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend;
+package com.rbiffi.vacationfriend.Utils;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,7 +6,6 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Vacation;
-import com.rbiffi.vacationfriend.Repository.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class VacationViewModel extends AndroidViewModel {
 
     private VacationRepository repository;
 
-    // per cashare dati
+    // per cashare dati ascoltati all'aggiornamento
     private LiveData<List<VacationLite>> allVacations;
 
     public VacationViewModel(@NonNull Application app) {

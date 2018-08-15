@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.rbiffi.vacationfriend.Utils.VacationLite;
+
 import java.util.List;
 
 //classe per gestire le sorgenti di dati. Utile a mettere in un unico luogo tutte risorse dati.

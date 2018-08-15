@@ -7,10 +7,9 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Relation;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
-
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
 @Entity(indices = {@Index("id")})
 public class Vacation{
@@ -21,18 +20,14 @@ public class Vacation{
 
     @NonNull
     public String name;
-
-    //todo i tipi di dato commentati vanno convertiti in qualche modo prima di essere usati.
-    // forse si può fare lo stesso con colonne contenenti liste di oggetti
-    /*@NonNull
+    @NonNull
     public Date startDate;
     @NonNull
     public Date endDate;
 
     //@Relation(parentColumn = "id", entityColumn = "vacationId")
     //public List<Participant> participants;
-    public Bitmap photo;
-    */
+    public Uri photo;
     public String note;
 }
 
