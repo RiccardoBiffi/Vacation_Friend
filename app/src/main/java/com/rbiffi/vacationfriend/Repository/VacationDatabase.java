@@ -5,7 +5,6 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,7 +13,6 @@ import android.support.annotation.NonNull;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Converters;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,14 +32,12 @@ public abstract class VacationDatabase extends RoomDatabase {
         }
     };
 
-    public abstract IVacationDao getVacationDao();
-
-    public static VacationDatabase getDatabase(final Context context){
-        if(INSTANCE == null){
-            synchronized (VacationDatabase.class){
-                if(INSTANCE == null){
+    public static VacationDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (VacationDatabase.class) {
+                if (INSTANCE == null) {
                     INSTANCE = Room
-                            .databaseBuilder(context.getApplicationContext(), VacationDatabase.class,"VacationDB")
+                            .databaseBuilder(context.getApplicationContext(), VacationDatabase.class, "VacationDB")
                             .fallbackToDestructiveMigration()
                             .addCallback(roomDbCallback)
                             .build();
@@ -51,8 +47,9 @@ public abstract class VacationDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    public abstract IVacationDao getVacationDao();
 
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void>{
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final IVacationDao vDao;
 

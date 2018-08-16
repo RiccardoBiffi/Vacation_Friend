@@ -63,10 +63,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:background="@android:drawable/screen_background_dark_transparent"
-                android:clickable="true"
 
-                android:contentDescription="@string/vlOpzioniAcc"
+                android:clickable="true"
                 android:focusable="true"
+                android:contentDescription="@string/vlOpzioniAcc"
 
                 android:src="@drawable/ic_more_vert_white_24dp"
                 app:layout_constraintBottom_toBottomOf="@id/vacationImage"

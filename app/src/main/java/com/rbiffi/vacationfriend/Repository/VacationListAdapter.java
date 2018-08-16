@@ -5,33 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.VacationLite;
+import com.rbiffi.vacationfriend.VacationList.IClickEvents;
 
 import java.util.List;
 
 
-public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapter.VacationViewHolder>{
-
-    class VacationViewHolder extends RecyclerView.ViewHolder{
-
-        //TODO poi devo salvare anche gli altri campi
-        private final TextView vacationTitleView;
-        private final ImageView vacationImageView;
-
-        private VacationViewHolder(View itemView) {
-            super(itemView);
-            vacationTitleView = itemView.findViewById(R.id.vacation_title);
-            vacationImageView = itemView.findViewById(R.id.vacationImage);
-        }
-    }
+public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapter.VacationViewHolder> {
 
     private final LayoutInflater inflater;
+    private IClickEvents listener;
     private List<VacationLite> vacationListCache;
 
-    public VacationListAdapter(Context context){
+    public VacationListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -44,11 +35,38 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     @Override
     public void onBindViewHolder(VacationListAdapter.VacationViewHolder holder, int position) {
-        if(vacationListCache != null){
-            //rimpiazza i dati per la posizione corrente
+        final VacationLite vacation = vacationListCache.get(position);
+        if (vacationListCache != null) {
+            //rimpiazza i dati ed assegna i click per la posizione corrente
             VacationLite current = vacationListCache.get(position);
             holder.vacationTitleView.setText(current.name);
+            holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.vacationClick(vacation);
+                    }
+                }
+            });
+
             holder.vacationImageView.setImageURI(current.photo);
+            holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.vacationClick(vacation);
+                    }
+                }
+            });
+
+            holder.vacationOverflow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.overflowClick(v, vacation);
+                    }
+                }
+            });
         } else {
             // Dati non pronti, placeholder
             holder.vacationTitleView.setText("Caricamento...");
@@ -58,13 +76,32 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     @Override
     public int getItemCount() {
-        if(vacationListCache == null) return 0;
+        if (vacationListCache == null) return 0;
         return vacationListCache.size();
     }
 
-    public void setVacations(List<VacationLite> vacations){
+    public void setListener(IClickEvents listener) {
+        this.listener = listener;
+    }
+
+    public void setVacations(List<VacationLite> vacations) {
         vacationListCache = vacations;
         notifyDataSetChanged();
+    }
+
+    class VacationViewHolder extends RecyclerView.ViewHolder {
+
+        //TODO poi devo salvare anche le altre view che mi interessano
+        private final TextView vacationTitleView;
+        private final ImageView vacationImageView;
+        private final ImageButton vacationOverflow;
+
+        private VacationViewHolder(View itemView) {
+            super(itemView);
+            vacationTitleView = itemView.findViewById(R.id.vacation_title);
+            vacationImageView = itemView.findViewById(R.id.vacationImage);
+            vacationOverflow = itemView.findViewById(R.id.vacationMenu);
+        }
     }
 
     /*
