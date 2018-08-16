@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationListAdapter;
@@ -30,7 +31,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Recenti extends Fragment{
+public class Recenti extends Fragment implements IClickEvents {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private VacationViewModel viewModel;
@@ -54,18 +55,6 @@ public class Recenti extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // uso un adapter per recuperare i dati da una sorgente e posizionarli nelle giuste posizioni dell'interfaccia
-        // è l'intermediario che visualizza i dati
-        // tipo l'array adapter ha per sorgente un array. (a me serve sia salvarli che leggerli)
-        /*
-        dataSource = new ArrayList();
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
-        dataSource.add("Oggetto 1");
-        dataSource.add("Oggetto 2");
-        dataSource.add("Oggetto 3");
-        */
     }
 
     @Override
@@ -82,7 +71,7 @@ public class Recenti extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK){
+        if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK) {
             Vacation v = new Vacation();
             v.name = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.TITLE_FIELD);
             v.note = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.NOTES_FIELD);
@@ -98,7 +87,7 @@ public class Recenti extends Fragment{
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),NewVacationActivity.class);
+                Intent intent = new Intent(getActivity(), NewVacationActivity.class);
                 startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
             }
         });
@@ -136,6 +125,7 @@ public class Recenti extends Fragment{
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
         final VacationListAdapter adapter = new VacationListAdapter(getContext());
+        adapter.setListener(this);
         vacationList.setAdapter(adapter);
 
         vacationLayout = new LinearLayoutManager(getContext());
@@ -155,10 +145,20 @@ public class Recenti extends Fragment{
 
     }
 
+    @Override
+    public void vacationClick(VacationLite vacation) {
+        Toast.makeText(getContext(), "Vacanza" + vacation.id, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void overflowClick(View v, VacationLite vacation) {
+        openPopupMenu(v, vacation);
+    }
+
     @SuppressLint("RestrictedApi")
-    private void openPopupMenu(View view, final int i) {
+    private void openPopupMenu(View view, VacationLite vacation) {
         PopupMenu popup = new PopupMenu(getContext(), view);
-        setActionsOnOptions(i, popup);
+        setActionsOnOptions(vacation, popup);
 
         Menu menu = popup.getMenu();
         popup.getMenuInflater().inflate(R.menu.vacation_menu, menu);
@@ -176,22 +176,22 @@ public class Recenti extends Fragment{
         return menuHelper;
     }
 
-    private void setActionsOnOptions(final int i, PopupMenu popup) {
+    private void setActionsOnOptions(final VacationLite vacation, PopupMenu popup) {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
                         //todo apri modifica vacanza
-                        Toast.makeText(getContext(), "Modifica" + i, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Modifica" + vacation.id, Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.actionArchivia:
                         // todo archivia vacanza
-                        Toast.makeText(getContext(), "Archivia" + i, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Archivia" + vacation.id, Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.actionElimina:
                         // todo elimina vacanza
-                        Toast.makeText(getContext(), "Elimina" + i, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Elimina" + vacation.id, Toast.LENGTH_SHORT).show();
                         return true;
                     default:
                         return false;

@@ -1,10 +1,9 @@
 package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,20 +13,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
-
-import java.util.ArrayList;
 
 public class VacationList extends AppCompatActivity {
 
@@ -56,7 +49,7 @@ public class VacationList extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.actionHome:
                         //todo apri attività
                         Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
@@ -90,7 +83,7 @@ public class VacationList extends AppCompatActivity {
     private void setupDrawerLayoutToggle() {
         drawerLayout = findViewById(R.id.drawer_layout);
         // elemento interattivo per aprire sidedrawer e visualizzarlo in action bar
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.sdOpenMenu, R.string.sdCloseMenu);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.sdOpenMenu, R.string.sdCloseMenu);
         drawerLayout.addDrawerListener(drawerToggle); // connetto il layout con il pulsante
         drawerToggle.syncState(); // "operazione di pulizia"
     }
@@ -101,7 +94,7 @@ public class VacationList extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.actionImpostazioni:
                         Toast.makeText(getApplicationContext(), "Impostazioni", Toast.LENGTH_SHORT).show();
                         break;
@@ -140,7 +133,6 @@ public class VacationList extends AppCompatActivity {
         viewPager.setAdapter(fragmentAdapter); // attacca al viewpager il gestore dei frammenti
     }
 
-
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { // mostra il menù sulla "action" bar
@@ -149,7 +141,7 @@ public class VacationList extends AppCompatActivity {
         menuInf.inflate(R.menu.test_menu, menu); // mette il menu gonfiato nel parametro in input
 
         // per rendere visibile l'icona anche nell'overflow menù
-        if(menu instanceof MenuBuilder){
+        if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
         }
@@ -159,7 +151,7 @@ public class VacationList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { // decide cosa fare quando una voce è selezionata
         // l'item è la voce selezionata
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.actionTest1:
                 Toast.makeText(getApplicationContext(), "Test1", Toast.LENGTH_SHORT).show();
                 return true;
@@ -172,7 +164,7 @@ public class VacationList extends AppCompatActivity {
     }
 
     //classe interna per gestire i frammenti
-    public class FragmentAdapter extends FragmentPagerAdapter{
+    public class FragmentAdapter extends FragmentPagerAdapter {
 
         public FragmentAdapter(FragmentManager fm) {
             super(fm);
@@ -181,7 +173,7 @@ public class VacationList extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // riempie l'interfaccia con gli elementi che voglio, passandogli il fragment giusto
-            switch(position){
+            switch (position) {
                 case 0:
                     return new Recenti();
                 case 1:
@@ -199,7 +191,7 @@ public class VacationList extends AppCompatActivity {
         // utile per visualizzare i fragment tramite tabs. Visualizza il testo dei tabs.
         @Override
         public CharSequence getPageTitle(int position) {
-            switch(position){
+            switch (position) {
                 case 0:
                     return getString(R.string.vlTab1);
                 case 1:
