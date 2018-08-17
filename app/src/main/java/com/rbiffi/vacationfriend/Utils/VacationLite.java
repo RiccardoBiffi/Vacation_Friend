@@ -11,5 +11,4 @@ public class VacationLite {
     public Date startDate;
     public Date endDate;
     public Uri photo;
-
 }

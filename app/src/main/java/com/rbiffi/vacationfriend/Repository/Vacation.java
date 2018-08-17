@@ -22,9 +22,12 @@ public class Vacation {
     @NonNull
     public Date endDate;
 
-    //@Relation(parentColumn = "id", entityColumn = "vacationId")
-    //public List<Participant> participants;
     public Uri photo;
     public String note;
+    public Boolean isAchieved;
+
+    //@Relation(parentColumn = "id", entityColumn = "vacationId")
+    //public List<Participant> participants;
+
 }
 
