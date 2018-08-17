@@ -18,18 +18,39 @@ import java.util.List;
 
 public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapter.VacationViewHolder> {
 
+    private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
+    private static final int VIEW_TYPE_OBJECT_VIEW = 1;
+
     private final LayoutInflater inflater;
     private IClickEvents listener;
     private List<VacationLite> vacationListCache;
+
 
     public VacationListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return vacationListCache.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER: VIEW_TYPE_OBJECT_VIEW;
+    }
+
+    @Override
     public VacationListAdapter.VacationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // crea nuove view
-        View view = inflater.inflate(R.layout.vacation_list_row, parent, false);
+
+        //TODO a seconda del viewtype posso creare view diverse per gli oggetti, tipo il footer
+        View view;
+        switch (viewType){
+            case VIEW_TYPE_OBJECT_VIEW:
+                view = inflater.inflate(R.layout.vacation_list_row, parent, false);
+                break;
+            case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
+                view = inflater.inflate(R.layout.empty_vacation_list, parent, false);
+                break;
+            default:
+                view = inflater.inflate(R.layout.vacation_list_row, parent, false);
+                break;
+        }
         return new VacationViewHolder(view);
     }
 
@@ -70,7 +91,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         } else {
             // Dati non pronti, placeholder
             holder.vacationTitleView.setText("Caricamento...");
-            //metti immagine grigia finchè non carica
+            //todo metti immagine grigia finchè non carica
         }
     }
 
@@ -104,56 +125,4 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         }
     }
 
-    /*
-    public VacationListAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-    }
-
-    VacationListAdapter(Context context, int vacation_list_row, int rowText, ArrayList dataSource) {
-        super(context, vacation_list_row, rowText, dataSource);
-    }
-
-    @NonNull
-    @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
-        convertView = maybeRecycleView(convertView, parent);
-
-        //Operazioni agguntive da fare alla view
-        setOverflowClickListener(position, convertView, (ListView) parent, R.id.vacationMenu);
-        setImageClickListener(position, convertView, (ListView) parent);
-
-        return convertView;
-    }
-
-    private void setImageClickListener(final int position, @NonNull View convertView, @NonNull final ListView parent) {
-        ImageView iv = convertView.findViewById(R.id.vacationImage);
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // rimando l'evento del click al frammento.onItemCLick(). Lo gestirà lui a seconda dell'elemento cliccato
-                parent.performItemClick(view, position, 0);
-            }
-        });
-    }
-
-    private void setOverflowClickListener(final int position, @NonNull View convertView, @NonNull final ListView parent, int vacationMenu) {
-        ImageButton ib = convertView.findViewById(vacationMenu);
-        ib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // rimando l'evento del click al frammento.onItemCLick(). Lo gestirà lui a seconda dell'elemento cliccato
-                parent.performItemClick(view, position, 0);
-            }
-        });
-    }
-
-    private View maybeRecycleView(@Nullable View convertView, @NonNull ViewGroup parent) {
-        if( convertView == null ){
-            //We must create a View:
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            convertView = inflater.inflate(R.layout.vacation_list_row, parent, false);
-        }
-        return convertView;
-    }
-    */
 }

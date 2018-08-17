@@ -20,6 +20,14 @@
         />
 
     <include
+        android:id="@+id/empty_list"
+        layout="@layout/empty_vacation_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+    <include
         android:id="@+id/floatingActionButton"
         layout="@layout/floating_action_button"
 
