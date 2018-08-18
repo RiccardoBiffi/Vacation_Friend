@@ -20,4 +20,8 @@
     <string name="vlElimina">Elimina</string>
     <string name="vlImageDescriptionAcc">Vacanza, tocca per dettagli</string>
     <string name="vlOpzioniAcc">Opzioni</string>
+    <string name="field_title_ob">Titolo*</string>
+    <string name="field_period_ob">Periodo*</string>
+    <string name="subfield_period_from">dal</string>
+    <string name="subfield_period_to">al</string>
 </resources>
