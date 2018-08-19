@@ -7,6 +7,9 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import com.rbiffi.vacationfriend.Utils.Constants;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +40,13 @@ public class Vacation implements IUserEditableObject {
     @Ignore
     @Override
     public List<String> getEditableFields() {
-        return Arrays.asList("title","period","place","partecipants","photo","notes");
+        return Arrays.asList(
+                Constants.F_TITLE,
+                Constants.F_PERIOD,
+                Constants.F_PLACE,
+                Constants.F_PARTECIP,
+                Constants.F_PHOTO,
+                Constants.F_NOTES);
     }
 }
 

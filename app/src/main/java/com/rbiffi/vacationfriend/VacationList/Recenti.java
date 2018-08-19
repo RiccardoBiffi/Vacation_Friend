@@ -39,7 +39,7 @@ public class Recenti extends Fragment implements IClickEvents {
     private FloatingActionButton floatingButton;
 
     private RecyclerView vacationList;
-    private RecyclerView.Adapter vacationAdapter;
+    private VacationListAdapter vacationAdapter;
     private RecyclerView.LayoutManager vacationLayout;
 
 
@@ -105,9 +105,9 @@ public class Recenti extends Fragment implements IClickEvents {
         vacationList = getView().findViewById(R.id.vacationElList);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
-        final VacationListAdapter adapter = new VacationListAdapter(getContext());
-        adapter.setListener(this);
-        vacationList.setAdapter(adapter);
+        vacationAdapter = new VacationListAdapter(getContext());
+        vacationAdapter.setListener(this);
+        vacationList.setAdapter(vacationAdapter);
 
         vacationLayout = new LinearLayoutManager(getContext());
         vacationList.setLayoutManager(vacationLayout);
@@ -120,7 +120,7 @@ public class Recenti extends Fragment implements IClickEvents {
             @Override
             public void onChanged(@Nullable List<VacationLite> vacationLites) {
                 // aggiorno la cache delle vacanze nell'adapter
-                adapter.setVacations(vacationLites);
+                vacationAdapter.setVacations(vacationLites);
             }
         });
 

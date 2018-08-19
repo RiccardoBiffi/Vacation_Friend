@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 
 @Database(entities = {
         Vacation.class,
-        Participant.class}, version = 6)
+        Participant.class}, version = 7)
 @TypeConverters({Converters.class})
 public abstract class VacationDatabase extends RoomDatabase {
 
