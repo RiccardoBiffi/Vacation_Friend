@@ -3,6 +3,8 @@ package com.rbiffi.vacationfriend.VacationList;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -24,7 +26,10 @@ public class NewVacationActivity extends AppCompatActivity {
 
     private Button confirm;
     private Button discard;
+
     private RecyclerView vacationFieldsList;
+    private FieldListAdapter fieldListAdapter;
+    private RecyclerView.LayoutManager fieldLayout;
 
     private Toolbar toolbar;
 
@@ -33,6 +38,7 @@ public class NewVacationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vacation);
         setupActionBar();
+        setupListWithAdapter();
 
         confirm = findViewById(R.id.saveBottonAction);
         discard = findViewById(R.id.undoBottonAction);
@@ -67,14 +73,20 @@ public class NewVacationActivity extends AppCompatActivity {
             }
         });
 
-        setupListWithAdapter();
-
     }
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
+        vacationFieldsList.addItemDecoration(new DividerItemDecoration(vacationFieldsList.getContext(), DividerItemDecoration.VERTICAL));
         IUserEditableObject v = new Vacation();
-        final FieldListAdapter adapter = new FieldListAdapter(getApplicationContext(), v);
+        fieldListAdapter = new FieldListAdapter(getApplicationContext(), v);
+        vacationFieldsList.setAdapter(fieldListAdapter);
+
+        fieldLayout = new LinearLayoutManager(getApplicationContext());
+        vacationFieldsList.setLayoutManager(fieldLayout);
+
+        //todo viewmodel per mantenere i dati inseriti dall'utente
+
     }
 
     private void setupActionBar() {

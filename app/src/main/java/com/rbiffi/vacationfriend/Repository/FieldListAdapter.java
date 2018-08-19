@@ -5,7 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Utils.Constants;
+import com.rbiffi.vacationfriend.Utils.VacationLite;
 import com.rbiffi.vacationfriend.VacationList.IClickEvents;
 
 import java.lang.reflect.Field;
@@ -34,12 +42,67 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     @Override
     public FieldViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        //TODO a seconda del viewtype posso creare view diverse per gli oggetti, tipo il footer
+        View view;
+        switch (viewType){
+            case VIEW_TYPE_TITLE:
+                view = inflater.inflate(R.layout.field_title, parent, false);
+                break;
+            case VIEW_TYPE_PERIOD:
+                view = inflater.inflate(R.layout.field_period, parent, false);
+                break;
+            case VIEW_TYPE_PLACE:
+                view = inflater.inflate(R.layout.field_place, parent, false);
+                break;
+            default:
+                view = inflater.inflate(R.layout.field_title, parent, false);
+                break;
+        }
+        return new FieldViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(FieldViewHolder holder, int position) {
+        //todo assegna una precompilazione dei campi (se modifica) + connetti eventi a pulsanti
+        // tutto vuoto per la new. Dati presi dal caller per la modifica
 
+        /*
+        if (field != null) {
+            //rimpiazza i dati ed assegna i click per la posizione corrente
+
+            VacationLite current = field.get(position);
+            holder.vacationTitleView.setText(current.name);
+            holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.vacationClick(vacation);
+                    }
+                }
+            });
+
+            holder.vacationImageView.setImageURI(current.photo);
+            holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.vacationClick(vacation);
+                    }
+                }
+            });
+
+            holder.vacationOverflow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.overflowClick(v, vacation);
+                    }
+                }
+            });
+        } else {
+            // todo Dati non pronti
+        }
+        */
     }
 
     @Override
@@ -49,13 +112,43 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        String field = fieldList.get(position);
+        switch (field){
+            case Constants.F_TITLE:
+                return VIEW_TYPE_TITLE;
+            case Constants.F_PERIOD:
+                return VIEW_TYPE_PERIOD;
+            case Constants.F_PLACE:
+                return VIEW_TYPE_PLACE;
+            case Constants.F_PARTECIP:
+                return VIEW_TYPE_PARTECIPANTS;
+            case Constants.F_PHOTO:
+                return VIEW_TYPE_PHOTO;
+            case Constants.F_NOTES:
+                return VIEW_TYPE_NOTES;
+            default:
+                return VIEW_TYPE_TITLE;
+        }
     }
+
+    //todo valuta di inserire un metodo che aggiorna la visualizzazione dei campi
+    // con notifyDataSetChanged(). Non dovrebbe servire per i campi, solo le vacanze.
 
     class FieldViewHolder extends RecyclerView.ViewHolder {
 
+        //TODO poi devo salvare anche le altre view che mi interessano
+        private final EditText titleFieldView;
+        private final EditText periodFromView;
+        private final EditText periodToView;
+
         public FieldViewHolder(View itemView) {
             super(itemView);
+            // mi interessa salvare solo alcuni campi
+            // sicuro i partecipanti e le foto (per accedere ai bottoni)
+            // forse ciò che l'utente scrive nei form. Non è chiara di chi è la responsabilità
+            titleFieldView = itemView.findViewById(R.id.input_title);
+            periodFromView = itemView.findViewById(R.id.input_period_from);
+            periodToView = itemView.findViewById(R.id.input_period_to);
         }
     }
 }
