@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 
 @Database(entities = {
         Vacation.class,
-        Participant.class}, version = 3)
+        Participant.class}, version = 6)
 @TypeConverters({Converters.class})
 public abstract class VacationDatabase extends RoomDatabase {
 
@@ -64,7 +64,7 @@ public abstract class VacationDatabase extends RoomDatabase {
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
             Vacation v = new Vacation();
-            v.name = "Croazia 2018";
+            v.title = "Croazia 2018";
             String start = "25/08/2017";
             String end = "02/09/2017";
             try {
@@ -78,12 +78,12 @@ public abstract class VacationDatabase extends RoomDatabase {
                 e.printStackTrace();
             }
             v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
-            v.note = "Prima prova";
+            v.notes = "Prima prova";
             v.achived = false;
             vDao.insert(v);
 
             v = new Vacation();
-            v.name = "Ferragosto 2018";
+            v.title = "Ferragosto 2018";
             start = "12/08/2017";
             end = "17/08/2017";
             try {
@@ -97,7 +97,7 @@ public abstract class VacationDatabase extends RoomDatabase {
                 e.printStackTrace();
             }
             v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo1);
-            v.note = "Seconda prova";
+            v.notes = "Seconda prova";
             v.achived = false;
             vDao.insert(v);
             */

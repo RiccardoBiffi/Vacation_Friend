@@ -20,6 +20,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
+    private static final int VIEW_TYPE_FOOTER = 2;
 
     private final LayoutInflater inflater;
     private IClickEvents listener;
@@ -28,11 +29,6 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     public VacationListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return vacationListCache.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER: VIEW_TYPE_OBJECT_VIEW;
     }
 
     @Override
@@ -99,6 +95,11 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     public int getItemCount() {
         if (vacationListCache == null) return 0;
         return vacationListCache.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return vacationListCache.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER: VIEW_TYPE_OBJECT_VIEW;
     }
 
     public void setListener(IClickEvents listener) {

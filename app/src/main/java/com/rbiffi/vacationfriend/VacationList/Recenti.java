@@ -63,8 +63,6 @@ public class Recenti extends Fragment implements IClickEvents {
 
         setupListWithAdapter();
         setupFloatingButton();
-        //setupRowClickListeners();
-        //setupListFooter();
     }
 
     @Override
@@ -73,10 +71,12 @@ public class Recenti extends Fragment implements IClickEvents {
 
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK) {
             Vacation v = new Vacation();
-            v.name = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.TITLE_FIELD);
-            v.note = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.NOTES_FIELD);
+            v.title = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.TITLE_FIELD);
+            v.notes = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.NOTES_FIELD);
+            //todo recupera anche altri campi
             viewModel.insert(v);
         } else {
+            //todo da sostituire con "do nothing"
             Toast.makeText(getContext(), "Elemento non salvato perché vuoto", Toast.LENGTH_SHORT).show();
         }
 
@@ -98,25 +98,6 @@ public class Recenti extends Fragment implements IClickEvents {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View footer = inflater.inflate(R.layout.listview_footer,vacationList,false);
         vacationList.addFooterView(footer,null,false);
-    }
-
-    private void setupRowClickListeners() {
-        vacationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                long clickedViewId = view.getId();
-
-                if(clickedViewId == R.id.vacationImage) {
-                    //todo start activity della vacanza corrente
-                    Toast.makeText(getContext(), "Start activity"+i, Toast.LENGTH_SHORT).show();
-                } else if (clickedViewId == R.id.vacationMenu){
-                    openPopupMenu(view, i);
-                } else {
-                    Toast.makeText(getContext(), "Unknown view clicked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 */
 

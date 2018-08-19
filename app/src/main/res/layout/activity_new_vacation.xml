@@ -6,64 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".VacationList.NewVacationActivity">
 
-    <TextView
-        android:id="@+id/vacationTitleLabel"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarNewVacation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Titolo"
-        app:layout_constraintBaseline_toBaselineOf="@id/vacationTitle"
-        app:layout_constraintEnd_toStartOf="@id/vacationTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tabs"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
 
-    <TextView
-        android:id="@+id/vacationNotesLabel"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vacationFieldsList"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Note"
-        app:layout_constraintBaseline_toBaselineOf="@id/vacationNotes"
-        app:layout_constraintEnd_toStartOf="@id/vacationNotes"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
 
-    <EditText
-        android:id="@+id/vacationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarNewVacation"
+        />
 
-    <EditText
-        android:id="@+id/vacationNotes"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vacationTitle" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/saveBottonAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Salva"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vacationNotes" />
+        <Button
+            android:id="@+id/undoBottonAction"
+            style="@style/UndoBotton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Annulla" />
+
+        <Button
+            android:id="@+id/saveBottonAction"
+            style="@style/PrimaryBotton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Salva" />
+
+    </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>

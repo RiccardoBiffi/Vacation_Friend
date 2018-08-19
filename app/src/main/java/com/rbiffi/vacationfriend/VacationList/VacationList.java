@@ -21,6 +21,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Vacation;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 public class VacationList extends AppCompatActivity {
 
@@ -118,7 +123,7 @@ public class VacationList extends AppCompatActivity {
     }
 
     private void setupActionBar() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarVacationList);
         setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
     }
 
