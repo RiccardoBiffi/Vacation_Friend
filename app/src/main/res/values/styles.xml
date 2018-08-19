@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_close_white_24dp</item>
     </style>
 
     <style name="Fields" >
@@ -12,6 +13,15 @@
     </style>
     <style name="Subfields" >
         <item name="android:textSize">20sp</item>
+    </style>
+    <style name="PrimaryBotton">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="UndoBotton">
+        <item name="android:background">@color/lighter_gray</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

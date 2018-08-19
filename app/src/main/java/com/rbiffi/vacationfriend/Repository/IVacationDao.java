@@ -32,7 +32,7 @@ public interface IVacationDao {
     @Query("SELECT * FROM Vacation WHERE isAchieved = 1")
     List<VacationLite> getAchievedVacations();
 
-    @Query("SELECT * from Vacation ORDER BY name ASC")
+    @Query("SELECT * from Vacation ORDER BY title ASC")
     LiveData<List<VacationLite>> getAllVacations();
 
 

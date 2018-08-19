@@ -3,12 +3,17 @@ package com.rbiffi.vacationfriend.VacationList;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.FieldListAdapter;
+import com.rbiffi.vacationfriend.Repository.IUserEditableObject;
+import com.rbiffi.vacationfriend.Repository.Vacation;
 
 public class NewVacationActivity extends AppCompatActivity {
 
@@ -17,22 +22,29 @@ public class NewVacationActivity extends AppCompatActivity {
     public static final String TITLE_FIELD = "_title";
     public static final String NOTES_FIELD = "_notes";
 
-    private EditText vTitle;
-    private EditText vNotes;
+    private Button confirm;
+    private Button discard;
+    private RecyclerView vacationFieldsList;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vacation);
+        setupActionBar();
 
-        vTitle = findViewById(R.id.vacationTitle);
-        vNotes = findViewById(R.id.vacationNotes);
+        confirm = findViewById(R.id.saveBottonAction);
+        discard = findViewById(R.id.undoBottonAction);
 
-        final Button save = findViewById(R.id.saveBottonAction);
-        save.setOnClickListener(new View.OnClickListener() {
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent replyIntent = new Intent();
+                //todo delega di validare i campi obbligatori
+                //todo delega di raccgoliere i risultati
+                //todo costruisci la risposta
+                /*
                 if(TextUtils.isEmpty(vTitle.getText())){
                     setResult(RESULT_CANCELED, replyIntent);
                 }else{
@@ -43,9 +55,41 @@ public class NewVacationActivity extends AppCompatActivity {
                     replyIntent.putExtra(EXTRA_REPLY + NOTES_FIELD, notes);
                     setResult(RESULT_OK, replyIntent);
                 }
+                */
                 finish(); // restituisce il risultato a chi ha chiamato l'activity
             }
         });
 
+        discard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        setupListWithAdapter();
+
+    }
+
+    private void setupListWithAdapter() {
+        vacationFieldsList = findViewById(R.id.vacationFieldsList);
+        IUserEditableObject v = new Vacation();
+        final FieldListAdapter adapter = new FieldListAdapter(getApplicationContext(), v);
+    }
+
+    private void setupActionBar() {
+        toolbar = findViewById(R.id.toolbarNewVacation);
+        setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
+
+        // mostra il back alla activity precedente
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.acivity_title_new_vacation);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
