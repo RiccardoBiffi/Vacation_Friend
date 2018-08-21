@@ -14,6 +14,10 @@
     <style name="Subfields" >
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="FieldDescription" >
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
     <style name="PrimaryBotton">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textSize">24sp</item>

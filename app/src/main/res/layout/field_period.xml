@@ -59,18 +59,24 @@
         style="@style/Subfields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:gravity="end"
 
         android:text="@string/subfield_period_from"
         app:layout_constraintBaseline_toBaselineOf="@+id/input_period_from"
-        app:layout_constraintEnd_toStartOf="@+id/input_period_from"
+        app:layout_constraintEnd_toEndOf="@id/period_subfield_barrier_vertical"
         app:layout_constraintStart_toEndOf="@+id/period_field_barrier_vertical" />
 
     <EditText
         android:id="@+id/input_period_from"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/label_period_from"
@@ -84,6 +90,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:gravity="end"
+
         android:text="@string/subfield_period_to"
         app:layout_constraintBaseline_toBaselineOf="@id/input_period_to"
         app:layout_constraintEnd_toEndOf="@id/period_subfield_barrier_vertical"
@@ -93,10 +101,13 @@
         android:id="@+id/input_period_to"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
+
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/input_period_from"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/input_period_from"
         app:layout_constraintTop_toBottomOf="@+id/input_period_from"
         tools:ignore="LabelFor" />

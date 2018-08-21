@@ -11,7 +11,7 @@
     >
 
     <ImageView
-        android:id="@+id/icon_title"
+        android:id="@+id/icon_notes"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -19,58 +19,66 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
 
-        android:src="@drawable/ic_label_outline_black_24dp"
-        app:layout_constraintBottom_toTopOf="@id/title_field_barrier_horizontal"
+        android:src="@drawable/ic_notes_black_24dp"
+        app:layout_constraintBottom_toTopOf="@id/notes_field_barrier_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/title_field_barrier_vertical"
+        app:layout_constraintEnd_toStartOf="@id/notes_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/field_title_ob" />
+        android:contentDescription="@string/field_notes_ob" />
 
     <android.support.constraint.Barrier
-        android:id="@+id/title_field_barrier_vertical"
+        android:id="@+id/notes_field_barrier_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="label_title,input_title"
-        app:layout_constraintStart_toEndOf="@id/icon_title"
+        app:constraint_referenced_ids="label_notes,input_notes"
+        app:layout_constraintStart_toEndOf="@id/icon_notes"
         />
 
     <android.support.constraint.Barrier
-        android:id="@+id/title_field_barrier_horizontal"
+        android:id="@+id/notes_field_barrier_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="label_title"
-        app:layout_constraintStart_toEndOf="@id/icon_title"
+        app:constraint_referenced_ids="label_notes"
+        app:layout_constraintStart_toEndOf="@id/icon_notes"
         />
 
     <TextView
-        android:id="@+id/label_title"
+        android:id="@+id/label_notes"
         style="@style/Fields"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/field_title_ob"
-        app:layout_constraintBottom_toTopOf="@id/input_title"
+        android:text="@string/field_notes_ob"
+        app:layout_constraintBottom_toTopOf="@id/input_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/title_field_barrier_vertical"
+        app:layout_constraintStart_toEndOf="@id/notes_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- todo scegli un campo adeguato per poter scrivere su più righe -->
     <EditText
-        android:id="@+id/input_title"
+        android:id="@+id/input_notes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
+
         android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/white"
 
-        android:layout_marginTop="8dp"
-        android:inputType="text"
-        android:maxLines="1"
+        android:gravity="top|left"
 
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/title_field_barrier_vertical"
-        app:layout_constraintTop_toTopOf="@id/title_field_barrier_horizontal"
+        app:layout_constraintStart_toEndOf="@id/notes_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/notes_field_barrier_horizontal"
         tools:ignore="LabelFor" />
 
 </android.support.constraint.ConstraintLayout>

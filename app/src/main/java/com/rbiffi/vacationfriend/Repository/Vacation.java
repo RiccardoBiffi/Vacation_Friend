@@ -45,8 +45,7 @@ public class Vacation implements IUserEditableObject {
                 Constants.F_PERIOD,
                 Constants.F_PLACE,
                 Constants.F_PARTECIP,
-                Constants.F_PHOTO,
-                Constants.F_NOTES);
+                Constants.F_PHOTO);
     }
 }
 

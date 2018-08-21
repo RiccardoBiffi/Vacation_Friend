@@ -11,7 +11,7 @@
     >
 
     <ImageView
-        android:id="@+id/icon_title"
+        android:id="@+id/icon_partes"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -19,58 +19,57 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
 
-        android:src="@drawable/ic_label_outline_black_24dp"
-        app:layout_constraintBottom_toTopOf="@id/title_field_barrier_horizontal"
+        android:src="@drawable/ic_people_black_24dp"
+        app:layout_constraintBottom_toTopOf="@id/partes_field_barrier_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/title_field_barrier_vertical"
+        app:layout_constraintEnd_toStartOf="@id/partes_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/field_title_ob" />
+        android:contentDescription="@string/field_partes_ob" />
 
     <android.support.constraint.Barrier
-        android:id="@+id/title_field_barrier_vertical"
+        android:id="@+id/partes_field_barrier_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="label_title,input_title"
-        app:layout_constraintStart_toEndOf="@id/icon_title"
+        app:constraint_referenced_ids="label_partes,input_partes"
+        app:layout_constraintStart_toEndOf="@id/icon_partes"
         />
 
     <android.support.constraint.Barrier
-        android:id="@+id/title_field_barrier_horizontal"
+        android:id="@+id/partes_field_barrier_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="label_title"
-        app:layout_constraintStart_toEndOf="@id/icon_title"
+        app:constraint_referenced_ids="label_partes"
+        app:layout_constraintStart_toEndOf="@id/icon_partes"
         />
 
     <TextView
-        android:id="@+id/label_title"
+        android:id="@+id/label_partes"
         style="@style/Fields"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/field_title_ob"
-        app:layout_constraintBottom_toTopOf="@id/input_title"
+        android:text="@string/field_partes_ob"
+        app:layout_constraintBottom_toTopOf="@id/input_partes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/title_field_barrier_vertical"
+        app:layout_constraintStart_toEndOf="@id/partes_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- todo Listview, "io" e "aggiungi" fissi a mo' di header e footer -->
+    <!-- todo i partecipanti vengono presi dal db, prepopolalo con 4 -->
     <EditText
-        android:id="@+id/input_title"
+        android:id="@+id/input_partes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-
         android:layout_marginTop="8dp"
         android:inputType="text"
-        android:maxLines="1"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/title_field_barrier_vertical"
-        app:layout_constraintTop_toTopOf="@id/title_field_barrier_horizontal"
+        app:layout_constraintStart_toEndOf="@id/partes_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/partes_field_barrier_horizontal"
         tools:ignore="LabelFor" />
 
 </android.support.constraint.ConstraintLayout>

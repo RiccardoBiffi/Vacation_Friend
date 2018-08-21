@@ -15,7 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VacationList.NewVacationActivity"></activity>
+        <activity
+            android:name=".VacationList.NewVacationActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
     </application>
 
 </manifest>

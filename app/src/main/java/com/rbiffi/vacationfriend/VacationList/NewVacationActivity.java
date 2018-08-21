@@ -1,5 +1,6 @@
 package com.rbiffi.vacationfriend.VacationList;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.rbiffi.vacationfriend.R;
@@ -17,7 +19,7 @@ import com.rbiffi.vacationfriend.Repository.FieldListAdapter;
 import com.rbiffi.vacationfriend.Repository.IUserEditableObject;
 import com.rbiffi.vacationfriend.Repository.Vacation;
 
-public class NewVacationActivity extends AppCompatActivity {
+public class NewVacationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.NewVacationActivity.REPLY";
@@ -103,5 +105,10 @@ public class NewVacationActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        //todo inserisci la data scelta sull'edit text corretto.
     }
 }
