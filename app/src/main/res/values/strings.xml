@@ -26,4 +26,9 @@
     <string name="subfield_period_to">al</string>
     <string name="acivity_title_new_vacation">Nuova vacanza</string>
     <string name="field_place_ob">Località</string>
+    <string name="field_photo_ob">Immagine</string>
+    <string name="field_partes_ob">Partecipanti</string>
+    <string name="field_notes_ob">Note</string>
+    <string name="new_image">Scegli nuova</string>
+    <string name="photo_field_description">Descrivi la tua vacanza con una foto suggestiva.</string>
 </resources>

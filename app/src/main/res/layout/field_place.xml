@@ -61,10 +61,16 @@
         android:id="@+id/input_place"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:layout_marginTop="8dp"
+        android:inputType="text"
+        android:maxLines="1"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/place_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="@id/place_field_barrier_horizontal"
-        android:inputType="text"
         tools:ignore="LabelFor" />
 
 </android.support.constraint.ConstraintLayout>

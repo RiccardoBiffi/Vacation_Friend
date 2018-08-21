@@ -6,19 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
-import com.rbiffi.vacationfriend.Utils.VacationLite;
 import com.rbiffi.vacationfriend.VacationList.IClickEvents;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
+
+/*  Classe per gestire le Recyclerview contenenti i campi degli oggetti da creare/modificare
+    al'interno della app. Ogni volta che si crea o modifica un elemento, questo adapter specifica
+    quale view usare e cosa succede al suo interno, per ogni campo dell'oggetto.
+ */
 
 public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.FieldViewHolder> {
 
@@ -44,7 +42,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     public FieldViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //TODO a seconda del viewtype posso creare view diverse per gli oggetti, tipo il footer
         View view;
-        switch (viewType){
+        switch (viewType) {
             case VIEW_TYPE_TITLE:
                 view = inflater.inflate(R.layout.field_title, parent, false);
                 break;
@@ -53,6 +51,12 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 break;
             case VIEW_TYPE_PLACE:
                 view = inflater.inflate(R.layout.field_place, parent, false);
+                break;
+            case VIEW_TYPE_PARTECIPANTS:
+                view = inflater.inflate(R.layout.field_partecipants, parent, false);
+                break;
+            case VIEW_TYPE_PHOTO:
+                view = inflater.inflate(R.layout.field_photo, parent, false);
                 break;
             default:
                 view = inflater.inflate(R.layout.field_title, parent, false);
@@ -113,7 +117,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     @Override
     public int getItemViewType(int position) {
         String field = fieldList.get(position);
-        switch (field){
+        switch (field) {
             case Constants.F_TITLE:
                 return VIEW_TYPE_TITLE;
             case Constants.F_PERIOD:
@@ -126,6 +130,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 return VIEW_TYPE_PHOTO;
             case Constants.F_NOTES:
                 return VIEW_TYPE_NOTES;
+            //todo e le altre
             default:
                 return VIEW_TYPE_TITLE;
         }
