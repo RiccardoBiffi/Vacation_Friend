@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
-import com.rbiffi.vacationfriend.VacationList.IClickEvents;
+import com.rbiffi.vacationfriend.VacationList.IVacationFieldsClickEvents;
+import com.rbiffi.vacationfriend.VacationList.IVacationListClickEvents;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     //...
 
     private final LayoutInflater inflater;
-    private IClickEvents listener;
+    private IVacationFieldsClickEvents listener;
     private List<String> fieldList;
 
     public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj) {
@@ -70,6 +72,23 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         //todo assegna una precompilazione dei campi (se modifica) + connetti eventi a pulsanti
         // tutto vuoto per la new. Dati presi dal caller per la modifica
 
+        final String field = fieldList.get(position);
+        switch(field) {
+            case Constants.F_PHOTO:
+                holder.photoButtonView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            listener.onAddPhotoClick(v);
+                        }
+                    }
+                });
+                break;
+            default:
+                //todo valuta cosa inserire qua
+                // dati non pronti, placeholder
+        }
+
         /*
         if (field != null) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
@@ -80,7 +99,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.vacationClick(vacation);
+                        listener.onVacationClick(vacation);
                     }
                 }
             });
@@ -90,7 +109,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.vacationClick(vacation);
+                        listener.onVacationClick(vacation);
                     }
                 }
             });
@@ -99,7 +118,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.overflowClick(v, vacation);
+                        listener.onOverflowClick(v, vacation);
                     }
                 }
             });
@@ -136,6 +155,9 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         }
     }
 
+    public void setListener(IVacationFieldsClickEvents listener){
+        this.listener = listener;
+    }
     //todo valuta di inserire un metodo che aggiorna la visualizzazione dei campi
     // con notifyDataSetChanged(). Non dovrebbe servire per i campi, solo le vacanze.
 
@@ -145,8 +167,9 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         private final EditText titleFieldView;
         private final EditText periodFromView;
         private final EditText periodToView;
+        private final Button photoButtonView;
 
-        public FieldViewHolder(View itemView) {
+        private FieldViewHolder(View itemView) {
             super(itemView);
             // mi interessa salvare solo alcuni campi
             // sicuro i partecipanti e le foto (per accedere ai bottoni)
@@ -154,6 +177,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             titleFieldView = itemView.findViewById(R.id.input_title);
             periodFromView = itemView.findViewById(R.id.input_period_from);
             periodToView = itemView.findViewById(R.id.input_period_to);
+            photoButtonView = itemView.findViewById(R.id.input_photo);
         }
     }
 }
