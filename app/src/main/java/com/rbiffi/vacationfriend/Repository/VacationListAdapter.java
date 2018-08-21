@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.VacationLite;
-import com.rbiffi.vacationfriend.VacationList.IClickEvents;
+import com.rbiffi.vacationfriend.VacationList.IVacationListClickEvents;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private static final int VIEW_TYPE_FOOTER = 2;
 
     private final LayoutInflater inflater;
-    private IClickEvents listener;
+    private IVacationListClickEvents listener;
     private List<VacationLite> vacationListCache;
 
 
@@ -54,17 +54,16 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     }
 
     @Override
-    public void onBindViewHolder(VacationListAdapter.VacationViewHolder holder, int position) {
-        final VacationLite vacation = vacationListCache.get(position);
+    public void onBindViewHolder(VacationViewHolder holder, int position) {
         if (vacationListCache != null) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
-            VacationLite current = vacationListCache.get(position);
+            final VacationLite current = vacationListCache.get(position);
             holder.vacationTitleView.setText(current.name);
             holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.vacationClick(vacation);
+                        listener.onVacationClick(current);
                     }
                 }
             });
@@ -74,7 +73,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.vacationClick(vacation);
+                        listener.onVacationClick(current);
                     }
                 }
             });
@@ -83,14 +82,14 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.overflowClick(v, vacation);
+                        listener.onOverflowClick(v, current);
                     }
                 }
             });
         } else {
+            //todo metti immagine grigia finchè non carica
             // Dati non pronti, placeholder
             holder.vacationTitleView.setText("Caricamento...");
-            //todo metti immagine grigia finchè non carica
         }
     }
 
@@ -105,7 +104,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         return vacationListCache.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER: VIEW_TYPE_OBJECT_VIEW;
     }
 
-    public void setListener(IClickEvents listener) {
+    public void setListener(IVacationListClickEvents listener) {
         this.listener = listener;
     }
 
@@ -121,7 +120,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         private final ImageView vacationImageView;
         private final ImageButton vacationOverflow;
 
-        private VacationViewHolder(View itemView) {
+        protected VacationViewHolder(View itemView) {
             super(itemView);
             vacationTitleView = itemView.findViewById(R.id.vacation_title);
             vacationImageView = itemView.findViewById(R.id.vacationImage);

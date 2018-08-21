@@ -31,7 +31,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Recenti extends Fragment implements IClickEvents {
+public class Recenti extends Fragment implements IVacationListClickEvents {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private VacationViewModel viewModel;
@@ -127,12 +127,12 @@ public class Recenti extends Fragment implements IClickEvents {
     }
 
     @Override
-    public void vacationClick(VacationLite vacation) {
+    public void onVacationClick(VacationLite vacation) {
         Toast.makeText(getContext(), "Vacanza" + vacation.id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void overflowClick(View v, VacationLite vacation) {
+    public void onOverflowClick(View v, VacationLite vacation) {
         openPopupMenu(v, vacation);
     }
 

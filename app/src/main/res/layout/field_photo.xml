@@ -74,7 +74,7 @@
         app:layout_constraintStart_toEndOf="@id/photo_field_barrier_vertical"
         app:layout_constraintTop_toBottomOf="@id/photo_field_barrier_horizontal" />
 
-    <!-- todo Button con placeholder e che poi contiene immagine scelta in background -->
+    <!-- todo Button e sotto Imagebutton nascosto che lo sostituisce-->
     <Button
         android:id="@+id/input_photo"
         android:layout_width="0dp"
@@ -95,6 +95,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/photo_field_barrier_vertical"
         app:layout_constraintTop_toBottomOf="@id/description_photo"
-         />
+        />
 
 </android.support.constraint.ConstraintLayout>
