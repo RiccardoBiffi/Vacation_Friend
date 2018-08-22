@@ -78,10 +78,14 @@
         android:layout_marginRight="16dp"
 
         android:inputType="date"
+        android:longClickable="false"
+        android:nextFocusForward="@id/input_period_to"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/label_period_from"
         app:layout_constraintTop_toTopOf="@id/period_field_barrier_horizontal"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        />
 
 
     <TextView
@@ -106,6 +110,9 @@
         android:layout_marginTop="8dp"
 
         android:inputType="date"
+        android:longClickable="false"
+        android:imeOptions="actionNext"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/input_period_from"

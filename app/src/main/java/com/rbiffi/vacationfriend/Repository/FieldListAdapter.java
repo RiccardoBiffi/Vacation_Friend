@@ -1,19 +1,26 @@
 package com.rbiffi.vacationfriend.Repository;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
-import com.rbiffi.vacationfriend.VacationList.IVacationFieldsClickEvents;
-import com.rbiffi.vacationfriend.VacationList.IVacationListClickEvents;
+import com.rbiffi.vacationfriend.VacationList.IVacationFieldsEvents;
+import com.rbiffi.vacationfriend.VacationList.NewVacationActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /*  Classe per gestire le Recyclerview contenenti i campi degli oggetti da creare/modificare
     al'interno della app. Ogni volta che si crea o modifica un elemento, questo adapter specifica
@@ -32,7 +39,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     //...
 
     private final LayoutInflater inflater;
-    private IVacationFieldsClickEvents listener;
+    private IVacationFieldsEvents listener;
     private List<String> fieldList;
 
     public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj) {
@@ -68,21 +75,71 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     }
 
     @Override
-    public void onBindViewHolder(FieldViewHolder holder, int position) {
+    public void onBindViewHolder(final FieldViewHolder holder, int position) {
         //todo assegna una precompilazione dei campi (se modifica) + connetti eventi a pulsanti
         // tutto vuoto per la new. Dati presi dal caller per la modifica
 
         final String field = fieldList.get(position);
-        switch(field) {
+        switch (field) {
             case Constants.F_PHOTO:
-                holder.photoButtonView.setOnClickListener(new View.OnClickListener() {
+                holder.photoButtonAddView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (listener != null) {
-                            listener.onAddPhotoClick(v);
+                            listener.onAddPhotoClick(v, holder.photoImageButtonView);
                         }
                     }
                 });
+                holder.photoImageButtonView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            listener.onAddPhotoClick(holder.photoButtonAddView, v);
+                        }
+                    }
+                });
+                break;
+            case Constants.F_PERIOD:
+                final Calendar calendar = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener fromDateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(holder.periodFromView, calendar);
+                    }
+                };
+                final DatePickerDialog.OnDateSetListener toDateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(holder.periodToView, calendar);
+                    }
+                };
+
+                holder.periodFromView.setInputType(InputType.TYPE_NULL);
+                holder.periodFromView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (listener != null) {
+                            listener.onDateFocus(v, hasFocus, calendar, fromDateListener);
+                        }
+                    }
+                });
+
+                holder.periodToView.setInputType(InputType.TYPE_NULL);
+                holder.periodToView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (listener != null) {
+                            listener.onDateFocus(v, hasFocus, calendar, toDateListener);
+                        }
+                    }
+                });
+
                 break;
             default:
                 //todo valuta cosa inserire qua
@@ -155,9 +212,18 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         }
     }
 
-    public void setListener(IVacationFieldsClickEvents listener){
+    public void setListener(IVacationFieldsEvents listener) {
         this.listener = listener;
     }
+
+    private void updateLabel(View dateView, Calendar calendar) {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
+
+        EditText dateText = (EditText) dateView;
+        dateText.setText(sdf.format(calendar.getTime()));
+    }
+
     //todo valuta di inserire un metodo che aggiorna la visualizzazione dei campi
     // con notifyDataSetChanged(). Non dovrebbe servire per i campi, solo le vacanze.
 
@@ -167,7 +233,8 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         private final EditText titleFieldView;
         private final EditText periodFromView;
         private final EditText periodToView;
-        private final Button photoButtonView;
+        private final Button photoButtonAddView;
+        private final ImageButton photoImageButtonView;
 
         private FieldViewHolder(View itemView) {
             super(itemView);
@@ -177,7 +244,8 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             titleFieldView = itemView.findViewById(R.id.input_title);
             periodFromView = itemView.findViewById(R.id.input_period_from);
             periodToView = itemView.findViewById(R.id.input_period_to);
-            photoButtonView = itemView.findViewById(R.id.input_photo);
+            photoButtonAddView = itemView.findViewById(R.id.input_photo);
+            photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
         }
     }
 }
