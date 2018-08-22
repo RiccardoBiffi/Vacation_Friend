@@ -5,20 +5,16 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
@@ -28,12 +24,12 @@ import com.rbiffi.vacationfriend.Repository.Vacation;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
 
 public class NewVacationActivity
         extends AppCompatActivity
         implements
-            IVacationFieldsClickEvents,
-            DatePickerDialog.OnDateSetListener {
+        IVacationFieldsEvents {
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.NewVacationActivity.REPLY";
@@ -43,7 +39,8 @@ public class NewVacationActivity
 
     private Button confirm;
     private Button discard;
-    private Button vacationImage;
+    private Button vacationImageAddButton;
+    private ImageButton vacationImageButton;
 
     private RecyclerView vacationFieldsList;
     private FieldListAdapter fieldListAdapter;
@@ -125,18 +122,28 @@ public class NewVacationActivity
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        //todo inserisci la data scelta sull'edit text corretto.
+    public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
+        if(hasFocus) {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dateDialog = new DatePickerDialog(NewVacationActivity.this, dateListener, year, month, day);
+            dateDialog.show();
+            date.clearFocus();
+        }
     }
 
+
     @Override
-    public void onAddPhotoClick(View button) {
-        vacationImage = (Button) button;
+    public void onAddPhotoClick(View button, View imageButton) {
+        vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
+        vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -147,22 +154,16 @@ public class NewVacationActivity
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
                 Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                vacationImage.setBackground(userImage);
-                vacationImage.setText("");
-                vacationImage.setCompoundDrawables(null,null,null,null);
-                vacationImage.getLayoutParams().height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                vacationImage.requestLayout();
+                vacationImageAddButton.setVisibility(View.GONE);
 
+                vacationImageButton.setBackground(userImage);
+                vacationImageButton.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 Toast.makeText(this, "File non trovato", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    @Override
-    public void onDateClick() {
-
-    }
 
     @Override
     public void onAddPartecipantClick() {
