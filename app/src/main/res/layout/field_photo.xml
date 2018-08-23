@@ -68,13 +68,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/photo_field_description"
+        android:text="@string/field_photo_description"
         app:layout_constraintBottom_toTopOf="@+id/input_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/photo_field_barrier_vertical"
         app:layout_constraintTop_toBottomOf="@id/photo_field_barrier_horizontal" />
 
-    <!-- todo Button e sotto Imagebutton nascosto che lo sostituisce-->
     <Button
         android:id="@+id/input_photo"
         android:layout_width="0dp"
@@ -88,7 +87,7 @@
         android:drawableStart="@drawable/ic_add_photo_white_24dp"
         android:drawablePadding="8dp"
         android:gravity="start|center"
-        android:text="@string/new_image"
+        android:text="@string/field_photo_buttontext"
         android:textColor="@color/colorPrimaryDark"
 
         android:focusable="false"
