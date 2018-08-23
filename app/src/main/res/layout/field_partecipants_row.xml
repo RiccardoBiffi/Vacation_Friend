@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/partecipant_picture"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+
+        android:src="@drawable/vacation_photo1"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="2dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/barrier_partecipants"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/partecipant_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+
+        android:text="Nome Cognome"
+        android:gravity="center_vertical"
+        style="@style/Fields"
+
+        app:layout_constraintBottom_toTopOf="@+id/barrier_partecipants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/partecipant_picture"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier_partecipants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="partecipant_picture,partecipant_name"
+        />
+
+</android.support.constraint.ConstraintLayout>
