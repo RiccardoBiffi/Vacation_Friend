@@ -1,7 +1,9 @@
 package com.rbiffi.vacationfriend.Repository;
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -11,16 +13,20 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.VacationList.IVacationFieldsEvents;
-import com.rbiffi.vacationfriend.VacationList.NewVacationActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*  Classe per gestire le Recyclerview contenenti i campi degli oggetti da creare/modificare
     al'interno della app. Ogni volta che si crea o modifica un elemento, questo adapter specifica
@@ -37,12 +43,13 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
     //...
-
     private final LayoutInflater inflater;
+    private Context appContext;
     private IVacationFieldsEvents listener;
     private List<String> fieldList;
 
     public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj) {
+        appContext = applicationContext;
         inflater = LayoutInflater.from(applicationContext);
         fieldList = editableObj.getEditableFields();
     }
@@ -99,6 +106,8 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                     }
                 });
                 break;
+
+
             case Constants.F_PERIOD:
                 final Calendar calendar = Calendar.getInstance();
                 final DatePickerDialog.OnDateSetListener fromDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -139,8 +148,30 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         }
                     }
                 });
-
                 break;
+
+
+            case Constants.F_PARTECIP:
+                //todo recupera partecipanti da DB per vacanza corrente
+                //se non ci sono, lista vuota con solo "io" e "aggiungi"
+                List<Participant> partList = new ArrayList<>();
+                Participant test = new Participant();
+                test.name = "Riccardo";
+                test.lastName = "Biffi";
+                test.email = "biffi.riccardo91@gmail.com";
+                test.picture = resourceToURI(appContext, R.drawable.average_man);
+                partList.add(test);
+
+                //todo inizializza e aggiungi header
+                View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
+                holder.partecipantListView.addFooterView(footer);
+                holder.partecipantListView.requestLayout();
+
+                ParticipantAdapter partAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, partList);
+                holder.partecipantListView.setAdapter(partAdapter);
+                break;
+
+
             default:
                 //todo valuta cosa inserire qua
                 // dati non pronti, placeholder
@@ -183,6 +214,13 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             // todo Dati non pronti
         }
         */
+    }
+
+    private Uri resourceToURI(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID));
     }
 
     @Override
@@ -231,10 +269,17 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
         //TODO poi devo salvare anche le altre view che mi interessano
         private final EditText titleFieldView;
+
         private final EditText periodFromView;
         private final EditText periodToView;
+
         private final Button photoButtonAddView;
         private final ImageButton photoImageButtonView;
+
+        private final ListView partecipantListView;
+        //todo i successivi 2 forse non servono perché gestiti dal ParticipantAdapter
+        private final CircleImageView partecipantPictureView;
+        private final TextView partecipantNameView;
 
         private FieldViewHolder(View itemView) {
             super(itemView);
@@ -242,10 +287,16 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             // sicuro i partecipanti e le foto (per accedere ai bottoni)
             // forse ciò che l'utente scrive nei form. Non è chiara di chi è la responsabilità
             titleFieldView = itemView.findViewById(R.id.input_title);
+
             periodFromView = itemView.findViewById(R.id.input_period_from);
             periodToView = itemView.findViewById(R.id.input_period_to);
+
             photoButtonAddView = itemView.findViewById(R.id.input_photo);
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
+
+            partecipantListView = itemView.findViewById(R.id.input_partes);
+            partecipantPictureView = itemView.findViewById(R.id.partecipant_picture);
+            partecipantNameView = itemView.findViewById(R.id.partecipant_name);
         }
     }
 }

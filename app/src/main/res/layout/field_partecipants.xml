@@ -59,7 +59,7 @@
 
     <!-- todo Listview, "io" e "aggiungi" fissi a mo' di header e footer -->
     <!-- todo i partecipanti vengono presi dal db, prepopolalo con 4 -->
-    <ListView
+    <com.rbiffi.vacationfriend.Utils.ExtendedListView
         android:id="@+id/input_partes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

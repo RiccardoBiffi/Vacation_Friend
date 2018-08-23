@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 @Entity(indices = {@Index("email")})
@@ -13,15 +14,14 @@ public class Participant {
     @NonNull
     public String email;
 
-    //da usare come foreignkey per la relazione con la vacanza
-    public int vacationId;
-
+    @NonNull
+    public Uri picture;
     @NonNull
     public String name;
     @NonNull
     public String lastName;
 
-    //@NonNull
-    //public Bitmap picture;
+    //da usare come foreignkey per la relazione con la vacanza
+    public int vacationId;
 
 }
