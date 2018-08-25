@@ -93,13 +93,7 @@ public class Recenti extends Fragment implements IVacationListClickEvents {
         });
     }
 
-/*
-    private void setupListFooter() {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View footer = inflater.inflate(R.layout.listview_footer,vacationList,false);
-        vacationList.addFooterView(footer,null,false);
-    }
-*/
+
 
     private void setupListWithAdapter() {
         vacationList = getView().findViewById(R.id.vacationElList);

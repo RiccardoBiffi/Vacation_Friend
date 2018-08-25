@@ -152,22 +152,15 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
 
             case Constants.F_PARTECIP:
-                //todo recupera partecipanti da DB per vacanza corrente
-                //se non ci sono, lista vuota con solo "io" e "aggiungi"
-                List<Participant> partList = new ArrayList<>();
-                Participant test = new Participant();
-                test.name = "Riccardo";
-                test.lastName = "Biffi";
-                test.email = "biffi.riccardo91@gmail.com";
-                test.picture = resourceToURI(appContext, R.drawable.average_man);
-                partList.add(test);
 
-                //todo inizializza e aggiungi header
-                View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
-                holder.partecipantListView.addFooterView(footer);
-                holder.partecipantListView.requestLayout();
+                // se è una nuova vacanza, non ci sono partecipanti
+                //todo se in modifica di una vacanza, recupera partecipanti da DB
+                setPartecipantsListHeader(holder);
+                setParticipantsListFooter(holder);
+                holder.partecipantListView.setDivider(null);
 
-                ParticipantAdapter partAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, partList);
+                List<Participant> empty = new ArrayList<>();
+                ParticipantAdapter partAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, empty);
                 holder.partecipantListView.setAdapter(partAdapter);
                 break;
 
@@ -214,6 +207,26 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             // todo Dati non pronti
         }
         */
+    }
+
+    private void setParticipantsListFooter(FieldViewHolder holder) {
+        View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
+        holder.partecipantListView.addFooterView(footer);
+    }
+
+    private void setPartecipantsListHeader(FieldViewHolder holder) {
+        View header = inflater.inflate(R.layout.field_partecipants_row, null);
+        header.setEnabled(false);
+
+        CircleImageView myPicture = header.findViewById(R.id.partecipant_picture);
+        TextView myName = header.findViewById(R.id.partecipant_name);
+        ImageButton myDeleteButton = header.findViewById(R.id.remove_partic_button);
+
+        //todo le seguenti informazioni dovrebbero essere prelevate altrove, tipo il view model
+        myPicture.setImageURI(resourceToURI(appContext, R.drawable.average_man));
+        myName.setText(R.string.my_self);
+        myDeleteButton.setVisibility(View.GONE);
+        holder.partecipantListView.addHeaderView(header);
     }
 
     private Uri resourceToURI(Context context, int resID) {
@@ -277,9 +290,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         private final ImageButton photoImageButtonView;
 
         private final ListView partecipantListView;
-        //todo i successivi 2 forse non servono perché gestiti dal ParticipantAdapter
-        private final CircleImageView partecipantPictureView;
-        private final TextView partecipantNameView;
 
         private FieldViewHolder(View itemView) {
             super(itemView);
@@ -295,8 +305,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
 
             partecipantListView = itemView.findViewById(R.id.input_partes);
-            partecipantPictureView = itemView.findViewById(R.id.partecipant_picture);
-            partecipantNameView = itemView.findViewById(R.id.partecipant_name);
         }
     }
 }

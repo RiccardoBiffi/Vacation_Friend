@@ -24,20 +24,36 @@
 
     <TextView
         android:id="@+id/partecipant_name"
+        style="@style/Fields"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
 
         android:text="Nome Cognome"
         android:gravity="center_vertical"
-        style="@style/Fields"
+        android:ellipsize="end"
 
-        app:layout_constraintBottom_toTopOf="@+id/barrier_partecipants"
+        app:layout_constraintBottom_toTopOf="@id/barrier_partecipants"
+        app:layout_constraintEnd_toStartOf="@id/remove_partic_button"
+        app:layout_constraintStart_toEndOf="@id/partecipant_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/remove_partic_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+
+        android:background="@drawable/ic_close_secdark_24dp"
+        android:scaleType="fitCenter"
+
+        app:layout_constraintBottom_toTopOf="@id/barrier_partecipants"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/partecipant_picture"
         app:layout_constraintTop_toTopOf="parent"
+
         />
 
     <android.support.constraint.Barrier
@@ -45,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="partecipant_picture,partecipant_name"
+        app:constraint_referenced_ids="partecipant_picture,partecipant_name,remove_partic_button"
         />
 
 </android.support.constraint.ConstraintLayout>
