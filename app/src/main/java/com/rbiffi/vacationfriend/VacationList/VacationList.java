@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.VacationList;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -138,6 +139,7 @@ public class VacationList extends AppCompatActivity {
         viewPager.setAdapter(fragmentAdapter); // attacca al viewpager il gestore dei frammenti
     }
 
+
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { // mostra il menù sulla "action" bar
@@ -167,6 +169,7 @@ public class VacationList extends AppCompatActivity {
                 return super.onOptionsItemSelected(item); // ogni tanto android aggiunge voci di menù. Così le gestisce
         }
     }
+
 
     //classe interna per gestire i frammenti
     public class FragmentAdapter extends FragmentPagerAdapter {

@@ -16,7 +16,7 @@ import java.util.List;
 @Dao
 public interface IVacationDao {
 
-    //READ
+//READ
     @Query("SELECT * FROM Vacation WHERE id = :id")
     Vacation getVacationDetails(int id);
 
@@ -36,21 +36,20 @@ public interface IVacationDao {
     LiveData<List<VacationLite>> getAllVacations();
 
 
-    //INSERT
+//INSERT
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Vacation vacation);
+    long insert(Vacation vacation);
 
 
-    //UPDATE
+//UPDATE
     @Update
     void updateVacation(Vacation vacation);
 
 
-    //DELETE
+//DELETE
     @Delete
-    void deleteVacation(Vacation vacation);
+    void delete(Vacation vacation);
 
     @Query("DELETE FROM Vacation")
     void deleteAll();
-
 }

@@ -70,6 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/partes_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="@id/partes_field_barrier_horizontal"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        />
 
 </android.support.constraint.ConstraintLayout>

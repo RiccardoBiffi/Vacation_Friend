@@ -10,15 +10,13 @@
         android:layout_height="wrap_content"
 
         android:drawableLeft="@drawable/ic_person_add_black_24dp"
-        android:drawablePadding="8dp"
-
         android:drawableStart="@drawable/ic_person_add_black_24dp"
-        android:focusable="false"
-
-        android:focusableInTouchMode="false"
+        android:drawablePadding="8dp"
         android:gravity="start|center"
+
         android:text="@string/field_partec_buttontext"
-        android:textColor="@color/colorPrimaryDark"
+        style="@style/AddFieldBotton"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

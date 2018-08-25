@@ -87,11 +87,9 @@
         android:drawableStart="@drawable/ic_add_photo_white_24dp"
         android:drawablePadding="8dp"
         android:gravity="start|center"
-        android:text="@string/field_photo_buttontext"
-        android:textColor="@color/colorPrimaryDark"
 
-        android:focusable="false"
-        android:focusableInTouchMode="false"
+        android:text="@string/field_photo_buttontext"
+        style="@style/AddFieldBotton"
 
         app:layout_constraintBottom_toTopOf="@id/input_photo_choosed"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +106,8 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
 
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:visibility="gone"
 
         android:focusable="false"

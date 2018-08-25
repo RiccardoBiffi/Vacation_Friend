@@ -13,13 +13,10 @@ import android.support.annotation.NonNull;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Converters;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 @Database(entities = {
         Vacation.class,
-        Participant.class}, version = 8)
+        Participant.class},
+        version = 10)
 @TypeConverters({Converters.class})
 public abstract class VacationDatabase extends RoomDatabase {
 
@@ -48,13 +45,16 @@ public abstract class VacationDatabase extends RoomDatabase {
     }
 
     public abstract IVacationDao getVacationDao();
+    public abstract IParticipantDao getParticipantDao();
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final IVacationDao vDao;
+        private final IParticipantDao pDao;
 
-        public PopulateDbAsync(VacationDatabase db) {
+        PopulateDbAsync(VacationDatabase db) {
             vDao = db.getVacationDao();
+            pDao = db.getParticipantDao();
         }
 
         @Override
@@ -101,7 +101,36 @@ public abstract class VacationDatabase extends RoomDatabase {
             v.achived = false;
             vDao.insert(v);
             */
+
+            initializeParticipants();
             return null;
+        }
+
+        private void initializeParticipants() {
+            Participant p = new Participant();
+            p.email = "test1@domani.com";
+            p.name = "Sara";
+            p.lastName = "Manzini";
+            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.blonde_woman);
+            pDao.insert(p);
+
+            p.email = "test2@domani.com";
+            p.name = "Chiara";
+            p.lastName = "Rocchi";
+            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.fine_woman);
+            pDao.insert(p);
+
+            p.email = "test3@domani.com";
+            p.name = "Carlo";
+            p.lastName = "Rossi";
+            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.happy_man);
+            pDao.insert(p);
+
+            p.email = "test4@domani.com";
+            p.name = "Marco";
+            p.lastName = "Scalzi";
+            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.businnes_man);
+            pDao.insert(p);
         }
     }
 
