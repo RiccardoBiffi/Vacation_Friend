@@ -93,8 +93,6 @@ public class Recenti extends Fragment implements IVacationListClickEvents {
         });
     }
 
-
-
     private void setupListWithAdapter() {
         vacationList = getView().findViewById(R.id.vacationElList);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni

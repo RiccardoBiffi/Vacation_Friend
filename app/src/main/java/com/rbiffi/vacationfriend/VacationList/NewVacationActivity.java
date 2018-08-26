@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.VacationList;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -61,6 +63,8 @@ public class NewVacationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vacation);
+
+        restoreState(savedInstanceState);
         setupActionBar();
         setupListWithAdapter();
 
@@ -96,22 +100,38 @@ public class NewVacationActivity
                 finish();
             }
         });
+    }
 
+    private void restoreState(Bundle savedInstanceState) {
+        //todo viewmodel per mantenere i dati inseriti dall'utente
+        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
+        // salva tutto, soprattutto lista partecipanti selezionati e photo vacanza
+        // gli altri campi li salvo anche nel nel onSaveInstanceState xkè leggeri
+
+        if (viewModel.getFieldTitle() == null && savedInstanceState != null) {
+            String title = savedInstanceState.getString("inputTitle");
+            viewModel.setFieldTitle(title);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        EditText inputTitle = vacationFieldsList.findViewById(R.id.input_title);
+        viewModel.setFieldTitle(inputTitle.getText().toString());
+        outState.putString("inputTitle", inputTitle.getText().toString());
     }
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
         vacationFieldsList.addItemDecoration(new DividerItemDecoration(vacationFieldsList.getContext(), DividerItemDecoration.VERTICAL));
         IUserEditableObject v = new Vacation();
-        fieldListAdapter = new FieldListAdapter(getApplicationContext(), v);
+        fieldListAdapter = new FieldListAdapter(getApplicationContext(), v, viewModel);
         fieldListAdapter.setListener(this);
         vacationFieldsList.setAdapter(fieldListAdapter);
 
         fieldLayout = new LinearLayoutManager(getApplicationContext());
         vacationFieldsList.setLayoutManager(fieldLayout);
-
-        //todo viewmodel per mantenere i dati inseriti dall'utente
-
     }
 
     private void setupActionBar() {
@@ -182,8 +202,6 @@ public class NewVacationActivity
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
-        //todo comunica al tuo adapter la nuova lista di partecipanti
-        // e chiudi il dialog
         participantAdapter.setParticipantList(selectedParticipants);
         dialog.dismiss();
     }
