@@ -33,4 +33,8 @@
     <string name="field_photo_description">Descrivi la tua vacanza con una foto suggestiva.</string>
     <string name="field_partec_buttontext">Aggiungi</string>
     <string name="my_self">Me stesso</string>
+    <string name="dialog_confirm">Fatto</string>
+    <string name="dialog_participant_message">Scegli partecipanti</string>
+    <string name="button_ignore">Annulla</string>
+    <string name="button_create">Crea</string>
 </resources>

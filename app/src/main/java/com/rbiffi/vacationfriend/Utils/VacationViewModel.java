@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.rbiffi.vacationfriend.Repository.Participant;
 import com.rbiffi.vacationfriend.Repository.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
@@ -19,6 +20,7 @@ public class VacationViewModel extends AndroidViewModel {
 
     // per cashare dati ascoltati all'aggiornamento
     private LiveData<List<VacationLite>> allVacations;
+    private LiveData<List<Participant>> allPartecipants;
 
     public VacationViewModel(@NonNull Application app) {
         super(app);
@@ -26,10 +28,15 @@ public class VacationViewModel extends AndroidViewModel {
 
         //inizializzo i dati
         allVacations = repository.getVacationList();
+        allPartecipants = repository.getParticipantList();
     }
 
     public LiveData<List<VacationLite>> getAllVacations() {
         return allVacations;
+    }
+
+    public LiveData<List<Participant>> getAllPartecipants() {
+        return allPartecipants;
     }
 
     public void insert(Vacation v){

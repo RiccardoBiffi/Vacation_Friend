@@ -16,11 +16,11 @@ import com.rbiffi.vacationfriend.Utils.Converters;
 @Database(entities = {
         Vacation.class,
         Participant.class},
-        version = 10)
+        version = 11)
 @TypeConverters({Converters.class})
-public abstract class VacationDatabase extends RoomDatabase {
+public abstract class VacationFriendDatabase extends RoomDatabase {
 
-    private static VacationDatabase INSTANCE;
+    private static VacationFriendDatabase INSTANCE;
     private static RoomDatabase.Callback roomDbCallback = new Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
@@ -29,12 +29,12 @@ public abstract class VacationDatabase extends RoomDatabase {
         }
     };
 
-    public static VacationDatabase getDatabase(final Context context) {
+    public static VacationFriendDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (VacationDatabase.class) {
+            synchronized (VacationFriendDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room
-                            .databaseBuilder(context.getApplicationContext(), VacationDatabase.class, "VacationDB")
+                            .databaseBuilder(context.getApplicationContext(), VacationFriendDatabase.class, "VacationDB")
                             .fallbackToDestructiveMigration()
                             .addCallback(roomDbCallback)
                             .build();
@@ -52,7 +52,7 @@ public abstract class VacationDatabase extends RoomDatabase {
         private final IVacationDao vDao;
         private final IParticipantDao pDao;
 
-        PopulateDbAsync(VacationDatabase db) {
+        PopulateDbAsync(VacationFriendDatabase db) {
             vDao = db.getVacationDao();
             pDao = db.getParticipantDao();
         }
