@@ -13,23 +13,31 @@ public class VacationRepository {
     private IVacationDao vacationDao;
     private LiveData<List<VacationLite>> vacationList;
 
-    public VacationRepository(Application app){
-        VacationDatabase db = VacationDatabase.getDatabase(app); // prendo l'istanza del db
+    private IParticipantDao participantDao;
+    private LiveData<List<Participant>> participantList;
+
+    public VacationRepository(Application app) {
+        VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
         vacationDao = db.getVacationDao(); // prendo dal db il DAO
+        participantDao = db.getParticipantDao();
 
         // acquisisco quel che mi interessa dal db
         vacationList = vacationDao.getAllVacations();
+        participantList = participantDao.getAllPartecipants();
     }
 
     public LiveData<List<VacationLite>> getVacationList() {
         return vacationList;
     }
 
-    public void insert(Vacation vacation){
+    public LiveData<List<Participant>> getParticipantList() {
+        return participantList;
+    }
+
+    public void insert(Vacation vacation) {
         // bisogna chiamarlo in un tread diverso da quello principale.
         new insertAsyncTask(vacationDao).execute(vacation);
     }
-
 
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private class insertAsyncTask extends AsyncTask<Vacation, Void, Void> {

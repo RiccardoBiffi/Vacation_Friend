@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="label_partes,input_partes"
+        app:constraint_referenced_ids="label_partes,input_partes_list"
         app:layout_constraintStart_toEndOf="@id/icon_partes"
         />
 
@@ -50,7 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/field_partes_ob"
-        app:layout_constraintBottom_toTopOf="@id/input_partes"
+        app:layout_constraintBottom_toTopOf="@id/input_partes_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/partes_field_barrier_vertical"
@@ -60,7 +60,7 @@
     <!-- todo Listview, "io" e "aggiungi" fissi a mo' di header e footer -->
     <!-- todo i partecipanti vengono presi dal db, prepopolalo con 4 -->
     <com.rbiffi.vacationfriend.Utils.ExtendedListView
-        android:id="@+id/input_partes"
+        android:id="@+id/input_partes_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

@@ -4,6 +4,8 @@ package com.rbiffi.vacationfriend.VacationList;
 import android.app.DatePickerDialog;
 import android.view.View;
 
+import com.rbiffi.vacationfriend.Repository.ParticipantAdapter;
+
 import java.util.Calendar;
 
 public interface IVacationFieldsEvents {
@@ -12,5 +14,5 @@ public interface IVacationFieldsEvents {
 
     void onDateFocus(View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener);
 
-    void onAddPartecipantClick();
+    void onAddPartecipantClick(View button, ParticipantAdapter adapter);
 }

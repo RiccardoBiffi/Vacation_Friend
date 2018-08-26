@@ -35,11 +35,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.FieldViewHolder> {
 
-    //TODO lista di interi per tutti i possibili fieldList
+    //TODO lista di interi per tutti i possibili fieldList di tutta la App
     private static final int VIEW_TYPE_TITLE = 0;
     private static final int VIEW_TYPE_PERIOD = 1;
     private static final int VIEW_TYPE_PLACE = 2;
-    private static final int VIEW_TYPE_PARTECIPANTS = 3;
+    private static final int VIEW_TYPE_PARTICIPANTS = 3;
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
     //...
@@ -68,7 +68,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             case VIEW_TYPE_PLACE:
                 view = inflater.inflate(R.layout.field_place, parent, false);
                 break;
-            case VIEW_TYPE_PARTECIPANTS:
+            case VIEW_TYPE_PARTICIPANTS:
                 view = inflater.inflate(R.layout.field_partecipants, parent, false);
                 break;
             case VIEW_TYPE_PHOTO:
@@ -152,15 +152,15 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
 
             case Constants.F_PARTECIP:
-
                 // se è una nuova vacanza, non ci sono partecipanti
                 //todo se in modifica di una vacanza, recupera partecipanti da DB
-                setPartecipantsListHeader(holder);
-                setParticipantsListFooter(holder);
-                holder.partecipantListView.setDivider(null);
-
                 List<Participant> empty = new ArrayList<>();
                 ParticipantAdapter partAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, empty);
+
+                setPartecipantsListHeader(holder);
+                setParticipantsListFooter(holder, partAdapter);
+                holder.partecipantListView.setDivider(null);
+
                 holder.partecipantListView.setAdapter(partAdapter);
                 break;
 
@@ -169,48 +169,18 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 //todo valuta cosa inserire qua
                 // dati non pronti, placeholder
         }
-
-        /*
-        if (field != null) {
-            //rimpiazza i dati ed assegna i click per la posizione corrente
-
-            VacationLite current = field.get(position);
-            holder.vacationTitleView.setText(current.name);
-            holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onVacationClick(vacation);
-                    }
-                }
-            });
-
-            holder.vacationImageView.setImageURI(current.photo);
-            holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onVacationClick(vacation);
-                    }
-                }
-            });
-
-            holder.vacationOverflow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onOverflowClick(v, vacation);
-                    }
-                }
-            });
-        } else {
-            // todo Dati non pronti
-        }
-        */
     }
 
-    private void setParticipantsListFooter(FieldViewHolder holder) {
+    private void setParticipantsListFooter(FieldViewHolder holder, final ParticipantAdapter partAdapter) {
         View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
+        footer.findViewById(R.id.input_add_partic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onAddPartecipantClick(v, partAdapter);
+                }
+            }
+        });
         holder.partecipantListView.addFooterView(footer);
     }
 
@@ -252,7 +222,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             case Constants.F_PLACE:
                 return VIEW_TYPE_PLACE;
             case Constants.F_PARTECIP:
-                return VIEW_TYPE_PARTECIPANTS;
+                return VIEW_TYPE_PARTICIPANTS;
             case Constants.F_PHOTO:
                 return VIEW_TYPE_PHOTO;
             case Constants.F_NOTES:
@@ -304,7 +274,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             photoButtonAddView = itemView.findViewById(R.id.input_photo);
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
 
-            partecipantListView = itemView.findViewById(R.id.input_partes);
+            partecipantListView = itemView.findViewById(R.id.input_partes_list);
         }
     }
 }

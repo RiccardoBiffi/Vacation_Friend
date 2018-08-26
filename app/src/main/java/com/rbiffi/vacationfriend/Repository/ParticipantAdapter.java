@@ -21,6 +21,15 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
     private Context context;
     private List<Participant> listData;
 
+    public List<Participant> getListData() {
+        return listData;
+    }
+
+    public void setListData(List<Participant> listData) {
+        this.listData = listData;
+        notifyDataSetChanged();
+    }
+
     public ParticipantAdapter(@NonNull Context context, int resource, @NonNull List<Participant> objects) {
         super(context, resource, objects);
         this.context = context;
@@ -37,8 +46,8 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
         ImageButton removeParticipantView = convertView.findViewById(R.id.remove_partic_button);
 
         Participant current = getItem(position);
-        partecipantPictureView.setImageURI(current.picture);
-        partecipantNameView.setText(current.name + " " + current.lastName);
+        partecipantPictureView.setImageURI(current != null ? current.picture : null);
+        partecipantNameView.setText((current != null ? current.name : "") + " " + (current != null ? current.lastName : ""));
         removeParticipantView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,4 +57,5 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
         });
         return convertView;
     }
+
 }
