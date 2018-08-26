@@ -14,5 +14,5 @@ public interface IVacationFieldsEvents {
 
     void onDateFocus(View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener);
 
-    void onAddPartecipantClick(View button, ParticipantAdapter adapter);
+    void onAddParticipantClick(View button, ParticipantAdapter adapter);
 }

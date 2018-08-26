@@ -34,7 +34,11 @@
     <string name="field_partec_buttontext">Aggiungi</string>
     <string name="my_self">Me stesso</string>
     <string name="dialog_confirm">Fatto</string>
-    <string name="dialog_participant_message">Scegli partecipanti</string>
+    <string name="dialog_participant_message">Scegli i partecipanti</string>
     <string name="button_ignore">Annulla</string>
     <string name="button_create">Crea</string>
+    <string name="button_done">Fatto</string>
+    <string name="dialog_invite_title">Non vedi i tuoi amici?</string>
+    <string name="dialog_invite_button">Invita</string>
+    <string name="dialog_invite_description">Invita anche i tuoi amici su Vacation Friend!\nPotrete organizzare assieme le vostre vacanze, in comodità e semplicità.</string>
 </resources>
