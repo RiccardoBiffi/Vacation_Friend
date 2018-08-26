@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
+import com.rbiffi.vacationfriend.Utils.VacationViewModel;
 import com.rbiffi.vacationfriend.VacationList.IVacationFieldsEvents;
 
 import java.text.SimpleDateFormat;
@@ -43,15 +44,17 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
     //...
+    private VacationViewModel viewModel;
     private final LayoutInflater inflater;
     private Context appContext;
     private IVacationFieldsEvents listener;
     private List<String> fieldList;
 
-    public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj) {
+    public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj, VacationViewModel viewModel) {
         appContext = applicationContext;
         inflater = LayoutInflater.from(applicationContext);
         fieldList = editableObj.getEditableFields();
+        this.viewModel = viewModel;
     }
 
     @Override
@@ -88,6 +91,11 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
         final String field = fieldList.get(position);
         switch (field) {
+            case Constants.F_TITLE:
+                holder.titleFieldView.setText(viewModel.getFieldTitle());
+                break;
+
+
             case Constants.F_PHOTO:
                 holder.photoButtonAddView.setOnClickListener(new View.OnClickListener() {
                     @Override
