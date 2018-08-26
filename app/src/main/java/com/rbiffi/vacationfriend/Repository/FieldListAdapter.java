@@ -155,13 +155,13 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 // se è una nuova vacanza, non ci sono partecipanti
                 //todo se in modifica di una vacanza, recupera partecipanti da DB
                 List<Participant> empty = new ArrayList<>();
-                ParticipantAdapter partAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, empty);
+                ParticipantAdapter fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, empty);
 
                 setPartecipantsListHeader(holder);
-                setParticipantsListFooter(holder, partAdapter);
+                setParticipantsListFooter(holder, fieldParticipantsAdapter);
                 holder.partecipantListView.setDivider(null);
 
-                holder.partecipantListView.setAdapter(partAdapter);
+                holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
                 break;
 
 
@@ -177,7 +177,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onAddPartecipantClick(v, partAdapter);
+                    listener.onAddParticipantClick(v, partAdapter);
                 }
             }
         });

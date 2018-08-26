@@ -20,12 +20,15 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.FieldListAdapter;
 import com.rbiffi.vacationfriend.Repository.IUserEditableObject;
+import com.rbiffi.vacationfriend.Repository.Participant;
 import com.rbiffi.vacationfriend.Repository.ParticipantAdapter;
 import com.rbiffi.vacationfriend.Repository.Vacation;
+import com.rbiffi.vacationfriend.Utils.VacationViewModel;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
+import java.util.List;
 
 public class NewVacationActivity
         extends AppCompatActivity
@@ -39,6 +42,8 @@ public class NewVacationActivity
     public static final String NOTES_FIELD = "_notes";
     private static final int PICK_IMAGE = 1;
 
+    private VacationViewModel viewModel; // todo mantieni lo stato dei vari campi
+
     private Button confirm;
     private Button discard;
     private Button vacationImageAddButton;
@@ -47,6 +52,8 @@ public class NewVacationActivity
     private RecyclerView vacationFieldsList;
     private FieldListAdapter fieldListAdapter;
     private RecyclerView.LayoutManager fieldLayout;
+
+    private ParticipantAdapter participantAdapter;
 
     private Toolbar toolbar;
 
@@ -165,21 +172,24 @@ public class NewVacationActivity
     }
 
     @Override
-    public void onAddPartecipantClick(View button, ParticipantAdapter adapter) {
-        DialogFragment dialogFragment = new AddParticipantsDialogFragment(); // todo passo qualcosa, tipo chi è già selezionato
+    public void onAddParticipantClick(View button, ParticipantAdapter adapter) {
+        participantAdapter = adapter;
+        AddParticipantsDialogFragment dialogFragment = new AddParticipantsDialogFragment();
+        List<Participant> participantList = participantAdapter.getParticipantList();
+        dialogFragment.setSelectedParticipants(participantList);
         dialogFragment.show(getSupportFragmentManager(), "AddParticipantsDialogFragment");
-
-
-        //todo aggiorna la lista dell'adapter con gli utenti selezionati (get e set)
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-
+    public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
+        //todo comunica al tuo adapter la nuova lista di partecipanti
+        // e chiudi il dialog
+        participantAdapter.setParticipantList(selectedParticipants);
+        dialog.dismiss();
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-
+        dialog.dismiss();
     }
 }
