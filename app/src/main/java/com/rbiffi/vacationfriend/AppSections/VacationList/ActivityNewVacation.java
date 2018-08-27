@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -19,29 +19,28 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.FieldListAdapter;
-import com.rbiffi.vacationfriend.Repository.IUserEditableObject;
-import com.rbiffi.vacationfriend.Repository.Participant;
-import com.rbiffi.vacationfriend.Repository.ParticipantAdapter;
-import com.rbiffi.vacationfriend.Repository.Vacation;
-import com.rbiffi.vacationfriend.Utils.VacationViewModel;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Utils.FieldLists;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 
-public class NewVacationActivity
+public class ActivityNewVacation
         extends AppCompatActivity
         implements
         IVacationFieldsEvents,
-        AddParticipantsDialogFragment.IAddParticipantsListener {
+        FragmentAddParticipantsDialog.IAddParticipantsListener {
 
     // per rendere la risposta univoca a questa classe
-    public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.NewVacationActivity.REPLY";
+    public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
     public static final String TITLE_FIELD = "_title";
-    public static final String NOTES_FIELD = "_notes";
     private static final int PICK_IMAGE = 1;
 
     private VacationViewModel viewModel; // todo mantieni lo stato dei vari campi
@@ -125,8 +124,7 @@ public class NewVacationActivity
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
         vacationFieldsList.addItemDecoration(new DividerItemDecoration(vacationFieldsList.getContext(), DividerItemDecoration.VERTICAL));
-        IUserEditableObject v = new Vacation();
-        fieldListAdapter = new FieldListAdapter(getApplicationContext(), v, viewModel);
+        fieldListAdapter = new FieldListAdapter(getApplicationContext(), FieldLists.getVacationFieldList(), viewModel);
         fieldListAdapter.setListener(this);
         vacationFieldsList.setAdapter(fieldListAdapter);
 
@@ -156,7 +154,7 @@ public class NewVacationActivity
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dateDialog = new DatePickerDialog(NewVacationActivity.this, dateListener, year, month, day);
+            DatePickerDialog dateDialog = new DatePickerDialog(ActivityNewVacation.this, dateListener, year, month, day);
             dateDialog.show();
             date.clearFocus();
         }
@@ -194,10 +192,10 @@ public class NewVacationActivity
     @Override
     public void onAddParticipantClick(View button, ParticipantAdapter adapter) {
         participantAdapter = adapter;
-        AddParticipantsDialogFragment dialogFragment = new AddParticipantsDialogFragment();
+        FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
         List<Participant> participantList = participantAdapter.getParticipantList();
         dialogFragment.setSelectedParticipants(participantList);
-        dialogFragment.show(getSupportFragmentManager(), "AddParticipantsDialogFragment");
+        dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
     }
 
     @Override

@@ -1,12 +1,13 @@
-package com.rbiffi.vacationfriend.Utils;
+package com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.rbiffi.vacationfriend.Repository.Participant;
-import com.rbiffi.vacationfriend.Repository.Vacation;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
 import java.util.List;

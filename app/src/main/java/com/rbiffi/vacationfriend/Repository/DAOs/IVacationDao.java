@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.Repository;
+package com.rbiffi.vacationfriend.Repository.DAOs;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -8,7 +8,8 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.rbiffi.vacationfriend.Utils.VacationLite;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.Date;
 import java.util.List;
@@ -20,19 +21,29 @@ public interface IVacationDao {
     @Query("SELECT * FROM Vacation WHERE id = :id")
     Vacation getVacationDetails(int id);
 
-    @Query("SELECT * FROM Vacation WHERE date('now') < :startDate")
+    @Query("SELECT id, title, startDate, endDate, photo " +
+            "FROM Vacation " +
+            "WHERE date('now') < :startDate")
     List<VacationLite> getNextVacations(Date startDate);
 
-    @Query("SELECT * FROM Vacation WHERE date('now') BETWEEN :startDate AND :endDate")
+    @Query("SELECT id, title, startDate, endDate, photo " +
+            "FROM Vacation " +
+            "WHERE date('now') BETWEEN :startDate AND :endDate")
     List<VacationLite> getCurrentVacations(Date startDate, Date endDate);
 
-    @Query("SELECT * FROM Vacation WHERE date('now') > :endDate")
+    @Query("SELECT id, title, startDate, endDate, photo " +
+            "FROM Vacation " +
+            "WHERE date('now') > :endDate")
     List<VacationLite> getEndedVacations(String endDate);
 
-    @Query("SELECT * FROM Vacation WHERE isAchieved = 1")
+    @Query("SELECT id, title, startDate, endDate, photo " +
+            "FROM Vacation " +
+            "WHERE isAchieved = 1")
     List<VacationLite> getAchievedVacations();
 
-    @Query("SELECT * from Vacation ORDER BY title ASC")
+    @Query("SELECT id, title, startDate, endDate, photo " +
+            "FROM Vacation " +
+            "ORDER BY title ASC")
     LiveData<List<VacationLite>> getAllVacations();
 
 

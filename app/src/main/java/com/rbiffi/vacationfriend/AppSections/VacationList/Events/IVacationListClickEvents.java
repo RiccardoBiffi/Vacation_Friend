@@ -1,8 +1,8 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList.Events;
 
 import android.view.View;
 
-import com.rbiffi.vacationfriend.Utils.VacationLite;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 public interface IVacationListClickEvents {
 

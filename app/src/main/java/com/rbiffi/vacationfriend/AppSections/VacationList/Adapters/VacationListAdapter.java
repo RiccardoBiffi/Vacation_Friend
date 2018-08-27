@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.Repository;
+package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Utils.VacationLite;
-import com.rbiffi.vacationfriend.VacationList.IVacationListClickEvents;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         if (vacationListCache != null) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
             final VacationLite current = vacationListCache.get(position);
-            holder.vacationTitleView.setText(current.name);
+            holder.vacationTitleView.setText(current.title);
             holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,7 +89,6 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         } else {
             //todo metti immagine grigia finchè non carica
             // Dati non pronti, placeholder
-            holder.vacationTitleView.setText("Caricamento...");
         }
     }
 
@@ -120,7 +119,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         private final ImageView vacationImageView;
         private final ImageButton vacationOverflow;
 
-        protected VacationViewHolder(View itemView) {
+        VacationViewHolder(View itemView) {
             super(itemView);
             vacationTitleView = itemView.findViewById(R.id.vacation_title);
             vacationImageView = itemView.findViewById(R.id.vacationImage);

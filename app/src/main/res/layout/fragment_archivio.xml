@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".VacationList.Archivio"
+        android:layout_height="wrap_content"
+        tools:context=".AppSections.VacationList.FragmentArchivio"
         android:orientation="vertical"
         android:gravity="center">
 

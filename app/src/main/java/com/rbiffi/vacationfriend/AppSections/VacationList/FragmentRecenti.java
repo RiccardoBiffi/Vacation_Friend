@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
@@ -21,17 +21,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Vacation;
-import com.rbiffi.vacationfriend.Repository.VacationListAdapter;
-import com.rbiffi.vacationfriend.Utils.VacationLite;
-import com.rbiffi.vacationfriend.Utils.VacationViewModel;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Recenti extends Fragment implements IVacationListClickEvents {
+public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private VacationViewModel viewModel;
@@ -70,11 +70,16 @@ public class Recenti extends Fragment implements IVacationListClickEvents {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK) {
-            Vacation v = new Vacation();
-            v.title = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.TITLE_FIELD);
-            v.notes = data.getStringExtra(NewVacationActivity.EXTRA_REPLY + NewVacationActivity.NOTES_FIELD);
-            //todo recupera anche altri campi
-            viewModel.insert(v);
+            //todo in "data" c'è la vacanza salvata. Aggiungila al viewmodel
+            // il quale chiederà al repository diaggiungerla sul DB. Il resto è di riflesso per LiveData
+            /*
+                String title = data.getStringExtra(ActivityNewVacation.EXTRA_REPLY + ActivityNewVacation.TITLE_FIELD);
+                //todo anche altri campi
+                Vacation v = new Vacation(id,title,period,place,photo,isAchieved);
+
+                //todo come recupero l'id autogenerato della vacanza?
+                viewModel.insert(v);
+            */
         } else {
             //todo da sostituire con "do nothing"
             Toast.makeText(getContext(), "Elemento non salvato perché vuoto", Toast.LENGTH_SHORT).show();
@@ -87,7 +92,7 @@ public class Recenti extends Fragment implements IVacationListClickEvents {
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), NewVacationActivity.class);
+                Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
                 startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
             }
         });

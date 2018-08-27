@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.rbiffi.vacationfriend.R;
 
-public class Archivio extends Fragment {
+public class FragmentArchivio extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

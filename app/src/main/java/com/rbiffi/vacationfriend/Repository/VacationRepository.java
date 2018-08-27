@@ -4,7 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.rbiffi.vacationfriend.Utils.VacationLite;
+import com.rbiffi.vacationfriend.Repository.DAOs.IParticipantDao;
+import com.rbiffi.vacationfriend.Repository.DAOs.IVacationDao;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.List;
 
@@ -36,21 +40,22 @@ public class VacationRepository {
 
     public void insert(Vacation vacation) {
         // bisogna chiamarlo in un tread diverso da quello principale.
-        new insertAsyncTask(vacationDao).execute(vacation);
+        new InsertAsyncTask(vacationDao).execute(vacation);
     }
 
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
-    private class insertAsyncTask extends AsyncTask<Vacation, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<Vacation, Void, Void> {
 
         private IVacationDao asyncDao;
 
-        public insertAsyncTask(IVacationDao vacationDao) {
+        InsertAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;
         }
 
         @Override
         protected Void doInBackground(final Vacation... vacations) {
-            asyncDao.insert(vacations[0]);
+            long rowId = asyncDao.insert(vacations[0]);
+            //todo recupera il rowId
             return null;
         }
     }

@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,16 +17,16 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Participant;
-import com.rbiffi.vacationfriend.Repository.ParticipantAdapter;
-import com.rbiffi.vacationfriend.Utils.VacationViewModel;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Frammento che permette di selezionare partecipanti tramite una dialog con lista e checkbox
-public class AddParticipantsDialogFragment extends DialogFragment {
+public class FragmentAddParticipantsDialog extends DialogFragment {
 
     private VacationViewModel viewModel; //todo popolalo con le scelte fatte
 
@@ -34,7 +34,7 @@ public class AddParticipantsDialogFragment extends DialogFragment {
     private IAddParticipantsListener listener;
     private List<Participant> selectedParticipants;
 
-    public AddParticipantsDialogFragment() {
+    public FragmentAddParticipantsDialog() {
         selectedParticipants = new ArrayList<>();
     }
 
@@ -68,14 +68,14 @@ public class AddParticipantsDialogFragment extends DialogFragment {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDialogNegativeClick(AddParticipantsDialogFragment.this);
+                listener.onDialogNegativeClick(FragmentAddParticipantsDialog.this);
             }
         });
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDialogPositiveClick(AddParticipantsDialogFragment.this, participantAdapter.getSelectedParticipants());
+                listener.onDialogPositiveClick(FragmentAddParticipantsDialog.this, participantAdapter.getSelectedParticipants());
             }
         });
 
