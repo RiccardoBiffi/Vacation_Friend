@@ -11,12 +11,23 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.DAOs.IJoinVacationParticipantDao;
+import com.rbiffi.vacationfriend.Repository.DAOs.IParticipantDao;
+import com.rbiffi.vacationfriend.Repository.DAOs.IVacationDao;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Utils.Converters;
 
-@Database(entities = {
-        Vacation.class,
-        Participant.class},
-        version = 11)
+@Database(
+        entities = {
+                Vacation.class,
+                Participant.class,
+                JoinVacationParticipant.class
+        },
+        version = 14,
+        exportSchema = false
+)
 @TypeConverters({Converters.class})
 public abstract class VacationFriendDatabase extends RoomDatabase {
 
@@ -47,19 +58,30 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
     public abstract IVacationDao getVacationDao();
     public abstract IParticipantDao getParticipantDao();
 
+    public abstract IJoinVacationParticipantDao getJoinVacationParticipantDao();
+
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final IVacationDao vDao;
         private final IParticipantDao pDao;
+        private final IJoinVacationParticipantDao jvpDao;
 
         PopulateDbAsync(VacationFriendDatabase db) {
             vDao = db.getVacationDao();
             pDao = db.getParticipantDao();
+            jvpDao = db.getJoinVacationParticipantDao();
         }
 
         @Override
         protected Void doInBackground(final Void... vacations) {
             vDao.deleteAll();
+
+            initializeVacations();
+            initializeParticipants();
+            return null;
+        }
+
+        private void initializeVacations() {
             /*
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -101,35 +123,23 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
             v.achived = false;
             vDao.insert(v);
             */
-
-            initializeParticipants();
-            return null;
         }
 
         private void initializeParticipants() {
-            Participant p = new Participant();
-            p.email = "test1@domani.com";
-            p.name = "Sara";
-            p.lastName = "Manzini";
-            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.blonde_woman);
+            Uri photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.blonde_woman);
+            Participant p = new Participant("test1@domani.com", photoUri, "Sara", "Manzini");
             pDao.insert(p);
 
-            p.email = "test2@domani.com";
-            p.name = "Chiara";
-            p.lastName = "Rocchi";
-            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.fine_woman);
+            photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.fine_woman);
+            p = new Participant("test2@domani.com", photoUri, "Chiara", "Rocchi");
             pDao.insert(p);
 
-            p.email = "test3@domani.com";
-            p.name = "Carlo";
-            p.lastName = "Rossi";
-            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.happy_man);
+            photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.happy_man);
+            p = new Participant("test3@domani.com", photoUri, "Carlo", "Rossi");
             pDao.insert(p);
 
-            p.email = "test4@domani.com";
-            p.name = "Marco";
-            p.lastName = "Scalzi";
-            p.picture = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.businnes_man);
+            photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.businnes_man);
+            p = new Participant("test4@domani.com", photoUri, "Marco", "Scalzi");
             pDao.insert(p);
         }
     }

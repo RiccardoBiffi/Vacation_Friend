@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.Repository;
+package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
 import java.util.ArrayList;
 import java.util.List;

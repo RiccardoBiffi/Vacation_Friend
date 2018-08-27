@@ -1,10 +1,10 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList.Events;
 
 
 import android.app.DatePickerDialog;
 import android.view.View;
 
-import com.rbiffi.vacationfriend.Repository.ParticipantAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
 
 import java.util.Calendar;
 

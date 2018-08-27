@@ -1,7 +1,6 @@
-package com.rbiffi.vacationfriend.VacationList;
+package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,13 +21,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Vacation;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-
-public class VacationList extends AppCompatActivity {
+public class ActivityVacationList extends AppCompatActivity {
 
     private ViewPager viewPager;
     private FragmentAdapter fragmentAdapter;
@@ -174,7 +168,7 @@ public class VacationList extends AppCompatActivity {
     //classe interna per gestire i frammenti
     public class FragmentAdapter extends FragmentPagerAdapter {
 
-        public FragmentAdapter(FragmentManager fm) {
+        FragmentAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -183,9 +177,9 @@ public class VacationList extends AppCompatActivity {
             // riempie l'interfaccia con gli elementi che voglio, passandogli il fragment giusto
             switch (position) {
                 case 0:
-                    return new Recenti();
+                    return new FragmentRecenti();
                 case 1:
-                    return new Archivio();
+                    return new FragmentArchivio();
                 default:
                     return null;
             }

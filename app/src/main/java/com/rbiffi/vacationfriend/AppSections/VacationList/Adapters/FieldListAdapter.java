@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.Repository;
+package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
@@ -16,10 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.Constants;
-import com.rbiffi.vacationfriend.Utils.VacationViewModel;
-import com.rbiffi.vacationfriend.VacationList.IVacationFieldsEvents;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,10 +51,10 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     private IVacationFieldsEvents listener;
     private List<String> fieldList;
 
-    public FieldListAdapter(Context applicationContext, IUserEditableObject editableObj, VacationViewModel viewModel) {
+    public FieldListAdapter(Context applicationContext, List<String> fieldList, VacationViewModel viewModel) {
         appContext = applicationContext;
         inflater = LayoutInflater.from(applicationContext);
-        fieldList = editableObj.getEditableFields();
+        this.fieldList = fieldList;
         this.viewModel = viewModel;
     }
 
