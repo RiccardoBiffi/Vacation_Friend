@@ -20,12 +20,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
 
 public class ActivityVacationList extends AppCompatActivity {
 
+    private VacationViewModel viewModel; //todo valuta se usarlo anche qua
+
     private ViewPager viewPager;
     private FragmentAdapter fragmentAdapter;
+
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;

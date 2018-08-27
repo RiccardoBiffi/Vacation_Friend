@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
@@ -28,7 +28,7 @@ import java.util.List;
 // Frammento che permette di selezionare partecipanti tramite una dialog con lista e checkbox
 public class FragmentAddParticipantsDialog extends DialogFragment {
 
-    private VacationViewModel viewModel; //todo popolalo con le scelte fatte
+    private NewVacationViewModel viewModel; //todo fanne un'altro e popolalo con le scelte fatte
 
     private ParticipantAdapter participantAdapter;
     private IAddParticipantsListener listener;
@@ -51,8 +51,8 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         //todo metti la lista utenti selezionabili (da DB)
         participantAdapter = new ParticipantAdapter(getContext(), R.layout.dialog_participants_row, selectedParticipants);
         participantAdapter.setSelectedParticipants(selectedParticipants);
-        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
-        viewModel.getAllPartecipants().observe(this, new Observer<List<Participant>>() {
+        viewModel = ViewModelProviders.of(this).get(NewVacationViewModel.class);
+        viewModel.getAllParticipants().observe(this, new Observer<List<Participant>>() {
             @Override
             public void onChanged(@Nullable List<Participant> participants) {
                 participantAdapter.setParticipantList(participants);

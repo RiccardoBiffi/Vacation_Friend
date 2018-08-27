@@ -34,6 +34,7 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
+
     private VacationViewModel viewModel;
 
     private FloatingActionButton floatingButton;
