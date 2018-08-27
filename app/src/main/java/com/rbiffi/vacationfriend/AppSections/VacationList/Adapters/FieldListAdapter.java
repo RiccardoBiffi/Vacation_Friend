@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.Constants;
@@ -45,13 +45,15 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
     //...
-    private VacationViewModel viewModel;
+
+    private NewVacationViewModel viewModel;
+
     private final LayoutInflater inflater;
     private Context appContext;
     private IVacationFieldsEvents listener;
     private List<String> fieldList;
 
-    public FieldListAdapter(Context applicationContext, List<String> fieldList, VacationViewModel viewModel) {
+    public FieldListAdapter(Context applicationContext, List<String> fieldList, NewVacationViewModel viewModel) {
         appContext = applicationContext;
         inflater = LayoutInflater.from(applicationContext);
         this.fieldList = fieldList;

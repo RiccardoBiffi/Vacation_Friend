@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
@@ -43,7 +43,7 @@ public class ActivityNewVacation
     public static final String TITLE_FIELD = "_title";
     private static final int PICK_IMAGE = 1;
 
-    private VacationViewModel viewModel; // todo mantieni lo stato dei vari campi
+    private NewVacationViewModel viewModel; // todo mantieni lo stato dei vari campi
 
     private Button confirm;
     private Button discard;
@@ -103,7 +103,7 @@ public class ActivityNewVacation
 
     private void restoreState(Bundle savedInstanceState) {
         //todo viewmodel per mantenere i dati inseriti dall'utente
-        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(NewVacationViewModel.class);
         // salva tutto, soprattutto lista partecipanti selezionati e photo vacanza
         // gli altri campi li salvo anche nel nel onSaveInstanceState xkè leggeri
 
