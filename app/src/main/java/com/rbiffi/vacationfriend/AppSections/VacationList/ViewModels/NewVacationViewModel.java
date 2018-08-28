@@ -2,13 +2,13 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewVacationViewModel extends AndroidViewModel {
@@ -22,8 +22,8 @@ public class NewVacationViewModel extends AndroidViewModel {
     private String fieldPeriodFrom;
     private String fieldPeriodTo;
     private String fieldPlace;
-    private LiveData<List<Participant>> allPartecipants;
-    //todo altri campi dell'activity
+    private List<Participant> fieldParticipants;
+    private String fieldPhoto;
 
     public NewVacationViewModel(@NonNull Application app) {
         super(app);
@@ -31,11 +31,11 @@ public class NewVacationViewModel extends AndroidViewModel {
 
         //inizializzo i dati
         fieldTitle = "";
-        allPartecipants = repository.getParticipantList();
-    }
-
-    public LiveData<List<Participant>> getAllParticipants() {
-        return allPartecipants;
+        fieldPeriodFrom = "";
+        fieldPeriodTo = "";
+        fieldPlace = "";
+        fieldParticipants = new ArrayList<>();
+        fieldPhoto = "";
     }
 
     public void insert(Vacation v) {
@@ -73,5 +73,21 @@ public class NewVacationViewModel extends AndroidViewModel {
 
     public String getFieldPlace() {
         return fieldPlace;
+    }
+
+    public void setFieldPhoto(String fieldPhoto) {
+        this.fieldPhoto = fieldPhoto;
+    }
+
+    public String getFieldPhoto() {
+        return fieldPhoto;
+    }
+
+    public void setFieldParticipants(List<Participant> fieldParticipants) {
+        this.fieldParticipants = fieldParticipants;
+    }
+
+    public List<Participant> getFieldParticipants() {
+        return fieldParticipants;
     }
 }

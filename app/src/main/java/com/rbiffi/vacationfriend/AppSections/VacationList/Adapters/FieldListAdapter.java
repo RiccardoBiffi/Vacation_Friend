@@ -3,6 +3,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -15,15 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.Constants;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -154,8 +156,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             case Constants.F_PARTECIP:
                 // se è una nuova vacanza, non ci sono partecipanti
                 //todo se in modifica di una vacanza, recupera partecipanti da DB
-                List<Participant> empty = new ArrayList<>();
-                ParticipantAdapter fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, empty);
+                ParticipantAdapter fieldParticipantsAdapter = new ParticipantAdapter(appContext, viewModel, R.layout.field_partecipants_row);
 
                 setPartecipantsListHeader(holder);
                 setParticipantsListFooter(holder, fieldParticipantsAdapter);
@@ -169,6 +170,8 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 holder.photoButtonAddView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // devo utilizzare l'activity per chiamare startActivityForResult
+                        // ed ascoltare il risultato
                         if (listener != null) {
                             listener.onAddPhotoClick(v, holder.photoImageButtonView);
                         }
@@ -177,11 +180,28 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 holder.photoImageButtonView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // devo utilizzare l'activity per chiamare startActivityForResult
+                        // ed ascoltare il risultato
                         if (listener != null) {
                             listener.onAddPhotoClick(holder.photoButtonAddView, v);
                         }
                     }
                 });
+
+                if (viewModel.getFieldPhoto() != null) {
+                    try {
+                        Uri imageUri = Uri.parse(viewModel.getFieldPhoto());
+                        InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);
+                        Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
+                        holder.photoButtonAddView.setVisibility(View.GONE);
+
+                        holder.photoImageButtonView.setBackground(userImage);
+                        holder.photoImageButtonView.setVisibility(View.VISIBLE);
+                    } catch (FileNotFoundException e) {
+                        Toast.makeText(appContext, "File non trovato", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
                 break;
 
 
@@ -268,10 +288,10 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     //todo valuta di inserire un metodo che aggiorna la visualizzazione dei campi
     // con notifyDataSetChanged(). Non dovrebbe servire per i campi, solo le vacanze.
 
-    static class FieldViewHolder extends RecyclerView.ViewHolder {
+    public static class FieldViewHolder extends RecyclerView.ViewHolder {
 
         //TODO poi devo salvare anche le altre view che mi interessano
-        private final EditText titleFieldView;
+        public final EditText titleFieldView;
 
         private final EditText periodFromView;
         private final EditText periodToView;
@@ -300,5 +320,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             partecipantListView = itemView.findViewById(R.id.input_partes_list);
         }
+
+
     }
 }
