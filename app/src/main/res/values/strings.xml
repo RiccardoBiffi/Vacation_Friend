@@ -41,4 +41,5 @@
     <string name="dialog_invite_title">Non vedi i tuoi amici?</string>
     <string name="dialog_invite_button">Invita</string>
     <string name="dialog_invite_description">Invita anche i tuoi amici su Vacation Friend!\nPotrete organizzare assieme le vostre vacanze, in comodità e semplicità.</string>
+    <string name="photo_field_choosed_photo">Immagine della vacanza</string>
 </resources>

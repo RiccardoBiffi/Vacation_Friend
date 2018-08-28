@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
-    android:paddingTop="16dp"
-    >
+    android:paddingTop="16dp">
 
     <ImageView
         android:id="@+id/icon_photo"
@@ -109,6 +106,7 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:visibility="gone"
+        android:contentDescription="@string/photo_field_choosed_photo"
 
         android:focusable="false"
         android:focusableInTouchMode="false"
@@ -116,7 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/photo_field_barrier_vertical"
-        app:layout_constraintTop_toBottomOf="@id/input_photo" />
+        app:layout_constraintTop_toBottomOf="@id/input_photo"
         />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
@@ -23,15 +24,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ParticipantAdapter extends ArrayAdapter<Participant> {
 
     private Context context;
+    private NewVacationViewModel viewModel;
     private int layoutResource;
     private List<Participant> participantList;
     private List<Participant> selectedParticipants;
 
-    public ParticipantAdapter(@NonNull Context context, int resource, @NonNull List<Participant> objects) {
-        super(context, resource, objects);
+    public ParticipantAdapter(@NonNull Context context, NewVacationViewModel viewModel, int resource) {
+        super(context, resource, viewModel.getFieldParticipants());
         this.context = context;
+        this.viewModel = viewModel;
         layoutResource = resource;
-        participantList = objects;
+        participantList = viewModel.getFieldParticipants();
         selectedParticipants = new ArrayList<>();
     }
 
@@ -147,5 +150,10 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
         if (position >= 0) {
             selectedParticipants.remove(position);
         }
+    }
+
+    public void updateParticipants() {
+        this.participantList = viewModel.getFieldParticipants();
+        notifyDataSetChanged();
     }
 }

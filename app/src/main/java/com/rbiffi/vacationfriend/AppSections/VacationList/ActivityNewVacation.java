@@ -112,16 +112,16 @@ public class ActivityNewVacation
             viewModel.setFieldTitle(title);
         }
         if (viewModel.getFieldPeriodFrom() == null && savedInstanceState != null) {
-            String title = savedInstanceState.getString("inputPeriodFrom");
-            viewModel.setFieldPeriodFrom(title);
+            String dateFrom = savedInstanceState.getString("inputPeriodFrom");
+            viewModel.setFieldPeriodFrom(dateFrom);
         }
         if (viewModel.getFieldPeriodTo() == null && savedInstanceState != null) {
-            String title = savedInstanceState.getString("inputPeriodTo");
-            viewModel.setFieldPeriodTo(title);
+            String dateTo = savedInstanceState.getString("inputPeriodTo");
+            viewModel.setFieldPeriodTo(dateTo);
         }
         if (viewModel.getFieldPlace() == null && savedInstanceState != null) {
-            String title = savedInstanceState.getString("inputPlace");
-            viewModel.setFieldPlace(title);
+            String place = savedInstanceState.getString("inputPlace");
+            viewModel.setFieldPlace(place);
         }
 
         //todo recupera lista partecipanti e photo solo dal viewmodel
@@ -130,6 +130,13 @@ public class ActivityNewVacation
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+
+        //TODO SOSTITUISCI LA RECYCLERVIEW CON UNA LISTA NORMALE
+        // la recyclerview mi sbinda gli elementi non visibili nella schermata
+        // ma così facendo non posso salvarne il contenuto dei campi nel view model
+        // --> recycler view solo per oggetti che non hanno a loro volta uno stato da mantenere
+        //     ma solo l'elemento stesso da mantenere (mi basta salvare la lista)
+
         EditText inputTitle = vacationFieldsList.findViewById(R.id.input_title);
         if (inputTitle != null) {
             viewModel.setFieldTitle(inputTitle.getText().toString());
@@ -153,8 +160,6 @@ public class ActivityNewVacation
             viewModel.setFieldPlace(inputPlace.getText().toString());
             outState.putString("inputPlace", inputPlace.getText().toString());
         }
-
-        //todo salva partecipanti e foto, ma non nel outState
 
         super.onSaveInstanceState(outState);
     }
@@ -217,6 +222,7 @@ public class ActivityNewVacation
 
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                viewModel.setFieldPhoto(imageUri.toString());
                 Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                 vacationImageAddButton.setVisibility(View.GONE);
 
@@ -239,7 +245,8 @@ public class ActivityNewVacation
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
-        participantAdapter.setParticipantList(selectedParticipants);
+        viewModel.setFieldParticipants(selectedParticipants);
+        participantAdapter.updateParticipants();
         dialog.dismiss();
     }
 

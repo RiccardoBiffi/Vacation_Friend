@@ -17,8 +17,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
@@ -28,9 +27,9 @@ import java.util.List;
 // Frammento che permette di selezionare partecipanti tramite una dialog con lista e checkbox
 public class FragmentAddParticipantsDialog extends DialogFragment {
 
-    private NewVacationViewModel viewModel; //todo fanne un'altro e popolalo con le scelte fatte
+    private ParticipantsDialogViewModel viewModel; //todo fanne un'altro e popolalo con le scelte fatte
 
-    private ParticipantAdapter participantAdapter;
+    private ParticipantDialogAdapter participantDialogAdapter;
     private IAddParticipantsListener listener;
     private List<Participant> selectedParticipants;
 
@@ -49,13 +48,12 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         //todo metti la lista utenti selezionabili (da DB)
-        participantAdapter = new ParticipantAdapter(getContext(), R.layout.dialog_participants_row, selectedParticipants);
-        participantAdapter.setSelectedParticipants(selectedParticipants);
-        viewModel = ViewModelProviders.of(this).get(NewVacationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
         viewModel.getAllParticipants().observe(this, new Observer<List<Participant>>() {
             @Override
             public void onChanged(@Nullable List<Participant> participants) {
-                participantAdapter.setParticipantList(participants);
+                participantDialogAdapter = new ParticipantDialogAdapter(getContext(), R.layout.dialog_participants_row, participants);
+                participantDialogAdapter.setViewModel(viewModel);
             }
         });
 
@@ -76,7 +74,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDialogPositiveClick(FragmentAddParticipantsDialog.this, participantAdapter.getSelectedParticipants());
+                listener.onDialogPositiveClick(FragmentAddParticipantsDialog.this, participantDialogAdapter.getSelectedParticipants());
             }
         });
 
@@ -87,9 +85,9 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
                 cb.toggle();
                 Participant current = (Participant) parent.getItemAtPosition(position);
                 if (cb.isChecked()) {
-                    participantAdapter.addSelectedParticipant(current);
+                    participantDialogAdapter.addSelectedParticipant(current);
                 } else {
-                    participantAdapter.removeSelectedParticipant(current);
+                    participantDialogAdapter.removeSelectedParticipant(current);
                 }
             }
         });
@@ -104,7 +102,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         });
         lv.addFooterView(footer);
 
-        lv.setAdapter(participantAdapter);
+        lv.setAdapter(participantDialogAdapter);
         builder.setView(v);
 
         builder.setTitle(R.string.dialog_participant_message);
