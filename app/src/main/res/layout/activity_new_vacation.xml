@@ -34,30 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarNewVacation"
         />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/undoBottonAction"
-            style="@style/UndoBotton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_ignore" />
-
-        <Button
-            android:id="@+id/saveBottonAction"
-            style="@style/PrimaryBotton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_create" />
-
-    </LinearLayout>
+    <include layout="@layout/footer_edit_buttons" />
 
 
 </android.support.constraint.ConstraintLayout>
