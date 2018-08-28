@@ -62,8 +62,8 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_participants, null);
         ListView lv = v.findViewById(R.id.dialog_allparticipant_list);
-        Button undoButton = v.findViewById(R.id.dialog_undo_button_action);
-        Button confirmButton = v.findViewById(R.id.dialog_confirm_button_action);
+        Button undoButton = v.findViewById(R.id.undoBottonAction);
+        Button confirmButton = v.findViewById(R.id.saveBottonAction);
 
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +72,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
             }
         });
 
+        confirmButton.setText(R.string.button_done);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

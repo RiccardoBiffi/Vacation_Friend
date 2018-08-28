@@ -19,6 +19,9 @@ public class NewVacationViewModel extends AndroidViewModel {
     private VacationRepository repository;
 
     private String fieldTitle;
+    private String fieldPeriodFrom;
+    private String fieldPeriodTo;
+    private String fieldPlace;
     private LiveData<List<Participant>> allPartecipants;
     //todo altri campi dell'activity
 
@@ -35,17 +38,40 @@ public class NewVacationViewModel extends AndroidViewModel {
         return allPartecipants;
     }
 
-    public String getFieldTitle() {
-        return fieldTitle;
+    public void insert(Vacation v) {
+        //la logica dell'inserimento delle vacanze è completamente gestita dal repository
+        repository.insert(v);
     }
 
     public void setFieldTitle(String fieldTitle) {
         this.fieldTitle = fieldTitle;
     }
 
-    public void insert(Vacation v) {
-        //la logica dell'inserimento delle vacanze è completamente gestita dal repository
-        repository.insert(v);
+    public String getFieldTitle() {
+        return fieldTitle;
     }
 
+    public void setFieldPeriodFrom(String fieldPeriodFrom) {
+        this.fieldPeriodFrom = fieldPeriodFrom;
+    }
+
+    public String getFieldPeriodFrom() {
+        return fieldPeriodFrom;
+    }
+
+    public void setFieldPeriodTo(String fieldPeriodTo) {
+        this.fieldPeriodTo = fieldPeriodTo;
+    }
+
+    public String getFieldPeriodTo() {
+        return fieldPeriodTo;
+    }
+
+    public void setFieldPlace(String fieldPlace) {
+        this.fieldPlace = fieldPlace;
+    }
+
+    public String getFieldPlace() {
+        return fieldPlace;
+    }
 }

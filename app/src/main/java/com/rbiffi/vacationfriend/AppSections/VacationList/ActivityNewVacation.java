@@ -70,6 +70,7 @@ public class ActivityNewVacation
         confirm = findViewById(R.id.saveBottonAction);
         discard = findViewById(R.id.undoBottonAction);
 
+        confirm.setText(R.string.button_create);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,24 +103,62 @@ public class ActivityNewVacation
     }
 
     private void restoreState(Bundle savedInstanceState) {
-        //todo viewmodel per mantenere i dati inseriti dall'utente
         viewModel = ViewModelProviders.of(this).get(NewVacationViewModel.class);
         // salva tutto, soprattutto lista partecipanti selezionati e photo vacanza
-        // gli altri campi li salvo anche nel nel onSaveInstanceState xkè leggeri
+        // gli altri campi li salvo anche nel onSaveInstanceState xkè leggeri
 
         if (viewModel.getFieldTitle() == null && savedInstanceState != null) {
             String title = savedInstanceState.getString("inputTitle");
             viewModel.setFieldTitle(title);
         }
+        if (viewModel.getFieldPeriodFrom() == null && savedInstanceState != null) {
+            String title = savedInstanceState.getString("inputPeriodFrom");
+            viewModel.setFieldPeriodFrom(title);
+        }
+        if (viewModel.getFieldPeriodTo() == null && savedInstanceState != null) {
+            String title = savedInstanceState.getString("inputPeriodTo");
+            viewModel.setFieldPeriodTo(title);
+        }
+        if (viewModel.getFieldPlace() == null && savedInstanceState != null) {
+            String title = savedInstanceState.getString("inputPlace");
+            viewModel.setFieldPlace(title);
+        }
+
+        //todo recupera lista partecipanti e photo solo dal viewmodel
+
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         EditText inputTitle = vacationFieldsList.findViewById(R.id.input_title);
-        viewModel.setFieldTitle(inputTitle.getText().toString());
-        outState.putString("inputTitle", inputTitle.getText().toString());
+        if (inputTitle != null) {
+            viewModel.setFieldTitle(inputTitle.getText().toString());
+            outState.putString("inputTitle", inputTitle.getText().toString());
+        }
+
+        EditText inputPeriodFrom = vacationFieldsList.findViewById(R.id.input_period_from);
+        if (inputPeriodFrom != null) {
+            viewModel.setFieldPeriodFrom(inputPeriodFrom.getText().toString());
+            outState.putString("inputPeriodFrom", inputPeriodFrom.getText().toString());
+        }
+
+        EditText inputPeriodTo = vacationFieldsList.findViewById(R.id.input_period_to);
+        if (inputPeriodTo != null) {
+            viewModel.setFieldPeriodTo(inputPeriodTo.getText().toString());
+            outState.putString("inputPeriodTo", inputPeriodTo.getText().toString());
+        }
+
+        EditText inputPlace = vacationFieldsList.findViewById(R.id.input_place);
+        if (inputPlace != null) {
+            viewModel.setFieldPlace(inputPlace.getText().toString());
+            outState.putString("inputPlace", inputPlace.getText().toString());
+        }
+
+        //todo salva partecipanti e foto, ma non nel outState
+
+        super.onSaveInstanceState(outState);
     }
+
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
