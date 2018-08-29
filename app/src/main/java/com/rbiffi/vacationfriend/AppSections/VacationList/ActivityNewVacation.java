@@ -20,9 +20,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
@@ -43,20 +43,20 @@ public class ActivityNewVacation
     public static final String TITLE_FIELD = "_title";
     private static final int PICK_IMAGE = 1;
 
-    private NewVacationViewModel viewModel; // todo mantieni lo stato dei vari campi
+    private Toolbar toolbar;
+
+    private NewVacationViewModel viewModel;
 
     private Button confirm;
     private Button discard;
-    private Button vacationImageAddButton;
-    private ImageButton vacationImageButton;
+
+    private Button vacationImageAddButton; // todo valuta se rimuoverli da qua
+    private ImageButton vacationImageButton; // non serve salvarli tra i campi
 
     private RecyclerView vacationFieldsList;
     private FieldListAdapter fieldListAdapter;
     private RecyclerView.LayoutManager fieldLayout;
 
-    private ParticipantAdapter participantAdapter;
-
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +123,6 @@ public class ActivityNewVacation
             String place = savedInstanceState.getString("inputPlace");
             viewModel.setFieldPlace(place);
         }
-
-        //todo recupera lista partecipanti e photo solo dal viewmodel
 
     }
 
@@ -235,18 +233,18 @@ public class ActivityNewVacation
     }
 
     @Override
-    public void onAddParticipantClick(View button, ParticipantAdapter adapter) {
-        participantAdapter = adapter;
+    public void onAddParticipantClick(View button, List<Participant> partecipants) {
+        ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
+        pdvm.setSelectedParticipants(partecipants);
         FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
-        List<Participant> participantList = participantAdapter.getParticipantList();
-        dialogFragment.setSelectedParticipants(participantList);
+        dialogFragment.setViewModel(pdvm);
         dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
     }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
         viewModel.setFieldParticipants(selectedParticipants);
-        participantAdapter.updateParticipants();
+        fieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
         dialog.dismiss();
     }
 

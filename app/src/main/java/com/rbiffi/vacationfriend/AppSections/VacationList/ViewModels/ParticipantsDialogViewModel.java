@@ -42,4 +42,27 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
     public void setSelectedParticipants(List<Participant> selectedParticipants) {
         this.selectedParticipants = selectedParticipants;
     }
+
+    public void addSelectedParticipant(Participant current) {
+        if (indexOf(current, selectedParticipants) < 0) {
+            selectedParticipants.add(current);
+        }
+    }
+
+    public void removeSelectedParticipant(Participant current) {
+        int position = indexOf(current, selectedParticipants);
+        if (position >= 0) {
+            selectedParticipants.remove(position);
+        }
+    }
+
+    private int indexOf(Participant selected, List<Participant> selectedParticipants) {
+        String sEmail = selected.email;
+        List<String> lEamils = new ArrayList<>();
+        for (Participant p :
+                selectedParticipants) {
+            lEamils.add(p.email);
+        }
+        return lEamils.indexOf(sEmail);
+    }
 }

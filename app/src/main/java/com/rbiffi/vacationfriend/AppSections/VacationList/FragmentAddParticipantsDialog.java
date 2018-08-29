@@ -2,8 +2,8 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantDialogAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
@@ -25,35 +26,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Frammento che permette di selezionare partecipanti tramite una dialog con lista e checkbox
-public class FragmentAddParticipantsDialog extends DialogFragment {
+public class FragmentAddParticipantsDialog extends DialogFragment implements ParticipantDialogAdapter.IParticipantDialogEvents {
 
-    private ParticipantsDialogViewModel viewModel; //todo fanne un'altro e popolalo con le scelte fatte
-
+    private ParticipantsDialogViewModel viewModel;
     private ParticipantDialogAdapter participantDialogAdapter;
     private IAddParticipantsListener listener;
+
+    private LiveData<List<Participant>> allParticipants;
     private List<Participant> selectedParticipants;
 
     public FragmentAddParticipantsDialog() {
-        selectedParticipants = new ArrayList<>();
+
     }
 
     public void setSelectedParticipants(List<Participant> selectedParticipants) {
         this.selectedParticipants = selectedParticipants;
     }
 
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        //todo metti la lista utenti selezionabili (da DB)
-        viewModel = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
+        participantDialogAdapter = new ParticipantDialogAdapter(getContext(), R.layout.dialog_participants_row, new ArrayList<Participant>());
+
         viewModel.getAllParticipants().observe(this, new Observer<List<Participant>>() {
             @Override
             public void onChanged(@Nullable List<Participant> participants) {
-                participantDialogAdapter = new ParticipantDialogAdapter(getContext(), R.layout.dialog_participants_row, participants);
-                participantDialogAdapter.setViewModel(viewModel);
+                participantDialogAdapter.setListener(FragmentAddParticipantsDialog.this);
+                participantDialogAdapter.setSelectedParticipants(viewModel.getSelectedParticipants());
+                participantDialogAdapter.updatePartecipants(participants);
             }
         });
 
@@ -74,7 +76,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDialogPositiveClick(FragmentAddParticipantsDialog.this, participantDialogAdapter.getSelectedParticipants());
+                listener.onDialogPositiveClick(FragmentAddParticipantsDialog.this, viewModel.getSelectedParticipants());
             }
         });
 
@@ -85,9 +87,9 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
                 cb.toggle();
                 Participant current = (Participant) parent.getItemAtPosition(position);
                 if (cb.isChecked()) {
-                    participantDialogAdapter.addSelectedParticipant(current);
+                    viewModel.addSelectedParticipant(current);
                 } else {
-                    participantDialogAdapter.removeSelectedParticipant(current);
+                    viewModel.removeSelectedParticipant(current);
                 }
             }
         });
@@ -120,6 +122,22 @@ public class FragmentAddParticipantsDialog extends DialogFragment {
                     + " must implement NoticeDialogListener");
         }
     }
+
+    @Override
+    public void onAddSelected(Participant selected) {
+        viewModel.addSelectedParticipant(selected);
+    }
+
+    @Override
+    public void onRemoveSelected(Participant selected) {
+        viewModel.removeSelectedParticipant(selected);
+    }
+
+    public void setViewModel(ParticipantsDialogViewModel viewModel) {
+        this.viewModel = viewModel;
+        selectedParticipants = new ArrayList<>();
+    }
+
 
     public interface IAddParticipantsListener {
         void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants);
