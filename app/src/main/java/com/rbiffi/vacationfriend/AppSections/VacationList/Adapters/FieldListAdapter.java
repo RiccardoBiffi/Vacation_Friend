@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.Constants;
 
 import java.io.FileNotFoundException;
@@ -48,23 +49,30 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     private static final int VIEW_TYPE_NOTES = 5;
     //...
 
-    private NewVacationViewModel viewModel;
-
     private final LayoutInflater inflater;
+
     private Context appContext;
-    private IVacationFieldsEvents listener;
     private List<String> fieldList;
+    private final NewVacationViewModel viewModel; // per facilitare il passaggio di dati
+
+    private ParticipantAdapter fieldParticipantsAdapter;
+
+    private IVacationFieldsEvents listener;
 
     public FieldListAdapter(Context applicationContext, List<String> fieldList, NewVacationViewModel viewModel) {
-        appContext = applicationContext;
         inflater = LayoutInflater.from(applicationContext);
+
+        appContext = applicationContext;
         this.fieldList = fieldList;
         this.viewModel = viewModel;
     }
 
+    public void setListener(IVacationFieldsEvents listener) {
+        this.listener = listener;
+    }
+
     @Override
     public FieldViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //TODO a seconda del viewtype posso creare view diverse per gli oggetti, tipo il footer
         View view;
         switch (viewType) {
             case VIEW_TYPE_TITLE:
@@ -154,12 +162,9 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
 
             case Constants.F_PARTECIP:
-                // se è una nuova vacanza, non ci sono partecipanti
-                //todo se in modifica di una vacanza, recupera partecipanti da DB
-                ParticipantAdapter fieldParticipantsAdapter = new ParticipantAdapter(appContext, viewModel, R.layout.field_partecipants_row);
-
+                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, viewModel.getFieldParticipants());
                 setPartecipantsListHeader(holder);
-                setParticipantsListFooter(holder, fieldParticipantsAdapter);
+                setParticipantsListFooter(holder);
                 holder.partecipantListView.setDivider(null);
 
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
@@ -211,13 +216,13 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         }
     }
 
-    private void setParticipantsListFooter(FieldViewHolder holder, final ParticipantAdapter partAdapter) {
+    private void setParticipantsListFooter(FieldViewHolder holder) {
         View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
         footer.findViewById(R.id.input_add_partic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onAddParticipantClick(v, partAdapter);
+                    listener.onAddParticipantClick(v, viewModel.getFieldParticipants());
                 }
             }
         });
@@ -273,24 +278,21 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         }
     }
 
-    public void setListener(IVacationFieldsEvents listener) {
-        this.listener = listener;
+    public void updateParticipants(List<Participant> fieldParticipants) {
+        fieldParticipantsAdapter.updateParticipants(fieldParticipants);
     }
 
     private void updateLabel(View dateView, Calendar calendar) {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
 
         EditText dateText = (EditText) dateView;
         dateText.setText(sdf.format(calendar.getTime()));
     }
 
-    //todo valuta di inserire un metodo che aggiorna la visualizzazione dei campi
-    // con notifyDataSetChanged(). Non dovrebbe servire per i campi, solo le vacanze.
 
     public static class FieldViewHolder extends RecyclerView.ViewHolder {
 
-        //TODO poi devo salvare anche le altre view che mi interessano
         public final EditText titleFieldView;
 
         private final EditText periodFromView;

@@ -35,7 +35,7 @@ public class NewVacationViewModel extends AndroidViewModel {
         fieldPeriodTo = "";
         fieldPlace = "";
         fieldParticipants = new ArrayList<>();
-        fieldPhoto = "";
+        fieldPhoto = null;
     }
 
     public void insert(Vacation v) {
