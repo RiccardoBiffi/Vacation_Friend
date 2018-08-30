@@ -2,8 +2,8 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,11 +32,9 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
     private ParticipantDialogAdapter participantDialogAdapter;
     private IAddParticipantsListener listener;
 
-    private LiveData<List<Participant>> allParticipants;
     private List<Participant> selectedParticipants;
 
     public FragmentAddParticipantsDialog() {
-
     }
 
     public void setSelectedParticipants(List<Participant> selectedParticipants) {
@@ -46,6 +44,9 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        this.viewModel = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
+        viewModel.setSelectedParticipants(selectedParticipants);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         participantDialogAdapter = new ParticipantDialogAdapter(getContext(), R.layout.dialog_participants_row, new ArrayList<Participant>());
@@ -132,12 +133,6 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
     public void onRemoveSelected(Participant selected) {
         viewModel.removeSelectedParticipant(selected);
     }
-
-    public void setViewModel(ParticipantsDialogViewModel viewModel) {
-        this.viewModel = viewModel;
-        selectedParticipants = new ArrayList<>();
-    }
-
 
     public interface IAddParticipantsListener {
         void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants);

@@ -79,7 +79,7 @@
 
         android:inputType="date"
         android:longClickable="false"
-        android:nextFocusForward="@id/input_period_to"
+        android:nextFocusDown="@id/input_period_to"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/label_period_from"

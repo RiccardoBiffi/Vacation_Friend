@@ -31,25 +31,6 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
         participantList = objects;
     }
 
-    public List<Participant> getParticipantList() {
-        //TODO non dovrebbe esere lui a restituire il dato
-        // l'activity chiamante dovrebbe avere giò il dato tramite avento
-        return participantList;
-    }
-
-    //public List<Participant> getSelectedParticipants() {
-    //    return selectedParticipants;
-    //}
-
-    //public void setSelectedParticipants(List<Participant> selectedParticipants) {
-    //    this.selectedParticipants = selectedParticipants;
-    //}
-
-    public void setParticipantList(List<Participant> participantList) {
-        this.participantList = participantList;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
