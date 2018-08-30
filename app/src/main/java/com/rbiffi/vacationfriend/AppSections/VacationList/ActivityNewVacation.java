@@ -15,7 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -107,6 +106,8 @@ public class ActivityNewVacation
         // salva tutto, soprattutto lista partecipanti selezionati e photo vacanza
         // gli altri campi li salvo anche nel onSaveInstanceState xkè leggeri
 
+        //todo rivedi la logica di ripristino dello stato
+        //todo salva in Constants le chiavi dei campi
         if (viewModel.getFieldTitle() == null && savedInstanceState != null) {
             String title = savedInstanceState.getString("inputTitle");
             viewModel.setFieldTitle(title);
@@ -123,45 +124,37 @@ public class ActivityNewVacation
             String place = savedInstanceState.getString("inputPlace");
             viewModel.setFieldPlace(place);
         }
+        if (viewModel.getFieldPhoto() == null && savedInstanceState != null) {
+            String place = savedInstanceState.getString("inputPhoto");
+            viewModel.setFieldPlace(place);
+        }
 
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        String titleField = viewModel.getFieldTitle();
+        outState.putString("inputTitle", titleField);
 
-        //TODO SOSTITUISCI LA RECYCLERVIEW CON UNA LISTA NORMALE
-        // la recyclerview mi sbinda gli elementi non visibili nella schermata
-        // ma così facendo non posso salvarne il contenuto dei campi nel view model
-        // --> recycler view solo per oggetti che non hanno a loro volta uno stato da mantenere
-        //     ma solo l'elemento stesso da mantenere (mi basta salvare la lista)
+        String periodFromField = viewModel.getFieldPeriodFrom();
+        outState.putString("inputPeriodFrom", periodFromField);
 
-        EditText inputTitle = vacationFieldsList.findViewById(R.id.input_title);
-        if (inputTitle != null) {
-            viewModel.setFieldTitle(inputTitle.getText().toString());
-            outState.putString("inputTitle", inputTitle.getText().toString());
+        String periodToField = viewModel.getFieldPeriodTo();
+        outState.putString("inputPeriodTo", periodToField);
+
+        String placeField = viewModel.getFieldPlace();
+        outState.putString("inputPlace", placeField);
+
+        String photoField = viewModel.getFieldPhoto();
+        if (photoField != null) {
+            outState.putString("inputPhoto", photoField);
         }
 
-        EditText inputPeriodFrom = vacationFieldsList.findViewById(R.id.input_period_from);
-        if (inputPeriodFrom != null) {
-            viewModel.setFieldPeriodFrom(inputPeriodFrom.getText().toString());
-            outState.putString("inputPeriodFrom", inputPeriodFrom.getText().toString());
-        }
-
-        EditText inputPeriodTo = vacationFieldsList.findViewById(R.id.input_period_to);
-        if (inputPeriodTo != null) {
-            viewModel.setFieldPeriodTo(inputPeriodTo.getText().toString());
-            outState.putString("inputPeriodTo", inputPeriodTo.getText().toString());
-        }
-
-        EditText inputPlace = vacationFieldsList.findViewById(R.id.input_place);
-        if (inputPlace != null) {
-            viewModel.setFieldPlace(inputPlace.getText().toString());
-            outState.putString("inputPlace", inputPlace.getText().toString());
-        }
+        // la lista di partecipanti non la salvo perché può essere corposa
+        // sarà solo nel viewmodel
 
         super.onSaveInstanceState(outState);
     }
-
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
@@ -191,18 +184,6 @@ public class ActivityNewVacation
     }
 
     @Override
-    public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
-        if (hasFocus) {
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dateDialog = new DatePickerDialog(ActivityNewVacation.this, dateListener, year, month, day);
-            dateDialog.show();
-            date.clearFocus();
-        }
-    }
-
-    @Override
     public void onAddPhotoClick(View button, View imageButton) {
         vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
         vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
@@ -213,31 +194,24 @@ public class ActivityNewVacation
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
-            Uri imageUri = data.getData();
-
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                viewModel.setFieldPhoto(imageUri.toString());
-                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                vacationImageAddButton.setVisibility(View.GONE);
-
-                vacationImageButton.setBackground(userImage);
-                vacationImageButton.setVisibility(View.VISIBLE);
-            } catch (FileNotFoundException e) {
-                Toast.makeText(this, "File non trovato", Toast.LENGTH_SHORT).show();
-            }
+    public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
+        if (hasFocus) {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dateDialog = new DatePickerDialog(ActivityNewVacation.this, dateListener, year, month, day);
+            dateDialog.show();
         }
     }
 
     @Override
     public void onAddParticipantClick(View button, List<Participant> partecipants) {
+        //todo problema ad aprire il dialog con già settati i partecipanti
+        // rivedi questo metodo, FragmentAddParticipantsDialog, ParticipantsDialogViewModel e ParticipantDialogAdapter
         ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
         pdvm.setSelectedParticipants(partecipants);
         FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
-        dialogFragment.setViewModel(pdvm);
+        dialogFragment.setSelectedParticipants(partecipants);
         dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
     }
 
@@ -251,5 +225,52 @@ public class ActivityNewVacation
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+            Uri imageUri = data.getData();
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                String imageUriString = imageUri.toString();
+                saveFieldPhoto(imageUriString);
+                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
+                vacationImageAddButton.setVisibility(View.GONE);
+
+                vacationImageButton.setBackground(userImage);
+                vacationImageButton.setVisibility(View.VISIBLE);
+                vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
+
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void saveFieldTitleState(String content) {
+        viewModel.setFieldTitle(content);
+    }
+
+    @Override
+    public void saveFieldPeriodFrom(String date) {
+        viewModel.setFieldPeriodFrom(date);
+    }
+
+    @Override
+    public void saveFieldPeriodTo(String date) {
+        viewModel.setFieldPeriodTo(date);
+    }
+
+    @Override
+    public void saveFieldPlaceState(String content) {
+        viewModel.setFieldPlace(content);
+    }
+
+    private void saveFieldPhoto(String imageUriString) {
+        viewModel.setFieldPhoto(imageUriString);
     }
 }

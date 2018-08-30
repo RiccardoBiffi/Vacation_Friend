@@ -6,7 +6,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,6 +110,23 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             case Constants.F_TITLE:
                 holder.titleFieldView.setText(viewModel.getFieldTitle());
+                holder.titleFieldView.requestFocus();
+                holder.titleFieldView.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (listener != null) {
+                            listener.saveFieldTitleState(holder.titleFieldView.getText().toString());
+                        }
+                    }
+                });
                 break;
 
 
@@ -120,6 +139,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodFromView, calendar);
+                        listener.saveFieldPeriodFrom(holder.periodFromView.getText().toString());
                     }
                 };
                 final DatePickerDialog.OnDateSetListener toDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -129,6 +149,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodToView, calendar);
+                        listener.saveFieldPeriodTo(holder.periodToView.getText().toString());
                     }
                 };
 
@@ -158,6 +179,22 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             case Constants.F_PLACE:
                 holder.placeView.setText(viewModel.getFieldPlace());
+                holder.placeView.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (listener != null) {
+                            listener.saveFieldPlaceState(holder.placeView.getText().toString());
+                        }
+                    }
+                });
                 break;
 
 
