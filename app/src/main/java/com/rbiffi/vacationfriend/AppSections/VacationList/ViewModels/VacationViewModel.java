@@ -15,7 +15,7 @@ public class VacationViewModel extends AndroidViewModel {
     //warning: non salvare Activity, Fragment, View o contesti in quanto cambiano più spesso dei dati
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
 
-    //todo dividi le richieste in base alla data ed n base se sono archiviate
+    //todo dividi le richieste in base alla data ed in base se sono archiviate
 
     private VacationRepository repository;
 
@@ -26,11 +26,18 @@ public class VacationViewModel extends AndroidViewModel {
         repository = new VacationRepository(app);
 
         //inizializzo i dati
-        allVacations = repository.getVacationList();
+        allVacations = repository.getActiveVacationList();
     }
 
     public LiveData<List<VacationLite>> getAllVacations() {
         return allVacations;
     }
 
+    public void delete(int v) {
+        repository.delete(v);
+    }
+
+    public void store(int id) {
+        repository.store(id);
+    }
 }

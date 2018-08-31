@@ -43,4 +43,7 @@
     <string name="dialog_invite_description">Invita anche i tuoi amici su Vacation Friend!\nPotrete organizzare assieme le vostre vacanze, in comodità e semplicità.</string>
     <string name="photo_field_choosed_photo">Immagine della vacanza</string>
     <string name="err_photo_not_found">Immagine non trovata</string>
+    <string name="ptutorial_vacationlist_welcome">Benvenuto!</string>
+    <string name="ptutorial_vacationlist_whatsee">Qui appariranno tutte le tue ultime vacanze.</string>
+    <string name="ptutorial_vacationlist_calltoaction">Per creare una nuova vacanza premi qui!</string>
 </resources>
