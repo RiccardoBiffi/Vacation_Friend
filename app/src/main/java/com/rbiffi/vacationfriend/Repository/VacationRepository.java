@@ -28,11 +28,11 @@ public class VacationRepository {
         participantDao = db.getParticipantDao();
 
         // acquisisco quel che mi interessa dal db
-        vacationList = vacationDao.getAllVacations();
+        vacationList = vacationDao.getActiveVacations();
         participantList = participantDao.getAllPartecipants();
     }
 
-    public LiveData<List<VacationLite>> getVacationList() {
+    public LiveData<List<VacationLite>> getActiveVacationList() {
         return vacationList;
     }
 
@@ -45,9 +45,18 @@ public class VacationRepository {
         new InsertAsyncTask(vacationDao).execute(vacation);
     }
 
+    public void delete(int vacationId) {
+        new DeleteAsyncTask(vacationDao).execute(vacationId);
+    }
+
+    public void store(int vacationId) {
+        new StoreAsyncTask(vacationDao).execute(vacationId);
+    }
+
     public void addUpdateListener(IInsertListener listener) {
         this.listener = listener;
     }
+
 
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private static class InsertAsyncTask extends AsyncTask<Vacation, Void, Void> {
@@ -65,8 +74,41 @@ public class VacationRepository {
             return null;
         }
     }
-
     public interface IInsertListener {
+
         void onInsertComplete(long rowId);
+    }
+
+
+    // classe interna per la gestione dei task, asincroni rispetto l'UI.
+    private static class DeleteAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private IVacationDao asyncDao;
+
+        DeleteAsyncTask(IVacationDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... vacationIds) {
+            asyncDao.deleteFromID(vacationIds[0]);
+            return null;
+        }
+    }
+
+
+    private static class StoreAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private IVacationDao asyncDao;
+
+        StoreAsyncTask(IVacationDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... vacationIds) {
+            asyncDao.storeFromID(vacationIds[0]);
+            return null;
+        }
     }
 }

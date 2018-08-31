@@ -3,8 +3,6 @@ package com.rbiffi.vacationfriend.Utils;
 import android.arch.persistence.room.TypeConverter;
 import android.net.Uri;
 
-import java.util.Date;
-
 // per convertire tipi di dato da-a tipi che Room può persistere
 public class Converters {
 
@@ -17,16 +15,6 @@ public class Converters {
     public static int booleanToInt(Boolean bool) {
         if(bool == null) return 0;
         return bool ? 1 : 0;
-    }
-
-    //DATE todo non serve più, le salvo come stringhe
-    @TypeConverter
-    public static Date timestampToDate(Long value) {
-        return value == null ? null : new Date(value);
-    }
-    @TypeConverter
-    public static Long dateToTimestamp(Date date) {
-        return date == null ? null : date.getTime();
     }
 
     //IMAGES

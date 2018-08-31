@@ -20,7 +20,6 @@ import java.util.List;
 
 public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapter.VacationViewHolder> {
 
-    private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0; // todo non serve
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
 
@@ -44,11 +43,6 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
             case VIEW_TYPE_OBJECT_VIEW:
                 view = inflater.inflate(R.layout.vacation_list_row, parent, false);
                 break;
-                /*
-            case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
-                view = inflater.inflate(R.layout.empty_vacation_list, parent, false);
-                break;
-                */
             default:
                 //TODO probabilmente finisco sempre qua
                 view = inflater.inflate(R.layout.vacation_list_row, parent, false);
@@ -105,7 +99,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     @Override
     public int getItemViewType(int position) {
-        return vacationList.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER : VIEW_TYPE_OBJECT_VIEW;
+        return VIEW_TYPE_OBJECT_VIEW;
     }
 
     public void setListener(IVacationListClickEvents listener) {

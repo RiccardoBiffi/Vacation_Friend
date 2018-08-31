@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
@@ -29,14 +31,14 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
 public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
 
+    // todo al momento non aspetto risultati perché si riflettono con il livedata
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
 
     private VacationViewModel viewModel;
 
+    private View emptyListTutorial;
     private FloatingActionButton floatingButton;
 
     private RecyclerView vacationList;
@@ -63,31 +65,8 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
         super.onViewCreated(view, savedInstanceState);
 
         setupListWithAdapter();
+        emptyListTutorial = getActivity().findViewById(R.id.empty_list);
         setupFloatingButton();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        //todo modifica l'if se voglio fare qualcosa con l'ID della vacanza appena creata
-        // nb sembra niente perché LiveData aggiorna già la View con le modifiche sul DB
-        if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK) {
-            //todo in "data" c'è la vacanza salvata. Aggiungila al viewmodel
-            // il quale chiederà al repository diaggiungerla sul DB. Il resto è di riflesso per LiveData
-            /*
-                String title = data.getStringExtra(ActivityNewVacation.EXTRA_REPLY + ActivityNewVacation.TITLE_FIELD);
-                //todo anche altri campi
-                Vacation v = new Vacation(id,title,period,place,photo,isAchieved);
-
-                //todo come recupero l'id autogenerato della vacanza?
-                viewModel.insert(v);
-            */
-        } else {
-            //todo da sostituire con "do nothing"
-            Toast.makeText(getContext(), "Elemento non salvato perché vuoto", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     private void setupFloatingButton() {
@@ -96,7 +75,7 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
-                startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
+                startActivity(intent);
             }
         });
     }
@@ -119,11 +98,18 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
         viewModel.getAllVacations().observe(this, new Observer<List<VacationLite>>() {
             @Override
             public void onChanged(@Nullable List<VacationLite> vacationLites) {
-                // aggiorno la cache delle vacanze nell'adapter
+                if (!vacationLites.isEmpty()) {
+                    emptyListTutorial.setVisibility(View.GONE);
+                } else {
+                    emptyListTutorial.setVisibility(View.VISIBLE);
+                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
+                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
+                    View arrow = emptyListTutorial.findViewById(R.id.arrow);
+                    arrow.startAnimation(rotation);
+                }
                 vacationAdapter.setVacations(vacationLites);
             }
         });
-
     }
 
     @Override
@@ -164,15 +150,17 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
                         //todo apri modifica vacanza
+                        // passa all'activity l'ID della VacationLite scelta
+                        // lei lo preleverà dal DB e popolerà i campi (ie viewmodel) con i dati trovati
                         Toast.makeText(getContext(), "Modifica" + vacation.id, Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.actionArchivia:
-                        // todo archivia vacanza
-                        Toast.makeText(getContext(), "Archivia" + vacation.id, Toast.LENGTH_SHORT).show();
+                        // todo dialog semplice dove avverti che le vacanze non saranno più modificabili
+                        viewModel.store(vacation.id);
                         return true;
                     case R.id.actionElimina:
-                        // todo elimina vacanza
-                        Toast.makeText(getContext(), "Elimina" + vacation.id, Toast.LENGTH_SHORT).show();
+                        // todo dialog semplice di conferma
+                        viewModel.delete(vacation.id);
                         return true;
                     default:
                         return false;

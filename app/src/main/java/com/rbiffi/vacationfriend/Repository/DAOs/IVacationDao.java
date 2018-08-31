@@ -11,7 +11,6 @@ import android.arch.persistence.room.Update;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
-import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -24,12 +23,12 @@ public interface IVacationDao {
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
             "WHERE date('now') < :startDate")
-    List<VacationLite> getNextVacations(Date startDate);
+    List<VacationLite> getNextVacations(String startDate);
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
             "WHERE date('now') BETWEEN :startDate AND :endDate")
-    List<VacationLite> getCurrentVacations(Date startDate, Date endDate);
+    List<VacationLite> getCurrentVacations(String startDate, String endDate);
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
@@ -43,8 +42,9 @@ public interface IVacationDao {
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
+            "WHERE isAchieved = 0 " +
             "ORDER BY title ASC")
-    LiveData<List<VacationLite>> getAllVacations();
+    LiveData<List<VacationLite>> getActiveVacations();
 
 
 //INSERT
@@ -54,12 +54,22 @@ public interface IVacationDao {
 
 //UPDATE
     @Update
-    void updateVacation(Vacation vacation);
+    void update(Vacation vacation);
+
+    @Query("UPDATE Vacation " +
+            "SET isAchieved = 1 " +
+            "WHERE id = :vacationId")
+    void storeFromID(long vacationId);
 
 
 //DELETE
     @Delete
     void delete(Vacation vacation);
+
+    @Query("DELETE " +
+            "FROM Vacation " +
+            "WHERE id = :vacationId ")
+    void deleteFromID(long vacationId);
 
     @Query("DELETE FROM Vacation")
     void deleteAll();
