@@ -20,6 +20,8 @@ public class VacationRepository {
     private IParticipantDao participantDao;
     private LiveData<List<Participant>> participantList;
 
+    private static IInsertListener listener;
+
     public VacationRepository(Application app) {
         VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
         vacationDao = db.getVacationDao(); // prendo dal db il DAO
@@ -43,6 +45,10 @@ public class VacationRepository {
         new InsertAsyncTask(vacationDao).execute(vacation);
     }
 
+    public void addUpdateListener(IInsertListener listener) {
+        this.listener = listener;
+    }
+
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private static class InsertAsyncTask extends AsyncTask<Vacation, Void, Void> {
 
@@ -55,8 +61,12 @@ public class VacationRepository {
         @Override
         protected Void doInBackground(final Vacation... vacations) {
             long rowId = asyncDao.insert(vacations[0]);
-            //todo recupera il rowId
+            listener.onInsertComplete(rowId);
             return null;
         }
+    }
+
+    public interface IInsertListener {
+        void onInsertComplete(long rowId);
     }
 }

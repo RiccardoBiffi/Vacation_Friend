@@ -202,7 +202,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, viewModel.getFieldParticipants());
                 setPartecipantsListHeader(holder);
                 setParticipantsListFooter(holder);
-                holder.partecipantListView.setDivider(null);
 
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
                 break;
@@ -232,7 +231,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
                 if (viewModel.getFieldPhoto() != null) {
                     try {
-                        Uri imageUri = Uri.parse(viewModel.getFieldPhoto());
+                        Uri imageUri = viewModel.getFieldPhoto();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);
                         Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                         holder.photoButtonAddView.setVisibility(View.GONE);

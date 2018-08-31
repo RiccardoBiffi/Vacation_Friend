@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 public class Vacation {
 
     @PrimaryKey(autoGenerate = true)
-    public final int id;
+    public int id;
 
     @NonNull
     public final String title;
@@ -26,8 +26,7 @@ public class Vacation {
 
     public final Boolean isAchieved;
 
-    public Vacation(int id, @NonNull String title, @NonNull Period period, String place, Uri photo, Boolean isAchieved) {
-        this.id = id;
+    public Vacation(@NonNull String title, @NonNull Period period, String place, Uri photo, Boolean isAchieved) {
         this.title = title;
         this.period = period;
         this.place = place;

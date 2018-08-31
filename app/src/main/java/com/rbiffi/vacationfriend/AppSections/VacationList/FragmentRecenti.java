@@ -70,6 +70,8 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //todo modifica l'if se voglio fare qualcosa con l'ID della vacanza appena creata
+        // nb sembra niente perché LiveData aggiorna già la View con le modifiche sul DB
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == RESULT_OK) {
             //todo in "data" c'è la vacanza salvata. Aggiungila al viewmodel
             // il quale chiederà al repository diaggiungerla sul DB. Il resto è di riflesso per LiveData

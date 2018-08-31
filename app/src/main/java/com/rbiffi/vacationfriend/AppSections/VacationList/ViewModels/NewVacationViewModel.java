@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
@@ -23,7 +24,7 @@ public class NewVacationViewModel extends AndroidViewModel {
     private String fieldPeriodTo;
     private String fieldPlace;
     private List<Participant> fieldParticipants;
-    private String fieldPhoto;
+    private Uri fieldPhoto;
 
     public NewVacationViewModel(@NonNull Application app) {
         super(app);
@@ -38,10 +39,12 @@ public class NewVacationViewModel extends AndroidViewModel {
         fieldPhoto = null;
     }
 
-    public void insert(Vacation v) {
+    public void insert(Vacation v, VacationRepository.IInsertListener listener) {
         //la logica dell'inserimento delle vacanze è completamente gestita dal repository
+        repository.addUpdateListener(listener);
         repository.insert(v);
     }
+
 
     public void setFieldTitle(String fieldTitle) {
         this.fieldTitle = fieldTitle;
@@ -75,11 +78,11 @@ public class NewVacationViewModel extends AndroidViewModel {
         return fieldPlace;
     }
 
-    public void setFieldPhoto(String fieldPhoto) {
+    public void setFieldPhoto(Uri fieldPhoto) {
         this.fieldPhoto = fieldPhoto;
     }
 
-    public String getFieldPhoto() {
+    public Uri getFieldPhoto() {
         return fieldPhoto;
     }
 
@@ -90,4 +93,5 @@ public class NewVacationViewModel extends AndroidViewModel {
     public List<Participant> getFieldParticipants() {
         return fieldParticipants;
     }
+
 }

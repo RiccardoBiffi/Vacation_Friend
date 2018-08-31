@@ -28,7 +28,7 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
 
         // inizializzo campi
         allPartecipants = repository.getParticipantList();
-        selectedParticipants = new ArrayList<>();
+        selectedParticipants = null;
     }
 
     public LiveData<List<Participant>> getAllParticipants() {
@@ -58,11 +58,11 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
 
     private int indexOf(Participant selected, List<Participant> selectedParticipants) {
         String sEmail = selected.email;
-        List<String> lEamils = new ArrayList<>();
+        List<String> emailList = new ArrayList<>();
         for (Participant p :
                 selectedParticipants) {
-            lEamils.add(p.email);
+            emailList.add(p.email);
         }
-        return lEamils.indexOf(sEmail);
+        return emailList.indexOf(sEmail);
     }
 }

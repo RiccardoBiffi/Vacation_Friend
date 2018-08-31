@@ -8,8 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +24,11 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacation
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.VacationRepository;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
+import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -35,11 +39,12 @@ public class ActivityNewVacation
         extends AppCompatActivity
         implements
         IVacationFieldsEvents,
-        FragmentAddParticipantsDialog.IAddParticipantsListener {
+        FragmentAddParticipantsDialog.IAddParticipantsListener,
+        VacationRepository.IInsertListener {
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
-    public static final String TITLE_FIELD = "_title";
+    public static final String VACATION_ID = "_vacation";
     private static final int PICK_IMAGE = 1;
 
     private Toolbar toolbar;
@@ -73,23 +78,14 @@ public class ActivityNewVacation
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent replyIntent = new Intent();
                 //todo delega di validare i campi obbligatori
                 //todo delega di raccgoliere i risultati
                 //todo costruisci la risposta
-                /*
-                if(TextUtils.isEmpty(vTitle.getText())){
-                    setResult(RESULT_CANCELED, replyIntent);
-                }else{
-                    String title = vTitle.getText().toString();
-                    String notes = vNotes.getText().toString();
 
-                    replyIntent.putExtra(EXTRA_REPLY + TITLE_FIELD, title);
-                    replyIntent.putExtra(EXTRA_REPLY + NOTES_FIELD, notes);
-                    setResult(RESULT_OK, replyIntent);
-                }
-                */
-                finish(); // restituisce il risultato a chi ha chiamato l'activity
+                Period period = new Period(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo());
+                Vacation newVacation = new Vacation(viewModel.getFieldTitle(), period,
+                        viewModel.getFieldPlace(), viewModel.getFieldPhoto(), false);
+                viewModel.insert(newVacation, ActivityNewVacation.this);
             }
         });
 
@@ -125,8 +121,8 @@ public class ActivityNewVacation
             viewModel.setFieldPlace(place);
         }
         if (viewModel.getFieldPhoto() == null && savedInstanceState != null) {
-            String place = savedInstanceState.getString("inputPhoto");
-            viewModel.setFieldPlace(place);
+            String photo = savedInstanceState.getString("inputPhoto");
+            viewModel.setFieldPhoto(Uri.parse(photo));
         }
 
     }
@@ -145,9 +141,9 @@ public class ActivityNewVacation
         String placeField = viewModel.getFieldPlace();
         outState.putString("inputPlace", placeField);
 
-        String photoField = viewModel.getFieldPhoto();
+        Uri photoField = viewModel.getFieldPhoto();
         if (photoField != null) {
-            outState.putString("inputPhoto", photoField);
+            outState.putString("inputPhoto", photoField.toString());
         }
 
         // la lista di partecipanti non la salvo perché può essere corposa
@@ -158,7 +154,7 @@ public class ActivityNewVacation
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
-        vacationFieldsList.addItemDecoration(new DividerItemDecoration(vacationFieldsList.getContext(), DividerItemDecoration.VERTICAL));
+        vacationFieldsList.addItemDecoration(new MyDividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(), R.drawable.list_divider)));
         fieldListAdapter = new FieldListAdapter(getApplicationContext(), FieldLists.getVacationFieldList(), viewModel);
         fieldListAdapter.setListener(this);
         vacationFieldsList.setAdapter(fieldListAdapter);
@@ -181,16 +177,6 @@ public class ActivityNewVacation
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void onAddPhotoClick(View button, View imageButton) {
-        vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
-        vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     @Override
@@ -228,6 +214,20 @@ public class ActivityNewVacation
     }
 
     @Override
+    public void onAddPhotoClick(View button, View imageButton) {
+        vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
+        vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
+        if (viewModel.getFieldPhoto() == null) {
+            vacationImageButton.setVisibility(View.INVISIBLE);
+        }
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
@@ -235,17 +235,22 @@ public class ActivityNewVacation
 
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                String imageUriString = imageUri.toString();
-                saveFieldPhoto(imageUriString);
+                saveFieldPhoto(imageUri);
                 Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                 vacationImageAddButton.setVisibility(View.GONE);
 
                 vacationImageButton.setBackground(userImage);
                 vacationImageButton.setVisibility(View.VISIBLE);
+                vacationImageButton.requestLayout();
                 vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
 
             } catch (FileNotFoundException e) {
                 Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (resultCode == Activity.RESULT_CANCELED && requestCode == PICK_IMAGE) {
+            if (viewModel.getFieldPhoto() == null) {
+                vacationImageButton.setVisibility(View.GONE);
             }
         }
     }
@@ -270,7 +275,17 @@ public class ActivityNewVacation
         viewModel.setFieldPlace(content);
     }
 
-    private void saveFieldPhoto(String imageUriString) {
+    private void saveFieldPhoto(Uri imageUriString) {
         viewModel.setFieldPhoto(imageUriString);
+    }
+
+    @Override
+    public void onInsertComplete(long rowId) {
+        // vacanza inserita correttamente nel DB
+        //todo utilizza l'id per inserire anche la relazione con i partecipanti nel DB
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
+        setResult(RESULT_OK, replyIntent);
+        finish(); // restituisce il risultato a chi ha chiamato l'activity
     }
 }

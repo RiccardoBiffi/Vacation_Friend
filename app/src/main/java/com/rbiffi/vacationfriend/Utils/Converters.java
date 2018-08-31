@@ -19,7 +19,7 @@ public class Converters {
         return bool ? 1 : 0;
     }
 
-    //DATE
+    //DATE todo non serve più, le salvo come stringhe
     @TypeConverter
     public static Date timestampToDate(Long value) {
         return value == null ? null : new Date(value);
