@@ -57,8 +57,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <!-- todo Listview, "io" e "aggiungi" fissi a mo' di header e footer -->
-    <!-- todo i partecipanti vengono presi dal db, prepopolalo con 4 -->
     <com.rbiffi.vacationfriend.Utils.ExtendedListView
         android:id="@+id/input_partes_list"
         android:layout_width="0dp"
@@ -66,6 +64,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
+
+        android:divider="@drawable/list_divider"
+        android:footerDividersEnabled="false"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/partes_field_barrier_vertical"

@@ -45,7 +45,9 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         this.viewModel = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
-        viewModel.setSelectedParticipants(selectedParticipants);
+        if (viewModel.getSelectedParticipants() == null) {
+            viewModel.setSelectedParticipants(selectedParticipants);
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

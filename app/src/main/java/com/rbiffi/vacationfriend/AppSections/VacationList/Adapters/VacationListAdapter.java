@@ -1,6 +1,8 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +24,14 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
 
+    private Context context;
     private final LayoutInflater inflater;
     private IVacationListClickEvents listener;
-    private List<VacationLite> vacationListCache;
+    private List<VacationLite> vacationList;
 
 
     public VacationListAdapter(Context context) {
+        this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -55,9 +59,9 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     @Override
     public void onBindViewHolder(VacationViewHolder holder, int position) {
-        if (vacationListCache != null) {
+        if (vacationList != null) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
-            final VacationLite current = vacationListCache.get(position);
+            final VacationLite current = vacationList.get(position);
             holder.vacationTitleView.setText(current.title);
             holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,7 +72,8 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 }
             });
 
-            holder.vacationImageView.setImageURI(current.photo);
+            Uri photoUri = current.photo != null ? current.photo : resourceToUri(context, R.drawable.vacation_default_photo);
+            holder.vacationImageView.setImageURI(photoUri);
             holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -87,20 +92,20 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 }
             });
         } else {
-            //todo metti immagine grigia finchè non carica
+            //todo metti schermata di caricamento
             // Dati non pronti, placeholder
         }
     }
 
     @Override
     public int getItemCount() {
-        if (vacationListCache == null) return 0;
-        return vacationListCache.size();
+        if (vacationList == null) return 0;
+        return vacationList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return vacationListCache.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER: VIEW_TYPE_OBJECT_VIEW;
+        return vacationList.isEmpty() ? VIEW_TYPE_EMPTY_LIST_PLACEHOLDER : VIEW_TYPE_OBJECT_VIEW;
     }
 
     public void setListener(IVacationListClickEvents listener) {
@@ -108,8 +113,15 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     }
 
     public void setVacations(List<VacationLite> vacations) {
-        vacationListCache = vacations;
+        vacationList = vacations;
         notifyDataSetChanged();
+    }
+
+    private static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID));
     }
 
     class VacationViewHolder extends RecyclerView.ViewHolder {
