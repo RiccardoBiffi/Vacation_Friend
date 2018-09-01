@@ -3,6 +3,7 @@ package com.rbiffi.vacationfriend.Repository.Entities_POJOs;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
+import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
@@ -29,10 +30,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                         childColumns = "userEmail")
         })
 public class JoinVacationParticipant {
-    public final int vacationId;
-    public final int userEmail;
+    @NonNull
+    public final long vacationId;
+    @NonNull
+    public final String userEmail;
 
-    public JoinVacationParticipant(int vacationId, int userEmail) {
+    public JoinVacationParticipant(long vacationId, String userEmail) {
         this.vacationId = vacationId;
         this.userEmail = userEmail;
     }

@@ -1,8 +1,11 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,7 +36,6 @@ import java.util.List;
 
 public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
 
-    // todo al momento non aspetto risultati perché si riflettono con il livedata
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
 
     private VacationViewModel viewModel;
@@ -65,7 +67,7 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
         super.onViewCreated(view, savedInstanceState);
 
         setupListWithAdapter();
-        emptyListTutorial = getActivity().findViewById(R.id.empty_list);
+        emptyListTutorial = getActivity().findViewById(R.id.empty_vacation_list);
         setupFloatingButton();
     }
 
@@ -75,13 +77,21 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
-                startActivity(intent);
+                startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
+            // todo accedi direttamente alla vacanza appena creata
+        }
+    }
+
     private void setupListWithAdapter() {
-        vacationList = getView().findViewById(R.id.vacationElList);
+        vacationList = getView().findViewById(R.id.vacationList);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
         vacationAdapter = new VacationListAdapter(getContext());
@@ -104,7 +114,7 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                     emptyListTutorial.setVisibility(View.VISIBLE);
                     Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
                     rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
-                    View arrow = emptyListTutorial.findViewById(R.id.arrow);
+                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
                     arrow.startAnimation(rotation);
                 }
                 vacationAdapter.setVacations(vacationLites);
@@ -154,13 +164,45 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                         // lei lo preleverà dal DB e popolerà i campi (ie viewmodel) con i dati trovati
                         Toast.makeText(getContext(), "Modifica" + vacation.id, Toast.LENGTH_SHORT).show();
                         return true;
+
                     case R.id.actionArchivia:
-                        // todo dialog semplice dove avverti che le vacanze non saranno più modificabili
-                        viewModel.store(vacation.id);
+                        AlertDialog.Builder builderArchivia = new AlertDialog.Builder(getActivity());
+                        builderArchivia.setTitle("Vuoi archiviare " + vacation.title + "?");
+                        builderArchivia.setMessage(R.string.dialog_vacation_store_message);
+                        builderArchivia.setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                viewModel.store(vacation.id);
+                                Toast.makeText(getContext(), vacation.title + " archiviata", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builderArchivia.setNegativeButton(R.string.button_ignore, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        });
+
+                        builderArchivia.create().show();
                         return true;
+
                     case R.id.actionElimina:
-                        // todo dialog semplice di conferma
-                        viewModel.delete(vacation.id);
+                        AlertDialog.Builder builderElimina = new AlertDialog.Builder(getActivity());
+                        builderElimina.setTitle("Vuoi eliminare " + vacation.title + "?");
+                        builderElimina.setMessage(R.string.dialog_vacation_delete_message);
+                        builderElimina.setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                viewModel.delete(vacation.id);
+                                Toast.makeText(getContext(), vacation.title + " eliminata", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builderElimina.setNegativeButton(R.string.button_ignore, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        });
+
+                        builderElimina.create().show();
                         return true;
                     default:
                         return false;

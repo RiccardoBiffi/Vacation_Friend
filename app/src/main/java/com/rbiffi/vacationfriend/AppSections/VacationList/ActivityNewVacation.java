@@ -23,6 +23,7 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFields
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
@@ -32,6 +33,7 @@ import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -282,7 +284,14 @@ public class ActivityNewVacation
     @Override
     public void onInsertComplete(long rowId) {
         // vacanza inserita correttamente nel DB
-        //todo utilizza l'id per inserire anche la relazione con i partecipanti nel DB
+        List<JoinVacationParticipant> jvps = new ArrayList<JoinVacationParticipant>();
+        List<Participant> partecipants = viewModel.getFieldParticipants();
+        for (Participant part :
+                partecipants) {
+            jvps.add(new JoinVacationParticipant(rowId, part.email));
+        }
+        viewModel.insertList(jvps);
+
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
         setResult(RESULT_OK, replyIntent);

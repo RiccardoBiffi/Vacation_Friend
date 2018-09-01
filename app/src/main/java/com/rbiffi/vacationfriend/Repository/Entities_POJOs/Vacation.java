@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 public class Vacation {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @NonNull
     public final String title;

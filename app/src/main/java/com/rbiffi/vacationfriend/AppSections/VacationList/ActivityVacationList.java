@@ -106,11 +106,9 @@ public class ActivityVacationList extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Novità", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.actionFeedback:
-                        //todo apri attività
                         Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.actionAbout:
-                        //todo apri attività
                         Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                         break;
                     default:

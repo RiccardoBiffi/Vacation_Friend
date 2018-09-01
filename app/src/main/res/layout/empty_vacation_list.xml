@@ -8,7 +8,7 @@
     tools:showIn="@layout/fragment_recenti">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/ptutorial_vacationlist_welcome"
         style="@style/Ptutorial"
 
         android:layout_width="0dp"
@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.15" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/ptutorial_vacationlist_whatsee"
         style="@style/Ptutorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,13 +40,14 @@
         android:gravity="start"
         android:text="@string/ptutorial_vacationlist_whatsee"
 
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintBottom_toTopOf="@+id/ptutorial_vacationlist_calltoaction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/barrier4"
+        app:layout_constraintTop_toBottomOf="@+id/ptutorial_vacationlist_welcome"
         app:layout_constraintVertical_bias="0.07999998" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/ptutorial_vacationlist_calltoaction"
         style="@style/Pcalltoaction"
         android:layout_width="268dp"
 
@@ -58,7 +59,7 @@
         app:layout_constraintTop_toTopOf="@+id/barrier2" />
 
     <ImageView
-        android:id="@+id/arrow"
+        android:id="@+id/ptutorial_arrow"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
@@ -68,7 +69,7 @@
         android:src="@drawable/ic_arrow_forward_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/ptutorial_vacationlist_calltoaction"
         app:layout_constraintTop_toTopOf="@+id/barrier2" />
 
     <android.support.constraint.Barrier
@@ -76,21 +77,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="arrow,textView7" />
+        app:constraint_referenced_ids="ptutorial_arrow,ptutorial_vacationlist_calltoaction" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="arrow,textView7" />
+        app:constraint_referenced_ids="ptutorial_arrow,ptutorial_vacationlist_calltoaction" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="left"
-        app:constraint_referenced_ids="textView8,textView5,textView7" />
+        app:constraint_referenced_ids="ptutorial_vacationlist_welcome,ptutorial_vacationlist_whatsee,ptutorial_vacationlist_calltoaction" />
 
 
 </android.support.constraint.ConstraintLayout>
