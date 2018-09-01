@@ -28,6 +28,9 @@ public interface IJoinVacationParticipantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(JoinVacationParticipant jvp);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertList(List<JoinVacationParticipant> jvps);
+
 
     //UPDATE
     @Update

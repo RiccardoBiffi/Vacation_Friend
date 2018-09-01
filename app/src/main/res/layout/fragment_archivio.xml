@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".AppSections.VacationList.ActivityVacationList"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vacationStoredList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".AppSections.VacationList.FragmentArchivio"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent"
 
+        android:scrollbars="vertical"
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/vlTab2"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-</ScrollView>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <include
+        android:id="@+id/empty_stored_list"
+        layout="@layout/empty_stored_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

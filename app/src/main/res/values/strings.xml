@@ -46,4 +46,8 @@
     <string name="ptutorial_vacationlist_welcome">Benvenuto!</string>
     <string name="ptutorial_vacationlist_whatsee">Qui appariranno tutte le tue ultime vacanze.</string>
     <string name="ptutorial_vacationlist_calltoaction">Per creare una nuova vacanza premi qui!</string>
+    <string name="ptutorial_storedlist_whatsee">Le vacanze che hai archiviato verranno mostrate qui.</string>
+    <string name="button_confirm">Conferma</string>
+    <string name="dialog_vacation_store_message">Non potrai più modificarla, ma potrai ripristinarla in seguito.</string>
+    <string name="dialog_vacation_delete_message">Non potrai più recuperarla.</string>
 </resources>

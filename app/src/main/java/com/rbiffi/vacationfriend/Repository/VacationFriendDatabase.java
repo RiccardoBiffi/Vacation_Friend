@@ -25,7 +25,7 @@ import com.rbiffi.vacationfriend.Utils.Converters;
                 Participant.class,
                 JoinVacationParticipant.class
         },
-        version = 15,
+        version = 17,
         exportSchema = false
 )
 @TypeConverters({Converters.class})

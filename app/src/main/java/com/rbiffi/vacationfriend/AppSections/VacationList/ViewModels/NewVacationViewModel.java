@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
@@ -94,4 +95,7 @@ public class NewVacationViewModel extends AndroidViewModel {
         return fieldParticipants;
     }
 
+    public void insertList(List<JoinVacationParticipant> jvps) {
+        repository.insertList(jvps);
+    }
 }
