@@ -4,7 +4,7 @@ import android.net.Uri;
 
 public class VacationLite {
 
-    public int id;
+    public long id;
     public String title;
     public String startDate;
     public String endDate;

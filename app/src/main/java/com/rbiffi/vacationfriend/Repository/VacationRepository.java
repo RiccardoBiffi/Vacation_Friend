@@ -25,7 +25,7 @@ public class VacationRepository {
 
     private IJoinVacationParticipantDao jVacationParticipantDao;
 
-    private static IInsertListener listener;
+    private static IRepositoryListener listener;
 
     public VacationRepository(Application app) {
         VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
@@ -55,16 +55,20 @@ public class VacationRepository {
         new InsertListAsyncTask(jVacationParticipantDao).execute(jvps);
     }
 
-    public void delete(int vacationId) {
+    public void delete(Long vacationId) {
         new DeleteAsyncTask(vacationDao).execute(vacationId);
     }
 
-    public void store(int vacationId) {
+    public void store(Long vacationId) {
         new StoreAsyncTask(vacationDao).execute(vacationId);
     }
 
-    public void addUpdateListener(IInsertListener listener) {
-        this.listener = listener;
+    public void getVacationDetails(long vId) {
+        new GetDetailsAsyncTask(vacationDao).execute(vId);
+    }
+
+    public void addListener(IRepositoryListener listener) {
+        VacationRepository.listener = listener;
     }
 
 
@@ -89,13 +93,15 @@ public class VacationRepository {
         }
     }
 
-    public interface IInsertListener {
+    public interface IRepositoryListener {
         void onInsertComplete(long rowId);
+
+        void onGetComplete(Vacation v);
     }
 
 
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
-    private static class DeleteAsyncTask extends AsyncTask<Integer, Void, Void> {
+    private static class DeleteAsyncTask extends AsyncTask<Long, Void, Void> {
 
         private IVacationDao asyncDao;
 
@@ -104,14 +110,14 @@ public class VacationRepository {
         }
 
         @Override
-        protected Void doInBackground(Integer... vacationIds) {
+        protected Void doInBackground(Long... vacationIds) {
             asyncDao.deleteFromID(vacationIds[0]);
             return null;
         }
     }
 
 
-    private static class StoreAsyncTask extends AsyncTask<Integer, Void, Void> {
+    private static class StoreAsyncTask extends AsyncTask<Long, Void, Void> {
 
         private IVacationDao asyncDao;
 
@@ -120,7 +126,7 @@ public class VacationRepository {
         }
 
         @Override
-        protected Void doInBackground(Integer... vacationIds) {
+        protected Void doInBackground(Long... vacationIds) {
             asyncDao.storeFromID(vacationIds[0]);
             return null;
         }
@@ -135,10 +141,31 @@ public class VacationRepository {
             asyncDao = vacationDao;
         }
 
+        @SafeVarargs
         @Override
-        protected Void doInBackground(List<JoinVacationParticipant>... vacationIds) {
+        protected final Void doInBackground(List<JoinVacationParticipant>... vacationIds) {
             asyncDao.insertList(vacationIds[0]);
             return null;
+        }
+    }
+
+    private static class GetDetailsAsyncTask extends AsyncTask<Long, Void, Vacation> {
+
+        private IVacationDao asyncDao;
+
+        GetDetailsAsyncTask(IVacationDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected Vacation doInBackground(Long... vacationIds) {
+            return asyncDao.getVacationDetails(vacationIds[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Vacation vacation) {
+            super.onPostExecute(vacation);
+            listener.onGetComplete(vacation);
         }
     }
 }

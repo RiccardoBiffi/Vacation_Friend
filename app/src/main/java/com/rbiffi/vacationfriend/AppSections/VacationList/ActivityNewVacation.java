@@ -42,7 +42,7 @@ public class ActivityNewVacation
         implements
         IVacationFieldsEvents,
         FragmentAddParticipantsDialog.IAddParticipantsListener,
-        VacationRepository.IInsertListener {
+        VacationRepository.IRepositoryListener {
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
@@ -64,14 +64,25 @@ public class ActivityNewVacation
     private RecyclerView.LayoutManager fieldLayout;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vacation);
 
+        //todo controlla se c'è un vacationId nel bundle
+        // se c'è, siamo in modalità "modifica" della vacanza
+        // vedi se riesci ad inserire la modalità vacanza in questa classe
+        // altrimenti vedi se riesci ad estenderla, reciclando molto da questa.
+
+
         restoreState(savedInstanceState);
-        setupActionBar();
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get("vacationId") != null) {
+            setVacationFieldToModify(getIntent().getExtras().getLong("vacationId"));
+        }
         setupListWithAdapter();
+        setupActionBar();
 
         confirm = findViewById(R.id.saveBottonAction);
         discard = findViewById(R.id.undoBottonAction);
@@ -104,29 +115,24 @@ public class ActivityNewVacation
         // salva tutto, soprattutto lista partecipanti selezionati e photo vacanza
         // gli altri campi li salvo anche nel onSaveInstanceState xkè leggeri
 
-        //todo rivedi la logica di ripristino dello stato
         //todo salva in Constants le chiavi dei campi
-        if (viewModel.getFieldTitle() == null && savedInstanceState != null) {
+        if (savedInstanceState != null) {
             String title = savedInstanceState.getString("inputTitle");
             viewModel.setFieldTitle(title);
-        }
-        if (viewModel.getFieldPeriodFrom() == null && savedInstanceState != null) {
+
             String dateFrom = savedInstanceState.getString("inputPeriodFrom");
             viewModel.setFieldPeriodFrom(dateFrom);
-        }
-        if (viewModel.getFieldPeriodTo() == null && savedInstanceState != null) {
+
             String dateTo = savedInstanceState.getString("inputPeriodTo");
             viewModel.setFieldPeriodTo(dateTo);
-        }
-        if (viewModel.getFieldPlace() == null && savedInstanceState != null) {
+
             String place = savedInstanceState.getString("inputPlace");
             viewModel.setFieldPlace(place);
-        }
-        if (viewModel.getFieldPhoto() == null && savedInstanceState != null) {
+
             String photo = savedInstanceState.getString("inputPhoto");
             viewModel.setFieldPhoto(Uri.parse(photo));
         }
-
+        // else leggo tutto dal view model
     }
 
     @Override
@@ -144,9 +150,7 @@ public class ActivityNewVacation
         outState.putString("inputPlace", placeField);
 
         Uri photoField = viewModel.getFieldPhoto();
-        if (photoField != null) {
-            outState.putString("inputPhoto", photoField.toString());
-        }
+        outState.putString("inputPhoto", photoField.toString());
 
         // la lista di partecipanti non la salvo perché può essere corposa
         // sarà solo nel viewmodel
@@ -237,7 +241,7 @@ public class ActivityNewVacation
 
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                saveFieldPhoto(imageUri);
+                saveFieldPhotoState(imageUri);
                 Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                 vacationImageAddButton.setVisibility(View.GONE);
 
@@ -263,12 +267,12 @@ public class ActivityNewVacation
     }
 
     @Override
-    public void saveFieldPeriodFrom(String date) {
+    public void saveFieldPeriodFromState(String date) {
         viewModel.setFieldPeriodFrom(date);
     }
 
     @Override
-    public void saveFieldPeriodTo(String date) {
+    public void saveFieldPeriodToState(String date) {
         viewModel.setFieldPeriodTo(date);
     }
 
@@ -277,8 +281,12 @@ public class ActivityNewVacation
         viewModel.setFieldPlace(content);
     }
 
-    private void saveFieldPhoto(Uri imageUriString) {
+    private void saveFieldPhotoState(Uri imageUriString) {
         viewModel.setFieldPhoto(imageUriString);
+    }
+
+    public void setVacationFieldToModify(long vId) {
+        viewModel.getVacationDetails(vId);
     }
 
     @Override
@@ -296,5 +304,15 @@ public class ActivityNewVacation
         replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
         setResult(RESULT_OK, replyIntent);
         finish(); // restituisce il risultato a chi ha chiamato l'activity
+    }
+
+    @Override
+    public void onGetComplete(Vacation v) {
+        saveFieldTitleState(v.title);
+        saveFieldPeriodFromState(v.period.startDate);
+        saveFieldPeriodToState(v.period.endDate);
+        saveFieldPlaceState(v.place);
+        //todo partecipants
+        saveFieldPhotoState(v.photo);
     }
 }

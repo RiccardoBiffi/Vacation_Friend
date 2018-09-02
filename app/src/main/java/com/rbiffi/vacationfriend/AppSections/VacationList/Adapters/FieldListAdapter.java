@@ -55,7 +55,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     private Context appContext;
     private List<String> fieldList;
-    private final NewVacationViewModel viewModel; // per facilitare il passaggio di dati
+    private NewVacationViewModel viewModel; // per facilitare il passaggio di dati
 
     private ParticipantAdapter fieldParticipantsAdapter;
 
@@ -71,6 +71,11 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     public void setListener(IVacationFieldsEvents listener) {
         this.listener = listener;
+    }
+
+    public void updateViewModel(NewVacationViewModel viewModel) {
+        this.viewModel = viewModel;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -139,7 +144,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodFromView, calendar);
-                        listener.saveFieldPeriodFrom(holder.periodFromView.getText().toString());
+                        listener.saveFieldPeriodFromState(holder.periodFromView.getText().toString());
                     }
                 };
                 final DatePickerDialog.OnDateSetListener toDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -149,7 +154,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodToView, calendar);
-                        listener.saveFieldPeriodTo(holder.periodToView.getText().toString());
+                        listener.saveFieldPeriodToState(holder.periodToView.getText().toString());
                     }
                 };
 
@@ -229,7 +234,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                     }
                 });
 
-                if (viewModel.getFieldPhoto() != null) {
+                if (viewModel.getFieldPhoto().toString() != "") {
                     try {
                         Uri imageUri = viewModel.getFieldPhoto();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);

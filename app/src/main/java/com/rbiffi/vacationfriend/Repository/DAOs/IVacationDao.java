@@ -18,7 +18,7 @@ public interface IVacationDao {
 
 //READ
     @Query("SELECT * FROM Vacation WHERE id = :id")
-    Vacation getVacationDetails(int id);
+    Vacation getVacationDetails(long id);
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
