@@ -37,6 +37,7 @@ import java.util.List;
 public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
+    private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
 
     private VacationViewModel viewModel;
 
@@ -87,6 +88,9 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
             // todo accedi direttamente alla vacanza appena creata
+        }
+        if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
+            // todo la vacanza è stata modificata, non ci accedo
         }
     }
 
@@ -159,10 +163,11 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
-                        //todo apri modifica vacanza
-                        // passa all'activity l'ID della VacationLite scelta
-                        // lei lo preleverà dal DB e popolerà i campi (ie viewmodel) con i dati trovati
-                        Toast.makeText(getContext(), "Modifica" + vacation.id, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("vacationId", vacation.id);
+                        intent.putExtras(bundle);
+                        startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                         return true;
 
                     case R.id.actionArchivia:
@@ -181,7 +186,6 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                                 //do nothing
                             }
                         });
-
                         builderArchivia.create().show();
                         return true;
 
@@ -201,9 +205,9 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                                 //do nothing
                             }
                         });
-
                         builderElimina.create().show();
                         return true;
+
                     default:
                         return false;
                 }

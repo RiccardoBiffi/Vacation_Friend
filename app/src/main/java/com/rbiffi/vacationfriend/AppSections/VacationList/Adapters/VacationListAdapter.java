@@ -66,7 +66,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 }
             });
 
-            Uri photoUri = current.photo != null ? current.photo : resourceToUri(context, R.drawable.vacation_default_photo);
+            Uri photoUri = !current.photo.toString().equals("") ? current.photo : resourceToUri(context, R.drawable.vacation_default_photo);
             holder.vacationImageView.setImageURI(photoUri);
             holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
                 @Override

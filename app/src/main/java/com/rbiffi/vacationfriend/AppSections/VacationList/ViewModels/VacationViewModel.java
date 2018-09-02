@@ -33,11 +33,11 @@ public class VacationViewModel extends AndroidViewModel {
         return allVacations;
     }
 
-    public void delete(int v) {
+    public void delete(long v) {
         repository.delete(v);
     }
 
-    public void store(int id) {
+    public void store(long id) {
         repository.store(id);
     }
 }
