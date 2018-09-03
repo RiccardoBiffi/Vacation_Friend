@@ -49,5 +49,7 @@
     <string name="ptutorial_storedlist_whatsee">Le vacanze che hai archiviato verranno mostrate qui.</string>
     <string name="button_confirm">Conferma</string>
     <string name="dialog_vacation_store_message">Non potrai più modificarla, ma potrai ripristinarla in seguito.</string>
-    <string name="dialog_vacation_delete_message">Non potrai più recuperarla.</string>
+    <string name="dialog_vacation_delete_message">Questa azione non è reversibile.</string>
+    <string name="acivity_title_mod_vacation">Modifica vacanza</string>
+    <string name="button_save">Salva</string>
 </resources>

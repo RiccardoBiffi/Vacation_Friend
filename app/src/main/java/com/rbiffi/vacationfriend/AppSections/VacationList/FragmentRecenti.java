@@ -30,11 +30,17 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListA
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
+import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
 import java.util.List;
 
-public class FragmentRecenti extends Fragment implements IVacationListClickEvents {
+public class FragmentRecenti
+        extends Fragment
+        implements
+        IVacationListClickEvents,
+        VacationRepository.IRepositoryListener {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
@@ -134,6 +140,7 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
     @Override
     public void onOverflowClick(View v, VacationLite vacation) {
         openPopupMenu(v, vacation);
+        viewModel.updateSelectedVacation(vacation.id, this);
     }
 
     @SuppressLint("RestrictedApi")
@@ -164,9 +171,7 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
                         Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putLong("vacationId", vacation.id);
-                        intent.putExtras(bundle);
+                        intent.putExtra("selectedVacation", viewModel.getSelectedVacation());
                         startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                         return true;
 
@@ -215,4 +220,14 @@ public class FragmentRecenti extends Fragment implements IVacationListClickEvent
         });
     }
 
+
+    @Override
+    public void onInsertComplete(long rowId) {
+
+    }
+
+    @Override
+    public void onGetComplete(Vacation v) {
+        viewModel.setSelectedVacation(v);
+    }
 }

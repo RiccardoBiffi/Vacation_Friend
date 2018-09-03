@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
@@ -57,7 +58,7 @@ public class ActivityNewVacation
     private Button discard;
 
     private Button vacationImageAddButton; // todo valuta se rimuoverli da qua
-    private ImageButton vacationImageButton; // non serve salvarli tra i campi
+    private ImageButton vacationImageButton; // fano parte dell'adapter + che altro
 
     private RecyclerView vacationFieldsList;
     private FieldListAdapter fieldListAdapter;
@@ -75,19 +76,32 @@ public class ActivityNewVacation
         // vedi se riesci ad inserire la modalità vacanza in questa classe
         // altrimenti vedi se riesci ad estenderla, reciclando molto da questa.
 
-
         restoreState(savedInstanceState);
 
-        if (getIntent().getExtras() != null && getIntent().getExtras().get("vacationId") != null) {
-            setVacationFieldToModify(getIntent().getExtras().getLong("vacationId"));
+        Intent intent = getIntent();
+        Vacation current = intent.getParcelableExtra("selectedVacation");
+        if (current != null && !isModifyMode()) {
+            viewModel.setMod(NewVacationViewModel.MOD_VACATION);
+            viewModel.setVacationId(current.id);
+            saveFieldTitleState(current.title);
+            saveFieldPeriodFromState(current.period.startDate);
+            saveFieldPeriodToState(current.period.endDate);
+            saveFieldPlaceState(current.place);
+            saveFieldPhotoState(current.photo);
         }
+
         setupListWithAdapter();
         setupActionBar();
 
         confirm = findViewById(R.id.saveBottonAction);
         discard = findViewById(R.id.undoBottonAction);
 
-        confirm.setText(R.string.button_create);
+        if (isModifyMode()) {
+            confirm.setText(R.string.button_save);
+        } else {
+            confirm.setText(R.string.button_create);
+        }
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,9 +110,16 @@ public class ActivityNewVacation
                 //todo costruisci la risposta
 
                 Period period = new Period(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo());
-                Vacation newVacation = new Vacation(viewModel.getFieldTitle(), period,
+                Vacation builtVacation = new Vacation(viewModel.getFieldTitle(), period,
                         viewModel.getFieldPlace(), viewModel.getFieldPhoto(), false);
-                viewModel.insert(newVacation, ActivityNewVacation.this);
+                if (isModifyMode()) {
+                    builtVacation.id = viewModel.getVacationId();
+                    viewModel.update(builtVacation);
+                    // todo oppure mando al chiamante la rowId della vacanza modificata per aprirla subito
+                    finish();
+                } else {
+                    viewModel.insert(builtVacation, ActivityNewVacation.this);
+                }
             }
         });
 
@@ -108,6 +129,10 @@ public class ActivityNewVacation
                 finish();
             }
         });
+    }
+
+    private boolean isModifyMode() {
+        return viewModel.getMod() == NewVacationViewModel.MOD_VACATION;
     }
 
     private void restoreState(Bundle savedInstanceState) {
@@ -176,7 +201,12 @@ public class ActivityNewVacation
         // mostra il back alla activity precedente
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.acivity_title_new_vacation);
+        if (viewModel.getMod() == viewModel.NEW_VACATION) {
+            getSupportActionBar().setTitle(R.string.acivity_title_new_vacation);
+        } else {
+            getSupportActionBar().setTitle(R.string.acivity_title_mod_vacation);
+
+        }
     }
 
     @Override
@@ -223,22 +253,33 @@ public class ActivityNewVacation
     public void onAddPhotoClick(View button, View imageButton) {
         vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
         vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
-        if (viewModel.getFieldPhoto() == null) {
+        if (viewModel.getFieldPhoto().toString().equals("")) {
             vacationImageButton.setVisibility(View.INVISIBLE);
         }
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        Intent intent;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            intent = new Intent();
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE && data != null) {
             Uri imageUri = data.getData();
 
+            //grantUriPermission(getPackageName(), imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            //final int flags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
+            //getContentResolver().takePersistableUriPermission(imageUri,flags);
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
                 saveFieldPhotoState(imageUri);

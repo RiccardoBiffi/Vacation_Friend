@@ -234,7 +234,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                     }
                 });
 
-                if (viewModel.getFieldPhoto().toString() != "") {
+                if (!viewModel.getFieldPhoto().toString().equals("")) {
                     try {
                         Uri imageUri = viewModel.getFieldPhoto();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);

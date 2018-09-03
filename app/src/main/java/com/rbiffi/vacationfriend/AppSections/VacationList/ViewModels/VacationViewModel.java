@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationRepository;
 
@@ -20,6 +21,7 @@ public class VacationViewModel extends AndroidViewModel {
     private VacationRepository repository;
 
     private LiveData<List<VacationLite>> allVacations;
+    private Vacation selected;
 
     public VacationViewModel(@NonNull Application app) {
         super(app);
@@ -27,6 +29,7 @@ public class VacationViewModel extends AndroidViewModel {
 
         //inizializzo i dati
         allVacations = repository.getActiveVacationList();
+        selected = null;
     }
 
     public LiveData<List<VacationLite>> getAllVacations() {
@@ -39,5 +42,18 @@ public class VacationViewModel extends AndroidViewModel {
 
     public void store(long id) {
         repository.store(id);
+    }
+
+    public void updateSelectedVacation(long id, VacationRepository.IRepositoryListener listener) {
+        repository.addListener(listener);
+        repository.getVacationDetails(id);
+    }
+
+    public Vacation getSelectedVacation() {
+        return selected;
+    }
+
+    public void setSelectedVacation(Vacation selected) {
+        this.selected = selected;
     }
 }

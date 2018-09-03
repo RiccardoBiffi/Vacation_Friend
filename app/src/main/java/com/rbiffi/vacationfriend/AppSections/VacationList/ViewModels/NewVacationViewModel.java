@@ -27,6 +27,12 @@ public class NewVacationViewModel extends AndroidViewModel {
     private List<Participant> fieldParticipants;
     private Uri fieldPhoto;
 
+    private int mod;
+    private long vacationId;
+
+    public static final int NEW_VACATION = 0;
+    public static final int MOD_VACATION = 1;
+
     public NewVacationViewModel(@NonNull Application app) {
         super(app);
         repository = new VacationRepository(app);
@@ -39,6 +45,8 @@ public class NewVacationViewModel extends AndroidViewModel {
         fieldPlace = "";
         fieldParticipants = new ArrayList<>();
         fieldPhoto = Uri.parse("");
+
+        mod = NEW_VACATION;
     }
 
     public void getVacationDetails(long vId) {
@@ -49,6 +57,10 @@ public class NewVacationViewModel extends AndroidViewModel {
         //la logica dell'inserimento delle vacanze è completamente gestita dal repository
         repository.addListener(listener);
         repository.insert(v);
+    }
+
+    public void update(Vacation builtVacation) {
+        repository.update(builtVacation);
     }
 
     public void setFieldTitle(String fieldTitle) {
@@ -103,4 +115,19 @@ public class NewVacationViewModel extends AndroidViewModel {
         repository.insertList(jvps);
     }
 
+    public void setMod(int mod) {
+        this.mod = mod;
+    }
+
+    public int getMod() {
+        return mod;
+    }
+
+    public long getVacationId() {
+        return vacationId;
+    }
+
+    public void setVacationId(long vacationId) {
+        this.vacationId = vacationId;
+    }
 }
