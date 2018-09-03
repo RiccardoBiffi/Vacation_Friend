@@ -67,6 +67,10 @@ public class VacationRepository {
         new GetDetailsAsyncTask(vacationDao).execute(vId);
     }
 
+    public void update(Vacation builtVacation) {
+        new UpdateAsyncTask(vacationDao).execute(builtVacation);
+    }
+
     public void addListener(IRepositoryListener listener) {
         VacationRepository.listener = listener;
     }
@@ -166,6 +170,21 @@ public class VacationRepository {
         protected void onPostExecute(Vacation vacation) {
             super.onPostExecute(vacation);
             listener.onGetComplete(vacation);
+        }
+    }
+
+    private static class UpdateAsyncTask extends AsyncTask<Vacation, Void, Void> {
+
+        private IVacationDao asyncDao;
+
+        UpdateAsyncTask(IVacationDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Vacation... vacationIds) {
+            asyncDao.insert(vacationIds[0]);
+            return null;
         }
     }
 }
