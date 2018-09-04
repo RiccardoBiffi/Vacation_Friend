@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.Constants;
@@ -55,13 +55,13 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     private Context appContext;
     private List<String> fieldList;
-    private NewVacationViewModel viewModel; // per facilitare il passaggio di dati
+    private ChangeVacationViewModel viewModel; // per facilitare il passaggio di dati
 
     private ParticipantAdapter fieldParticipantsAdapter;
 
     private IVacationFieldsEvents listener;
 
-    public FieldListAdapter(Context applicationContext, List<String> fieldList, NewVacationViewModel viewModel) {
+    public FieldListAdapter(Context applicationContext, List<String> fieldList, ChangeVacationViewModel viewModel) {
         inflater = LayoutInflater.from(applicationContext);
 
         appContext = applicationContext;
@@ -71,11 +71,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     public void setListener(IVacationFieldsEvents listener) {
         this.listener = listener;
-    }
-
-    public void updateViewModel(NewVacationViewModel viewModel) {
-        this.viewModel = viewModel;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -205,9 +200,9 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             case Constants.F_PARTECIP:
                 fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, viewModel.getFieldParticipants());
+
                 setPartecipantsListHeader(holder);
                 setParticipantsListFooter(holder);
-
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
                 break;
 

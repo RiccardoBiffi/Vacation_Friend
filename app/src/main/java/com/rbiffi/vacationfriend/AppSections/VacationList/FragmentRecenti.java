@@ -170,7 +170,7 @@ public class FragmentRecenti
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
-                        Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
+                        Intent intent = new Intent(getActivity(), ActivityModifyVacation.class);
                         intent.putExtra("selectedVacation", viewModel.getSelectedVacation());
                         startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                         return true;

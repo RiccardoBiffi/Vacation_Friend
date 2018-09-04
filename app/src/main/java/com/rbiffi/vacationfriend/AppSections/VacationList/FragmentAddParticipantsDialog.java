@@ -58,7 +58,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
             public void onChanged(@Nullable List<Participant> participants) {
                 participantDialogAdapter.setListener(FragmentAddParticipantsDialog.this);
                 participantDialogAdapter.setSelectedParticipants(viewModel.getSelectedParticipants());
-                participantDialogAdapter.updatePartecipants(participants);
+                participantDialogAdapter.updateParticipants(participants);
             }
         });
 

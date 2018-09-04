@@ -83,7 +83,7 @@ public class ParticipantDialogAdapter extends ArrayAdapter<Participant> {
         return participantList.get(position);
     }
 
-    public void updatePartecipants(List<Participant> participants) {
+    public void updateParticipants(List<Participant> participants) {
         this.participantList = participants;
         notifyDataSetChanged();
     }

@@ -19,6 +19,7 @@
             android:name=".AppSections.VacationList.ActivityNewVacation"
             android:windowSoftInputMode="adjustPan"
             />
+        <activity android:name=".AppSections.VacationList.ActivityModifyVacation" />
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
