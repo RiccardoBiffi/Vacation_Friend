@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
-import com.rbiffi.vacationfriend.Repository.VacationRepository;
+import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
     //Salva la lista dei partecipanti presa dal DB e quali sono stati selezionati dall'utente
 
-    private VacationRepository repository;
+    private VacationFriendRepository repository;
 
     private LiveData<List<Participant>> allPartecipants;
     private List<Participant> selectedParticipants;
 
     public ParticipantsDialogViewModel(@NonNull Application app) {
         super(app);
-        repository = new VacationRepository(app);
+        repository = new VacationFriendRepository(app);
 
         // inizializzo campi
         allPartecipants = repository.getParticipantList();

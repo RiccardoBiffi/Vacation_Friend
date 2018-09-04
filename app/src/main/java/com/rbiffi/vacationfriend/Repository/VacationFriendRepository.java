@@ -15,7 +15,13 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import java.util.List;
 
 //classe per gestire le sorgenti di dati. Utile a mettere in un unico luogo tutte risorse dati.
-public class VacationRepository {
+public class VacationFriendRepository {
+
+    public interface IRepositoryListener {
+        void onInsertComplete(long rowId);
+
+        void onGetComplete(Vacation v);
+    }
 
     private IVacationDao vacationDao;
     private LiveData<List<VacationLite>> vacationList;
@@ -27,7 +33,7 @@ public class VacationRepository {
 
     private static IRepositoryListener listener;
 
-    public VacationRepository(Application app) {
+    public VacationFriendRepository(Application app) {
         VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
         vacationDao = db.getVacationDao(); // prendo dal db il DAO
         participantDao = db.getParticipantDao();
@@ -72,7 +78,7 @@ public class VacationRepository {
     }
 
     public void addListener(IRepositoryListener listener) {
-        VacationRepository.listener = listener;
+        VacationFriendRepository.listener = listener;
     }
 
 
@@ -95,12 +101,6 @@ public class VacationRepository {
             super.onPostExecute(aLong);
             listener.onInsertComplete(aLong);
         }
-    }
-
-    public interface IRepositoryListener {
-        void onInsertComplete(long rowId);
-
-        void onGetComplete(Vacation v);
     }
 
 

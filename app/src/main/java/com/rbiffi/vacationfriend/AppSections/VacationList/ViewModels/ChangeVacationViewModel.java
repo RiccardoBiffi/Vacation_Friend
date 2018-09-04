@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.VacationRepository;
+import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
     //warning: non salvare Activity, Fragment, View o contesti in quanto cambiano più spesso dei dati
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
 
-    private VacationRepository repository;
+    private VacationFriendRepository repository;
 
     protected String fieldTitle;
     protected String fieldPeriodFrom;
@@ -30,7 +30,7 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
 
     public ChangeVacationViewModel(@NonNull Application app) {
         super(app);
-        repository = new VacationRepository(app);
+        repository = new VacationFriendRepository(app);
 
         //inizializzo i dati
 
@@ -46,7 +46,7 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         repository.getVacationDetails(vId);
     }
 
-    public void insert(Vacation v, VacationRepository.IRepositoryListener listener) {
+    public void insert(Vacation v, VacationFriendRepository.IRepositoryListener listener) {
         //la logica dell'inserimento delle vacanze è completamente gestita dal repository
         repository.addListener(listener);
         repository.insert(v);

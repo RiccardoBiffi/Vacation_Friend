@@ -15,13 +15,6 @@ public interface IVacationFieldsEvents {
 
     void onDateFocus(View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener);
 
-    void saveFieldPeriodFromState(String date);
-
-    void saveFieldPeriodToState(String date);
-
     void onAddParticipantClick(View button, List<Participant> adapter);
-
-    void saveFieldTitleState(String content);
-
-    void saveFieldPlaceState(String content);
 }
+
