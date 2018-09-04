@@ -16,8 +16,10 @@ import com.rbiffi.vacationfriend.Repository.DAOs.IParticipantDao;
 import com.rbiffi.vacationfriend.Repository.DAOs.IVacationDao;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Utils.Converters;
+
 
 @Database(
         entities = {
@@ -82,47 +84,10 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
         }
 
         private void initializeVacations() {
-            /*
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-            Vacation v = new Vacation();
-            v.title = "Croazia 2018";
-            String start = "25/08/2017";
-            String end = "02/09/2017";
-            try {
-                v.startDate = format.parse(start);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            try {
-                v.endDate = format.parse(end);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
-            v.notes = "Prima prova";
-            v.achived = false;
+            Period p = new Period("25/08/2017", "02/09/2017");
+            Uri photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
+            Vacation v = new Vacation("Croazia 2018", p, "Rovigno", photo, false);
             vDao.insert(v);
-
-            v = new Vacation();
-            v.title = "Ferragosto 2018";
-            start = "12/08/2017";
-            end = "17/08/2017";
-            try {
-                v.startDate = format.parse(start);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            try {
-                v.endDate = format.parse(end);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            v.photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo1);
-            v.notes = "Seconda prova";
-            v.achived = false;
-            vDao.insert(v);
-            */
         }
 
         private void initializeParticipants() {
