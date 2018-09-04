@@ -32,7 +32,7 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationVie
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
-import com.rbiffi.vacationfriend.Repository.VacationRepository;
+import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class FragmentRecenti
         extends Fragment
         implements
         IVacationListClickEvents,
-        VacationRepository.IRepositoryListener {
+        VacationFriendRepository.IRepositoryListener {
 
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;

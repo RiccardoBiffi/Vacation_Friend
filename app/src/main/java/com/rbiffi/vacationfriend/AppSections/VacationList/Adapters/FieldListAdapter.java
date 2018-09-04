@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityEditAppObject;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
@@ -59,7 +59,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     private ParticipantAdapter fieldParticipantsAdapter;
 
-    private IVacationFieldsEvents listener;
+    private ActivityEditAppObject listener;
 
     public FieldListAdapter(Context applicationContext, List<String> fieldList, ChangeVacationViewModel viewModel) {
         inflater = LayoutInflater.from(applicationContext);
@@ -69,7 +69,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         this.viewModel = viewModel;
     }
 
-    public void setListener(IVacationFieldsEvents listener) {
+    public void setListener(ActivityEditAppObject listener) {
         this.listener = listener;
     }
 
@@ -123,7 +123,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                     @Override
                     public void afterTextChanged(Editable s) {
                         if (listener != null) {
-                            listener.saveFieldTitleState(holder.titleFieldView.getText().toString());
+                            listener.saveTitleField(holder.titleFieldView.getText().toString());
                         }
                     }
                 });
@@ -139,7 +139,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodFromView, calendar);
-                        listener.saveFieldPeriodFromState(holder.periodFromView.getText().toString());
+                        listener.saveDateFromField(holder.periodFromView.getText().toString());
                     }
                 };
                 final DatePickerDialog.OnDateSetListener toDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -149,7 +149,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodToView, calendar);
-                        listener.saveFieldPeriodToState(holder.periodToView.getText().toString());
+                        listener.saveDateToField(holder.periodToView.getText().toString());
                     }
                 };
 
@@ -191,7 +191,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                     @Override
                     public void afterTextChanged(Editable s) {
                         if (listener != null) {
-                            listener.saveFieldPlaceState(holder.placeView.getText().toString());
+                            listener.savePlaceField(holder.placeView.getText().toString());
                         }
                     }
                 });
@@ -343,9 +343,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
         FieldViewHolder(View itemView) {
             super(itemView);
-            // mi interessa salvare solo alcuni campi
-            // sicuro i partecipanti e le foto (per accedere ai bottoni)
-            // forse ciò che l'utente scrive nei form. Non è chiara di chi è la responsabilità
             titleFieldView = itemView.findViewById(R.id.input_title);
 
             periodFromView = itemView.findViewById(R.id.input_period_from);
