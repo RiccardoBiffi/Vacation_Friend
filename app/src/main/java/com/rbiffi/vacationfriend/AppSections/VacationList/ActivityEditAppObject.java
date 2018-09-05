@@ -71,9 +71,7 @@ public abstract class ActivityEditAppObject
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo delega di validare i campi obbligatori
-                //todo delega di raccgoliere i risultati
-                //todo costruisci la risposta
+                //todo valida i campi obbligatori e gli altri
                 collectAndSaveObject();
             }
         });

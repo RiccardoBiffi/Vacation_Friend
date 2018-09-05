@@ -17,7 +17,7 @@ public interface IParticipantDao {
 
 //READ
     @Query("SELECT * FROM Participant ORDER BY lastName ASC")
-    LiveData<List<Participant>> getAllPartecipants();
+    LiveData<List<Participant>> getAllParticipants();
 
 //INSERT
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -25,7 +25,7 @@ public interface IParticipantDao {
 
 //UPDATE
     @Update
-    void updatePartecipant(Participant participant);
+    void update(Participant participant);
 
 //DELETE
     @Delete

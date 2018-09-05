@@ -105,8 +105,12 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
     }
 
     public void insertList(List<JoinVacationParticipant> jvps) {
-        repository.insertList(jvps);
+        repository.insertParticipants(jvps);
     }
 
+    public void updatePartecipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
+        repository.addListener(listener);
+        repository.getVacationParticipants(vacationId);
+    }
 
 }

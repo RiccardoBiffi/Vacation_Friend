@@ -11,11 +11,14 @@ import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
 import java.util.List;
 
-public class ActivityModifyVacation extends ActivityEditAppObject {
+public class ActivityModifyVacation
+        extends ActivityEditAppObject
+        implements VacationFriendRepository.IRepositoryListener {
 
     protected ModifyVacationViewModel viewModel;
 
@@ -39,7 +42,7 @@ public class ActivityModifyVacation extends ActivityEditAppObject {
             viewModel.setFieldPeriodFrom(current.period.startDate);
             viewModel.setFieldPeriodTo(current.period.endDate);
             viewModel.setFieldPlace(current.place);
-            // todo carica i partecipanti
+            viewModel.updatePartecipants(viewModel.getVacationId(), this);
             viewModel.setFieldPhoto(current.photo);
         }
     }
@@ -127,7 +130,8 @@ public class ActivityModifyVacation extends ActivityEditAppObject {
 
     @Override
     public void onInsertComplete(long rowId) {
-        //todo aggiorna anche i partecipanti
+        //todo aggiorna anche i partecipanti dopo aver completato la modifica, sarebbe onUpdateComplete
+        // fai degli insert che eventualmente fanno il replace
 
         /*
         // vacanza inserita correttamente nel DB
@@ -137,7 +141,7 @@ public class ActivityModifyVacation extends ActivityEditAppObject {
                 partecipants) {
             jvps.add(new JoinVacationParticipant(rowId, part.email));
         }
-        viewModel.insertList(jvps);
+        viewModel.insertParticipants(jvps);
 
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
@@ -147,50 +151,14 @@ public class ActivityModifyVacation extends ActivityEditAppObject {
     }
 
     @Override
-    public void onGetComplete(Vacation v) {
-
-    }
-
-    /*
-    @Override
-    protected void getActivityViewModel() {
-
+    public void onGetVacationDetailsComplete(Vacation v) {
+        //non necessario perchè la vacanza scelta arriva dall'intent. In caso fai 2+ interfacce del repository
     }
 
     @Override
-    protected void restoreState(Bundle savedInstanceState) {
-        super.restoreState(savedInstanceState);
-
-
+    public void onGetVacationParticipants(List<Participant> participants) {
+        viewModel.setFieldParticipants(participants);
+        fieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
     }
 
-    @Override
-    protected FieldListAdapter createFieldAdapter() {
-        return new FieldListAdapter(getApplicationContext(), FieldLists.getFieldList(Vacation.class), viewModel);
-    }
-
-    @Override
-    protected void setupActionBar() {
-        super.setupActionBar();
-        //todo meglio se creo una classe astratta da cui eredito le parti comuni
-        getSupportActionBar().setTitle(R.string.acivity_title_mod_vacation);
-    }
-
-    @Override
-    protected void setupActivityButtons() {
-        super.setupActivityButtons();
-        confirm.setText(R.string.button_save);
-    }
-
-    @Override
-    protected void buildAndSaveVacation() {
-        Period period = new Period(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo());
-        Vacation builtVacation = new Vacation(viewModel.getFieldTitle(), period, viewModel.getFieldPlace(), viewModel.getFieldPhoto(), false);
-
-        ModifyVacationViewModel modViewmodel = (ModifyVacationViewModel) viewModel;
-        builtVacation.id = modViewmodel.getVacationId();
-        modViewmodel.update(builtVacation);
-        finish();
-    }
-    */
 }
