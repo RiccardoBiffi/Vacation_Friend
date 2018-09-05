@@ -21,7 +21,7 @@ public interface IJoinVacationParticipantDao {
             "INNER JOIN JoinVacationParticipant " +
             "ON Participant.email = JoinVacationParticipant.userEmail " +
             "WHERE JoinVacationParticipant.vacationId = :id")
-    List<Participant> getParticipantsForVacation(int id);
+    List<Participant> getParticipantsForVacation(long id);
 
 
     //INSERT

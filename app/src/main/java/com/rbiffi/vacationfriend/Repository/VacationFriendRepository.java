@@ -20,7 +20,9 @@ public class VacationFriendRepository {
     public interface IRepositoryListener {
         void onInsertComplete(long rowId);
 
-        void onGetComplete(Vacation v);
+        void onGetVacationDetailsComplete(Vacation v);
+
+        void onGetVacationParticipants(List<Participant> participants);
     }
 
     private IVacationDao vacationDao;
@@ -41,7 +43,7 @@ public class VacationFriendRepository {
 
         // acquisisco quel che mi interessa dal db
         vacationList = vacationDao.getActiveVacations();
-        participantList = participantDao.getAllPartecipants();
+        participantList = participantDao.getAllParticipants();
     }
 
     public LiveData<List<VacationLite>> getActiveVacationList() {
@@ -53,12 +55,11 @@ public class VacationFriendRepository {
     }
 
     public void insert(Vacation vacation) {
-        // bisogna chiamarlo in un tread diverso da quello principale.
         new InsertAsyncTask(vacationDao).execute(vacation);
     }
 
-    public void insertList(List<JoinVacationParticipant> jvps) {
-        new InsertListAsyncTask(jVacationParticipantDao).execute(jvps);
+    public void insertParticipants(List<JoinVacationParticipant> jvps) {
+        new InsertListParticipantsAsyncTask(jVacationParticipantDao).execute(jvps);
     }
 
     public void delete(Long vacationId) {
@@ -71,6 +72,10 @@ public class VacationFriendRepository {
 
     public void getVacationDetails(long vId) {
         new GetDetailsAsyncTask(vacationDao).execute(vId);
+    }
+
+    public void getVacationParticipants(long vId) {
+        new GetParticipantsAsyncTask(jVacationParticipantDao).execute(vId);
     }
 
     public void update(Vacation builtVacation) {
@@ -137,11 +142,11 @@ public class VacationFriendRepository {
     }
 
 
-    private static class InsertListAsyncTask extends AsyncTask<List<JoinVacationParticipant>, Void, Void> {
+    private static class InsertListParticipantsAsyncTask extends AsyncTask<List<JoinVacationParticipant>, Void, Void> {
 
         private IJoinVacationParticipantDao asyncDao;
 
-        InsertListAsyncTask(IJoinVacationParticipantDao vacationDao) {
+        InsertListParticipantsAsyncTask(IJoinVacationParticipantDao vacationDao) {
             asyncDao = vacationDao;
         }
 
@@ -169,7 +174,7 @@ public class VacationFriendRepository {
         @Override
         protected void onPostExecute(Vacation vacation) {
             super.onPostExecute(vacation);
-            listener.onGetComplete(vacation);
+            listener.onGetVacationDetailsComplete(vacation);
         }
     }
 
@@ -185,6 +190,26 @@ public class VacationFriendRepository {
         protected Void doInBackground(Vacation... vacationIds) {
             asyncDao.insert(vacationIds[0]);
             return null;
+        }
+    }
+
+    private static class GetParticipantsAsyncTask extends AsyncTask<Long, Void, List<Participant>> {
+
+        private IJoinVacationParticipantDao asyncDao;
+
+        GetParticipantsAsyncTask(IJoinVacationParticipantDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected List<Participant> doInBackground(Long... vacationIds) {
+            return asyncDao.getParticipantsForVacation(vacationIds[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Participant> participants) {
+            super.onPostExecute(participants);
+            listener.onGetVacationParticipants(participants);
         }
     }
 }

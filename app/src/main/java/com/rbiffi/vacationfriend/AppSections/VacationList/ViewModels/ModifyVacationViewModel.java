@@ -20,4 +20,5 @@ public class ModifyVacationViewModel extends ChangeVacationViewModel {
     public void setVacationId(long vacationId) {
         this.modifiedVacationId = vacationId;
     }
+
 }

@@ -30,6 +30,7 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListA
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
@@ -227,7 +228,12 @@ public class FragmentRecenti
     }
 
     @Override
-    public void onGetComplete(Vacation v) {
+    public void onGetVacationDetailsComplete(Vacation v) {
         viewModel.setSelectedVacation(v);
+    }
+
+    @Override
+    public void onGetVacationParticipants(List<Participant> participants) {
+        //todo non serve recuperare la lista dei partecipanti
     }
 }
