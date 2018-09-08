@@ -13,8 +13,6 @@
     <string name="sdAbout">About</string>
     <string name="sdOpenMenu">Menù laterale aperto</string>
     <string name="sdCloseMenu">Menù laterale chiuso</string>
-    <string name="testUserName">Nome Cognome</string>
-    <string name="testUserEmail">useremail@emaildomain.com</string>
     <string name="vlModifica">Modifica</string>
     <string name="vlArchivia">Archivia</string>
     <string name="vlElimina">Elimina</string>
@@ -52,4 +50,8 @@
     <string name="dialog_vacation_delete_message">Questa azione non è reversibile.</string>
     <string name="acivity_title_mod_vacation">Modifica vacanza</string>
     <string name="button_save">Salva</string>
+    <string name="ph_name_lastname">Nome Cognome</string>
+    <string name="ph_user_email">lastname.name@domain.com</string>
+    <string name="button_remove_participant">Togli partecipante</string>
+    <string name="ph_vacation_name">Vacation name</string>
 </resources>

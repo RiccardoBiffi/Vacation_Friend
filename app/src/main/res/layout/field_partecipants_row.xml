@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
+    android:id="@+id/participant_row_element"
     >
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -32,7 +31,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
 
-        android:text="Nome Cognome"
+        android:text="@string/ph_name_lastname"
         android:gravity="center_vertical"
         android:ellipsize="end"
 
@@ -49,6 +48,7 @@
 
         android:background="@drawable/ic_close_secdark_24dp"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/button_remove_participant"
 
         app:layout_constraintBottom_toTopOf="@id/barrier_partecipants"
         app:layout_constraintEnd_toEndOf="parent"

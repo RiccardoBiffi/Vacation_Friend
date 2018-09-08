@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
@@ -49,6 +50,7 @@ public class FragmentRecenti
     private VacationViewModel viewModel;
 
     private View emptyListTutorial;
+    private ProgressBar progressBar;
     private FloatingActionButton floatingButton;
 
     private RecyclerView vacationList;
@@ -74,13 +76,15 @@ public class FragmentRecenti
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setupListWithAdapter();
         emptyListTutorial = getActivity().findViewById(R.id.empty_vacation_list);
+        progressBar = getActivity().findViewById(R.id.fragment_vacationlist_progressbar);
+        floatingButton = getActivity().findViewById(R.id.floatingActionButton);
+
+        setupListWithAdapter();
         setupFloatingButton();
     }
 
     private void setupFloatingButton() {
-        floatingButton = getActivity().findViewById(R.id.floatingActionButton);
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +123,8 @@ public class FragmentRecenti
         viewModel.getAllVacations().observe(this, new Observer<List<VacationLite>>() {
             @Override
             public void onChanged(@Nullable List<VacationLite> vacationLites) {
-                if (!vacationLites.isEmpty()) {
+                if (vacationLites != null && !vacationLites.isEmpty()) {
+                    //todo loader
                     emptyListTutorial.setVisibility(View.GONE);
                 } else {
                     emptyListTutorial.setVisibility(View.VISIBLE);
@@ -128,9 +133,12 @@ public class FragmentRecenti
                     View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
                     arrow.startAnimation(rotation);
                 }
+                progressBar.setVisibility(View.GONE);
                 vacationAdapter.setVacations(vacationLites);
             }
         });
+
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -223,7 +231,7 @@ public class FragmentRecenti
 
 
     @Override
-    public void onInsertComplete(long rowId) {
+    public void onVacationOperationComplete(long rowId) {
 
     }
 

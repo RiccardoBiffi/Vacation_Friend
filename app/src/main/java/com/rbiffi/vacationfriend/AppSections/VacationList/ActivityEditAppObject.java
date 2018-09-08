@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -199,11 +200,34 @@ public abstract class ActivityEditAppObject
     @Override
     public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
         if (hasFocus) {
+            hideKeyboard(this);
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog dateDialog = new DatePickerDialog(this, dateListener, year, month, day);
             dateDialog.show();
+        }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+        }
+    }
+
+    public static void showKeyboard(Activity activity, View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
         }
     }
 
@@ -222,6 +246,7 @@ public abstract class ActivityEditAppObject
 
     @Override
     public void onAddParticipantClick(View button, List<Participant> partecipants) {
+        hideKeyboard(this);
         ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
         pdvm.setSelectedParticipants(partecipants);
         FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
@@ -280,6 +305,6 @@ public abstract class ActivityEditAppObject
     }
 
     @Override
-    public abstract void onInsertComplete(long rowId);
+    public abstract void onVacationOperationComplete(long rowId);
 
 }
