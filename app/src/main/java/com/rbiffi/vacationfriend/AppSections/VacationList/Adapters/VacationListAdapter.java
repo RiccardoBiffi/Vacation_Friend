@@ -43,8 +43,10 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
             case VIEW_TYPE_OBJECT_VIEW:
                 view = inflater.inflate(R.layout.vacation_list_row, parent, false);
                 break;
+            case VIEW_TYPE_FOOTER:
+                view = inflater.inflate(R.layout.activity_vacationlist_footer, parent, false);
+                break;
             default:
-                //TODO probabilmente finisco sempre qua
                 view = inflater.inflate(R.layout.vacation_list_row, parent, false);
                 break;
         }
@@ -53,7 +55,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
 
     @Override
     public void onBindViewHolder(VacationViewHolder holder, int position) {
-        if (vacationList != null) {
+        if (position != vacationList.size()) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
             final VacationLite current = vacationList.get(position);
             holder.vacationTitleView.setText(current.title);
@@ -85,21 +87,22 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                     }
                 }
             });
-        } else {
-            //todo metti schermata di caricamento
-            // Dati non pronti, placeholder
         }
     }
 
     @Override
     public int getItemCount() {
         if (vacationList == null) return 0;
-        return vacationList.size();
+        return vacationList.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return VIEW_TYPE_OBJECT_VIEW;
+        if (position == vacationList.size()) {
+            return VIEW_TYPE_FOOTER;
+        } else {
+            return VIEW_TYPE_OBJECT_VIEW;
+        }
     }
 
     public void setListener(IVacationListClickEvents listener) {

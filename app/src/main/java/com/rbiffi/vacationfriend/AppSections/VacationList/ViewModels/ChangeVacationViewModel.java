@@ -20,17 +20,17 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
 
     private VacationFriendRepository repository;
 
-    protected String fieldTitle;
-    protected String fieldPeriodFrom;
-    protected String fieldPeriodTo;
-    protected String fieldPlace;
-    protected List<Participant> fieldParticipants;
-    protected Uri fieldPhoto;
+    private String fieldTitle;
+    private String fieldPeriodFrom;
+    private String fieldPeriodTo;
+    private String fieldPlace;
+    private List<Participant> fieldParticipants;
+    private Uri fieldPhoto;
 
 
-    public ChangeVacationViewModel(@NonNull Application app) {
+    ChangeVacationViewModel(@NonNull Application app) {
         super(app);
-        repository = new VacationFriendRepository(app);
+        repository = VacationFriendRepository.getInstance(app);
 
         //inizializzo i dati
 
@@ -108,7 +108,7 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         repository.insertParticipants(jvps);
     }
 
-    public void updatePartecipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
+    public void setFieldPartecipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
         repository.addListener(listener);
         repository.getVacationParticipants(vacationId);
     }

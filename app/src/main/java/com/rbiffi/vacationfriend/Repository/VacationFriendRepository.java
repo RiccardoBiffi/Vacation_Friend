@@ -18,12 +18,14 @@ import java.util.List;
 public class VacationFriendRepository {
 
     public interface IRepositoryListener {
-        void onInsertComplete(long rowId);
+        void onVacationOperationComplete(long rowId);
 
         void onGetVacationDetailsComplete(Vacation v);
 
         void onGetVacationParticipants(List<Participant> participants);
     }
+
+    private static volatile VacationFriendRepository REPOSITORY = null;
 
     private IVacationDao vacationDao;
     private LiveData<List<VacationLite>> vacationList;
@@ -35,7 +37,8 @@ public class VacationFriendRepository {
 
     private static IRepositoryListener listener;
 
-    public VacationFriendRepository(Application app) {
+    private VacationFriendRepository(Application app) {
+
         VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
         vacationDao = db.getVacationDao(); // prendo dal db il DAO
         participantDao = db.getParticipantDao();
@@ -44,6 +47,17 @@ public class VacationFriendRepository {
         // acquisisco quel che mi interessa dal db
         vacationList = vacationDao.getActiveVacations();
         participantList = participantDao.getAllParticipants();
+    }
+
+    public static VacationFriendRepository getInstance(Application app) {
+        if (REPOSITORY == null) {
+            synchronized (VacationFriendRepository.class) {
+                if (REPOSITORY == null) {
+                    REPOSITORY = new VacationFriendRepository(app);
+                }
+            }
+        }
+        return REPOSITORY;
     }
 
     public LiveData<List<VacationLite>> getActiveVacationList() {
@@ -104,7 +118,7 @@ public class VacationFriendRepository {
         @Override
         protected void onPostExecute(Long aLong) {
             super.onPostExecute(aLong);
-            listener.onInsertComplete(aLong);
+            listener.onVacationOperationComplete(aLong);
         }
     }
 
@@ -178,7 +192,7 @@ public class VacationFriendRepository {
         }
     }
 
-    private static class UpdateAsyncTask extends AsyncTask<Vacation, Void, Void> {
+    private static class UpdateAsyncTask extends AsyncTask<Vacation, Void, Long> {
 
         private IVacationDao asyncDao;
 
@@ -187,9 +201,14 @@ public class VacationFriendRepository {
         }
 
         @Override
-        protected Void doInBackground(Vacation... vacationIds) {
-            asyncDao.insert(vacationIds[0]);
-            return null;
+        protected Long doInBackground(Vacation... vacationIds) {
+            return asyncDao.insert(vacationIds[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            super.onPostExecute(aLong);
+            listener.onVacationOperationComplete(aLong);
         }
     }
 

@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantDialogAdapter;
@@ -53,20 +54,36 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
 
         participantDialogAdapter = new ParticipantDialogAdapter(getContext(), R.layout.dialog_participants_row, new ArrayList<Participant>());
 
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_participants, null);
+        ListView lv = v.findViewById(R.id.dialog_allparticipant_list);
+        Button undoButton = v.findViewById(R.id.undoBottonAction);
+        Button confirmButton = v.findViewById(R.id.saveBottonAction);
+        final ProgressBar progressCircle = v.findViewById(R.id.dialog_participants_progressbar);
+        final View footer = inflater.inflate(R.layout.dialog_participants_footer, null);
+        Button inviteButton = footer.findViewById(R.id.dialog_invite_button);
+
+        footer.setVisibility(View.GONE);
+
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Start InviteContactsActivity", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        progressCircle.setVisibility(View.VISIBLE);
+
         viewModel.getAllParticipants().observe(this, new Observer<List<Participant>>() {
             @Override
             public void onChanged(@Nullable List<Participant> participants) {
                 participantDialogAdapter.setListener(FragmentAddParticipantsDialog.this);
                 participantDialogAdapter.setSelectedParticipants(viewModel.getSelectedParticipants());
                 participantDialogAdapter.updateParticipants(participants);
+                progressCircle.setVisibility(View.GONE);
+                footer.setVisibility(View.VISIBLE);
             }
         });
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_participants, null);
-        ListView lv = v.findViewById(R.id.dialog_allparticipant_list);
-        Button undoButton = v.findViewById(R.id.undoBottonAction);
-        Button confirmButton = v.findViewById(R.id.saveBottonAction);
 
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,14 +114,6 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
             }
         });
 
-        View footer = inflater.inflate(R.layout.dialog_participants_footer, null);
-        Button inviteButton = footer.findViewById(R.id.dialog_invite_button);
-        inviteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Start InviteContactsActivity", Toast.LENGTH_SHORT).show();
-            }
-        });
         lv.addFooterView(footer);
 
         lv.setAdapter(participantDialogAdapter);

@@ -24,7 +24,7 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
 
     public ParticipantsDialogViewModel(@NonNull Application app) {
         super(app);
-        repository = new VacationFriendRepository(app);
+        repository = VacationFriendRepository.getInstance(app);
 
         // inizializzo campi
         allPartecipants = repository.getParticipantList();

@@ -87,7 +87,6 @@
 
         android:text="@string/field_photo_buttontext"
         style="@style/AddFieldBotton"
-        android:focusable="true"
 
         app:layout_constraintBottom_toTopOf="@id/input_photo_choosed"
         app:layout_constraintEnd_toEndOf="parent"

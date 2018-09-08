@@ -25,7 +25,7 @@ public class VacationViewModel extends AndroidViewModel {
 
     public VacationViewModel(@NonNull Application app) {
         super(app);
-        repository = new VacationFriendRepository(app);
+        repository = VacationFriendRepository.getInstance(app);
 
         //inizializzo i dati
         allVacations = repository.getActiveVacationList();

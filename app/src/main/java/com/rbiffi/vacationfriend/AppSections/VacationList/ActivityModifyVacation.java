@@ -8,12 +8,14 @@ import android.os.Bundle;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ModifyVacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityModifyVacation
@@ -42,7 +44,7 @@ public class ActivityModifyVacation
             viewModel.setFieldPeriodFrom(current.period.startDate);
             viewModel.setFieldPeriodTo(current.period.endDate);
             viewModel.setFieldPlace(current.place);
-            viewModel.updatePartecipants(viewModel.getVacationId(), this);
+            viewModel.setFieldPartecipants(viewModel.getVacationId(), this);
             viewModel.setFieldPhoto(current.photo);
         }
     }
@@ -129,25 +131,20 @@ public class ActivityModifyVacation
     }
 
     @Override
-    public void onInsertComplete(long rowId) {
-        //todo aggiorna anche i partecipanti dopo aver completato la modifica, sarebbe onUpdateComplete
-        // fai degli insert che eventualmente fanno il replace
-
-        /*
-        // vacanza inserita correttamente nel DB
-        List<JoinVacationParticipant> jvps = new ArrayList<JoinVacationParticipant>();
+    public void onVacationOperationComplete(long rowId) {
+        // vacanza aggiornata correttamente nel DB
+        List<JoinVacationParticipant> jvps = new ArrayList<>();
         List<Participant> partecipants = viewModel.getFieldParticipants();
         for (Participant part :
                 partecipants) {
             jvps.add(new JoinVacationParticipant(rowId, part.email));
         }
-        viewModel.insertParticipants(jvps);
+        viewModel.insertList(jvps);
 
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
         setResult(RESULT_OK, replyIntent);
         finish(); // restituisce il risultato a chi ha chiamato l'activity
-        */
     }
 
     @Override

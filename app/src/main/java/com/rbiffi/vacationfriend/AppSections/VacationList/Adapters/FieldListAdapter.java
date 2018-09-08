@@ -111,6 +111,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             case Constants.F_TITLE:
                 holder.titleFieldView.setText(viewModel.getFieldTitle());
                 holder.titleFieldView.requestFocus();
+                //todo open keyboard
                 holder.titleFieldView.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -201,7 +202,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
             case Constants.F_PARTECIP:
                 fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, viewModel.getFieldParticipants());
 
-                setPartecipantsListHeader(holder);
+                setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
                 break;
@@ -265,10 +266,11 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         holder.partecipantListView.addFooterView(footer);
     }
 
-    private void setPartecipantsListHeader(FieldViewHolder holder) {
+    private void setParticipantsListHeader(FieldViewHolder holder) {
         View header = inflater.inflate(R.layout.field_partecipants_row, null);
         header.setEnabled(false);
 
+        View participant_row = header.findViewById(R.id.participant_row_element);
         CircleImageView myPicture = header.findViewById(R.id.partecipant_picture);
         TextView myName = header.findViewById(R.id.partecipant_name);
         ImageButton myDeleteButton = header.findViewById(R.id.remove_partic_button);
@@ -277,6 +279,9 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         myPicture.setImageURI(resourceToURI(appContext, R.drawable.average_man));
         myName.setText(R.string.my_self);
         myDeleteButton.setVisibility(View.GONE);
+        participant_row.setFocusable(false);
+        participant_row.setClickable(false);
+
         holder.partecipantListView.addHeaderView(header);
     }
 
