@@ -116,6 +116,7 @@ public class FragmentAddParticipantsDialog extends DialogFragment implements Par
 
         lv.addFooterView(footer);
 
+
         lv.setAdapter(participantDialogAdapter);
         builder.setView(v);
 

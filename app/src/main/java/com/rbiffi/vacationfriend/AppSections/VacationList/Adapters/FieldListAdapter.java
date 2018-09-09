@@ -360,7 +360,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             partecipantListView = itemView.findViewById(R.id.input_partes_list);
         }
-
-
     }
+
 }

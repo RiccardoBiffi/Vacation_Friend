@@ -20,7 +20,9 @@ public class VacationViewModel extends AndroidViewModel {
 
     private VacationFriendRepository repository;
 
-    private LiveData<List<VacationLite>> allVacations;
+    private LiveData<List<VacationLite>> allVacations; // todo separalo in 3 liste
+
+    private LiveData<List<VacationLite>> storedVacation;
     private Vacation selected;
 
     public VacationViewModel(@NonNull Application app) {
@@ -28,12 +30,18 @@ public class VacationViewModel extends AndroidViewModel {
         repository = VacationFriendRepository.getInstance(app);
 
         //inizializzo i dati
-        allVacations = repository.getActiveVacationList();
+        allVacations = repository.getActiveVacationList(); // todo separalo in 3 liste
+
+        storedVacation = repository.getStoredVacation();
         selected = null;
     }
 
     public LiveData<List<VacationLite>> getAllVacations() {
         return allVacations;
+    }
+
+    public LiveData<List<VacationLite>> getStoredVacation() {
+        return storedVacation;
     }
 
     public void delete(long v) {

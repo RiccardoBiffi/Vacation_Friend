@@ -18,21 +18,23 @@ import java.util.List;
 public class VacationFriendRepository {
 
     public interface IRepositoryListener {
+
         void onVacationOperationComplete(long rowId);
 
         void onGetVacationDetailsComplete(Vacation v);
 
         void onGetVacationParticipants(List<Participant> participants);
-    }
 
+    }
     private static volatile VacationFriendRepository REPOSITORY = null;
 
     private IVacationDao vacationDao;
-    private LiveData<List<VacationLite>> vacationList;
 
+    private LiveData<List<VacationLite>> vacationList; // todo separalo in 3 liste
+    private LiveData<List<VacationLite>> storedVacation;
     private IParticipantDao participantDao;
-    private LiveData<List<Participant>> participantList;
 
+    private LiveData<List<Participant>> participantList;
     private IJoinVacationParticipantDao jVacationParticipantDao;
 
     private static IRepositoryListener listener;
@@ -46,6 +48,7 @@ public class VacationFriendRepository {
 
         // acquisisco quel che mi interessa dal db
         vacationList = vacationDao.getActiveVacations();
+        storedVacation = vacationDao.getAchievedVacations();
         participantList = participantDao.getAllParticipants();
     }
 
@@ -62,6 +65,10 @@ public class VacationFriendRepository {
 
     public LiveData<List<VacationLite>> getActiveVacationList() {
         return vacationList;
+    }
+
+    public LiveData<List<VacationLite>> getStoredVacation() {
+        return storedVacation;
     }
 
     public LiveData<List<Participant>> getParticipantList() {

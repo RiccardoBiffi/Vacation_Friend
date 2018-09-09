@@ -54,4 +54,5 @@
     <string name="ph_user_email">lastname.name@domain.com</string>
     <string name="button_remove_participant">Togli partecipante</string>
     <string name="ph_vacation_name">Vacation name</string>
+    <string name="vl_unachieve">Ripristina</string>
 </resources>

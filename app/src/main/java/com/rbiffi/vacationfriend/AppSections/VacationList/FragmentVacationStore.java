@@ -1,7 +1,6 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
@@ -22,8 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -38,12 +34,13 @@ import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.List;
 
-public class FragmentRecenti
+public class FragmentVacationStore
         extends Fragment
         implements
         IVacationListClickEvents,
         VacationFriendRepository.IRepositoryListener {
 
+    // todo queste 2 costanti probabilmente non servono
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
 
@@ -51,20 +48,15 @@ public class FragmentRecenti
 
     private View emptyListTutorial;
     private ProgressBar progressBar;
-    private FloatingActionButton floatingButton;
 
     private RecyclerView vacationList;
     private VacationListAdapter vacationAdapter;
     private RecyclerView.LayoutManager vacationLayout;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // non posso passare il layout con setContentView, devo usare i parametri in input
-        // l'inflater trasforma xml in codice java a run time
-        //container è il padre del fragment, si arrangia lui a sostituirlo
-        return inflater.inflate(R.layout.fragment_recenti, container, false);
+        return inflater.inflate(R.layout.fragment_archivio, container, false);
     }
 
     @Override
@@ -76,37 +68,28 @@ public class FragmentRecenti
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        emptyListTutorial = getActivity().findViewById(R.id.empty_vacation_list);
-        progressBar = getActivity().findViewById(R.id.fragment_vacationlist_progressbar);
-        floatingButton = getActivity().findViewById(R.id.floatingActionButton);
+        emptyListTutorial = getActivity().findViewById(R.id.empty_stored_list);
+        progressBar = getActivity().findViewById(R.id.fragment_stored_vacationlist_progressbar);
 
         setupListWithAdapter();
-        setupFloatingButton();
-    }
-
-    private void setupFloatingButton() {
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityNewVacation.class);
-                startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
-            }
-        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //todo valuta se rimuovere
+        /*
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
             // todo accedi direttamente alla vacanza appena creata
         }
         if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
             // todo la vacanza è stata modificata, non ci accedo
         }
+        */
     }
 
     private void setupListWithAdapter() {
-        vacationList = getView().findViewById(R.id.vacationList);
+        vacationList = getView().findViewById(R.id.vacationStoredList);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
         vacationAdapter = new VacationListAdapter(getContext());
@@ -117,10 +100,12 @@ public class FragmentRecenti
         vacationList.setLayoutManager(vacationLayout);
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
+        //todo devo salvare le vacanze archiviate
         viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
-        viewModel.getAllVacations().observe(this, new Observer<List<VacationLite>>() {
+        //todo devo osservare le vacanze archiviate
+        viewModel.getStoredVacation().observe(this, new Observer<List<VacationLite>>() {
             @Override
             public void onChanged(@Nullable List<VacationLite> vacationLites) {
                 if (vacationLites != null && !vacationLites.isEmpty()) {
@@ -128,10 +113,6 @@ public class FragmentRecenti
                     emptyListTutorial.setVisibility(View.GONE);
                 } else {
                     emptyListTutorial.setVisibility(View.VISIBLE);
-                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
-                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
-                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
-                    arrow.startAnimation(rotation);
                 }
                 progressBar.setVisibility(View.GONE);
                 vacationAdapter.setVacations(vacationLites);
@@ -143,7 +124,7 @@ public class FragmentRecenti
 
     @Override
     public void onVacationClick(VacationLite vacation) {
-        Toast.makeText(getContext(), "Vacanza" + vacation.id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Apertura vacanza archiviata " + vacation.id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -158,7 +139,7 @@ public class FragmentRecenti
         setActionsOnOptions(vacation, popup);
 
         Menu menu = popup.getMenu();
-        popup.getMenuInflater().inflate(R.menu.vacation_menu, menu);
+        popup.getMenuInflater().inflate(R.menu.vacation_stored_menu, menu);
         MenuPopupHelper menuHelper = showIconsOnMenu(view, (MenuBuilder) menu);
 
         menuHelper.show();
@@ -178,20 +159,14 @@ public class FragmentRecenti
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.actionModifica:
-                        Intent intent = new Intent(getActivity(), ActivityModifyVacation.class);
-                        intent.putExtra("selectedVacation", viewModel.getSelectedVacation());
-                        startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
-                        return true;
-
-                    case R.id.actionArchivia:
+                    case R.id.action_stored_dearchivia:
                         AlertDialog.Builder builderArchivia = new AlertDialog.Builder(getActivity());
-                        builderArchivia.setTitle("Vuoi archiviare " + vacation.title + "?");
-                        builderArchivia.setMessage(R.string.dialog_vacation_store_message);
+                        builderArchivia.setTitle("Vuoi ripristinare " + vacation.title + "?");
                         builderArchivia.setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                viewModel.store(vacation.id);
-                                Toast.makeText(getContext(), vacation.title + " archiviata", Toast.LENGTH_SHORT).show();
+                                //todo unstore vacanza
+                                //viewModel.store(vacation.id);
+                                Toast.makeText(getContext(), vacation.title + " ripristinata", Toast.LENGTH_SHORT).show();
                             }
                         });
                         builderArchivia.setNegativeButton(R.string.button_ignore, new DialogInterface.OnClickListener() {
@@ -203,7 +178,7 @@ public class FragmentRecenti
                         builderArchivia.create().show();
                         return true;
 
-                    case R.id.actionElimina:
+                    case R.id.action_stored_elimina:
                         AlertDialog.Builder builderElimina = new AlertDialog.Builder(getActivity());
                         builderElimina.setTitle("Vuoi eliminare " + vacation.title + "?");
                         builderElimina.setMessage(R.string.dialog_vacation_delete_message);

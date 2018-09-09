@@ -179,9 +179,9 @@ public class ActivityVacationList extends AppCompatActivity {
             // riempie l'interfaccia con gli elementi che voglio, passandogli il fragment giusto
             switch (position) {
                 case 0:
-                    return new FragmentRecenti();
+                    return new FragmentVacationRecent();
                 case 1:
-                    return new FragmentArchivio();
+                    return new FragmentVacationStore();
                 default:
                     return null;
             }

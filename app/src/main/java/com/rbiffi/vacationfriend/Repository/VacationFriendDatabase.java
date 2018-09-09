@@ -84,9 +84,14 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
         }
 
         private void initializeVacations() {
-            Period p = new Period("25/08/2017", "02/09/2017");
+            Period p = new Period("25/08/2018", "02/09/2018");
             Uri photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
             Vacation v = new Vacation("Croazia 2018", p, "Rovigno", photo, false);
+            vDao.insert(v);
+
+            p = new Period("25/08/2017", "02/09/2017");
+            photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo1);
+            v = new Vacation("Croazia 2017", p, "Rovigno", photo, true);
             vDao.insert(v);
         }
 
