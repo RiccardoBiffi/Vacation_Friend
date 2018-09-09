@@ -38,7 +38,7 @@ public interface IVacationDao {
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
             "WHERE isAchieved = 1")
-    List<VacationLite> getAchievedVacations();
+    LiveData<List<VacationLite>> getAchievedVacations();
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +

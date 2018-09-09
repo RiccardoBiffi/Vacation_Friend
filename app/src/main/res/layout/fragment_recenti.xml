@@ -36,7 +36,7 @@
         />
 
     <include
-        android:id="@+id/fragment_vacationlist_progressbar"
+        android:id="@+id/fragment_recent_vacationlist_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

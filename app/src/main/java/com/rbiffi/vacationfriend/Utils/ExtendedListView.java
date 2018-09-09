@@ -26,4 +26,5 @@ public class ExtendedListView extends ListView {
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
+
 }
