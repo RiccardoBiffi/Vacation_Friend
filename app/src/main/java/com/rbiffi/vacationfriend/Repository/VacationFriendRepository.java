@@ -25,18 +25,21 @@ public class VacationFriendRepository {
 
         void onGetVacationParticipants(List<Participant> participants);
 
+
     }
     private static volatile VacationFriendRepository REPOSITORY = null;
-
     private IVacationDao vacationDao;
 
-    private LiveData<List<VacationLite>> vacationList; // todo separalo in 3 liste
+    private LiveData<List<VacationLite>> vacationListNow;
+
+    private LiveData<List<VacationLite>> vacationListNext;
+    private LiveData<List<VacationLite>> vacationListPrevious;
     private LiveData<List<VacationLite>> storedVacation;
+
     private IParticipantDao participantDao;
-
     private LiveData<List<Participant>> participantList;
-    private IJoinVacationParticipantDao jVacationParticipantDao;
 
+    private IJoinVacationParticipantDao jVacationParticipantDao;
     private static IRepositoryListener listener;
 
     private VacationFriendRepository(Application app) {
@@ -47,7 +50,9 @@ public class VacationFriendRepository {
         jVacationParticipantDao = db.getJoinVacationParticipantDao();
 
         // acquisisco quel che mi interessa dal db
-        vacationList = vacationDao.getActiveVacations();
+        vacationListNow = vacationDao.getCurrentVacations();
+        vacationListNext = vacationDao.getNextVacations();
+        vacationListPrevious = vacationDao.getEndedVacations();
         storedVacation = vacationDao.getAchievedVacations();
         participantList = participantDao.getAllParticipants();
     }
@@ -63,8 +68,16 @@ public class VacationFriendRepository {
         return REPOSITORY;
     }
 
-    public LiveData<List<VacationLite>> getActiveVacationList() {
-        return vacationList;
+    public LiveData<List<VacationLite>> getVacationListNow() {
+        return vacationListNow;
+    }
+
+    public LiveData<List<VacationLite>> getVacationListNext() {
+        return vacationListNext;
+    }
+
+    public LiveData<List<VacationLite>> getVacationListPrevious() {
+        return vacationListPrevious;
     }
 
     public LiveData<List<VacationLite>> getStoredVacation() {

@@ -3,21 +3,39 @@ package com.rbiffi.vacationfriend.Repository.Entities_POJOs;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Period implements Parcelable {
-    public String startDate;
-    public String endDate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Period(String startDate, String endDate) {
+public class Period implements Parcelable {
+
+    // todo rendile date
+    // altrimenti da stringhe non posso fare le query come "prendi vacanze in corso"
+    public Date startDate;
+    public Date endDate;
+
+    public Period(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
+    public Period(String startDate, String endDate) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.startDate = format.parse(startDate);
+            this.endDate = format.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     // per rendere l'oggetto Parcelable
 
     protected Period(Parcel in) {
-        startDate = in.readString();
-        endDate = in.readString();
+        // Leggo il long e lo converto in data
+        startDate = new Date(in.readLong());
+        endDate = new Date(in.readLong());
     }
 
     public static final Creator<Period> CREATOR = new Creator<Period>() {
@@ -39,7 +57,10 @@ public class Period implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(startDate);
-        dest.writeString(endDate);
+        // Passo il Long della data. Lo converto quando lo leggo.
+        dest.writeLong(startDate.getTime());
+        dest.writeLong(endDate.getTime());
     }
+
+
 }

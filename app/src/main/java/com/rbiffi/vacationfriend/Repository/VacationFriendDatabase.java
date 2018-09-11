@@ -27,7 +27,7 @@ import com.rbiffi.vacationfriend.Utils.Converters;
                 Participant.class,
                 JoinVacationParticipant.class
         },
-        version = 17,
+        version = 19,
         exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -84,7 +84,7 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
         }
 
         private void initializeVacations() {
-            Period p = new Period("25/08/2018", "02/09/2018");
+            Period p = new Period("30/08/2018", "15/09/2018");
             Uri photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
             Vacation v = new Vacation("Croazia 2018", p, "Rovigno", photo, false);
             vDao.insert(v);
@@ -92,6 +92,11 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
             p = new Period("25/08/2017", "02/09/2017");
             photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo1);
             v = new Vacation("Croazia 2017", p, "Rovigno", photo, true);
+            vDao.insert(v);
+
+            p = new Period("25/08/2019", "02/09/2019");
+            photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo2);
+            v = new Vacation("Croazia 2019", p, "Rovigno", photo, true);
             vDao.insert(v);
         }
 

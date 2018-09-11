@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListStoredAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
@@ -50,7 +50,7 @@ public class FragmentVacationStore
     private ProgressBar progressBar;
 
     private RecyclerView vacationList;
-    private VacationListAdapter vacationAdapter;
+    private VacationListStoredAdapter vacationAdapter; // todo devo definirne un'altro
     private RecyclerView.LayoutManager vacationLayout;
 
     @Nullable
@@ -92,7 +92,7 @@ public class FragmentVacationStore
         vacationList = getView().findViewById(R.id.vacationStoredList);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
-        vacationAdapter = new VacationListAdapter(getContext());
+        vacationAdapter = new VacationListStoredAdapter(getContext());
         vacationAdapter.setListener(this);
         vacationList.setAdapter(vacationAdapter);
 
