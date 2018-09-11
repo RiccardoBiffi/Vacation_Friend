@@ -22,22 +22,26 @@ public interface IVacationDao {
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
-            "WHERE date('now') < :startDate")
-    List<VacationLite> getNextVacations(String startDate);
+            "WHERE date('now') BETWEEN startDate AND endDate " +
+            "AND isAchieved = 0")
+    LiveData<List<VacationLite>> getCurrentVacations();
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
-            "WHERE date('now') BETWEEN :startDate AND :endDate")
-    List<VacationLite> getCurrentVacations(String startDate, String endDate);
+            "WHERE date('now') < startDate " +
+            "AND isAchieved = 0")
+    LiveData<List<VacationLite>> getNextVacations();
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
-            "WHERE date('now') > :endDate")
-    List<VacationLite> getEndedVacations(String endDate);
+            "WHERE date('now') > endDate " +
+            "AND isAchieved = 0")
+    LiveData<List<VacationLite>> getEndedVacations();
 
     @Query("SELECT id, title, startDate, endDate, photo " +
             "FROM Vacation " +
-            "WHERE isAchieved = 1")
+            "WHERE isAchieved = 1 " +
+            "ORDER BY endDate DESC")
     LiveData<List<VacationLite>> getAchievedVacations();
 
     @Query("SELECT id, title, startDate, endDate, photo " +

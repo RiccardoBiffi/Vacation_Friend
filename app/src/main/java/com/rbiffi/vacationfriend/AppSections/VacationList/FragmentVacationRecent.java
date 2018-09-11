@@ -121,21 +121,33 @@ public class FragmentVacationRecent
         viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
-        viewModel.getAllVacations().observe(this, new Observer<List<VacationLite>>() {
+        viewModel.getVacationsNow().observe(this, new Observer<List<VacationLite>>() {
             @Override
-            public void onChanged(@Nullable List<VacationLite> vacationLites) {
-                if (vacationLites != null && !vacationLites.isEmpty()) {
-                    //todo loader
-                    emptyListTutorial.setVisibility(View.GONE);
-                } else {
-                    emptyListTutorial.setVisibility(View.VISIBLE);
-                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
-                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
-                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
-                    arrow.startAnimation(rotation);
-                }
-                progressBar.setVisibility(View.GONE);
-                vacationAdapter.setVacations(vacationLites);
+            public void onChanged(@Nullable final List<VacationLite> vacationsNow) {
+                viewModel.getVacationsNext().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<VacationLite> vacationsNext) {
+                        viewModel.getVacationsPrevious().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
+                            @Override
+                            public void onChanged(@Nullable List<VacationLite> vacationsPrevious) {
+                                if (vacationsNow != null && !vacationsNow.isEmpty() ||
+                                        vacationsNext != null && !vacationsNext.isEmpty() ||
+                                        vacationsPrevious != null && !vacationsPrevious.isEmpty()) {
+                                    emptyListTutorial.setVisibility(View.GONE);
+                                } else {
+                                    emptyListTutorial.setVisibility(View.VISIBLE);
+                                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
+                                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
+                                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
+                                    arrow.startAnimation(rotation);
+                                }
+                                progressBar.setVisibility(View.GONE);
+                                vacationAdapter.setAllVacations(vacationsNow, vacationsNext, vacationsPrevious);
+                            }
+                        });
+                    }
+                });
+
             }
         });
 

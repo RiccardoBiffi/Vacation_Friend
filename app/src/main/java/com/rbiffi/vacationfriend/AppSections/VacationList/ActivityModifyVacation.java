@@ -15,6 +15,8 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +43,9 @@ public class ActivityModifyVacation
         if (viewModel.getVacationId() == ModifyVacationViewModel.FIRST_EXECUTION && current != null) {
             viewModel.setVacationId(current.id);
             viewModel.setFieldTitle(current.title);
-            viewModel.setFieldPeriodFrom(current.period.startDate);
-            viewModel.setFieldPeriodTo(current.period.endDate);
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
+            viewModel.setFieldPeriodTo(format.format(current.period.endDate));
             viewModel.setFieldPlace(current.place);
             viewModel.setFieldPartecipants(viewModel.getVacationId(), this);
             viewModel.setFieldPhoto(current.photo);

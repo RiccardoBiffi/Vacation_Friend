@@ -101,9 +101,6 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     @Override
     public void onBindViewHolder(final FieldViewHolder holder, int position) {
-        //todo assegna una precompilazione dei campi (se modifica) + connetti eventi a pulsanti
-        // tutto vuoto per la new. Dati presi dal caller per la modifica
-
         final String field = fieldList.get(position);
         switch (field) {
 

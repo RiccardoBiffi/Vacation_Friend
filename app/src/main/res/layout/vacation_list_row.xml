@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/vacation_list_row_el"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
@@ -35,7 +37,7 @@
             >
 
             <ImageView
-                android:id="@+id/vacationImage"
+                android:id="@+id/vacation_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -59,12 +61,12 @@
                 android:textSize="20sp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-                app:layout_constraintBottom_toBottomOf="@id/vacationImage"
-                app:layout_constraintEnd_toStartOf="@id/vacationMenu"
-                app:layout_constraintStart_toStartOf="@id/vacationImage" />
+                app:layout_constraintBottom_toBottomOf="@id/vacation_image"
+                app:layout_constraintEnd_toStartOf="@id/vacation_oveflow_menu"
+                app:layout_constraintStart_toStartOf="@id/vacation_image" />
 
             <ImageButton
-                android:id="@+id/vacationMenu"
+                android:id="@+id/vacation_oveflow_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
 
@@ -76,8 +78,8 @@
                 android:contentDescription="@string/vlOpzioniAcc"
 
                 android:src="@drawable/ic_more_vert_white_24dp"
-                app:layout_constraintBottom_toBottomOf="@id/vacationImage"
-                app:layout_constraintEnd_toEndOf="@id/vacationImage"
+                app:layout_constraintBottom_toBottomOf="@id/vacation_image"
+                app:layout_constraintEnd_toEndOf="@id/vacation_image"
                 app:layout_constraintStart_toEndOf="@id/vacation_title"
                 app:layout_constraintTop_toTopOf="@id/vacation_title" />
 
