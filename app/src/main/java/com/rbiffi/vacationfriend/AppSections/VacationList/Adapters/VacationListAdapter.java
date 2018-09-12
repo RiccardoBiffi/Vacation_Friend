@@ -68,37 +68,47 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     public void onBindViewHolder(VacationViewHolder holder, int position) {
         if (isHeader(position)) {
             if (position == 0) {
-                holder.vacationHeaderView.setText(R.string.vacationlist_header_now);
-                if (vacationListNow.size() == 0) {
-                    holder.vacationHeaderView.setVisibility(View.GONE);
+                if (vacationListNow.size() == 0 && vacationListNext.size() == 0) {
+                    holder.vacationHeaderView.setText(R.string.vacationlist_header_previous);
+                } else if (vacationListNow.size() == 0) {
+                    holder.vacationHeaderView.setText(R.string.vacationlist_header_next);
                 } else {
-                    holder.vacationHeaderView.setVisibility(View.VISIBLE);
+                    holder.vacationHeaderView.setText(R.string.vacationlist_header_now);
                 }
+
             } else if (position == vacationListNow.size() + 1) {
-                holder.vacationHeaderView.setText(R.string.vacationlist_header_next);
                 if (vacationListNext.size() == 0) {
-                    holder.vacationHeaderView.setVisibility(View.GONE);
+                    holder.vacationHeaderView.setText(R.string.vacationlist_header_previous);
                 } else {
-                    holder.vacationHeaderView.setVisibility(View.VISIBLE);
+                    holder.vacationHeaderView.setText(R.string.vacationlist_header_next);
                 }
-            } else {
+
+            } else { // ultimo header
                 holder.vacationHeaderView.setText(R.string.vacationlist_header_previous);
-                if (vacationListPrevious.size() == 0) {
-                    holder.vacationHeaderView.setVisibility(View.GONE);
-                } else {
-                    holder.vacationHeaderView.setVisibility(View.VISIBLE);
-                }
             }
+
         } else if (isFooter(position)) {
             // do nothing
+
         } else {
             VacationLite current;
+            int elPosition;
             if (isNowList(position))
                 current = vacationListNow.get(position - 1);
-            else if (isNextList(position))
-                current = vacationListNext.get(position - vacationListNow.size() - 2);
-            else
-                current = vacationListPrevious.get(position - vacationListNow.size() - vacationListNext.size() - 3);
+
+            else if (isNextList(position)) {
+                elPosition = position - vacationListNow.size();
+                elPosition -= vacationListNow.isEmpty() ? 1 : 2;
+                current = vacationListNext.get(elPosition);
+
+            } else { // isPreviousList
+                elPosition = position - vacationListNow.size() - vacationListNext.size();
+                elPosition -=
+                        vacationListNow.isEmpty() && vacationListNext.isEmpty() ? 1 :
+                                vacationListNow.isEmpty() || vacationListNext.isEmpty() ? 2 :
+                                        3;
+                current = vacationListPrevious.get(elPosition);
+            }
 
             final VacationLite finalVacation = current;
             holder.vacationTitleView.setText(current.title);
@@ -138,12 +148,12 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     }
 
     private boolean isNextList(int position) {
-        return position > vacationListNow.size() + 1 && position <= vacationListNow.size() + vacationListNext.size() + 1;
+        if (vacationListNow.isEmpty()) return position <= vacationListNext.size();
+        return position > vacationListNow.size() + 1 && position <= vacationListNow.size() + 1 + vacationListNext.size();
     }
 
     @Override
     public int getItemCount() {
-        //todo al momento questa logica non è corretta. Modificare anche il binder
         int itemCount = 0;
         if (vacationListNow == null && vacationListNext == null && vacationListPrevious == null)
             return itemCount;
@@ -165,12 +175,44 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         return VIEW_TYPE_OBJECT_VIEW;
     }
 
-    private boolean isFooter(int position) {
-        return position == vacationListNow.size() + vacationListNext.size() + vacationListPrevious.size() + 3;
+    private boolean isHeader(int position) {
+        if (vacationListNow.isEmpty() && vacationListNext.isEmpty() && vacationListPrevious.isEmpty())
+            return false;
+
+        if (vacationListNow.isEmpty() && vacationListNext.isEmpty() ||
+                vacationListNow.isEmpty() && vacationListPrevious.isEmpty() ||
+                vacationListNext.isEmpty() && vacationListPrevious.isEmpty())
+            return position == 0;
+
+        if (vacationListNow.isEmpty())
+            return position == 0 || position == vacationListNext.size() + 1;
+        if (vacationListNext.isEmpty())
+            return position == 0 || position == vacationListNow.size() + 1;
+        if (vacationListPrevious.isEmpty())
+            return position == 0 || position == vacationListNow.size() + 1;
+
+        return position == 0 || position == vacationListNow.size() + 1 || position == vacationListNow.size() + vacationListNext.size() + 2;
     }
 
-    private boolean isHeader(int position) {
-        return position == 0 || position == vacationListNow.size() + 1 || position == vacationListNow.size() + vacationListNext.size() + 2;
+    private boolean isFooter(int position) {
+        if (vacationListNow.isEmpty() && vacationListNext.isEmpty() && vacationListPrevious.isEmpty())
+            return false;
+
+        if (vacationListNow.isEmpty() && vacationListNext.isEmpty())
+            return position == vacationListPrevious.size() + 1;
+        if (vacationListNow.isEmpty() && vacationListPrevious.isEmpty())
+            return position == vacationListNext.size() + 1;
+        if (vacationListNext.isEmpty() && vacationListPrevious.isEmpty())
+            return position == vacationListNow.size() + 1;
+
+        if (vacationListNow.isEmpty())
+            return position == vacationListNext.size() + vacationListPrevious.size() + 2;
+        if (vacationListNext.isEmpty())
+            return position == vacationListNow.size() + vacationListPrevious.size() + 2;
+        if (vacationListPrevious.isEmpty())
+            return position == vacationListNow.size() + vacationListNext.size() + 2;
+
+        return position == vacationListNow.size() + vacationListNext.size() + vacationListPrevious.size() + 3;
     }
 
     public void setListener(IVacationListClickEvents listener) {

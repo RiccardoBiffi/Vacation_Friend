@@ -31,6 +31,7 @@ public class ActivityModifyVacation
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     protected void getActivityViewModel() {
         viewModel = ViewModelProviders.of(this).get(ModifyVacationViewModel.class);
@@ -116,6 +117,23 @@ public class ActivityModifyVacation
     protected void setupActivityButtons() {
         super.setupActivityButtons();
         confirm.setText(R.string.button_save);
+    }
+
+    @Override
+    protected int checkFormValidity() {
+        if (viewModel.getFieldTitle().isEmpty()) {
+            return 0;
+        }
+
+        if (viewModel.getFieldPeriodFrom().isEmpty() ||
+                viewModel.getFieldPeriodTo().isEmpty()) {
+            return 1;
+        }
+
+        if (!checkDateConsistency(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo()))
+            return 1;
+
+        return -1;
     }
 
     @Override

@@ -55,11 +55,11 @@
     <string name="button_remove_participant">Togli partecipante</string>
     <string name="ph_vacation_name">Vacation name</string>
     <string name="vl_unachieve">Ripristina</string>
-    <string name="vacation_list_header_now">In corso</string>
-    <string name="vacation_list_header_next">Prossime</string>
-    <string name="vacation_list_header_previous">Concluse</string>
     <string name="ph_vacationlist_header">Header</string>
     <string name="vacationlist_header_now">In corso</string>
     <string name="vacationlist_header_next">Prossime</string>
     <string name="vacationlist_header_previous">Concluse</string>
+    <string name="err_vacationlist_title">Dai un titolo alla tua vacanza</string>
+    <string name="err_vacationlist_date_missing">Inserisci una data</string>
+    <string name="err_vacationlist_date_wrong">La periodo non è inserito correttamente</string>
 </resources>

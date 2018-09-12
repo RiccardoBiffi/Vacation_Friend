@@ -65,8 +65,13 @@ public interface IVacationDao {
             "WHERE id = :vacationId")
     void storeFromID(long vacationId);
 
+    @Query("UPDATE Vacation " +
+            "SET isAchieved = 0 " +
+            "WHERE id = :vacationId")
+    void unstoreFromID(Long vacationId);
 
 //DELETE
+
     @Delete
     void delete(Vacation vacation);
 
