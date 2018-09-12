@@ -26,22 +26,22 @@ public class VacationFriendRepository {
         void onGetVacationParticipants(List<Participant> participants);
 
 
+
     }
     private static volatile VacationFriendRepository REPOSITORY = null;
     private IVacationDao vacationDao;
-
     private LiveData<List<VacationLite>> vacationListNow;
 
     private LiveData<List<VacationLite>> vacationListNext;
+
     private LiveData<List<VacationLite>> vacationListPrevious;
     private LiveData<List<VacationLite>> storedVacation;
-
     private IParticipantDao participantDao;
+
     private LiveData<List<Participant>> participantList;
-
     private IJoinVacationParticipantDao jVacationParticipantDao;
-    private static IRepositoryListener listener;
 
+    private static IRepositoryListener listener;
     private VacationFriendRepository(Application app) {
 
         VacationFriendDatabase db = VacationFriendDatabase.getDatabase(app); // prendo l'istanza del db
@@ -102,6 +102,10 @@ public class VacationFriendRepository {
 
     public void store(Long vacationId) {
         new StoreAsyncTask(vacationDao).execute(vacationId);
+    }
+
+    public void unstore(long vacationId) {
+        new UnstoreAsyncTask(vacationDao).execute(vacationId);
     }
 
     public void getVacationDetails(long vId) {
@@ -171,6 +175,21 @@ public class VacationFriendRepository {
         @Override
         protected Void doInBackground(Long... vacationIds) {
             asyncDao.storeFromID(vacationIds[0]);
+            return null;
+        }
+    }
+
+    private static class UnstoreAsyncTask extends AsyncTask<Long, Void, Void> {
+
+        private IVacationDao asyncDao;
+
+        UnstoreAsyncTask(IVacationDao vacationDao) {
+            asyncDao = vacationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Long... vacationIds) {
+            asyncDao.unstoreFromID(vacationIds[0]);
             return null;
         }
     }

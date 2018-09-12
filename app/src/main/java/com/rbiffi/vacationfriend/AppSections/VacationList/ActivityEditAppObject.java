@@ -17,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
@@ -30,7 +32,11 @@ import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public abstract class ActivityEditAppObject
@@ -52,6 +58,10 @@ public abstract class ActivityEditAppObject
 
     protected Button vacationImageAddButton; // todo valuta se rimuoverli da qua
     protected ImageButton vacationImageButton; // fanno parte dell'adapter, photo field
+    protected Button addParticipantsButton;
+    protected TextView vacationFieldTitle;
+    protected TextView vacationFieldPeriodFrom;
+    protected TextView vacationFieldPeriodTo;
 
     protected RecyclerView vacationFieldsList;
     protected FieldListAdapter fieldListAdapter;
@@ -72,8 +82,11 @@ public abstract class ActivityEditAppObject
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo valida i campi obbligatori e gli altri
-                collectAndSaveObject();
+                int valid = checkFormValidity();
+                if (isFormValid(valid))
+                    collectAndSaveObject();
+                else
+                    scrollToTop(valid);
             }
         });
 
@@ -83,6 +96,37 @@ public abstract class ActivityEditAppObject
                 finish();
             }
         });
+    }
+
+    private boolean isFormValid(int valid) {
+        return valid < 0;
+    }
+
+    protected abstract int checkFormValidity();
+
+    private void scrollToTop(final int position) {
+        vacationFieldsList.post(new Runnable() {
+            @Override
+            public void run() {
+                vacationFieldsList.smoothScrollToPosition(position);
+                if (position == 0) {
+                    vacationFieldTitle.setError(getString(R.string.err_vacationlist_title));
+                } else if (position == 1) {
+                    if (!vacationFieldPeriodFrom.getText().toString().isEmpty())
+                        vacationFieldPeriodTo.setError(getString(R.string.err_vacationlist_date_wrong));
+
+                    if (!vacationFieldPeriodTo.getText().toString().isEmpty())
+                        vacationFieldPeriodFrom.setError(getString(R.string.err_vacationlist_date_wrong));
+
+                    if (vacationFieldPeriodFrom.getText().toString().isEmpty() &&
+                            vacationFieldPeriodTo.getText().toString().isEmpty()) {
+                        vacationFieldPeriodFrom.setError(getString(R.string.err_vacationlist_date_missing));
+                        vacationFieldPeriodTo.setError(getString(R.string.err_vacationlist_date_missing));
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -197,16 +241,63 @@ public abstract class ActivityEditAppObject
         return true;
     }
 
+    public void setVacationFieldTitle(EditText titleView) {
+        this.vacationFieldTitle = titleView;
+    }
+
+    public void setVacationFieldPeriod(EditText periodFromView, EditText periodToView) {
+        this.vacationFieldPeriodFrom = periodFromView;
+        this.vacationFieldPeriodTo = periodToView;
+    }
+
     @Override
-    public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
-        if (hasFocus) {
-            hideKeyboard(this);
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dateDialog = new DatePickerDialog(this, dateListener, year, month, day);
-            dateDialog.show();
+    public void onDateFocus(final TextView date, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
+        hideKeyboard(this);
+        date.setError(null);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dateDialog = new DatePickerDialog(this, dateListener, year, month, day);
+        dateDialog.show();
+    }
+
+    @Override
+    public void checkDate(TextView date) {
+        if (date.getText().toString().isEmpty()) {
+            date.setError(getString(R.string.err_vacationlist_title));
+        } else {
+            date.setError(null);
         }
+    }
+
+    @Override
+    public void checkPeriodConsistency(TextView periodFrom, TextView periodTo) {
+        if (!periodFrom.getText().toString().isEmpty() &&
+                !periodTo.getText().toString().isEmpty()
+                ) {
+            boolean consistent = checkDateConsistency(periodFrom.getText().toString(), periodTo.getText().toString());
+
+            if (!consistent) {
+                periodFrom.setError(getString(R.string.err_vacationlist_date_wrong));
+                periodTo.setError(getString(R.string.err_vacationlist_date_wrong));
+            } else {
+                periodFrom.setError(null);
+                periodTo.setError(null);
+            }
+        }
+    }
+
+    protected boolean checkDateConsistency(String periodFrom, String periodTo) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        try {
+            startDate = format.parse(periodFrom);
+            endDate = format.parse(periodTo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return startDate.compareTo(endDate) <= 0;
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -232,6 +323,17 @@ public abstract class ActivityEditAppObject
     }
 
     @Override
+    public void onAddParticipantClick(View button, List<Participant> partecipants) {
+        addParticipantsButton = (Button) button;
+        hideKeyboard(this);
+        ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
+        pdvm.setSelectedParticipants(partecipants);
+        FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
+        dialogFragment.setSelectedParticipants(partecipants);
+        dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
+    }
+
+    @Override
     public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
         saveParticipantsAndUpdateAdapter(selectedParticipants);
         dialog.dismiss();
@@ -242,16 +344,6 @@ public abstract class ActivityEditAppObject
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
-    }
-
-    @Override
-    public void onAddParticipantClick(View button, List<Participant> partecipants) {
-        hideKeyboard(this);
-        ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
-        pdvm.setSelectedParticipants(partecipants);
-        FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
-        dialogFragment.setSelectedParticipants(partecipants);
-        dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
     }
 
     @Override
@@ -306,5 +398,4 @@ public abstract class ActivityEditAppObject
 
     @Override
     public abstract void onVacationOperationComplete(long rowId);
-
 }

@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -74,19 +73,6 @@ public class FragmentVacationStore
         setupListWithAdapter();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //todo valuta se rimuovere
-        /*
-        if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
-            // todo accedi direttamente alla vacanza appena creata
-        }
-        if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
-            // todo la vacanza è stata modificata, non ci accedo
-        }
-        */
-    }
 
     private void setupListWithAdapter() {
         vacationList = getView().findViewById(R.id.vacationStoredList);
@@ -165,7 +151,7 @@ public class FragmentVacationStore
                         builderArchivia.setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //todo unstore vacanza
-                                //viewModel.store(vacation.id);
+                                viewModel.unstore(vacation.id);
                                 Toast.makeText(getContext(), vacation.title + " ripristinata", Toast.LENGTH_SHORT).show();
                             }
                         });
