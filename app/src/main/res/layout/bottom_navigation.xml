@@ -4,7 +4,7 @@
 <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/activity_vacation_list"
+    tools:showIn="@layout/activity_navigate_app"
 
     android:layout_width="0dp"
     android:layout_height="wrap_content"

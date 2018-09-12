@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Frammento che permette di selezionare partecipanti tramite una dialog con lista e checkbox
-public class FragmentAddParticipantsDialog extends DialogFragment implements ParticipantDialogAdapter.IParticipantDialogEvents {
+public class FragmentAddParticipantsDialog
+        extends DialogFragment
+        implements ParticipantDialogAdapter.IParticipantDialogEvents {
 
     private ParticipantsDialogViewModel viewModel;
     private ParticipantDialogAdapter participantDialogAdapter;

@@ -1,82 +1,39 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Utils.ActivityNavigateAppObj;
 
-public class ActivityVacationList extends AppCompatActivity {
+public class ActivityVacationList extends ActivityNavigateAppObj {
 
-    private VacationViewModel viewModel; //todo valuta se usarlo anche qua
-
-    private ViewPager viewPager;
-    private FragmentAdapter fragmentAdapter;
-
-    private TabLayout tabLayout;
-    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
-    //todo da spostare
-    private BottomNavigationView bottomNavigationView;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupSideDrawer();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setActivityContentView() {
         setContentView(R.layout.activity_drawer);
+    }
 
-        setupFragments();
-        setupTabsLabel();
-        setupActionBar();
-        setupSideDrawer();
-
-        //todo da spostare nella classe corretta assieme al campo
-        bottomNavigationView = findViewById(R.id.bottomNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.actionHome:
-                        //todo apri attività
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.actionItinerario:
-                        //todo apri attività
-                        Toast.makeText(getApplicationContext(), "Itinerario", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.actionSpese:
-                        //todo apri attività
-                        Toast.makeText(getApplicationContext(), "Spese", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.actionListe:
-                        //todo apri attività
-                        Toast.makeText(getApplicationContext(), "Liste", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        return false;
-                }
-                return true;
-            }
-        });
-
+    @NonNull
+    @Override
+    protected FragmentAdapter getFragmentAdapter() {
+        return new FragmentAdapter(getSupportFragmentManager());
     }
 
     private void setupSideDrawer() {
@@ -86,6 +43,7 @@ public class ActivityVacationList extends AppCompatActivity {
 
     private void setupDrawerLayoutToggle() {
         drawerLayout = findViewById(R.id.drawer_layout);
+
         // elemento interattivo per aprire sidedrawer e visualizzarlo in action bar
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.sdOpenMenu, R.string.sdCloseMenu);
         drawerLayout.addDrawerListener(drawerToggle); // connetto il layout con il pulsante
@@ -94,7 +52,7 @@ public class ActivityVacationList extends AppCompatActivity {
 
     private void setupDrawerMenuActions() {
         navigationView = findViewById(R.id.nav_view);
-        // definisco cosa succede quando premo sugli elementi del side drawer
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -119,56 +77,14 @@ public class ActivityVacationList extends AppCompatActivity {
         });
     }
 
-    private void setupActionBar() {
-        toolbar = findViewById(R.id.toolbarVacationList);
-        setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
-    }
-
-    private void setupTabsLabel() {
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager); // farà comparire le linguette all'interno dei tabs come definito nell'adapter
-    }
-
-    private void setupFragments() {
-        fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(fragmentAdapter); // attacca al viewpager il gestore dei frammenti
-    }
-
-
-    @SuppressLint("RestrictedApi")
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) { // mostra il menù sulla "action" bar
-        // dobbiamo creare il menu partendo dal xml -> inflater
-        MenuInflater menuInf = getMenuInflater();
-        menuInf.inflate(R.menu.test_menu, menu); // mette il menu gonfiato nel parametro in input
-
-        // per rendere visibile l'icona anche nell'overflow menù
-        if (menu instanceof MenuBuilder) {
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { // decide cosa fare quando una voce è selezionata
-        // l'item è la voce selezionata
-        switch (item.getItemId()) {
-            case R.id.actionTest1:
-                Toast.makeText(getApplicationContext(), "Test1", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.actionTest2:
-                Toast.makeText(getApplicationContext(), "Test2", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item); // ogni tanto android aggiunge voci di menù. Così le gestisce
-        }
+    protected void setupBottomNavigation() {
+        // no bottom navigation bar
     }
 
 
     //classe interna per gestire i frammenti
-    public class FragmentAdapter extends FragmentPagerAdapter {
+    public class FragmentAdapter extends ActivityNavigateAppObj.FragmentAdapter {
 
         FragmentAdapter(FragmentManager fm) {
             super(fm);
@@ -197,9 +113,9 @@ public class ActivityVacationList extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getString(R.string.vlTab1);
+                    return getString(R.string.vacationlist_tag_myvacations);
                 case 1:
-                    return getString(R.string.vlTab2);
+                    return getString(R.string.vacationlist_tag_stored);
                 default:
                     return "";
             }
