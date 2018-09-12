@@ -24,6 +24,7 @@
         <activity
             android:name=".AppSections.VacationList.ActivityModifyVacation"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".AppSections.Home.ActivityHome" />
     </application>
 
 

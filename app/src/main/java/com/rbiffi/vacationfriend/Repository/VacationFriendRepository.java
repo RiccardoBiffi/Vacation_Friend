@@ -11,6 +11,7 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipa
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
+import com.rbiffi.vacationfriend.Utils.JoinVacationParticipantListWrapper;
 
 import java.util.List;
 
@@ -93,7 +94,8 @@ public class VacationFriendRepository {
     }
 
     public void insertParticipants(List<JoinVacationParticipant> jvps) {
-        new InsertListParticipantsAsyncTask(jVacationParticipantDao).execute(jvps);
+        JoinVacationParticipantListWrapper jvplw = new JoinVacationParticipantListWrapper(jvps);
+        new InsertListParticipantsAsyncTask(jVacationParticipantDao).execute(jvplw);
     }
 
     public void delete(Long vacationId) {
@@ -195,7 +197,7 @@ public class VacationFriendRepository {
     }
 
 
-    private static class InsertListParticipantsAsyncTask extends AsyncTask<List<JoinVacationParticipant>, Void, Void> {
+    private static class InsertListParticipantsAsyncTask extends AsyncTask<JoinVacationParticipantListWrapper, Void, Void> {
 
         private IJoinVacationParticipantDao asyncDao;
 
@@ -203,10 +205,10 @@ public class VacationFriendRepository {
             asyncDao = vacationDao;
         }
 
-        @SafeVarargs
         @Override
-        protected final Void doInBackground(List<JoinVacationParticipant>... vacationIds) {
-            asyncDao.insertList(vacationIds[0]);
+        protected final Void doInBackground(JoinVacationParticipantListWrapper... vacationIds) {
+            JoinVacationParticipantListWrapper jvplw = vacationIds[0];
+            asyncDao.insertList(jvplw.unwrap());
             return null;
         }
     }

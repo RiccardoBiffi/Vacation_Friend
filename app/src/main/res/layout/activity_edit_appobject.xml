@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tabs"
+        app:layout_constraintBottom_toTopOf="@id/vacationlist_tabs"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
