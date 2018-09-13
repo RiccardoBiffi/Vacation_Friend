@@ -20,10 +20,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityEditAppObject;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
 import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.Utils.EditTextValidator;
 

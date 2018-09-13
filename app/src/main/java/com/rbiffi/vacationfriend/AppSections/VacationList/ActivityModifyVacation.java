@@ -13,6 +13,7 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
+import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
 import java.text.DateFormat;

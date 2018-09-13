@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        layout="@layout/empty_vacation_list"
+        layout="@layout/empty_vacationlist_recent"
         android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        layout="@layout/progressbar_circle_large"
+        layout="@layout/util_progressbar_circle_large"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
 
     <include
         android:id="@+id/floatingActionButton"
-        layout="@layout/floating_action_button"
+        layout="@layout/util_floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AppSections.VacationList.ActivityVacationList">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".AppSections.VacationList.ActivityNewVacation"
@@ -24,7 +21,12 @@
         <activity
             android:name=".AppSections.VacationList.ActivityModifyVacation"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".AppSections.Home.ActivityHome" />
+        <activity android:name=".AppSections.Home.ActivityVacation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 

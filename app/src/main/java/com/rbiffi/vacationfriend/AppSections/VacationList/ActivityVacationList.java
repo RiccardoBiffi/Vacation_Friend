@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -16,24 +18,46 @@ import com.rbiffi.vacationfriend.Utils.ActivityNavigateAppObj;
 
 public class ActivityVacationList extends ActivityNavigateAppObj {
 
+    private ViewPager viewPager;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewPager = getViewPager();
+        viewPager.setAdapter(fragmentAdapter); // attacca al viewpager il gestore dei frammenti
+
+        setupTabsLabel();
         setupSideDrawer();
     }
 
     @Override
     protected void setActivityContentView() {
-        setContentView(R.layout.activity_drawer);
+        setContentView(R.layout.sidedrawer_activity);
+    }
+
+    @NonNull
+    @Override
+    protected Toolbar getToolbarView() {
+        return findViewById(R.id.vacationlist_toolbar);
     }
 
     @NonNull
     @Override
     protected FragmentAdapter getFragmentAdapter() {
         return new FragmentAdapter(getSupportFragmentManager());
+    }
+
+    @NonNull
+    private ViewPager getViewPager() {
+        return findViewById(R.id.vacationlist_viewpager);
+    }
+
+    private void setupTabsLabel() {
+        tabLayout = findViewById(R.id.vacationlist_tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupSideDrawer() {
@@ -75,11 +99,6 @@ public class ActivityVacationList extends ActivityNavigateAppObj {
                 return true;
             }
         });
-    }
-
-    @Override
-    protected void setupBottomNavigation() {
-        // no bottom navigation bar
     }
 
 

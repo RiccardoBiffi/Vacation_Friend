@@ -40,13 +40,13 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
         View view;
         switch (viewType) {
             case VIEW_TYPE_OBJECT_VIEW:
-                view = inflater.inflate(R.layout.vacation_list_row, parent, false);
+                view = inflater.inflate(R.layout.vacationlist_list_row, parent, false);
                 break;
             case VIEW_TYPE_FOOTER:
-                view = inflater.inflate(R.layout.vacation_list_footer, parent, false);
+                view = inflater.inflate(R.layout.vacationlist_list_footer, parent, false);
                 break;
             default:
-                view = inflater.inflate(R.layout.vacation_list_row, parent, false);
+                view = inflater.inflate(R.layout.vacationlist_list_row, parent, false);
                 break;
         }
         return new VacationStoredViewHolder(view);

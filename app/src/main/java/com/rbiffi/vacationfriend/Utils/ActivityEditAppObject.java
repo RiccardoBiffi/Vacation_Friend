@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.AppSections.VacationList;
+package com.rbiffi.vacationfriend.Utils;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -24,11 +24,11 @@ import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
+import com.rbiffi.vacationfriend.AppSections.VacationList.FragmentAddParticipantsDialog;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
-import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -70,7 +70,7 @@ public abstract class ActivityEditAppObject
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_appobject);
+        setContentView(R.layout.activity_edit_object);
 
         getActivityViewModel();
         saveDataFromIntentMaybe();

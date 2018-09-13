@@ -40,13 +40,12 @@
                 android:id="@+id/vacation_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:contentDescription="@string/vlImageDescriptionAcc"
-                android:focusable="true"
-                android:orientation="horizontal"
 
+                app:srcCompat="@drawable/vacation_default_photo"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/vacation_photo" />
+                android:contentDescription="@string/vlImageDescriptionAcc"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/vacation_title"
