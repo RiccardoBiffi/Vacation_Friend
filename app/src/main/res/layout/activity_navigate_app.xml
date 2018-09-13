@@ -19,29 +19,16 @@
         app:layout_constraintBottom_toTopOf="@id/tabs"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- todo immagine scrollabile -->
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+    <!-- todo usa un ViewGroup, View non va bene -->
+    <FrameLayout
+        android:id="@+id/navigation_container_viewgroup"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/navigation_bottom"
-        app:layout_constraintTop_toBottomOf="@id/tabs" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <include
         android:id="@+id/navigation_bottom"
@@ -53,6 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpager" />
+        app:layout_constraintTop_toBottomOf="@id/navigation_container_viewgroup" />
 
 </android.support.constraint.ConstraintLayout>

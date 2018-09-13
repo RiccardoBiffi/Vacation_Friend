@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListStoredAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationListViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
@@ -43,7 +43,7 @@ public class FragmentVacationStore
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
 
-    private VacationViewModel viewModel;
+    private VacationListViewModel viewModel;
 
     private View emptyListTutorial;
     private ProgressBar progressBar;
@@ -55,7 +55,7 @@ public class FragmentVacationStore
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_archivio, container, false);
+        return inflater.inflate(R.layout.vacationlist_fragment_archive, container, false);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class FragmentVacationStore
 
 
     private void setupListWithAdapter() {
-        vacationList = getView().findViewById(R.id.vacationStoredList);
+        vacationList = getView().findViewById(R.id.vacationlist_achieved_list);
         vacationList.setHasFixedSize(true); // più performance se il contenuto non modifica le dimensioni
 
         vacationAdapter = new VacationListStoredAdapter(getContext());
@@ -82,7 +82,7 @@ public class FragmentVacationStore
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
         //todo devo salvare le vacanze archiviate
-        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(VacationListViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
         //todo devo osservare le vacanze archiviate

@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/vacationlist_toolbar"
+    <ImageView
+        android:id="@+id/fragment_image_header"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="156dp"
 
-        android:background="@color/colorPrimaryDark"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:srcCompat="@drawable/vacation_default_photo"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/ph_section_image_description"
+        android:clickable="true"
+        android:focusable="true"
 
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/vacationlist_tabs"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tabs" />
+
+    <!-- todo inserisci un layer sopra all'imageview con icona sezione -->
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/vacationlist_tabs"
+        android:id="@+id/tabs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -30,18 +31,17 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vacationlist_toolbar"
-        />
+        app:layout_constraintTop_toBottomOf="@id/fragment_image_header" />
 
+    <!-- qui dentro mostrerò gli altri fragment -->
     <android.support.v4.view.ViewPager
-        android:id="@+id/vacationlist_viewpager"
+        android:id="@+id/tabs_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        app:layout_constraintTop_toBottomOf="@id/vacationlist_tabs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
 
 </android.support.constraint.ConstraintLayout>

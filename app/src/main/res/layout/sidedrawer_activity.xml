@@ -24,7 +24,7 @@
         android:fitsSystemWindows="true"
 
         app:menu="@menu/side_drawer_menu"
-        app:headerLayout="@layout/sd_header"
+        app:headerLayout="@layout/sidedrawer_header"
         />
 
 </android.support.v4.widget.DrawerLayout>

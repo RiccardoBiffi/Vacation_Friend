@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationListViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
@@ -47,7 +47,7 @@ public class FragmentVacationRecent
     private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
 
-    private VacationViewModel viewModel;
+    private VacationListViewModel viewModel;
 
     private View emptyListTutorial;
     private ProgressBar progressBar;
@@ -65,7 +65,7 @@ public class FragmentVacationRecent
         // non posso passare il layout con setContentView, devo usare i parametri in input
         // l'inflater trasforma xml in codice java a run time
         //container è il padre del fragment, si arrangia lui a sostituirlo
-        return inflater.inflate(R.layout.fragment_recenti, container, false);
+        return inflater.inflate(R.layout.vacationlist_fragment_recent, container, false);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class FragmentVacationRecent
         vacationList.setLayoutManager(vacationLayout);
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
-        viewModel = ViewModelProviders.of(this).get(VacationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(VacationListViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
         viewModel.getVacationsNow().observe(this, new Observer<List<VacationLite>>() {

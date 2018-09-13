@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="32dp"
-    tools:showIn="@layout/fragment_recenti">
+    tools:showIn="@layout/vacationlist_fragment_recent">
 
     <TextView
         android:id="@+id/ptutorial_vacationlist_welcome"

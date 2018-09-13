@@ -11,7 +11,7 @@ import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.List;
 
-public class VacationViewModel extends AndroidViewModel {
+public class VacationListViewModel extends AndroidViewModel {
 
     //warning: non salvare Activity, Fragment, View o contesti in quanto cambiano più spesso dei dati
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
@@ -27,7 +27,7 @@ public class VacationViewModel extends AndroidViewModel {
     private LiveData<List<VacationLite>> storedVacation;
     private Vacation selected;
 
-    public VacationViewModel(@NonNull Application app) {
+    public VacationListViewModel(@NonNull Application app) {
         super(app);
         repository = VacationFriendRepository.getInstance(app);
 

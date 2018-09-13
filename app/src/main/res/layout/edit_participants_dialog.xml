@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        layout="@layout/progressbar_circle_large"
+        layout="@layout/util_progressbar_circle_large"
 
         app:layout_constraintBottom_toBottomOf="@+id/dialog_allparticipant_list"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,5 +31,5 @@
 
     <include
         android:id="@+id/dialog_buttons_container"
-        layout="@layout/footer_edit_buttons" />
+        layout="@layout/activity_edit_confirm_buttons" />
 </android.support.constraint.ConstraintLayout>

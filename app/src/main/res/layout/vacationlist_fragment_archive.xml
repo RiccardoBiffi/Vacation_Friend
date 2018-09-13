@@ -9,7 +9,7 @@
     tools:context=".AppSections.VacationList.ActivityVacationList">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/vacationStoredList"
+        android:id="@+id/vacationlist_achieved_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -22,7 +22,7 @@
 
     <include
         android:id="@+id/empty_stored_list"
-        layout="@layout/empty_stored_list"
+        layout="@layout/empty_vacationlist_achieved"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        layout="@layout/progressbar_circle_large"
+        layout="@layout/util_progressbar_circle_large"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

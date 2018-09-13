@@ -66,4 +66,5 @@
     <string name="ph_user_email" translatable="false">lastname.name@domain.com</string>
     <string name="ph_vacation_name" translatable="false">Vacation name</string>
     <string name="ph_vacationlist_header" translatable="false">Header</string>
+    <string name="ph_section_image_description">Section</string>
 </resources>
