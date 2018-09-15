@@ -58,8 +58,14 @@
     <string name="home_tag_activitylog">Registro</string>
     <string name="op_synch">Sincronizza</string>
     <string name="vacationlist_tag_stored">Archivio</string>
-    <string name="ph_section_image_description">Section</string>
     <string name="op_sort">Ordina</string>
     <string name="op_settings">Impostazioni</string>
     <string name="op_filter">Filtra</string>
+    <string name="ph_home_image_description">Immagine della home</string>
+    <string name="lists_tag_personal">Personali</string>
+    <string name="lists_tag_foreveryone">Per tutti</string>
+    <string name="lists_tag_collaborative">Collaborative</string>
+    <string name="expenses_tag_expenses">Spese</string>
+    <string name="expenses_tag_debts">Debiti</string>
+    <string name="expenses_tag_resolution">Risoluzione</string>
 </resources>

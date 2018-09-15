@@ -47,50 +47,34 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                supportInvalidateOptionsMenu();
                 switch (item.getItemId()) {
                     case R.id.actionHome:
-                        //todo apri attività se non già aperta
-                        supportInvalidateOptionsMenu();
-                        fm.beginTransaction().hide(activeFragment).show(fHome).commit();
-                        // fHome.updateTags();
+                        ft.hide(activeFragment).show(fHome);
                         activeFragment = fHome;
-
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.actionItinerario:
-                        //todo apri attività
-                        supportInvalidateOptionsMenu();
-                        fm.beginTransaction().hide(activeFragment).show(fRoute).commit();
-                        fRoute.updateTags();
+                        ft.hide(activeFragment).show(fRoute);
                         activeFragment = fRoute;
-
-                        Toast.makeText(getApplicationContext(), "Itinerario", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.actionSpese:
-                        //todo apri attività
-                        supportInvalidateOptionsMenu();
-                        fm.beginTransaction().hide(activeFragment).show(fExpenses).commit();
-                        fExpenses.updateTags();
+                        ft.hide(activeFragment).show(fExpenses);
                         activeFragment = fExpenses;
-
-                        Toast.makeText(getApplicationContext(), "Spese", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.actionListe:
-                        //todo apri attività
-                        supportInvalidateOptionsMenu();
-                        fm.beginTransaction().hide(activeFragment).show(fLists).commit();
-                        fLists.updateTags();
+                        ft.hide(activeFragment).show(fLists);
                         activeFragment = fLists;
-
-                        Toast.makeText(getApplicationContext(), "Liste", Toast.LENGTH_SHORT).show();
                         break;
 
                     default:
                         return false;
                 }
+                ft.commit();
                 return true;
             }
         });
@@ -119,8 +103,6 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         // salvo il fragment in uno stack gestito dall'activity, posso simulare il
         // back per riaprire il fragment precedente
         ft.addToBackStack(null);
-        // anima la transizione di fragment
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
 

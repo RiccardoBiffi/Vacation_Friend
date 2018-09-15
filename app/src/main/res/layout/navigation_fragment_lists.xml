@@ -5,24 +5,24 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/fragment_image_header"
+        android:id="@+id/lists_image_header"
         android:layout_width="0dp"
         android:layout_height="156dp"
 
         app:srcCompat="@drawable/vacation_default_photo"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/ph_section_image_description"
+        android:contentDescription="@string/ph_lists_image_description"
         android:clickable="true"
         android:focusable="true"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tabs" />
+        app:layout_constraintBottom_toTopOf="@id/tabs_lists" />
 
     <!-- todo inserisci un layer sopra all'imageview con icona sezione -->
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
+        android:id="@+id/tabs_lists"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -33,17 +33,17 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_image_header" />
+        app:layout_constraintTop_toBottomOf="@id/lists_image_header" />
 
     <!-- qui dentro mostrerò gli altri fragment -->
     <android.support.v4.view.ViewPager
-        android:id="@+id/tabs_viewpager"
+        android:id="@+id/tabs_lists_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabs" />
+        app:layout_constraintTop_toBottomOf="@id/tabs_lists" />
 
 </android.support.constraint.ConstraintLayout>

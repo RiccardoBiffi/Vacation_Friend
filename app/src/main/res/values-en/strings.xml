@@ -59,7 +59,14 @@
     <string name="home_tag_chat">Discussions</string>
     <string name="home_tag_activitylog">Activity log</string>
     <string name="op_synch">Synchronize</string>
-    <string name="ph_section_image_description">Section</string>
     <string name="op_filter">Filter</string>
     <string name="op_settings">Settings</string>
+    <string name="op_sort">Sort</string>
+    <string name="ph_home_image_description">Home image</string>
+    <string name="lists_tag_personal">Personal</string>
+    <string name="lists_tag_foreveryone">For Everyone</string>
+    <string name="lists_tag_collaborative">Collaborative</string>
+    <string name="expenses_tag_expenses">Expenses</string>
+    <string name="expenses_tag_debts">Debts</string>
+    <string name="expenses_tag_resolution">Resolution</string>
 </resources>
