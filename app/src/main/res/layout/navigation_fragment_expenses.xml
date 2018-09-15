@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/expenses_image_header"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+
+        app:srcCompat="@drawable/vacation_default_photo"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/ph_expenses_image_description"
+        android:clickable="true"
+        android:focusable="true"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tabs_expenses" />
+
+    <!-- todo inserisci un layer sopra all'imageview con icona sezione -->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs_expenses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:clickable="true"
+        android:focusable="true"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/expenses_image_header" />
+
+    <!-- qui dentro mostrerò gli altri fragment -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tabs_expenses_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs_expenses" />
+
+</android.support.constraint.ConstraintLayout>

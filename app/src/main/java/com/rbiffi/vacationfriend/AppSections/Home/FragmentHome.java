@@ -43,7 +43,7 @@ public class FragmentHome extends Fragment {
         // The system calls this when it's time for the fragment to draw its user interface for the
         // first time. To draw a UI for your fragment, you must return a View from this method that
         // is the root of your fragment's layout. You can return null if the fragment does not provide a UI.
-        return inflater.inflate(R.layout.navigation_fragment_section, container, false);
+        return inflater.inflate(R.layout.navigation_fragment_home, container, false);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class FragmentHome extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        viewPager = getActivity().findViewById(R.id.tabs_viewpager);
-        tabLayout = getActivity().findViewById(R.id.tabs);
+        viewPager = getActivity().findViewById(R.id.tabs_home_viewpager);
+        tabLayout = getActivity().findViewById(R.id.tabs_home);
 
         viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);

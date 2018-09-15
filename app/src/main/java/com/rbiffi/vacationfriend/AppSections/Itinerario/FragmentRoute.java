@@ -3,11 +3,7 @@ package com.rbiffi.vacationfriend.AppSections.Itinerario;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.view.menu.MenuBuilder;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,15 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.Home.FragmentHomeActivityLog;
-import com.rbiffi.vacationfriend.AppSections.Home.FragmentHomeChatList;
-import com.rbiffi.vacationfriend.AppSections.Home.FragmentHomeSummary;
 import com.rbiffi.vacationfriend.R;
 
 public class FragmentRoute extends Fragment {
-
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
 
     public FragmentRoute() {
         super();
@@ -45,23 +35,13 @@ public class FragmentRoute extends Fragment {
         // The system calls this when it's time for the fragment to draw its user interface for the
         // first time. To draw a UI for your fragment, you must return a View from this method that
         // is the root of your fragment's layout. You can return null if the fragment does not provide a UI.
-        return inflater.inflate(R.layout.navigation_fragment_section, container, false);
+        return inflater.inflate(R.layout.navigation_fragment_route, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // per eventuali utilizzi futuri
-        viewPager = getActivity().findViewById(R.id.tabs_viewpager);
-        tabLayout = getActivity().findViewById(R.id.tabs);
     }
-
-    public void updateTags() {
-        tabLayout.setVisibility(View.GONE);
-    }
-
-    // todo crea comunque un frammento per gestire la lista, così è più semplice estendere coi tabs
 
     @Override
     public void onPause() {
@@ -102,45 +82,4 @@ public class FragmentRoute extends Fragment {
         }
     }
 
-    //classe interna per gestire i frammenti
-    public class FragmentAdapter extends FragmentPagerAdapter {
-
-        FragmentAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new FragmentHomeSummary();
-                case 1:
-                    return new FragmentHomeChatList();
-                case 2:
-                    return new FragmentHomeActivityLog();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.home_tag_summary);
-                case 1:
-                    return getString(R.string.home_tag_chat);
-                case 2:
-                    return getString(R.string.home_tag_activitylog);
-                default:
-                    return "";
-            }
-        }
-
-    }
 }

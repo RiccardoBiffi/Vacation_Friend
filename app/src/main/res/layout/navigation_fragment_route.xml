@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/route_image_header"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+
+        app:srcCompat="@drawable/vacation_default_photo"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/ph_route_image_description"
+        android:clickable="true"
+        android:focusable="true"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tabs_route" />
+
+    <!-- todo inserisci un layer sopra all'imageview con icona sezione -->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs_route"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/route_image_header" />
+
+    <!-- qui dentro mostrerò gli altri fragment, al momento solo 1 -->
+    <fragment
+        android:name="com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRouteList"
+        android:id="@+id/fragment_route_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs_route" />
+
+</android.support.constraint.ConstraintLayout>
