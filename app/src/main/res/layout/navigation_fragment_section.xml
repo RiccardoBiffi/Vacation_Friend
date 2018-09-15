@@ -17,7 +17,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tabs" />
+        app:layout_constraintBottom_toTopOf="@id/tabs" />
 
     <!-- todo inserisci un layer sopra all'imageview con icona sezione -->
 
@@ -28,6 +28,8 @@
 
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:clickable="true"
+        android:focusable="true"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

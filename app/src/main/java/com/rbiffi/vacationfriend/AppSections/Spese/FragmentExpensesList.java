@@ -1,4 +1,4 @@
-package com.rbiffi.vacationfriend.AppSections.Home;
+package com.rbiffi.vacationfriend.AppSections.Spese;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import com.rbiffi.vacationfriend.R;
 
-public class FragmentHomeChat extends Fragment {
+public class FragmentExpensesList extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.home_fragment_chat, container, false);
+        return inflater.inflate(R.layout.fragment_expenses_list, container, false);
     }
 
     @Override

@@ -67,4 +67,12 @@
     <string name="ph_vacation_name" translatable="false">Vacation name</string>
     <string name="ph_vacationlist_header" translatable="false">Header</string>
     <string name="ph_section_image_description">Section</string>
+    <string name="op_settings">Settings</string>
+    <string name="op_filter">Filter</string>
+    <string name="lists_tag_personal">Personal</string>
+    <string name="lists_tag_foreveryone">For Everyone</string>
+    <string name="lists_tag_collaborative">Collaborative</string>
+    <string name="expenses_tag_expenses">Expenses</string>
+    <string name="expenses_tag_debts">Debts</string>
+    <string name="expenses_tag_resolution">Resolution</string>
 </resources>
