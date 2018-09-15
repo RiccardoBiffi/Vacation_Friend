@@ -19,11 +19,11 @@
         app:layout_constraintBottom_toTopOf="@id/tabs"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- todo usa un ViewGroup, View non va bene -->
-    <FrameLayout
-        android:id="@+id/navigation_container_viewgroup"
+    <LinearLayout
+        android:id="@+id/navigation_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navigation_container_viewgroup" />
+        app:layout_constraintTop_toBottomOf="@id/navigation_fragment_container" />
 
 </android.support.constraint.ConstraintLayout>

@@ -49,13 +49,21 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         viewPager = getActivity().findViewById(R.id.tabs_viewpager);
-        viewPager.setAdapter(fragmentAdapter);
-
         tabLayout = getActivity().findViewById(R.id.tabs);
+
+        viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    /*
+    public void updateTags() {
+        viewPager.setAdapter(fragmentAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+    */
 
     @Override
     public void onPause() {
@@ -73,7 +81,7 @@ public class FragmentHome extends Fragment {
     @SuppressLint("RestrictedApi")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.home_summary_menu, menu);
+        inflater.inflate(R.menu.appbar_home_menu, menu);
 
         // per rendere visibile l'icona anche nell'overflow menù
         if (menu instanceof MenuBuilder) {
@@ -85,14 +93,13 @@ public class FragmentHome extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //nb l'evento passa prima all'activity e, se non gestito, al fragment
+        // todo opzioni mostrate dalla activity, gestite dai fragment
         switch (item.getItemId()) {
-            case R.id.action_summary_modifica:
-                // todo apri l'activity di modifica passando la vacazna corrente
-                // todo fai in modo che tutto si aggiorni di conseguenza ad operazione finita (return?)
-                Toast.makeText(getContext(), getString(R.string.op_modify), Toast.LENGTH_SHORT).show();
+            case R.id.action_home_modifica:
+                Toast.makeText(getContext(), getString(R.string.op_modify) + " home", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.action_summary_synch:
-                Toast.makeText(getContext(), getString(R.string.op_synch), Toast.LENGTH_SHORT).show();
+            case R.id.action_home_synch:
+                Toast.makeText(getContext(), getString(R.string.op_synch) + " home", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra
@@ -113,7 +120,7 @@ public class FragmentHome extends Fragment {
                 case 0:
                     return new FragmentHomeSummary();
                 case 1:
-                    return new FragmentHomeChat();
+                    return new FragmentHomeChatList();
                 case 2:
                     return new FragmentHomeActivityLog();
                 default:

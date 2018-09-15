@@ -3,7 +3,11 @@ package com.rbiffi.vacationfriend.AppSections.Spese;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.view.menu.MenuBuilder;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +20,10 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.R;
 
 public class FragmentExpenses extends Fragment {
+
+    private FragmentAdapter fragmentAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     public FragmentExpenses() {
         super();
@@ -39,6 +47,20 @@ public class FragmentExpenses extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
+        viewPager = getActivity().findViewById(R.id.tabs_viewpager);
+        tabLayout = getActivity().findViewById(R.id.tabs);
+    }
+
+    public void updateTags() {
+        viewPager.setAdapter(fragmentAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         // This is usually where you should commit any changes that should be persisted beyond the
@@ -55,7 +77,7 @@ public class FragmentExpenses extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // todo modifica il menù della action bar
-        inflater.inflate(R.menu.home_summary_menu, menu);
+        inflater.inflate(R.menu.appbar_expenses_menu, menu);
 
         // per rendere visibile l'icona anche nell'overflow menù
         if (menu instanceof MenuBuilder) {
@@ -68,19 +90,61 @@ public class FragmentExpenses extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         //nb l'evento passa prima all'activity e, se non gestito, al fragment
 
-        // todo modifica il menù della action bar
         switch (item.getItemId()) {
-            case R.id.action_summary_modifica:
-                // todo apri l'activity di modifica passando la vacazna corrente
-                // todo fai in modo che tutto si aggiorni di conseguenza ad operazione finita (return?)
-                Toast.makeText(getContext(), getString(R.string.op_modify), Toast.LENGTH_SHORT).show();
+            case R.id.action_expenses_sort:
+                Toast.makeText(getContext(), getString(R.string.op_sort) + " spese", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.action_summary_synch:
-                Toast.makeText(getContext(), getString(R.string.op_synch), Toast.LENGTH_SHORT).show();
+            case R.id.action_expenses_filter:
+                Toast.makeText(getContext(), getString(R.string.op_filter) + " spese", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_expenses_setting:
+                Toast.makeText(getContext(), getString(R.string.op_settings) + " spese", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //classe interna per gestire i frammenti
+    public class FragmentAdapter extends FragmentPagerAdapter {
+
+        FragmentAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new FragmentExpensesList();
+                case 1:
+                    return new FragmentExpensesDebts();
+                case 2:
+                    return new FragmentExpensesResolution();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return getString(R.string.expenses_tag_expenses);
+                case 1:
+                    return getString(R.string.expenses_tag_debts);
+                case 2:
+                    return getString(R.string.expenses_tag_resolution);
+                default:
+                    return "";
+            }
+        }
+
     }
 }
