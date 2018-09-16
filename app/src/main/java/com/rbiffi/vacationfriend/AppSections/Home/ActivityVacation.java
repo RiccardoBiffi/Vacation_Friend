@@ -39,7 +39,20 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         setupBottomNavigation();
         navigationViewGroup = findViewById(R.id.navigation_fragment_container);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         setupFragmentsAndStartHome();
+    }
+
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
+        // mostra il back alla activity precedente
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Test2");
     }
 
     private void setupBottomNavigation() {

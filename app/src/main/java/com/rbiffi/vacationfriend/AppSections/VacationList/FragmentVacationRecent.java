@@ -53,7 +53,6 @@ public class FragmentVacationRecent
     private ProgressBar progressBar;
     private FloatingActionButton floatingButton;
 
-    //todo aggiungi 2 recycle view
     private RecyclerView vacationList;
     private VacationListAdapter vacationAdapter;
     private RecyclerView.LayoutManager vacationLayout;

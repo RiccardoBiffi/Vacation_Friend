@@ -11,23 +11,27 @@
         android:roundIcon="@drawable/logo_vacation_friend"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppSections.VacationList.ActivityVacationList">
 
-        </activity>
+        <activity android:name=".AppSections.VacationList.ActivityVacationList"></activity>
+
         <activity
             android:name=".AppSections.VacationList.ActivityNewVacation"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity
             android:name=".AppSections.VacationList.ActivityModifyVacation"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".AppSections.Home.ActivityVacation">
+
+        <activity
+            android:name=".AppSections.Home.ActivityVacation"
+            android:parentActivityName=".AppSections.VacationList.ActivityVacationList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 
 </manifest>
