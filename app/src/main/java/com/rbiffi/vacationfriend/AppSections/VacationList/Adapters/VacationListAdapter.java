@@ -24,9 +24,11 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
     private static final int VIEW_TYPE_HEADER = 3;
+
     private final LayoutInflater inflater;
     private Context context;
     private IVacationListClickEvents listener;
+
     private List<VacationLite> vacationListNow;
     private List<VacationLite> vacationListNext;
     private List<VacationLite> vacationListPrevious;
