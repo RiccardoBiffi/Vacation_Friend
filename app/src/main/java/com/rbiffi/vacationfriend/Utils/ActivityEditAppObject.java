@@ -220,13 +220,10 @@ public abstract class ActivityEditAppObject
         toolbar = findViewById(R.id.toolbarNewVacation);
         setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
 
-        // mostra il back alla activity precedente
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setActionBarTitle();
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
     }
-
-    protected abstract void setActionBarTitle();
 
     protected void setupActivityButtons() {
         confirm = findViewById(R.id.saveBottonAction);

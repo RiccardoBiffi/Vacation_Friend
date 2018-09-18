@@ -47,18 +47,23 @@
                 android:clickable="true"
                 android:focusable="true" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/gradient_dark_bottom"
+
+                app:layout_constraintBottom_toBottomOf="@id/vacation_image" />
+
             <TextView
                 android:id="@+id/vacation_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:background="@android:drawable/screen_background_dark_transparent"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="10dp"
                 android:text="@string/ph_vacation_name"
-                android:textSize="20sp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                style="@style/VacationCardTitle"
 
                 app:layout_constraintBottom_toBottomOf="@id/vacation_image"
                 app:layout_constraintEnd_toStartOf="@id/vacation_oveflow_menu"
@@ -71,12 +76,12 @@
 
                 android:padding="8dp"
 
-                android:background="@android:drawable/screen_background_dark_transparent"
+                android:src="@drawable/ic_more_vert_white_24dp"
+                android:background="@android:color/transparent"
                 android:clickable="true"
                 android:focusable="true"
                 android:contentDescription="@string/vlOpzioniAcc"
 
-                android:src="@drawable/ic_more_vert_white_24dp"
                 app:layout_constraintBottom_toBottomOf="@id/vacation_image"
                 app:layout_constraintEnd_toEndOf="@id/vacation_image"
                 app:layout_constraintStart_toEndOf="@id/vacation_title"

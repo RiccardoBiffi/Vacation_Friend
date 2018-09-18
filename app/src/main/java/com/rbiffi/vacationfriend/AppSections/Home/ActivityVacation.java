@@ -1,15 +1,19 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRoute;
@@ -23,7 +27,8 @@ import com.rbiffi.vacationfriend.Utils.Constants;
 public class ActivityVacation extends ActivityNavigateAppObj {
 
     //todo private viewmodel, con dentro la vacanza corrente
-    private LinearLayout navigationViewGroup;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private FrameLayout navigationViewGroup;
     private BottomNavigationView bottomNavigationView;
 
     private final FragmentHome fHome = new FragmentHome();
@@ -36,23 +41,17 @@ public class ActivityVacation extends ActivityNavigateAppObj {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupBottomNavigation();
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+        collapsingToolbar.setTitle("Croazia 2018");
         navigationViewGroup = findViewById(R.id.navigation_fragment_container);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setupBottomNavigation();
 
         setupFragmentsAndStartHome();
     }
 
     @Override
-    protected void setupActionBar() {
-        super.setupActionBar();
-
-        // mostra il back alla activity precedente
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Test2");
+    protected void setActivityContentView() {
+        setContentView(R.layout.activity_navigate_app);
     }
 
     private void setupBottomNavigation() {
@@ -119,11 +118,6 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         ft.commit();
     }
 
-    @Override
-    protected void setActivityContentView() {
-        setContentView(R.layout.activity_navigate_app);
-    }
-
     @NonNull
     @Override
     protected Toolbar getToolbarView() {
@@ -134,6 +128,28 @@ public class ActivityVacation extends ActivityNavigateAppObj {
     @Override
     protected FragmentAdapter getFragmentAdapter() {
         return new FragmentAdapter(getSupportFragmentManager());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot()) {
+                    // This activity is NOT part of this app's task, so create a new task
+                    TaskStackBuilder.create(this)
+                            // Add all of this activity's parents to the back stack
+                            .addNextIntentWithParentStack(upIntent)
+                            // Navigate up to the closest parent
+                            .startActivities();
+                } else {
+                    // This activity is part of this app's task
+                    NavUtils.navigateUpTo(this, upIntent);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //classe interna per gestire i frammenti

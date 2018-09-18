@@ -79,22 +79,22 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
         View view;
         switch (viewType) {
             case VIEW_TYPE_TITLE:
-                view = inflater.inflate(R.layout.field_title, parent, false);
+                view = inflater.inflate(R.layout.input_title, parent, false);
                 break;
             case VIEW_TYPE_PERIOD:
                 view = inflater.inflate(R.layout.field_period, parent, false);
                 break;
             case VIEW_TYPE_PLACE:
-                view = inflater.inflate(R.layout.field_place, parent, false);
+                view = inflater.inflate(R.layout.input_place, parent, false);
                 break;
             case VIEW_TYPE_PARTICIPANTS:
-                view = inflater.inflate(R.layout.field_partecipants, parent, false);
+                view = inflater.inflate(R.layout.input_partecipants, parent, false);
                 break;
             case VIEW_TYPE_PHOTO:
                 view = inflater.inflate(R.layout.field_photo, parent, false);
                 break;
             default:
-                view = inflater.inflate(R.layout.field_title, parent, false);
+                view = inflater.inflate(R.layout.input_title, parent, false);
                 break;
         }
         return new FieldViewHolder(view);
@@ -231,7 +231,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
 
             case Constants.F_PARTECIP:
-                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.field_partecipants_row, viewModel.getFieldParticipants());
+                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.input_partecipants_row, viewModel.getFieldParticipants());
 
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
@@ -280,7 +280,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     }
 
     private void setParticipantsListFooter(FieldViewHolder holder) {
-        View footer = inflater.inflate(R.layout.field_partecipants_footer, null);
+        View footer = inflater.inflate(R.layout.input_partecipants_footer, null);
         footer.findViewById(R.id.input_add_partic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,7 +293,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
     }
 
     private void setParticipantsListHeader(FieldViewHolder holder) {
-        View header = inflater.inflate(R.layout.field_partecipants_row, null);
+        View header = inflater.inflate(R.layout.input_partecipants_row, null);
         header.setEnabled(false);
 
         View participant_row = header.findViewById(R.id.participant_row_element);

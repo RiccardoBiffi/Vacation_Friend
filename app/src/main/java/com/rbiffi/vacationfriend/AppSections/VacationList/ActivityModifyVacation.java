@@ -110,11 +110,6 @@ public class ActivityModifyVacation
     }
 
     @Override
-    protected void setActionBarTitle() {
-        getSupportActionBar().setTitle(R.string.acivity_title_mod_vacation);
-    }
-
-    @Override
     protected void setupActivityButtons() {
         super.setupActivityButtons();
         confirm.setText(R.string.button_save);

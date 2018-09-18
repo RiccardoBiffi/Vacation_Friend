@@ -4,16 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- qui dentro mostrerò gli altri fragment, al momento solo 1 -->
-    <fragment
-        android:name="com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRouteList"
-        android:id="@+id/fragment_route_list"
+    <Button
+        android:id="@+id/input_add_partic"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
 
-        app:layout_constraintStart_toStartOf="parent"
+        android:drawableLeft="@drawable/ic_person_add_black_24dp"
+        android:drawableStart="@drawable/ic_person_add_black_24dp"
+        android:drawablePadding="8dp"
+        android:gravity="start|center"
+
+        android:text="@string/field_partec_buttontext"
+        style="@style/AddFieldBotton"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
