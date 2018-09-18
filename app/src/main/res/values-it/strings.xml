@@ -12,11 +12,11 @@
     <string name="op_delete">Elimina</string>
     <string name="vlImageDescriptionAcc">Vacanza, tocca per dettagli</string>
     <string name="vlOpzioniAcc">Opzioni</string>
-    <string name="field_title_ob">Titolo*</string>
+    <string name="input_title_ob">Titolo*</string>
     <string name="field_period_ob">Periodo*</string>
     <string name="subfield_period_from">dal</string>
     <string name="subfield_period_to">al</string>
-    <string name="acivity_title_new_vacation">Nuova vacanza</string>
+    <string name="activity_title_new_vacation">Nuova vacanza</string>
     <string name="field_place_ob">Località</string>
     <string name="field_photo_ob">Immagine</string>
     <string name="field_partes_ob">Partecipanti</string>
@@ -68,4 +68,5 @@
     <string name="expenses_tag_expenses">Spese</string>
     <string name="expenses_tag_debts">Debiti</string>
     <string name="expenses_tag_resolution">Risoluzione</string>
+    <string name="activity_title_modify_vacation">Modifica vacanza</string>
 </resources>

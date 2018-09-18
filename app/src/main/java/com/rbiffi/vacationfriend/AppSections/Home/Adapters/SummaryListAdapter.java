@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
@@ -38,8 +39,14 @@ public class SummaryListAdapter extends RecyclerView.Adapter<SummaryListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(SummaryViewHolder holder, int position) {
+    public void onBindViewHolder(SummaryViewHolder holder, final int position) {
         holder.testTextView.setText("Elemento n°" + position);
+        holder.testTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "El " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
