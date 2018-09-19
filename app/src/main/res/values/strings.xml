@@ -15,7 +15,7 @@
     <string name="vlImageDescriptionAcc">Vacation, touch to see details</string>
     <string name="vlOpzioniAcc">Options</string>
     <string name="input_title_ob">Title*</string>
-    <string name="field_period_ob">Period*</string>
+    <string name="input_period_ob">Period*</string>
     <string name="subfield_period_from">from</string>
     <string name="subfield_period_to">to</string>
     <string name="activity_title_new_vacation">New vacation</string>
@@ -82,4 +82,5 @@
     <string name="activity_title_modify_vacation">Modify vacation</string>
     <string name="cr_vacation_header_image">Header with vacation image</string>
     <string name="field_title_ob">Title</string>
+    <string name="ph_name">Name</string>
 </resources>

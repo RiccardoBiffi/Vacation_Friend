@@ -48,7 +48,7 @@ public abstract class ActivityEditAppObject
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
-    public static final String VACATION_ID = "_vacation";
+    public static final String VACATION = "_vacation";
     protected static final int PICK_IMAGE = 1;
 
     protected Toolbar toolbar;

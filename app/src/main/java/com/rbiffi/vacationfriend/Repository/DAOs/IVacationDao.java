@@ -9,54 +9,53 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 
 import java.util.List;
 
 @Dao
 public interface IVacationDao {
 
-//READ
+    //READ
     @Query("SELECT * FROM Vacation WHERE id = :id")
     Vacation getVacationDetails(long id);
 
-    @Query("SELECT id, title, startDate, endDate, photo " +
+    @Query("SELECT * " +
             "FROM Vacation " +
             "WHERE date('now') BETWEEN startDate AND endDate " +
             "AND isAchieved = 0")
-    LiveData<List<VacationLite>> getCurrentVacations();
+    LiveData<List<Vacation>> getCurrentVacations();
 
-    @Query("SELECT id, title, startDate, endDate, photo " +
+    @Query("SELECT * " +
             "FROM Vacation " +
             "WHERE date('now') < startDate " +
             "AND isAchieved = 0")
-    LiveData<List<VacationLite>> getNextVacations();
+    LiveData<List<Vacation>> getNextVacations();
 
-    @Query("SELECT id, title, startDate, endDate, photo " +
+    @Query("SELECT * " +
             "FROM Vacation " +
             "WHERE date('now') > endDate " +
             "AND isAchieved = 0")
-    LiveData<List<VacationLite>> getEndedVacations();
+    LiveData<List<Vacation>> getEndedVacations();
 
-    @Query("SELECT id, title, startDate, endDate, photo " +
+    @Query("SELECT * " +
             "FROM Vacation " +
             "WHERE isAchieved = 1 " +
             "ORDER BY endDate DESC")
-    LiveData<List<VacationLite>> getAchievedVacations();
+    LiveData<List<Vacation>> getAchievedVacations();
 
-    @Query("SELECT id, title, startDate, endDate, photo " +
+    @Query("SELECT * " +
             "FROM Vacation " +
             "WHERE isAchieved = 0 " +
             "ORDER BY title ASC")
-    LiveData<List<VacationLite>> getActiveVacations();
+    LiveData<List<Vacation>> getActiveVacations();
 
 
-//INSERT
+    //INSERT
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Vacation vacation);
 
 
-//UPDATE
+    //UPDATE
     @Update
     void update(Vacation vacation);
 

@@ -28,7 +28,6 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationLis
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.List;
@@ -86,9 +85,9 @@ public class FragmentVacationStore
 
         // osservo il livedata per reagire quando i dati cambiano
         //todo devo osservare le vacanze archiviate
-        viewModel.getStoredVacation().observe(this, new Observer<List<VacationLite>>() {
+        viewModel.getStoredVacation().observe(this, new Observer<List<Vacation>>() {
             @Override
-            public void onChanged(@Nullable List<VacationLite> vacationLites) {
+            public void onChanged(@Nullable List<Vacation> vacationLites) {
                 if (vacationLites != null && !vacationLites.isEmpty()) {
                     //todo loader
                     emptyListTutorial.setVisibility(View.GONE);
@@ -104,18 +103,18 @@ public class FragmentVacationStore
     }
 
     @Override
-    public void onVacationClick(VacationLite vacation) {
+    public void onVacationClick(Vacation vacation) {
         Toast.makeText(getContext(), "Apertura vacanza archiviata " + vacation.id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onOverflowClick(View v, VacationLite vacation) {
+    public void onOverflowClick(View v, Vacation vacation) {
         openPopupMenu(v, vacation);
-        viewModel.updateSelectedVacation(vacation.id, this);
+        viewModel.loadClickedVacation(vacation.id, this);
     }
 
     @SuppressLint("RestrictedApi")
-    private void openPopupMenu(View view, VacationLite vacation) {
+    private void openPopupMenu(View view, Vacation vacation) {
         PopupMenu popup = new PopupMenu(getContext(), view);
         setActionsOnOptions(vacation, popup);
 
@@ -135,7 +134,7 @@ public class FragmentVacationStore
         return menuHelper;
     }
 
-    private void setActionsOnOptions(final VacationLite vacation, PopupMenu popup) {
+    private void setActionsOnOptions(final Vacation vacation, PopupMenu popup) {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

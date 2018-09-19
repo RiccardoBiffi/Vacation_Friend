@@ -42,10 +42,6 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         fieldPhoto = Uri.parse("");
     }
 
-    public void getVacationDetails(long vId) {
-        repository.getVacationDetails(vId);
-    }
-
     public void insert(Vacation v, VacationFriendRepository.IRepositoryListener listener) {
         //la logica dell'inserimento delle vacanze è completamente gestita dal repository
         repository.addListener(listener);
@@ -96,6 +92,11 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         return fieldPhoto;
     }
 
+    public void updateFieldParticipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
+        repository.addListener(listener);
+        repository.getVacationParticipants(vacationId);
+    }
+
     public void setFieldParticipants(List<Participant> fieldParticipants) {
         this.fieldParticipants = fieldParticipants;
     }
@@ -106,11 +107,6 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
 
     public void insertList(List<JoinVacationParticipant> jvps) {
         repository.insertParticipants(jvps);
-    }
-
-    public void setFieldPartecipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
-        repository.addListener(listener);
-        repository.getVacationParticipants(vacationId);
     }
 
 }

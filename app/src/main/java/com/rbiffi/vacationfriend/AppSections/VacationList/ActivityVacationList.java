@@ -26,6 +26,7 @@ public class ActivityVacationList extends ActivityNavigateAppObj {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fragmentAdapter = getFragmentAdapter();
         viewPager = getViewPager();
         viewPager.setAdapter(fragmentAdapter); // attacca al viewpager il gestore dei frammenti
 
@@ -45,7 +46,6 @@ public class ActivityVacationList extends ActivityNavigateAppObj {
     }
 
     @NonNull
-    @Override
     protected FragmentAdapter getFragmentAdapter() {
         return new FragmentAdapter(getSupportFragmentManager());
     }

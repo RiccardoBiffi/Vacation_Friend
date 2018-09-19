@@ -27,14 +27,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.Home.ActivityVacation;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationListViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
+import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
 
 import java.util.List;
 
@@ -94,9 +95,11 @@ public class FragmentVacationRecent
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
             // todo accedi direttamente alla vacanza appena creata
+            Vacation newVacation = data.getParcelableExtra(ActivityEditAppObject.EXTRA_REPLY + ActivityEditAppObject.VACATION);
+            onVacationClick(newVacation);
         }
         if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
-            // todo la vacanza è stata modificata, non ci accedo
+            // la vacanza è stata modificata, non ci accedo
         }
     }
 
@@ -115,15 +118,15 @@ public class FragmentVacationRecent
         viewModel = ViewModelProviders.of(this).get(VacationListViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
-        viewModel.getVacationsNow().observe(this, new Observer<List<VacationLite>>() {
+        viewModel.getVacationsNow().observe(this, new Observer<List<Vacation>>() {
             @Override
-            public void onChanged(@Nullable final List<VacationLite> vacationsNow) {
-                viewModel.getVacationsNext().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
+            public void onChanged(@Nullable final List<Vacation> vacationsNow) {
+                viewModel.getVacationsNext().observe(FragmentVacationRecent.this, new Observer<List<Vacation>>() {
                     @Override
-                    public void onChanged(@Nullable final List<VacationLite> vacationsNext) {
-                        viewModel.getVacationsPrevious().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
+                    public void onChanged(@Nullable final List<Vacation> vacationsNext) {
+                        viewModel.getVacationsPrevious().observe(FragmentVacationRecent.this, new Observer<List<Vacation>>() {
                             @Override
-                            public void onChanged(@Nullable List<VacationLite> vacationsPrevious) {
+                            public void onChanged(@Nullable List<Vacation> vacationsPrevious) {
                                 if (vacationsNow != null && !vacationsNow.isEmpty() ||
                                         vacationsNext != null && !vacationsNext.isEmpty() ||
                                         vacationsPrevious != null && !vacationsPrevious.isEmpty()) {
@@ -149,18 +152,20 @@ public class FragmentVacationRecent
     }
 
     @Override
-    public void onVacationClick(VacationLite vacation) {
-        Toast.makeText(getContext(), "Vacanza" + vacation.id, Toast.LENGTH_SHORT).show();
+    public void onVacationClick(Vacation vacation) {
+        Intent intent = new Intent(getActivity(), ActivityVacation.class);
+        intent.putExtra("selectedVacation", vacation);
+        startActivity(intent);
     }
 
     @Override
-    public void onOverflowClick(View v, VacationLite vacation) {
+    public void onOverflowClick(View v, Vacation vacation) {
         openPopupMenu(v, vacation);
-        viewModel.updateSelectedVacation(vacation.id, this);
+        viewModel.loadClickedVacation(vacation.id, this);
     }
 
     @SuppressLint("RestrictedApi")
-    private void openPopupMenu(View view, VacationLite vacation) {
+    private void openPopupMenu(View view, Vacation vacation) {
         PopupMenu popup = new PopupMenu(getContext(), view);
         setActionsOnOptions(vacation, popup);
 
@@ -180,7 +185,7 @@ public class FragmentVacationRecent
         return menuHelper;
     }
 
-    private void setActionsOnOptions(final VacationLite vacation, PopupMenu popup) {
+    private void setActionsOnOptions(final Vacation vacation, PopupMenu popup) {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

@@ -6,7 +6,6 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
 import java.util.List;
@@ -20,11 +19,11 @@ public class VacationListViewModel extends AndroidViewModel {
 
     private VacationFriendRepository repository;
 
-    private LiveData<List<VacationLite>> vacationsNow;
-    private LiveData<List<VacationLite>> vacationsNext;
-    private LiveData<List<VacationLite>> vacationsPrevious;
+    private LiveData<List<Vacation>> vacationsNow;
+    private LiveData<List<Vacation>> vacationsNext;
+    private LiveData<List<Vacation>> vacationsPrevious;
 
-    private LiveData<List<VacationLite>> storedVacation;
+    private LiveData<List<Vacation>> storedVacation;
     private Vacation selected;
 
     public VacationListViewModel(@NonNull Application app) {
@@ -40,19 +39,19 @@ public class VacationListViewModel extends AndroidViewModel {
         selected = null;
     }
 
-    public LiveData<List<VacationLite>> getVacationsNow() {
+    public LiveData<List<Vacation>> getVacationsNow() {
         return vacationsNow;
     }
 
-    public LiveData<List<VacationLite>> getVacationsNext() {
+    public LiveData<List<Vacation>> getVacationsNext() {
         return vacationsNext;
     }
 
-    public LiveData<List<VacationLite>> getVacationsPrevious() {
+    public LiveData<List<Vacation>> getVacationsPrevious() {
         return vacationsPrevious;
     }
 
-    public LiveData<List<VacationLite>> getStoredVacation() {
+    public LiveData<List<Vacation>> getStoredVacation() {
         return storedVacation;
     }
 
@@ -68,7 +67,7 @@ public class VacationListViewModel extends AndroidViewModel {
         repository.unstore(id);
     }
 
-    public void updateSelectedVacation(long id, VacationFriendRepository.IRepositoryListener listener) {
+    public void loadClickedVacation(long id, VacationFriendRepository.IRepositoryListener listener) {
         repository.addListener(listener);
         repository.getVacationDetails(id);
     }

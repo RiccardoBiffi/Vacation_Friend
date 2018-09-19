@@ -41,6 +41,8 @@ public class ActivityModifyVacation
     @Override
     protected void saveDataFromIntentMaybe() {
         Intent intent = getIntent();
+        // todo metti il nome del parce nelle costanti e formattalo meglio
+        // vedi ActivityEditAppObject
         Vacation current = intent.getParcelableExtra("selectedVacation");
         if (viewModel.getVacationId() == ModifyVacationViewModel.FIRST_EXECUTION && current != null) {
             viewModel.setVacationId(current.id);
@@ -49,7 +51,7 @@ public class ActivityModifyVacation
             viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
             viewModel.setFieldPeriodTo(format.format(current.period.endDate));
             viewModel.setFieldPlace(current.place);
-            viewModel.setFieldPartecipants(viewModel.getVacationId(), this);
+            viewModel.updateFieldParticipants(viewModel.getVacationId(), this);
             viewModel.setFieldPhoto(current.photo);
         }
     }
@@ -159,7 +161,7 @@ public class ActivityModifyVacation
         viewModel.insertList(jvps);
 
         Intent replyIntent = new Intent();
-        replyIntent.putExtra(EXTRA_REPLY + VACATION_ID, rowId);
+        replyIntent.putExtra(EXTRA_REPLY + VACATION, rowId);
         setResult(RESULT_OK, replyIntent);
         finish(); // restituisce il risultato a chi ha chiamato l'activity
     }
