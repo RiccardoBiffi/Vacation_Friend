@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FieldLists {
 
-    public static List<String> getFieldList(Class type) {
+    public static List<String> getEditFieldList(Class type) {
         if (type == Vacation.class) {
             return Arrays.asList(
                     Constants.F_TITLE,
@@ -15,6 +15,16 @@ public class FieldLists {
                     Constants.F_PLACE,
                     Constants.F_PARTECIP,
                     Constants.F_PHOTO);
+        }
+        return null;
+    }
+
+    public static List<String> getReadFieldList(Class type) {
+        if (type == Vacation.class) {
+            return Arrays.asList(
+                    Constants.F_PERIOD,
+                    Constants.F_PLACE,
+                    Constants.F_PARTECIP);
         }
         return null;
     }

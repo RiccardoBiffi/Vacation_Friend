@@ -22,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.FragmentAddParticipantsDialog;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
@@ -64,7 +64,7 @@ public abstract class ActivityEditAppObject
     protected TextView vacationFieldPeriodTo;
 
     protected RecyclerView vacationFieldsList;
-    protected FieldListAdapter fieldListAdapter;
+    protected EditFieldListAdapter editFieldListAdapter;
     protected RecyclerView.LayoutManager fieldLayout;
 
     @Override
@@ -206,15 +206,15 @@ public abstract class ActivityEditAppObject
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
         vacationFieldsList.addItemDecoration(new MyDividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(), R.drawable.list_divider)));
-        fieldListAdapter = createFieldAdapter();
-        fieldListAdapter.setListener(this);
-        vacationFieldsList.setAdapter(fieldListAdapter);
+        editFieldListAdapter = createFieldAdapter();
+        editFieldListAdapter.setListener(this);
+        vacationFieldsList.setAdapter(editFieldListAdapter);
 
         fieldLayout = new LinearLayoutManager(getApplicationContext());
         vacationFieldsList.setLayoutManager(fieldLayout);
     }
 
-    protected abstract FieldListAdapter createFieldAdapter();
+    protected abstract EditFieldListAdapter createFieldAdapter();
 
     protected void setupActionBar() {
         toolbar = findViewById(R.id.toolbarNewVacation);

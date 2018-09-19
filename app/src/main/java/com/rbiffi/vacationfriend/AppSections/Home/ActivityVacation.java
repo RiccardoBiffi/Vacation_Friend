@@ -56,11 +56,8 @@ public class ActivityVacation
         restoreState(savedInstanceState);
 
         setupFragmentsAndStartHome(savedInstanceState);
-
         setupTitleAndPicture();
-
         setupBottomNavigation();
-
     }
 
     @Override
@@ -68,9 +65,13 @@ public class ActivityVacation
         setContentView(R.layout.activity_navigate_app);
     }
 
+    public VacationViewModel getActivityViewModel() {
+        return ViewModelProviders.of(this).get(VacationViewModel.class);
+    }
+
     private void saveDataFromIntentMaybe() {
         Intent intent = getIntent();
-        // todo metti il nome del parce nelle costanti e formattalo meglio
+        // todo metti il nome del parcel nelle costanti e formattalo meglio
         // vedi ActivityEditAppObject
         Vacation current = intent.getParcelableExtra("selectedVacation");
         if (current != null) {
@@ -238,10 +239,6 @@ public class ActivityVacation
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public VacationViewModel getActivityViewModel() {
-        return ViewModelProviders.of(this).get(VacationViewModel.class);
     }
 
     @Override

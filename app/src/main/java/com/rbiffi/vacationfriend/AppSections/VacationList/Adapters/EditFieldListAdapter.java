@@ -36,12 +36,13 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/*  Classe per gestire le Recyclerview contenenti i campi degli oggetti da creare/modificare
+/*
+    Classe per gestire le Recyclerview contenenti i campi degli oggetti da creare/modificare
     al'interno della app. Ogni volta che si crea o modifica un elemento, questo adapter specifica
     quale view usare e cosa succede al suo interno, per ogni campo dell'oggetto.
  */
 
-public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.FieldViewHolder> {
+public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdapter.FieldViewHolder> {
 
     //TODO lista di interi per tutti i possibili fieldList di tutta la App
     private static final int VIEW_TYPE_TITLE = 0;
@@ -62,10 +63,10 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
     private ActivityEditAppObject listener;
 
-    public FieldListAdapter(Context applicationContext, List<String> fieldList, ChangeVacationViewModel viewModel) {
+    public EditFieldListAdapter(Context applicationContext, List<String> fieldList, ChangeVacationViewModel viewModel) {
         inflater = LayoutInflater.from(applicationContext);
 
-        appContext = applicationContext;
+        this.appContext = applicationContext;
         this.fieldList = fieldList;
         this.viewModel = viewModel;
     }
@@ -367,10 +368,11 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
         private final EditText placeView;
 
+        private final ListView partecipantListView;
+
         private final Button photoButtonAddView;
         private final ImageButton photoImageButtonView;
 
-        private final ListView partecipantListView;
 
         FieldViewHolder(View itemView) {
             super(itemView);
@@ -381,10 +383,11 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
 
             placeView = itemView.findViewById(R.id.input_place);
 
+            partecipantListView = itemView.findViewById(R.id.input_partes_list);
+
             photoButtonAddView = itemView.findViewById(R.id.input_photo);
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
 
-            partecipantListView = itemView.findViewById(R.id.input_partes_list);
         }
 
         public EditText getTitleHolder() {
