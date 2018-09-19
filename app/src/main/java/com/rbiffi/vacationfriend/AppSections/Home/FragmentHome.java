@@ -58,13 +58,6 @@ public class FragmentHome extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    /*
-    public void updateTags() {
-        viewPager.setAdapter(fragmentAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-    */
-
     @Override
     public void onPause() {
         super.onPause();

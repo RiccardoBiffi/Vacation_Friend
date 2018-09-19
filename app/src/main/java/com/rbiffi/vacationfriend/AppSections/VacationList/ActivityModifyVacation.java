@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ModifyVacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
@@ -107,8 +107,8 @@ public class ActivityModifyVacation
     }
 
     @Override
-    protected FieldListAdapter createFieldAdapter() {
-        return new FieldListAdapter(getApplicationContext(), FieldLists.getFieldList(Vacation.class), viewModel);
+    protected EditFieldListAdapter createFieldAdapter() {
+        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Vacation.class), viewModel);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class ActivityModifyVacation
     @Override
     protected void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants) {
         viewModel.setFieldParticipants(selectedParticipants);
-        fieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
+        editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
     }
 
     @Override
@@ -174,7 +174,7 @@ public class ActivityModifyVacation
     @Override
     public void onGetVacationParticipants(List<Participant> participants) {
         viewModel.setFieldParticipants(participants);
-        fieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
+        editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
     }
 
 }

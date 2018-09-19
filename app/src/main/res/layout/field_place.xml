@@ -3,6 +3,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
@@ -13,45 +14,38 @@
         android:id="@+id/icon_field_place"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
 
+        android:contentDescription="@string/field_place_ob"
         android:src="@drawable/ic_location_on_black_24dp"
-        app:layout_constraintBottom_toTopOf="@id/place_barrier_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/place_barrier_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/field_place_ob" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Barrier
         android:id="@+id/place_barrier_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="place,input_place"
-        app:layout_constraintStart_toEndOf="@id/icon_field_place"
-        />
-
-    <android.support.constraint.Barrier
-        android:id="@+id/place_barrier_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="place"
+        app:constraint_referenced_ids="field_place"
         app:layout_constraintStart_toEndOf="@id/icon_field_place"
         />
 
     <TextView
-        android:id="@+id/place"
-        style="@style/Fields"
+        android:id="@+id/field_place"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+
         android:text="@string/field_place_ob"
-        app:layout_constraintBottom_toTopOf="@id/input_place"
+        style="@style/Fields"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/place_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent"
         />

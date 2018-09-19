@@ -10,11 +10,12 @@ public class Constants {
     public static final String F_NOTES = "notes";
 
     public static final String FTAG_HOME = "home";
+    public static final String FTAG_HOME_SUMMARY = "summary";
+    public static final String FTAG_HOME_CHATLIST = "chatList";
+    public static final String FTAG_HOME_ACTIVITYLOG = "activityLog";
+
     public static final String FTAG_ROUTE = "route";
     public static final String FTAG_EXPENSES = "expenses";
     public static final String FTAG_LISTS = "lists";
-    public static final String FTAG_SUMMARY = "summary";
-    public static final String FTAG_CHATLIST = "chatList";
-    public static final String FTAG_ACTIVITYLOG = "activityLog";
 
 }
