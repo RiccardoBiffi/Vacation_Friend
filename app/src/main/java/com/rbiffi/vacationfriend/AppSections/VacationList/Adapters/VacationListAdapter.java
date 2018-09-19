@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private Context context;
     private IVacationListClickEvents listener;
 
-    private List<VacationLite> vacationListNow;
-    private List<VacationLite> vacationListNext;
-    private List<VacationLite> vacationListPrevious;
+    private List<Vacation> vacationListNow;
+    private List<Vacation> vacationListNext;
+    private List<Vacation> vacationListPrevious;
 
 
     public VacationListAdapter(Context context) {
@@ -93,7 +93,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
             // do nothing
 
         } else {
-            VacationLite current;
+            Vacation current;
             int elPosition;
             if (isNowList(position))
                 current = vacationListNow.get(position - 1);
@@ -112,7 +112,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 current = vacationListPrevious.get(elPosition);
             }
 
-            final VacationLite finalVacation = current;
+            final Vacation finalVacation = current;
             holder.vacationTitleView.setText(current.title);
             holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -221,7 +221,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         this.listener = listener;
     }
 
-    public void setAllVacations(List<VacationLite> vacationsNow, List<VacationLite> vacationListNext, List<VacationLite> vacationListPrevious) {
+    public void setAllVacations(List<Vacation> vacationsNow, List<Vacation> vacationListNext, List<Vacation> vacationListPrevious) {
         this.vacationListNow = vacationsNow;
         this.vacationListNext = vacationListNext;
         this.vacationListPrevious = vacationListPrevious;

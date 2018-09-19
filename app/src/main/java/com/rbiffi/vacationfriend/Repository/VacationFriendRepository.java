@@ -10,7 +10,6 @@ import com.rbiffi.vacationfriend.Repository.DAOs.IVacationDao;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
 import com.rbiffi.vacationfriend.Utils.JoinVacationParticipantListWrapper;
 
 import java.util.List;
@@ -31,12 +30,12 @@ public class VacationFriendRepository {
     }
     private static volatile VacationFriendRepository REPOSITORY = null;
     private IVacationDao vacationDao;
-    private LiveData<List<VacationLite>> vacationListNow;
+    private LiveData<List<Vacation>> vacationListNow;
 
-    private LiveData<List<VacationLite>> vacationListNext;
+    private LiveData<List<Vacation>> vacationListNext;
 
-    private LiveData<List<VacationLite>> vacationListPrevious;
-    private LiveData<List<VacationLite>> storedVacation;
+    private LiveData<List<Vacation>> vacationListPrevious;
+    private LiveData<List<Vacation>> storedVacation;
     private IParticipantDao participantDao;
 
     private LiveData<List<Participant>> participantList;
@@ -69,19 +68,19 @@ public class VacationFriendRepository {
         return REPOSITORY;
     }
 
-    public LiveData<List<VacationLite>> getVacationListNow() {
+    public LiveData<List<Vacation>> getVacationListNow() {
         return vacationListNow;
     }
 
-    public LiveData<List<VacationLite>> getVacationListNext() {
+    public LiveData<List<Vacation>> getVacationListNext() {
         return vacationListNext;
     }
 
-    public LiveData<List<VacationLite>> getVacationListPrevious() {
+    public LiveData<List<Vacation>> getVacationListPrevious() {
         return vacationListPrevious;
     }
 
-    public LiveData<List<VacationLite>> getStoredVacation() {
+    public LiveData<List<Vacation>> getStoredVacation() {
         return storedVacation;
     }
 

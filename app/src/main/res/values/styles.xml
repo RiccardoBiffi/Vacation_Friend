@@ -7,6 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ParticipantShortName">
+        <item name="android:textSize">14sp</item>
+    </style>
     <style name="Fields" >
         <item name="android:textSize">24sp</item>
     </style>

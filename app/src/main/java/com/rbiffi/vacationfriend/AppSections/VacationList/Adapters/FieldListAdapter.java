@@ -82,7 +82,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 view = inflater.inflate(R.layout.input_title, parent, false);
                 break;
             case VIEW_TYPE_PERIOD:
-                view = inflater.inflate(R.layout.field_period, parent, false);
+                view = inflater.inflate(R.layout.input_period, parent, false);
                 break;
             case VIEW_TYPE_PLACE:
                 view = inflater.inflate(R.layout.input_place, parent, false);
@@ -91,7 +91,7 @@ public class FieldListAdapter extends RecyclerView.Adapter<FieldListAdapter.Fiel
                 view = inflater.inflate(R.layout.input_partecipants, parent, false);
                 break;
             case VIEW_TYPE_PHOTO:
-                view = inflater.inflate(R.layout.field_photo, parent, false);
+                view = inflater.inflate(R.layout.input_photo, parent, false);
                 break;
             default:
                 view = inflater.inflate(R.layout.input_title, parent, false);

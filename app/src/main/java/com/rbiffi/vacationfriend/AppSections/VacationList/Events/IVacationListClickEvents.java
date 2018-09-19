@@ -2,11 +2,11 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.Events;
 
 import android.view.View;
 
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 
 public interface IVacationListClickEvents {
 
-    void onVacationClick(VacationLite vacation);
+    void onVacationClick(Vacation vacation);
 
-    void onOverflowClick(View v, VacationLite vacation);
+    void onOverflowClick(View v, Vacation vacation);
 }

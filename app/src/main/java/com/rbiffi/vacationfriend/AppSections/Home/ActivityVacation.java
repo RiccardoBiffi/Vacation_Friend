@@ -1,6 +1,8 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,40 +15,52 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRoute;
 import com.rbiffi.vacationfriend.AppSections.Liste.FragmentLists;
 import com.rbiffi.vacationfriend.AppSections.Spese.FragmentExpenses;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.ActivityNavigateAppObj;
 import com.rbiffi.vacationfriend.Utils.Constants;
 
-// classe che contiene e gestisce i frammenti collegati alla navigazione primaria dell'app
-public class ActivityVacation extends ActivityNavigateAppObj {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
-    //todo private viewmodel, con dentro la vacanza corrente
+// classe che contiene e gestisce i frammenti collegati alla navigazione primaria dell'app
+public class ActivityVacation
+        extends ActivityNavigateAppObj
+        implements VacationFriendRepository.IRepositoryListener {
+
+    private VacationViewModel viewModel;
+
     private CollapsingToolbarLayout collapsingToolbar;
-    private FrameLayout navigationViewGroup;
+    private ImageView vacationPhoto;
     private BottomNavigationView bottomNavigationView;
 
-    private final FragmentHome fHome = new FragmentHome();
-    private final FragmentRoute fRoute = new FragmentRoute();
-    private final FragmentExpenses fExpenses = new FragmentExpenses();
-    private final FragmentLists fLists = new FragmentLists();
-    private final FragmentManager fm = getSupportFragmentManager();
-    Fragment activeFragment = fHome;
+    private FragmentManager fm;
+    private Fragment activeFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        collapsingToolbar = findViewById(R.id.collapsingToolbar);
-        collapsingToolbar.setTitle("Croazia 2018");
-        navigationViewGroup = findViewById(R.id.navigation_fragment_container);
+
+        viewModel = getActivityViewModel();
+        saveDataFromIntentMaybe();
+        restoreState(savedInstanceState);
+
+        setupFragmentsAndStartHome(savedInstanceState);
+
+        setupTitleAndPicture();
+
         setupBottomNavigation();
 
-        setupFragmentsAndStartHome();
     }
 
     @Override
@@ -54,39 +68,127 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         setContentView(R.layout.activity_navigate_app);
     }
 
+    private void saveDataFromIntentMaybe() {
+        Intent intent = getIntent();
+        // todo metti il nome del parce nelle costanti e formattalo meglio
+        // vedi ActivityEditAppObject
+        Vacation current = intent.getParcelableExtra("selectedVacation");
+        if (current != null) {
+            viewModel.setVacationId(current.id);
+            viewModel.setFieldTitle(current.title);
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
+            viewModel.setFieldPeriodTo(format.format(current.period.endDate));
+            viewModel.setFieldPlace(current.place);
+            viewModel.updateFieldParticipants(viewModel.getVacationId(), this);
+            viewModel.setFieldPhoto(current.photo);
+        }
+    }
+
+    protected void restoreState(Bundle savedInstanceState) {
+        //todo salva in Constants le chiavi dei campi
+        if (savedInstanceState != null) {
+            String title = savedInstanceState.getString("inputTitle");
+            if (title != null) viewModel.setFieldTitle(title);
+
+            String dateFrom = savedInstanceState.getString("inputPeriodFrom");
+            if (dateFrom != null) viewModel.setFieldPeriodFrom(dateFrom);
+
+            String dateTo = savedInstanceState.getString("inputPeriodTo");
+            if (dateTo != null) viewModel.setFieldPeriodTo(dateTo);
+
+            String place = savedInstanceState.getString("inputPlace");
+            if (place != null) viewModel.setFieldPlace(place);
+
+            String photo = savedInstanceState.getString("inputPhoto");
+            if (photo != null) viewModel.setFieldPhoto(Uri.parse(photo));
+
+            //todo altri campi da ripristinare, devo considerarli tutti
+        }
+        // else leggo tutto dal view model
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // salvo il frammento attualmente visibile
+        fm.putFragment(outState, "myFragmentName", activeFragment);
+    }
+
+    private void setupTitleAndPicture() {
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+        collapsingToolbar.setTitle(viewModel.getFieldTitle());
+        vacationPhoto = findViewById(R.id.vacation_collapsing_image);
+        vacationPhoto.setImageURI(viewModel.getFieldPhoto());
+    }
+
+    private void setupFragmentsAndStartHome(Bundle savedInstanceState) {
+        fm = getSupportFragmentManager();
+
+        // apro la home se prima apertura della activity
+        if (isFirstCreationActivity(savedInstanceState)) {
+            FragmentHome fHome = createFragmentsAndAddToManager();
+            showFragment(fHome);
+        } else {
+            activeFragment = fm.getFragment(savedInstanceState, "myFragmentName");
+        }
+    }
+
+    @NonNull
+    private FragmentHome createFragmentsAndAddToManager() {
+        FragmentHome fHome = new FragmentHome();
+        FragmentRoute fRoute = new FragmentRoute();
+        FragmentExpenses fExpences = new FragmentExpenses();
+        FragmentLists fLists = new FragmentLists();
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.navigation_fragment_container, fHome, Constants.FTAG_HOME).hide(fHome);
+        ft.add(R.id.navigation_fragment_container, fRoute, Constants.FTAG_ROUTE).hide(fRoute);
+        ft.add(R.id.navigation_fragment_container, fExpences, Constants.FTAG_EXPENSES).hide(fExpences);
+        ft.add(R.id.navigation_fragment_container, fLists, Constants.FTAG_LISTS).hide(fLists);
+        ft.commit();
+
+        return fHome;
+    }
+
+    private boolean isFirstCreationActivity(Bundle savedInstanceState) {
+        return savedInstanceState == null;
+    }
+
     private void setupBottomNavigation() {
         bottomNavigationView = findViewById(R.id.navigation_bottom);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 supportInvalidateOptionsMenu();
                 switch (item.getItemId()) {
                     case R.id.actionHome:
-                        ft.hide(activeFragment).show(fHome);
-                        activeFragment = fHome;
+                        Fragment fHome = fm.findFragmentByTag(Constants.FTAG_HOME);
+                        // todo findFragmentByTag potrebbe (ma non dovrebbe) tornare null.
+                        // in tal caso dovrei ricreare il fragment e riaggiungerlo al FragmentManager
+                        showFragment(fHome);
                         break;
 
                     case R.id.actionItinerario:
-                        ft.hide(activeFragment).show(fRoute);
-                        activeFragment = fRoute;
+                        Fragment fRoute = fm.findFragmentByTag(Constants.FTAG_ROUTE);
+                        showFragment(fRoute);
                         break;
 
                     case R.id.actionSpese:
-                        ft.hide(activeFragment).show(fExpenses);
-                        activeFragment = fExpenses;
+                        Fragment fExpenses = fm.findFragmentByTag(Constants.FTAG_EXPENSES);
+                        showFragment(fExpenses);
                         break;
 
                     case R.id.actionListe:
-                        ft.hide(activeFragment).show(fLists);
-                        activeFragment = fLists;
+                        Fragment fLists = fm.findFragmentByTag(Constants.FTAG_LISTS);
+                        showFragment(fLists);
                         break;
 
                     default:
                         return false;
                 }
-                ft.commit();
+
                 return true;
             }
         });
@@ -100,34 +202,20 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         });
     }
 
-    private void setupFragmentsAndStartHome() {
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.navigation_fragment_container, fHome, Constants.FTAG_HOME);
-        ft.add(R.id.navigation_fragment_container, fRoute, Constants.FTAG_ROUTE);
-        ft.add(R.id.navigation_fragment_container, fExpenses, Constants.FTAG_EXPENSES);
-        ft.add(R.id.navigation_fragment_container, fLists, Constants.FTAG_LISTS);
+    private void showFragment(@NonNull Fragment fragment) {
+        FragmentTransaction tr = fm.beginTransaction();
+        tr.show(fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (activeFragment != null)
+            tr.hide(activeFragment);
 
-        ft.show(fHome); // fragment mostrato di default
-        ft.hide(fRoute);
-        ft.hide(fExpenses);
-        ft.hide(fLists);
-
-        // salvo il fragment in uno stack gestito dall'activity, posso simulare il
-        // back per riaprire il fragment precedente
-        ft.addToBackStack(null);
-        ft.commit();
+        tr.commit();
+        activeFragment = fragment;
     }
 
     @NonNull
     @Override
     protected Toolbar getToolbarView() {
         return findViewById(R.id.toolbar);
-    }
-
-    @NonNull
-    @Override
-    protected FragmentAdapter getFragmentAdapter() {
-        return new FragmentAdapter(getSupportFragmentManager());
     }
 
     @Override
@@ -152,47 +240,23 @@ public class ActivityVacation extends ActivityNavigateAppObj {
         }
     }
 
-    //classe interna per gestire i frammenti
-    //todo valuta se rimuovere, dovrebbe servire solo per il viewpager
-    public class FragmentAdapter extends ActivityNavigateAppObj.FragmentAdapter {
+    public VacationViewModel getActivityViewModel() {
+        return ViewModelProviders.of(this).get(VacationViewModel.class);
+    }
 
-        FragmentAdapter(FragmentManager fm) {
-            super(fm);
-        }
+    @Override
+    public void onVacationOperationComplete(long rowId) {
 
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new FragmentHomeSummary();
-                case 1:
-                    return new FragmentHomeChatList();
-                case 2:
-                    return new FragmentHomeActivityLog();
-                default:
-                    return null;
-            }
-        }
+    }
 
-        @Override
-        public int getCount() {
-            return 3;
-        }
+    @Override
+    public void onGetVacationDetailsComplete(Vacation v) {
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.home_tag_summary);
-                case 1:
-                    return getString(R.string.home_tag_chat);
-                case 2:
-                    return getString(R.string.home_tag_activitylog);
-                default:
-                    return "";
-            }
-        }
+    }
 
+    @Override
+    public void onGetVacationParticipants(List<Participant> participants) {
+        viewModel.setFieldParticipants(participants);
     }
 
 }

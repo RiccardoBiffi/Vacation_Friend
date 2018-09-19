@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.VacationLite;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 
 import java.util.List;
 
@@ -21,16 +21,22 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
 
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
-
-    private Context context;
     private final LayoutInflater inflater;
+    private Context context;
     private IVacationListClickEvents listener;
-    private List<VacationLite> vacationList;
+    private List<Vacation> vacationList;
 
 
     public VacationListStoredAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+    }
+
+    private static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID));
     }
 
     @Override
@@ -56,7 +62,7 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
     public void onBindViewHolder(VacationStoredViewHolder holder, int position) {
         if (position != vacationList.size()) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
-            final VacationLite current = vacationList.get(position);
+            final Vacation current = vacationList.get(position);
             holder.vacationTitleView.setText(current.title);
             holder.vacationTitleView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,18 +113,10 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
         this.listener = listener;
     }
 
-    public void setVacations(List<VacationLite> vacations) {
+    public void setVacations(List<Vacation> vacations) {
         vacationList = vacations;
         notifyDataSetChanged();
     }
-
-    private static Uri resourceToUri(Context context, int resID) {
-        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
-                context.getResources().getResourcePackageName(resID) + '/' +
-                context.getResources().getResourceTypeName(resID) + '/' +
-                context.getResources().getResourceEntryName(resID));
-    }
-
 
     class VacationStoredViewHolder extends RecyclerView.ViewHolder {
 

@@ -51,8 +51,8 @@ public class FragmentExpenses extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        viewPager = getActivity().findViewById(R.id.tabs_expenses_viewpager);
-        tabLayout = getActivity().findViewById(R.id.tabs_expenses);
+        viewPager = view.findViewById(R.id.tabs_expenses_viewpager);
+        tabLayout = view.findViewById(R.id.tabs_expenses);
 
         viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -51,8 +51,8 @@ public class FragmentLists extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        viewPager = getActivity().findViewById(R.id.tabs_lists_viewpager);
-        tabLayout = getActivity().findViewById(R.id.tabs_lists);
+        viewPager = view.findViewById(R.id.tabs_lists_viewpager);
+        tabLayout = view.findViewById(R.id.tabs_lists);
 
         viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);

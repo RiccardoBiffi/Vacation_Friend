@@ -24,7 +24,6 @@ public abstract class ActivityNavigateAppObj extends AppCompatActivity {
         setActivityContentView();
 
         setupActionBar();
-        fragmentAdapter = getFragmentAdapter();
     }
 
     protected abstract void setActivityContentView();
@@ -39,9 +38,6 @@ public abstract class ActivityNavigateAppObj extends AppCompatActivity {
 
     @NonNull
     protected abstract Toolbar getToolbarView();
-
-    @NonNull
-    protected abstract FragmentAdapter getFragmentAdapter();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
