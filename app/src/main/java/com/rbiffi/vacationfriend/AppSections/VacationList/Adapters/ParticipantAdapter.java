@@ -14,21 +14,28 @@ import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParticipantAdapter extends ArrayAdapter<Participant> {
 
+    public final static int MODE_VERTICAL = 0;
+    public final static int MODE_HORIZONTAL = 1;
+
+
     private Context context;
     private int layoutResource;
     private List<Participant> participantList;
+    private int mode;
 
 
-    public ParticipantAdapter(@NonNull Context context, int resource, @NonNull List<Participant> objects) {
+    public ParticipantAdapter(@NonNull Context context, int resource, @NonNull List<Participant> objects, int mode) {
         super(context, resource, objects);
         this.context = context;
         layoutResource = resource;
         participantList = objects;
+        this.mode = mode;
     }
 
     @NonNull
@@ -36,21 +43,32 @@ public class ParticipantAdapter extends ArrayAdapter<Participant> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater != null ? inflater.inflate(layoutResource, parent, false) : null;
-        CircleImageView partecipantPictureView = convertView.findViewById(R.id.partecipant_picture);
-        TextView partecipantNameView = convertView.findViewById(R.id.partecipant_name);
-        ImageButton removeParticipantView = convertView.findViewById(R.id.remove_partic_button);
-
         Participant current = getItem(position);
-        partecipantPictureView.setImageURI(current != null ? current.picture : null);
-        partecipantNameView.setText((current != null ? current.name : "") + " " + (current != null ? current.lastName : ""));
-        removeParticipantView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                participantList.remove(position);
-                notifyDataSetChanged();
-            }
-        });
 
+        if (mode == MODE_VERTICAL) {
+            CircleImageView partecipantPictureView = convertView.findViewById(R.id.partecipant_picture);
+            TextView partecipantNameView = convertView.findViewById(R.id.partecipant_name);
+            ImageButton removeParticipantView = convertView.findViewById(R.id.remove_partic_button);
+
+            partecipantPictureView.setImageURI(current != null ? current.picture : null);
+            partecipantNameView.setText(String.format(Locale.getDefault(),
+                    "%s %s",
+                    (current != null ? current.name : ""),
+                    (current != null ? current.lastName : "")));
+
+            removeParticipantView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    participantList.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
+        } else {
+            CircleImageView partecipantPictureView = convertView.findViewById(R.id.partecipant_field_picture);
+            TextView partecipantNameView = convertView.findViewById(R.id.partecipant_short_name);
+            partecipantPictureView.setImageURI(current != null ? current.picture : null);
+            partecipantNameView.setText((current != null ? current.name : ""));
+        }
         return convertView;
     }
 
