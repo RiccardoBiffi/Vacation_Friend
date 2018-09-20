@@ -9,11 +9,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
 
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /*
     Classe per gestire le Recyclerview contenenti i campi degli oggetti da visualizzare
@@ -30,12 +39,14 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
 
+
     private Context context;
     private VacationViewModel viewModel;
     private List<String> fieldList;
 
     private final LayoutInflater inflater;
     private IVacationListClickEvents listener;
+    private ParticipantAdapter fieldParticipantsAdapter;
 
     public ReadFieldListAdapter(Context context, List<String> fieldList, VacationViewModel viewModel) {
         inflater = LayoutInflater.from(context);
@@ -70,25 +81,53 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
         final String field = fieldList.get(position);
         switch (field) {
             case Constants.F_PERIOD:
+                holder.periodDaysView.setText(String.format(Locale.getDefault(),
+                        "%d %s",
+                        countPeriodDays(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo()),
+                        context.getString(R.string.field_period_days)));
+                holder.periodFromView.setText(viewModel.getFieldPeriodFrom());
+                holder.periodToView.setText(viewModel.getFieldPeriodTo());
                 break;
 
             case Constants.F_PLACE:
+                holder.placeView.setText(viewModel.getFieldPlace());
+                // todo al click sull'elemento si potrebbe aprire maps
                 break;
 
             case Constants.F_PARTECIP:
                 //todo rispetto al edit, il read dei partecipanti è in lista orizzontale
-                /*
-                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.input_partecipants_row, viewModel.getFieldParticipants());
+                holder.partecipantNumber.setText(String.format(Locale.getDefault(),
+                        "%d %s",
+                        viewModel.getFieldParticipants().size(),
+                        context.getString(R.string.field_partic_number)));
 
-                setParticipantsListHeader(holder);
-                setParticipantsListFooter(holder);
+                fieldParticipantsAdapter = new ParticipantAdapter(context, R.layout.field_partecipants_column,
+                        viewModel.getFieldParticipants(), ParticipantAdapter.MODE_HORIZONTAL);
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
-                */
                 break;
 
             default:
                 // dati non pronti, placeholder
         }
+    }
+
+    private int countPeriodDays(String fieldPeriodFrom, String fieldPeriodTo) {
+        Date fromDate = formattedStringToDate(fieldPeriodFrom);
+        Date toDate = formattedStringToDate(fieldPeriodTo);
+        LocalDate from = new LocalDate(fromDate);
+        LocalDate to = new LocalDate(toDate);
+        return Days.daysBetween(from, to).getDays();
+    }
+
+    private Date formattedStringToDate(String value) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = value == null ? null : format.parse(value);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
     @Override
@@ -121,22 +160,26 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     class SummaryViewHolder extends RecyclerView.ViewHolder {
 
         // todo elementi di ogni view del sommario
+        private final TextView periodDaysView;
         private final TextView periodFromView;
         private final TextView periodToView;
 
         private final TextView placeView;
 
+        private TextView partecipantNumber;
         private final ListView partecipantListView;
 
 
         SummaryViewHolder(View itemView) {
             super(itemView);
 
+            periodDaysView = itemView.findViewById(R.id.label_total_period_days);
             periodFromView = itemView.findViewById(R.id.field_period_from);
             periodToView = itemView.findViewById(R.id.field_period_to);
 
             placeView = itemView.findViewById(R.id.field_place);
 
+            partecipantNumber = itemView.findViewById(R.id.label_number_partes);
             partecipantListView = itemView.findViewById(R.id.field_partes_list);
         }
     }

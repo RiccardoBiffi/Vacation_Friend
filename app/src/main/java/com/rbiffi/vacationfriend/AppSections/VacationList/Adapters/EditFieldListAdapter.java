@@ -232,7 +232,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_PARTECIP:
-                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.input_partecipants_row, viewModel.getFieldParticipants());
+                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.input_partecipants_row,
+                        viewModel.getFieldParticipants(), ParticipantAdapter.MODE_VERTICAL);
 
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
