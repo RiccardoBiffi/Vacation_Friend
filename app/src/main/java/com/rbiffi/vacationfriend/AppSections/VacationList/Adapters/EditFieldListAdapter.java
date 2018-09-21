@@ -59,7 +59,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
     private List<String> fieldList;
     private ChangeVacationViewModel viewModel; // per facilitare il passaggio di dati
 
-    private ParticipantAdapter fieldParticipantsAdapter;
+    private EditParticipantAdapter fieldParticipantsAdapter;
 
     private ActivityEditAppObject listener;
 
@@ -232,8 +232,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_PARTECIP:
-                fieldParticipantsAdapter = new ParticipantAdapter(appContext, R.layout.input_partecipants_row,
-                        viewModel.getFieldParticipants(), ParticipantAdapter.MODE_VERTICAL);
+                fieldParticipantsAdapter = new EditParticipantAdapter(appContext, R.layout.input_partecipants_row,
+                        viewModel.getFieldParticipants());
 
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
-    android:paddingTop="16dp"
-    >
+    android:paddingTop="16dp">
 
     <ImageView
         android:id="@+id/icon_field_partes"
@@ -57,7 +54,7 @@
         app:layout_constraintStart_toEndOf="@id/partes_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.rbiffi.vacationfriend.Utils.ExtendedListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/field_partes_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -71,7 +68,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/partes_barrier_vertical"
-        app:layout_constraintTop_toTopOf="@id/partes_barrier_horizontal"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="@id/partes_barrier_horizontal" />
 
 </android.support.constraint.ConstraintLayout>

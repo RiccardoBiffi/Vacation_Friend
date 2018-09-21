@@ -1,5 +1,6 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,15 +29,15 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.ActivityNavigateAppObj;
 import com.rbiffi.vacationfriend.Utils.Constants;
+import com.rbiffi.vacationfriend.Utils.Converters;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 // classe che contiene e gestisce i frammenti collegati alla navigazione primaria dell'app
 public class ActivityVacation
         extends ActivityNavigateAppObj
-        implements VacationFriendRepository.IRepositoryListener {
+        implements
+        VacationFriendRepository.IRepositoryListener {
 
     private VacationViewModel viewModel;
 
@@ -52,11 +53,9 @@ public class ActivityVacation
         super.onCreate(savedInstanceState);
 
         viewModel = getActivityViewModel();
-        saveDataFromIntentMaybe();
+        saveDataFromIntentMaybe(savedInstanceState);
         restoreState(savedInstanceState);
 
-        setupFragmentsAndStartHome(savedInstanceState);
-        setupTitleAndPicture();
         setupBottomNavigation();
     }
 
@@ -69,21 +68,46 @@ public class ActivityVacation
         return ViewModelProviders.of(this).get(VacationViewModel.class);
     }
 
-    private void saveDataFromIntentMaybe() {
+    private void saveDataFromIntentMaybe(final Bundle savedInstanceState) {
         Intent intent = getIntent();
-        // todo metti il nome del parcel nelle costanti e formattalo meglio
-        // vedi ActivityEditAppObject
+        // Nel parcel ci sono tutti i dati della vacanza, ma a me basta mostrare subito foto e titolo
         Vacation current = intent.getParcelableExtra("selectedVacation");
         if (current != null) {
-            viewModel.setVacationId(current.id);
-            viewModel.setFieldTitle(current.title);
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
-            viewModel.setFieldPeriodTo(format.format(current.period.endDate));
-            viewModel.setFieldPlace(current.place);
-            viewModel.updateFieldParticipants(viewModel.getVacationId(), this);
-            viewModel.setFieldPhoto(current.photo);
+            // eseguito subito e solo 1 volta alla creazione della activity
+            saveImmediateNeedingDataFromParcel(current);
+            setupTitleAndPicture();
+
+            viewModel.getCurrentVacation().observe(this, new Observer<Vacation>() {
+                @Override
+                public void onChanged(@Nullable Vacation vacation) {
+                    if (vacation != null) {
+                        viewModel.setFieldTitle(vacation.title);
+                        viewModel.setFieldPeriodFrom(Converters.dateToUserInterface(vacation.period.startDate));
+                        viewModel.setFieldPeriodTo(Converters.dateToUserInterface(vacation.period.endDate));
+                        viewModel.setFieldPlace(vacation.place);
+                        viewModel.getCurrentParticipants().observe(ActivityVacation.this, new Observer<List<Participant>>() {
+                            @Override
+                            public void onChanged(@Nullable List<Participant> participants) {
+                                viewModel.setParticipants(participants);
+
+                                // tutti i dati della home pronti, posso caricare la view
+                                setupFragmentsAndStartHome(savedInstanceState);
+                            }
+                        });
+                        viewModel.setFieldPhoto(vacation.photo);
+
+                        setupTitleAndPicture();
+                    }
+                }
+            });
+
         }
+    }
+
+    private void saveImmediateNeedingDataFromParcel(Vacation current) {
+        viewModel.setVacationId(current.id);
+        viewModel.setFieldTitle(current.title);
+        viewModel.setFieldPhoto(current.photo);
     }
 
     protected void restoreState(Bundle savedInstanceState) {
@@ -166,8 +190,6 @@ public class ActivityVacation
                 switch (item.getItemId()) {
                     case R.id.actionHome:
                         Fragment fHome = fm.findFragmentByTag(Constants.FTAG_HOME);
-                        // todo findFragmentByTag potrebbe (ma non dovrebbe) tornare null.
-                        // in tal caso dovrei ricreare il fragment e riaggiungerlo al FragmentManager
                         showFragment(fHome);
                         break;
 
@@ -241,19 +263,10 @@ public class ActivityVacation
         }
     }
 
+
     @Override
     public void onVacationOperationComplete(long rowId) {
 
-    }
-
-    @Override
-    public void onGetVacationDetailsComplete(Vacation v) {
-
-    }
-
-    @Override
-    public void onGetVacationParticipants(List<Participant> participants) {
-        viewModel.setFieldParticipants(participants);
     }
 
 }

@@ -32,7 +32,6 @@ import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.VacationListA
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.VacationListViewModel;
 import com.rbiffi.vacationfriend.R;
-import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
@@ -115,7 +114,7 @@ public class FragmentVacationRecent
         vacationList.setLayoutManager(vacationLayout);
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
-        viewModel = ViewModelProviders.of(this).get(VacationListViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(VacationListViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
         viewModel.getVacationsNow().observe(this, new Observer<List<Vacation>>() {
@@ -161,7 +160,12 @@ public class FragmentVacationRecent
     @Override
     public void onOverflowClick(View v, Vacation vacation) {
         openPopupMenu(v, vacation);
-        viewModel.loadClickedVacation(vacation.id, this);
+        viewModel.loadClickedVacation(vacation.id).observe(this, new Observer<Vacation>() {
+            @Override
+            public void onChanged(@Nullable Vacation v) {
+                viewModel.setSelectedVacation(v);
+            }
+        });
     }
 
     @SuppressLint("RestrictedApi")
@@ -241,19 +245,9 @@ public class FragmentVacationRecent
         });
     }
 
-
     @Override
     public void onVacationOperationComplete(long rowId) {
 
     }
 
-    @Override
-    public void onGetVacationDetailsComplete(Vacation v) {
-        viewModel.setSelectedVacation(v);
-    }
-
-    @Override
-    public void onGetVacationParticipants(List<Participant> participants) {
-        //todo non serve recuperare la lista dei partecipanti
-    }
 }

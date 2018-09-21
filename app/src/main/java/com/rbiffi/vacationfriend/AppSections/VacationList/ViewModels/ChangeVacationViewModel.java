@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -19,6 +20,8 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
 
     private VacationFriendRepository repository;
+
+    private LiveData<List<Participant>> currentParticipants;
 
     private String fieldTitle;
     private String fieldPeriodFrom;
@@ -48,7 +51,8 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         repository.insert(v);
     }
 
-    public void update(Vacation builtVacation) {
+    public void update(Vacation builtVacation, VacationFriendRepository.IRepositoryListener listener) {
+        repository.addListener(listener);
         repository.update(builtVacation);
     }
 
@@ -92,9 +96,10 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
         return fieldPhoto;
     }
 
-    public void updateFieldParticipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
-        repository.addListener(listener);
-        repository.getVacationParticipants(vacationId);
+    public LiveData<List<Participant>> loadFieldParticipants(long vacationId) {
+        if (currentParticipants == null)
+            currentParticipants = repository.getVacationParticipants(vacationId);
+        return currentParticipants;
     }
 
     public void setFieldParticipants(List<Participant> fieldParticipants) {

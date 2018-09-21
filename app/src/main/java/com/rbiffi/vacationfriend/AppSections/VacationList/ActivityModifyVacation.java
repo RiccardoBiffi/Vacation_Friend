@@ -1,9 +1,11 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ModifyVacationViewModel;
@@ -51,7 +53,13 @@ public class ActivityModifyVacation
             viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
             viewModel.setFieldPeriodTo(format.format(current.period.endDate));
             viewModel.setFieldPlace(current.place);
-            viewModel.updateFieldParticipants(viewModel.getVacationId(), this);
+            viewModel.loadFieldParticipants(viewModel.getVacationId()).observe(this, new Observer<List<Participant>>() {
+                @Override
+                public void onChanged(@Nullable List<Participant> participants) {
+                    viewModel.setFieldParticipants(participants);
+                    editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
+                }
+            });
             viewModel.setFieldPhoto(current.photo);
         }
     }
@@ -139,7 +147,7 @@ public class ActivityModifyVacation
         Period period = new Period(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo());
         Vacation builtVacation = new Vacation(viewModel.getFieldTitle(), period, viewModel.getFieldPlace(), viewModel.getFieldPhoto(), false);
         builtVacation.id = viewModel.getVacationId();
-        viewModel.update(builtVacation);
+        viewModel.update(builtVacation, this);
         finish();
     }
 
@@ -163,18 +171,7 @@ public class ActivityModifyVacation
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY + VACATION, rowId);
         setResult(RESULT_OK, replyIntent);
-        finish(); // restituisce il risultato a chi ha chiamato l'activity
-    }
-
-    @Override
-    public void onGetVacationDetailsComplete(Vacation v) {
-        //non necessario perchè la vacanza scelta arriva dall'intent. In caso fai 2+ interfacce del repository
-    }
-
-    @Override
-    public void onGetVacationParticipants(List<Participant> participants) {
-        viewModel.setFieldParticipants(participants);
-        editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
+        finish(); // restituisce l'id della vacanza modificata a chi ha chiamato l'activity
     }
 
 }

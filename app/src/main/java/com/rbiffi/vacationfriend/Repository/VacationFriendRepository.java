@@ -21,25 +21,22 @@ public class VacationFriendRepository {
 
         void onVacationOperationComplete(long rowId);
 
-        void onGetVacationDetailsComplete(Vacation v);
-
-        void onGetVacationParticipants(List<Participant> participants);
-
-
-
     }
+
+
     private static volatile VacationFriendRepository REPOSITORY = null;
     private IVacationDao vacationDao;
+
     private LiveData<List<Vacation>> vacationListNow;
-
     private LiveData<List<Vacation>> vacationListNext;
-
     private LiveData<List<Vacation>> vacationListPrevious;
     private LiveData<List<Vacation>> storedVacation;
     private IParticipantDao participantDao;
-
-    private LiveData<List<Participant>> participantList;
+    private LiveData<List<Participant>> allParticipantList;
     private IJoinVacationParticipantDao jVacationParticipantDao;
+
+    private LiveData<Vacation> currentVacation;
+    private LiveData<List<Participant>> currentParticipants;
 
     private static IRepositoryListener listener;
     private VacationFriendRepository(Application app) {
@@ -54,7 +51,7 @@ public class VacationFriendRepository {
         vacationListNext = vacationDao.getNextVacations();
         vacationListPrevious = vacationDao.getEndedVacations();
         storedVacation = vacationDao.getAchievedVacations();
-        participantList = participantDao.getAllParticipants();
+        allParticipantList = participantDao.getAllParticipants();
     }
 
     public static VacationFriendRepository getInstance(Application app) {
@@ -66,6 +63,16 @@ public class VacationFriendRepository {
             }
         }
         return REPOSITORY;
+    }
+
+    public LiveData<Vacation> getVacationDetails(long vId) {
+        currentVacation = vacationDao.getVacationDetails(vId);
+        return currentVacation;
+    }
+
+    public LiveData<List<Participant>> getVacationParticipants(long vId) {
+        currentParticipants = jVacationParticipantDao.getParticipantsForVacation(vId);
+        return currentParticipants;
     }
 
     public LiveData<List<Vacation>> getVacationListNow() {
@@ -84,8 +91,8 @@ public class VacationFriendRepository {
         return storedVacation;
     }
 
-    public LiveData<List<Participant>> getParticipantList() {
-        return participantList;
+    public LiveData<List<Participant>> getAllParticipantList() {
+        return allParticipantList;
     }
 
     public void insert(Vacation vacation) {
@@ -107,14 +114,6 @@ public class VacationFriendRepository {
 
     public void unstore(long vacationId) {
         new UnstoreAsyncTask(vacationDao).execute(vacationId);
-    }
-
-    public void getVacationDetails(long vId) {
-        new GetDetailsAsyncTask(vacationDao).execute(vId);
-    }
-
-    public void getVacationParticipants(long vId) {
-        new GetParticipantsAsyncTask(jVacationParticipantDao).execute(vId);
     }
 
     public void update(Vacation builtVacation) {
@@ -212,26 +211,6 @@ public class VacationFriendRepository {
         }
     }
 
-    private static class GetDetailsAsyncTask extends AsyncTask<Long, Void, Vacation> {
-
-        private IVacationDao asyncDao;
-
-        GetDetailsAsyncTask(IVacationDao vacationDao) {
-            asyncDao = vacationDao;
-        }
-
-        @Override
-        protected Vacation doInBackground(Long... vacationIds) {
-            return asyncDao.getVacationDetails(vacationIds[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Vacation vacation) {
-            super.onPostExecute(vacation);
-            listener.onGetVacationDetailsComplete(vacation);
-        }
-    }
-
     private static class UpdateAsyncTask extends AsyncTask<Vacation, Void, Long> {
 
         private IVacationDao asyncDao;
@@ -252,23 +231,4 @@ public class VacationFriendRepository {
         }
     }
 
-    private static class GetParticipantsAsyncTask extends AsyncTask<Long, Void, List<Participant>> {
-
-        private IJoinVacationParticipantDao asyncDao;
-
-        GetParticipantsAsyncTask(IJoinVacationParticipantDao vacationDao) {
-            asyncDao = vacationDao;
-        }
-
-        @Override
-        protected List<Participant> doInBackground(Long... vacationIds) {
-            return asyncDao.getParticipantsForVacation(vacationIds[0]);
-        }
-
-        @Override
-        protected void onPostExecute(List<Participant> participants) {
-            super.onPostExecute(participants);
-            listener.onGetVacationParticipants(participants);
-        }
-    }
 }

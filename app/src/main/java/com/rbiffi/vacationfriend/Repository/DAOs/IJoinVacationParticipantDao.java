@@ -1,5 +1,6 @@
 package com.rbiffi.vacationfriend.Repository.DAOs;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -21,7 +22,7 @@ public interface IJoinVacationParticipantDao {
             "INNER JOIN JoinVacationParticipant " +
             "ON Participant.email = JoinVacationParticipant.userEmail " +
             "WHERE JoinVacationParticipant.vacationId = :id")
-    List<Participant> getParticipantsForVacation(long id);
+    LiveData<List<Participant>> getParticipantsForVacation(long id);
 
 
     //INSERT

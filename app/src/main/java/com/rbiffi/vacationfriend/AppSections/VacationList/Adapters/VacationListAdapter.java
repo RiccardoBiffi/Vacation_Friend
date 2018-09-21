@@ -157,7 +157,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     @Override
     public int getItemCount() {
         int itemCount = 0;
-        if (vacationListNow == null && vacationListNext == null && vacationListPrevious == null)
+        if (isAllEmptyOrNull())
             return itemCount;
         if (vacationListNow != null && vacationListNow.size() != 0)
             itemCount += vacationListNow.size() + 1;
@@ -166,6 +166,11 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         if (vacationListPrevious != null && vacationListPrevious.size() != 0)
             itemCount += vacationListPrevious.size() + 1;
         return itemCount + 1; // +1 per il footer
+    }
+
+    private boolean isAllEmptyOrNull() {
+        return (vacationListNow == null && vacationListNext == null && vacationListPrevious == null) ||
+                (vacationListNow.size() == 0 && vacationListNext.size() == 0 && vacationListPrevious.size() == 0);
     }
 
     @Override
