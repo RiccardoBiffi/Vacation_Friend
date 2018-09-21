@@ -67,9 +67,8 @@ public class VacationListViewModel extends AndroidViewModel {
         repository.unstore(id);
     }
 
-    public void loadClickedVacation(long id, VacationFriendRepository.IRepositoryListener listener) {
-        repository.addListener(listener);
-        repository.getVacationDetails(id);
+    public LiveData<Vacation> loadClickedVacation(long id) {
+        return repository.getVacationDetails(id);
     }
 
     public Vacation getSelectedVacation() {

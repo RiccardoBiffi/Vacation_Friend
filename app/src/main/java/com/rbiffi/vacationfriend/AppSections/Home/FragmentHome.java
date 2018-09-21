@@ -1,6 +1,8 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -17,9 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityModifyVacation;
 import com.rbiffi.vacationfriend.R;
 
 public class FragmentHome extends Fragment {
+
+    private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
+
+    private VacationViewModel viewModel;
 
     private FragmentAdapter fragmentAdapter;
     private ViewPager viewPager;
@@ -34,6 +42,7 @@ public class FragmentHome extends Fragment {
         super.onCreate(savedInstanceState);
         // you should initialize essential components of the fragment that you want to retain when
         // the fragment is paused or stopped, then resumed.
+        viewModel = ViewModelProviders.of(getActivity()).get(VacationViewModel.class);
         setHasOptionsMenu(true); // il frammento può aggiungere voci al menù chiamando onCreateOptionsMenu
     }
 
@@ -50,12 +59,15 @@ public class FragmentHome extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.tabs_home_viewpager);
         tabLayout = view.findViewById(R.id.tabs_home);
 
         viewPager.setAdapter(fragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        getActivity().findViewById(R.id.fragment_home_vacation_progressbar).setVisibility(View.GONE);
     }
 
     @Override
@@ -89,7 +101,9 @@ public class FragmentHome extends Fragment {
         // todo opzioni mostrate dalla activity, gestite dai fragment
         switch (item.getItemId()) {
             case R.id.action_home_modifica:
-                Toast.makeText(getContext(), getString(R.string.op_modify) + " home", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ActivityModifyVacation.class);
+                intent.putExtra("selectedVacation", viewModel.getCurrentVacation().getValue());
+                startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                 return true;
             case R.id.action_home_synch:
                 Toast.makeText(getContext(), getString(R.string.op_synch) + " home", Toast.LENGTH_SHORT).show();

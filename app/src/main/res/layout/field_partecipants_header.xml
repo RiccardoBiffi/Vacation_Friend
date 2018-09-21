@@ -2,20 +2,17 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:id="@+id/participant_column_element"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="4dp">
+    android:padding="8dp"
+    android:id="@+id/participant_column_element">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/partecipant_field_picture"
         android:layout_width="56dp"
         android:layout_height="56dp"
 
-        android:src="@drawable/vacation_photo1"
+        android:src="@drawable/average_man"
         app:civ_border_color="@color/colorPrimaryDark"
         app:civ_border_width="2dp"
 
@@ -24,13 +21,13 @@
 
     <TextView
         android:id="@+id/partecipant_short_name"
-        style="@style/ParticipantShortName"
         android:layout_width="56dp"
-
         android:layout_height="wrap_content"
+
+        style="@style/ParticipantShortName"
         android:ellipsize="end"
         android:gravity="center"
-        android:text="@string/ph_name"
+        android:text="@string/my_self"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/partecipant_field_picture"

@@ -1,15 +1,15 @@
 package com.rbiffi.vacationfriend.AppSections.Home.Adapters;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ParticipantAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.ViewParticipantAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Utils.Constants;
@@ -39,17 +39,16 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
 
-
     private Context context;
     private VacationViewModel viewModel;
     private List<String> fieldList;
 
     private final LayoutInflater inflater;
     private IVacationListClickEvents listener;
-    private ParticipantAdapter fieldParticipantsAdapter;
+    private ViewParticipantAdapter fieldParticipantsAdapter;
 
     public ReadFieldListAdapter(Context context, List<String> fieldList, VacationViewModel viewModel) {
-        inflater = LayoutInflater.from(context);
+        this.inflater = LayoutInflater.from(context);
 
         this.context = context;
         this.fieldList = fieldList;
@@ -73,7 +72,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
                 view = inflater.inflate(R.layout.field_title, parent, false);
                 break;
         }
-        return new ReadFieldListAdapter.SummaryViewHolder(view);
+        return new SummaryViewHolder(view);
     }
 
     @Override
@@ -95,15 +94,18 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
                 break;
 
             case Constants.F_PARTECIP:
-                //todo rispetto al edit, il read dei partecipanti è in lista orizzontale
+                // todo se 1 partecipante solo, metti al singolare
                 holder.partecipantNumber.setText(String.format(Locale.getDefault(),
                         "%d %s",
-                        viewModel.getFieldParticipants().size(),
+                        viewModel.getParticipants().size() + 1,
                         context.getString(R.string.field_partic_number)));
 
-                fieldParticipantsAdapter = new ParticipantAdapter(context, R.layout.field_partecipants_column,
-                        viewModel.getFieldParticipants(), ParticipantAdapter.MODE_HORIZONTAL);
+                fieldParticipantsAdapter = new ViewParticipantAdapter(context, viewModel);
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
+
+                RecyclerView.LayoutManager llm = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                holder.partecipantListView.setLayoutManager(llm);
+
                 break;
 
             default:
@@ -167,7 +169,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
         private final TextView placeView;
 
         private TextView partecipantNumber;
-        private final ListView partecipantListView;
+        private final RecyclerView partecipantListView;
 
 
         SummaryViewHolder(View itemView) {

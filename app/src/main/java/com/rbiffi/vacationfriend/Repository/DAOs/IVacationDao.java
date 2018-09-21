@@ -17,7 +17,7 @@ public interface IVacationDao {
 
     //READ
     @Query("SELECT * FROM Vacation WHERE id = :id")
-    Vacation getVacationDetails(long id);
+    LiveData<Vacation> getVacationDetails(long id);
 
     @Query("SELECT * " +
             "FROM Vacation " +

@@ -1,20 +1,27 @@
 package com.rbiffi.vacationfriend.AppSections.Home.ViewModels;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
+import com.rbiffi.vacationfriend.Utils.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VacationViewModel extends AndroidViewModel {
+public class VacationViewModel extends UserViewModel {
 
     private VacationFriendRepository repository;
 
+    // oggetti aggiornati dal DB appena modificati
+    private LiveData<Vacation> currentVacation;
+    private LiveData<List<Participant>> currentParticipants;
+
+    // per persistere lo stato
     private long vacationId;
     private String fieldTitle;
     private String fieldPeriodFrom;
@@ -27,8 +34,7 @@ public class VacationViewModel extends AndroidViewModel {
         super(app);
         repository = VacationFriendRepository.getInstance(app);
 
-        //inizializzo i dati
-
+        //inizializzo i dati da persistere
         fieldTitle = "";
         fieldPeriodFrom = "";
         fieldPeriodTo = "";
@@ -37,12 +43,24 @@ public class VacationViewModel extends AndroidViewModel {
         fieldPhoto = Uri.parse("");
     }
 
+    public LiveData<Vacation> getCurrentVacation() {
+        return currentVacation;
+    }
+
     public long getVacationId() {
         return vacationId;
     }
 
     public void setVacationId(long vacationId) {
         this.vacationId = vacationId;
+
+        // ora che conosco l'ID della vacanza, posso caricare tutte le info relative
+        if (currentVacation == null)
+            currentVacation = repository.getVacationDetails(vacationId);
+        if (currentParticipants == null)
+            currentParticipants = repository.getVacationParticipants(vacationId);
+
+        //todo carica altre informazioni collegate alla vacanza
     }
 
     public String getFieldTitle() {
@@ -77,17 +95,16 @@ public class VacationViewModel extends AndroidViewModel {
         this.fieldPlace = fieldPlace;
     }
 
-    public List<Participant> getFieldParticipants() {
+    public LiveData<List<Participant>> getCurrentParticipants() {
+        return currentParticipants;
+    }
+
+    public List<Participant> getParticipants() {
         return fieldParticipants;
     }
 
-    public void setFieldParticipants(List<Participant> participants) {
+    public void setParticipants(List<Participant> participants) {
         this.fieldParticipants = participants;
-    }
-
-    public void updateFieldParticipants(long vacationId, VacationFriendRepository.IRepositoryListener listener) {
-        repository.addListener(listener);
-        repository.getVacationParticipants(vacationId);
     }
 
     public Uri getFieldPhoto() {
