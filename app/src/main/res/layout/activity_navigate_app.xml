@@ -20,7 +20,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="264dp"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/cardview_light_background">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbar"
@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
-                    android:background="@drawable/vacation_photo1"
+                    android:background="@drawable/vacation_default_photo"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/cr_vacation_header_image"
 

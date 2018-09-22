@@ -54,41 +54,6 @@ public class FragmentHomeSummary extends Fragment {
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
         //viewModel = ViewModelProviders.of(this).get(summaryListViewModel.class);
-
-        // osservo il livedata per reagire quando i dati cambiano
-        /*
-        viewModel.getVacationsNow().observe(this, new Observer<List<VacationLite>>() {
-            @Override
-            public void onChanged(@Nullable final List<VacationLite> vacationsNow) {
-                viewModel.getVacationsNext().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
-                    @Override
-                    public void onChanged(@Nullable final List<VacationLite> vacationsNext) {
-                        viewModel.getVacationsPrevious().observe(FragmentVacationRecent.this, new Observer<List<VacationLite>>() {
-                            @Override
-                            public void onChanged(@Nullable List<VacationLite> vacationsPrevious) {
-                                if (vacationsNow != null && !vacationsNow.isEmpty() ||
-                                        vacationsNext != null && !vacationsNext.isEmpty() ||
-                                        vacationsPrevious != null && !vacationsPrevious.isEmpty()) {
-                                    emptyListTutorial.setVisibility(View.GONE);
-                                } else {
-                                    emptyListTutorial.setVisibility(View.VISIBLE);
-                                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
-                                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
-                                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
-                                    arrow.startAnimation(rotation);
-                                }
-                                progressBar.setVisibility(View.GONE);
-                                vacationAdapter.setAllVacations(vacationsNow, vacationsNext, vacationsPrevious);
-                            }
-                        });
-                    }
-                });
-
-            }
-        });
-        */
-
-        //progressBar.setVisibility(View.VISIBLE);
     }
 
 

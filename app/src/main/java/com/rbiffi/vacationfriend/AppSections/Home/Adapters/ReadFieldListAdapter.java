@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,8 +52,17 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
         this.inflater = LayoutInflater.from(context);
 
         this.context = context;
-        this.fieldList = fieldList;
         this.viewModel = viewModel;
+        this.fieldList = removeEmptyFields(fieldList);
+    }
+
+    private List<String> removeEmptyFields(List<String> fieldList) {
+        List<String> valuedFields = new LinkedList<>(fieldList);
+
+        if (viewModel.getFieldPlace().isEmpty())
+            valuedFields.remove(Constants.F_PLACE);
+
+        return valuedFields;
     }
 
     @Override
@@ -118,7 +128,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
         Date toDate = formattedStringToDate(fieldPeriodTo);
         LocalDate from = new LocalDate(fromDate);
         LocalDate to = new LocalDate(toDate);
-        return Days.daysBetween(from, to).getDays();
+        return Days.daysBetween(from, to).getDays() + 1; // +1 per renderlo inclusivo
     }
 
     private Date formattedStringToDate(String value) {

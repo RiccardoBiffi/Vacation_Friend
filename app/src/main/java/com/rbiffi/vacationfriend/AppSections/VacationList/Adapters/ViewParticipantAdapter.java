@@ -17,9 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipantAdapter.ParticipantViewHolder> {
 
-    //private static final int VIEW_TYPE_HEADER = 0;
-    private static final int VIEW_TYPE_OBJECT = 1;
-    //private static final int VIEW_TYPE_FOOTER = 2;
+    private static final int VIEW_TYPE_OBJECT = 0;
 
     private final Context context;
     private final List<Participant> participants;
@@ -39,19 +37,9 @@ public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipant
     public ParticipantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
-            /*
-            case VIEW_TYPE_HEADER:
-                view = inflater.inflate(R.layout.field_partecipants_header, parent, false);
-                break;
-            */
             case VIEW_TYPE_OBJECT:
                 view = inflater.inflate(R.layout.field_partecipants_column, parent, false);
                 break;
-                /*
-            case VIEW_TYPE_FOOTER:
-                view = inflater.inflate(R.layout.field_partecipants_footer, parent, false);
-                break;
-                */
             default:
                 view = inflater.inflate(R.layout.field_partecipants_column, parent, false);
                 break;
@@ -74,7 +62,7 @@ public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipant
 
     @Override
     public int getItemCount() {
-        return participants.size() + 1; // lista con header (ed eventuale footer se non riesco a scorrere)
+        return participants.size() + 1; // lista con header
     }
 
     @Override
