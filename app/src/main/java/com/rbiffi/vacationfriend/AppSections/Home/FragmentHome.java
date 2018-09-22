@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -111,6 +112,14 @@ public class FragmentHome extends Fragment {
             default:
                 // per gestire eventuali voci di menù extra
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
+            fragmentAdapter.notifyDataSetChanged();
         }
     }
 

@@ -263,7 +263,6 @@ public class ActivityVacation
         }
     }
 
-
     @Override
     public void onVacationOperationComplete(long rowId) {
 
