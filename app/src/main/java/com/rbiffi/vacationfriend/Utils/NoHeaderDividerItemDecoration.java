@@ -5,11 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class NoHeaderDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable divider;
 
-    public MyDividerItemDecoration(Drawable divider) {
+    public NoHeaderDividerItemDecoration(Drawable divider) {
         this.divider = divider;
     }
 
@@ -21,7 +21,7 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
         int childCount = parent.getChildCount();
 
         // per rimuovere il divider dopo l'ultimo elemento
-        for (int i = 0; i <= childCount - 2; i++) {
+        for (int i = 1; i <= childCount - 1; i++) {
             View child = parent.getChildAt(i);
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();

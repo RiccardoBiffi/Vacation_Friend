@@ -205,7 +205,7 @@ public abstract class ActivityEditAppObject
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
-        vacationFieldsList.addItemDecoration(new MyDividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(), R.drawable.list_divider)));
+        vacationFieldsList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(), R.drawable.list_divider)));
         editFieldListAdapter = createFieldAdapter();
         editFieldListAdapter.setListener(this);
         vacationFieldsList.setAdapter(editFieldListAdapter);

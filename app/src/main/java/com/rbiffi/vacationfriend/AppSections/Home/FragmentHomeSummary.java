@@ -16,7 +16,7 @@ import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
-import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
+import com.rbiffi.vacationfriend.Utils.NoFooterDividerItemDecoration;
 
 public class FragmentHomeSummary extends Fragment {
 
@@ -42,18 +42,14 @@ public class FragmentHomeSummary extends Fragment {
 
     private void setupListWithAdapter() {
         summaryList = getView().findViewById(R.id.summaryList);
-        summaryList.addItemDecoration(new MyDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
+        summaryList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
 
 
         vacationAdapter = new ReadFieldListAdapter(getContext(), FieldLists.getReadFieldList(Vacation.class), viewModel);
-        //vacationAdapter.setListener(this);
         summaryList.setAdapter(vacationAdapter);
 
         vacationLayout = new LinearLayoutManager(getContext());
         summaryList.setLayoutManager(vacationLayout);
-
-        // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
-        //viewModel = ViewModelProviders.of(this).get(summaryListViewModel.class);
     }
 
 

@@ -33,7 +33,6 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private List<Vacation> vacationListNext;
     private List<Vacation> vacationListPrevious;
 
-
     public VacationListAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -51,7 +50,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         View view;
         switch (viewType) {
             case VIEW_TYPE_HEADER:
-                view = inflater.inflate(R.layout.vacationlist_list_header, parent, false);
+                view = inflater.inflate(R.layout.list_section_divider, parent, false);
                 break;
             case VIEW_TYPE_OBJECT_VIEW:
                 view = inflater.inflate(R.layout.vacationlist_list_row, parent, false);
@@ -248,7 +247,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
             vacationTitleView = itemView.findViewById(R.id.vacation_title);
             vacationImageView = itemView.findViewById(R.id.vacation_image);
             vacationOverflow = itemView.findViewById(R.id.vacation_oveflow_menu);
-            vacationHeaderView = itemView.findViewById(R.id.vacationlist_header);
+            vacationHeaderView = itemView.findViewById(R.id.list_section_header);
         }
     }
 

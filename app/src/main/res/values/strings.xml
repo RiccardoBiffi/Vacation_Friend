@@ -86,4 +86,11 @@
     <string name="field_partic_number">participants</string>
     <string name="field_period_days">days</string>
     <string name="ph_lastname">Lastname</string>
+    <string name="ptutorial_chat_whatsee">The chat list will be shown here.\nIt will update automatically.</string>
+    <string name="activitylog_header_today">Today\'s activities</string>
+    <string name="ph_activity_description">Activity description</string>
+    <string name="ph_time_of_day">hh:mm</string>
+    <string name="ph_activitylog_edit_period">has edited the start of the vacation from dd/mm to dd/mm</string>
+    <string name="ph_activitylog_edit_participants">has added N participants</string>
+    <string name="ph_activitylog_edit_vacation">has created the vacation Vacation Title</string>
 </resources>
