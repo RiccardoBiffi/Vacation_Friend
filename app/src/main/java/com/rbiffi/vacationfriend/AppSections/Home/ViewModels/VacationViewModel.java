@@ -2,24 +2,32 @@ package com.rbiffi.vacationfriend.AppSections.Home.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.ActivityLog;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Discussion;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
+import com.rbiffi.vacationfriend.Utils.Converters;
 import com.rbiffi.vacationfriend.Utils.UserViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VacationViewModel extends UserViewModel {
 
     private VacationFriendRepository repository;
 
-    // oggetti aggiornati dal DB appena modificati
+    // oggetti aggiornati dal DB quando modificati
     private LiveData<Vacation> currentVacation;
     private LiveData<List<Participant>> currentParticipants;
+    private LiveData<List<Discussion>> discussions;
+    private LiveData<List<ActivityLog>> activityLog;
 
     // per persistere lo stato
     private long vacationId;
@@ -60,7 +68,38 @@ public class VacationViewModel extends UserViewModel {
         if (currentParticipants == null)
             currentParticipants = repository.getVacationParticipants(vacationId);
 
+        // test todo recuperare da repository le discussioni con LiveData
+        discussions = testCreateDiscussions();
+
+        // test todo recuperare da repository le discussioni con LiveData
+        activityLog = testCreateActivityLogs();
+
         //todo carica altre informazioni collegate alla vacanza
+    }
+
+    private LiveData<List<Discussion>> testCreateDiscussions() {
+        MutableLiveData<List<Discussion>> mld = new MutableLiveData<>();
+
+        mld.setValue(null);
+        return mld;
+    }
+
+    private LiveData<List<ActivityLog>> testCreateActivityLogs() {
+        MutableLiveData<List<ActivityLog>> mall = new MutableLiveData<>();
+        List<ActivityLog> all = new ArrayList<>();
+
+        ActivityLog al = new ActivityLog(0, vacationId, Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.average_man),
+                getApplication().getResources().getString(R.string.ph_activitylog_edit_period), new Date());
+        all.add(al);
+        al = new ActivityLog(1, vacationId, Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.average_man),
+                getApplication().getResources().getString(R.string.ph_activitylog_edit_participants), new Date());
+        all.add(al);
+        al = new ActivityLog(2, vacationId, Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.average_man),
+                getApplication().getResources().getString(R.string.ph_activitylog_edit_vacation), new Date());
+        all.add(al);
+
+        mall.setValue(all);
+        return mall;
     }
 
     public String getFieldTitle() {
@@ -113,5 +152,13 @@ public class VacationViewModel extends UserViewModel {
 
     public void setFieldPhoto(Uri fieldPhoto) {
         this.fieldPhoto = fieldPhoto;
+    }
+
+    public LiveData<List<Discussion>> getDiscussions() {
+        return discussions;
+    }
+
+    public LiveData<List<ActivityLog>> getActivityLog() {
+        return activityLog;
     }
 }

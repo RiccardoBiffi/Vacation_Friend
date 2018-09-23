@@ -69,4 +69,20 @@
     <string name="expenses_tag_debts">Debiti</string>
     <string name="expenses_tag_resolution">Risoluzione</string>
     <string name="activity_title_modify_vacation">Modifica vacanza</string>
+    <string name="ph_activitylog_edit_period">ha modificato l\'inizio della vacanza dal gg/mm al gg/mm</string>
+    <string name="ph_activitylog_edit_participants">ha aggiunto N partecipanti</string>
+    <string name="ph_activitylog_edit_vacation">ha creato la vacanza Vacation Title</string>
+    <string name="ph_activity_description">Descrizione dell\'attività</string>
+    <string name="activitylog_header_today">Attività di oggi</string>
+    <string name="ptutorial_chat_whatsee">La lista delle discussioni verrà mostrata qui. Si aggiornerà automaticamente.</string>
+    <string name="ph_time_of_day">hh:mm</string>
+    <string name="ph_expenses_image_description">Immagine delle spese</string>
+    <string name="ph_lists_image_description">Immagine delle liste</string>
+    <string name="ph_route_image_description">Immagine dell\'itinerario</string>
+    <string name="cr_vacation_header_image">Intestazione con l\'immagine della vacanza</string>
+    <string name="field_title_ob">Titolo</string>
+    <string name="ph_name">Nome</string>
+    <string name="field_partic_number">partecipanti</string>
+    <string name="field_period_days">giorni</string>
+    <string name="ph_lastname">Cognome</string>
 </resources>
