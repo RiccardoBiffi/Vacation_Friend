@@ -12,5 +12,5 @@
     android:focusable="true"
 
     android:src="@drawable/ic_add_white_24px"
-    app:fabSize="mini"
+    app:fabSize="normal"
     />

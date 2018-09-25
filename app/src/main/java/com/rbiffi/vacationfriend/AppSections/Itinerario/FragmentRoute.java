@@ -42,15 +42,6 @@ public class FragmentRoute extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment f = new FragmentRouteList();
-
-        fragmentTransaction.replace(R.id.fragment_route_list, f);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-        */
     }
 
     @Override
