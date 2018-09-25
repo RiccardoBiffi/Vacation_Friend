@@ -10,6 +10,7 @@ import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.ActivityLog;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Discussion;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.Converters;
@@ -37,6 +38,7 @@ public class VacationViewModel extends UserViewModel {
     private String fieldPlace;
     private List<Participant> fieldParticipants;
     private Uri fieldPhoto;
+    private LiveData<List<Step>> route;
 
     public VacationViewModel(@NonNull Application app) {
         super(app);
@@ -65,6 +67,7 @@ public class VacationViewModel extends UserViewModel {
         // ora che conosco l'ID della vacanza, posso caricare tutte le info relative
         if (currentVacation == null)
             currentVacation = repository.getVacationDetails(vacationId);
+
         if (currentParticipants == null)
             currentParticipants = repository.getVacationParticipants(vacationId);
 
@@ -160,5 +163,9 @@ public class VacationViewModel extends UserViewModel {
 
     public LiveData<List<ActivityLog>> getActivityLog() {
         return activityLog;
+    }
+
+    public LiveData<List<Step>> getRoute() {
+        return route;
     }
 }
