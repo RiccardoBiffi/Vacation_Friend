@@ -85,4 +85,5 @@
     <string name="field_partic_number">partecipanti</string>
     <string name="field_period_days">giorni</string>
     <string name="ph_lastname">Cognome</string>
+    <string name="ph_stop">Destinazione</string>
 </resources>

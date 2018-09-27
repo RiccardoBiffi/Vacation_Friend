@@ -93,4 +93,12 @@
     <string name="ph_activitylog_edit_period">has edited the start of the vacation from dd/mm to dd/mm</string>
     <string name="ph_activitylog_edit_participants">has added N participants</string>
     <string name="ph_activitylog_edit_vacation">has created the vacation Vacation Title</string>
+    <string name="ph_stop">Stop</string>
+    <string name="ph_stop_time">hh:mm ~ hh:mm</string>
+    <string name="ph_route_location">Adress Street nn, City Name, State</string>
+    <string name="ph_route_title">Title</string>
+    <string name="ph_vehicle_time">mm min</string>
+    <string name="ph_vehicle_distance">n.n km</string>
+    <string name="ph_vehicle_label">Vehicle</string>
+    <string name="cd_route_vehicle">Vehicle icon</string>
 </resources>
