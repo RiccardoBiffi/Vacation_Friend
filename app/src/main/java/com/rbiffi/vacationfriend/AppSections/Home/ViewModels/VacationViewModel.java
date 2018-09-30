@@ -29,6 +29,7 @@ public class VacationViewModel extends UserViewModel {
     private LiveData<List<Participant>> currentParticipants;
     private LiveData<List<Discussion>> discussions;
     private LiveData<List<ActivityLog>> activityLog;
+    private LiveData<List<Step>> currentRoute;
 
     // per persistere lo stato
     private long vacationId;
@@ -38,7 +39,6 @@ public class VacationViewModel extends UserViewModel {
     private String fieldPlace;
     private List<Participant> fieldParticipants;
     private Uri fieldPhoto;
-    private LiveData<List<Step>> route;
 
     public VacationViewModel(@NonNull Application app) {
         super(app);
@@ -76,6 +76,9 @@ public class VacationViewModel extends UserViewModel {
 
         // test todo recuperare da repository le discussioni con LiveData
         activityLog = testCreateActivityLogs();
+
+        if (currentRoute == null)
+            currentRoute = repository.getVacationRoute(vacationId);
 
         //todo carica altre informazioni collegate alla vacanza
     }
@@ -166,6 +169,6 @@ public class VacationViewModel extends UserViewModel {
     }
 
     public LiveData<List<Step>> getRoute() {
-        return route;
+        return currentRoute;
     }
 }
