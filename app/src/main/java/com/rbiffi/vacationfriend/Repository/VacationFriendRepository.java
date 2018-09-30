@@ -9,6 +9,7 @@ import com.rbiffi.vacationfriend.Repository.DAOs.IParticipantDao;
 import com.rbiffi.vacationfriend.Repository.DAOs.IVacationDao;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Utils.JoinVacationParticipantListWrapper;
 
@@ -37,6 +38,7 @@ public class VacationFriendRepository {
 
     private LiveData<Vacation> currentVacation;
     private LiveData<List<Participant>> currentParticipants;
+    private LiveData<List<Step>> currentRoute;
 
     private static IRepositoryListener listener;
     private VacationFriendRepository(Application app) {
@@ -73,6 +75,11 @@ public class VacationFriendRepository {
     public LiveData<List<Participant>> getVacationParticipants(long vId) {
         currentParticipants = jVacationParticipantDao.getParticipantsForVacation(vId);
         return currentParticipants;
+    }
+
+    public LiveData<List<Step>> getVacationRoute(long vId) {
+        // todo leggili dal DB o costruiscili ad hoc (ad hoc nel viewmodel, DB qui)
+        return null;
     }
 
     public LiveData<List<Vacation>> getVacationListNow() {

@@ -5,11 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
 
 import java.util.List;
 
-public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder> {
+public class RouteAdapter
+        extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder>
+        implements
+        StickyHeaderHandler {
 
     private static final int VIEW_TYPE_STOP_VIEW = 0;
     private static final int VIEW_TYPE_VEHICLE_VIEW = 1;
@@ -36,6 +40,11 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    @Override
+    public List<?> getAdapterData() { // stiky header
+        return null;
     }
 
     public class RouteViewHolder extends RecyclerView.ViewHolder {

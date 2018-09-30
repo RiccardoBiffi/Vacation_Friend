@@ -101,4 +101,5 @@
     <string name="ph_vehicle_distance">n.n km</string>
     <string name="ph_vehicle_label">Vehicle</string>
     <string name="cd_route_vehicle">Vehicle icon</string>
+    <string name="ph_route_day">Weekday DD month YYYY</string>
 </resources>

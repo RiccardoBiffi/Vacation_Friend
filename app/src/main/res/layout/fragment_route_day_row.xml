@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:text="@string/ph_route_day"
+    style="@style/Subfields"
+    android:theme="@style/Base.V22.Theme.AppCompat.Light"
+    android:gravity="center"
+    android:background="@drawable/shape_route_day" />
