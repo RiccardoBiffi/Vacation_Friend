@@ -21,6 +21,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
 
     private static final int VIEW_TYPE_OBJECT_VIEW = 0;
     private static final int VIEW_TYPE_HEADER = 1;
+
     private static final int HEADERS_NUM = 1;
 
     private final LayoutInflater inflater;
