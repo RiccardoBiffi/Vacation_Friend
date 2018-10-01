@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import java.sql.Time;
 import java.util.Date;
 
-class Stop {
+public class Stop extends RouteElement {
 
     public long vacationId;
 

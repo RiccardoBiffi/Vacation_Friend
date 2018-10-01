@@ -2,7 +2,7 @@ package com.rbiffi.vacationfriend.Repository.Entities_POJOs;
 
 import android.net.Uri;
 
-class Vehicle {
+public class Vehicle extends RouteElement {
 
     public long id;
     public String title;

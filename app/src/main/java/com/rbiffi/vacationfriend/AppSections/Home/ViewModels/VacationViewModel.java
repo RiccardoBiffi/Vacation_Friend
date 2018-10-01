@@ -11,11 +11,14 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.ActivityLog;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Discussion;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Stop;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vehicle;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.Converters;
 import com.rbiffi.vacationfriend.Utils.UserViewModel;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,13 +75,16 @@ public class VacationViewModel extends UserViewModel {
             currentParticipants = repository.getVacationParticipants(vacationId);
 
         // test todo recuperare da repository le discussioni con LiveData
-        discussions = testCreateDiscussions();
+        if (discussions == null)
+            discussions = testCreateDiscussions();
 
-        // test todo recuperare da repository le discussioni con LiveData
-        activityLog = testCreateActivityLogs();
+        // test todo recuperare da repository le attività con LiveData
+        if (activityLog == null)
+            activityLog = testCreateActivityLogs();
 
+        // test todo recuperare da repository l'itinerario con LiveData
         if (currentRoute == null)
-            currentRoute = repository.getVacationRoute(vacationId);
+            currentRoute = testCreateRoute(); // repository.getVacationRoute(vacationId)
 
         //todo carica altre informazioni collegate alla vacanza
     }
@@ -106,6 +112,67 @@ public class VacationViewModel extends UserViewModel {
 
         mall.setValue(all);
         return mall;
+    }
+
+    private LiveData<List<Step>> testCreateRoute() {
+        MutableLiveData<List<Step>> msl = new MutableLiveData<>();
+        List<Step> sl = new ArrayList<>();
+
+        Uri uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_home_white_24dp);
+        Stop stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+                Converters.timestampToDate("2018-10-01"), Time.valueOf("10:15:00"), Time.valueOf("12:30:00"),
+                uri, "Note: tanta fame!");
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_black_24dp);
+        Vehicle vehicle = new Vehicle("Car", uri);
+        Step step = new Step();
+        step.setStopPlace(stop);
+        step.setVehicleToNextStop(vehicle);
+        sl.add(step);
+
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_restaurant_black_24dp);
+        stop = new Stop("Ristorante", "via Turismo 12, Rovigno, Croazia",
+                Converters.timestampToDate("2018-10-01"), Time.valueOf("12:45:00"), Time.valueOf("14:30:00"),
+                uri, "Gnam!");
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_walk_black_24dp);
+        vehicle = new Vehicle("Foot", uri);
+        step = new Step();
+        step.setStopPlace(stop);
+        step.setVehicleToNextStop(vehicle);
+        sl.add(step);
+
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_beach_access_black_24dp);
+        stop = new Stop("Spiaggia", "via Acquatica 97, Pola, Croazia",
+                Converters.timestampToDate("2018-10-01"), Time.valueOf("15:10:00"), Time.valueOf("19:00:00"),
+                uri, "Nuotata con scogli");
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_train_black_24dp);
+        vehicle = new Vehicle("Train", uri);
+        step = new Step();
+        step.setStopPlace(stop);
+        step.setVehicleToNextStop(vehicle);
+        sl.add(step);
+
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_hotel_black_24dp);
+        stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+                Converters.timestampToDate("2018-10-01"), Time.valueOf("22:00:00"), null,
+                uri, "Tanta nanna");
+        vehicle = null;
+        step = new Step();
+        step.setStopPlace(stop);
+        step.setVehicleToNextStop(vehicle);
+        sl.add(step);
+
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_hotel_black_24dp);
+        stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+                Converters.timestampToDate("2018-10-03"), null, Time.valueOf("09:00:00"),
+                uri, "New day of fun!");
+        vehicle = null;
+        step = new Step();
+        step.setStopPlace(stop);
+        step.setVehicleToNextStop(vehicle);
+        sl.add(step);
+
+        msl.setValue(sl);
+        return msl;
     }
 
     public String getFieldTitle() {

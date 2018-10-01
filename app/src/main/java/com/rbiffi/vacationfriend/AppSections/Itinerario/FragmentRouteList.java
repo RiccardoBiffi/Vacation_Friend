@@ -45,17 +45,14 @@ public class FragmentRouteList extends Fragment {
     private void setupListWithAdapter() {
         routeList = getView().findViewById(R.id.routeList);
         routeList.addItemDecoration(new NoHeaderDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
-        routeLayout = new StickyLayoutManager(getContext(), routeAdapter);
-        routeList.setLayoutManager(routeLayout);
 
         viewModel.getRoute().observe(this, new Observer<List<Step>>() {
             @Override
             public void onChanged(@Nullable List<Step> steps) {
-                // todo devo elaborare la lista degli step prima di darla all'adapter
-                // in particolare devo aggiungere i giorni e marcarli come stickyheader
-                // e creare una riga per l'elemento stop + una per l'elemento vehicle
                 routeAdapter = new RouteAdapter(getContext(), steps);
                 routeList.setAdapter(routeAdapter);
+                routeLayout = new StickyLayoutManager(getContext(), routeAdapter);
+                routeList.setLayoutManager(routeLayout);
             }
         });
     }
