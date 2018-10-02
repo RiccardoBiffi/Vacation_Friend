@@ -14,8 +14,8 @@
         android:layout_height="88dp"
         android:background="@color/colorPrimary"
         app:layout_constrainedHeight="false"
-        app:layout_constraintEnd_toEndOf="@+id/route_stop_icon"
-        app:layout_constraintStart_toStartOf="@+id/route_stop_icon" />
+        app:layout_constraintEnd_toEndOf="@id/route_stop_icon"
+        app:layout_constraintStart_toStartOf="@id/route_stop_icon" />
 
     <ImageView
         android:id="@+id/route_stop_icon"
@@ -38,14 +38,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
 
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:maxWidth="200dp"
         android:maxLines="1"
         android:text="@string/ph_route_title"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintStart_toEndOf="@+id/route_vertical_barrier"
+        app:layout_constraintBottom_toTopOf="@+id/route_horizontal_barrier"
+        app:layout_constraintStart_toEndOf="@id/route_vertical_barrier"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -54,12 +58,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/ph_stop_time"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintBaseline_toBaselineOf="@+id/route_stop_label"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/route_horizontal_barrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/route_more_icon"
@@ -80,10 +87,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_location_on_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/route_vertical_barrier" />
+        app:layout_constraintStart_toEndOf="@id/route_vertical_barrier" />
 
     <TextView
         android:id="@+id/route_stop_location"
@@ -99,8 +108,8 @@
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/route_location_icon"
-        app:layout_constraintTop_toTopOf="@+id/route_location_icon" />
+        app:layout_constraintStart_toEndOf="@id/route_location_icon"
+        app:layout_constraintTop_toTopOf="@id/route_location_icon" />
 
     <android.support.constraint.Barrier
         android:id="@+id/route_vertical_barrier"

@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="72dp">
+    android:layout_height="88dp">
 
     <View
         android:id="@+id/route_street"
@@ -18,8 +18,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,10 +27,10 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
 
         android:background="@drawable/shape_route_vehicle"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +46,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="@string/cd_route_vehicle"
-            android:src="@drawable/ic_location_on_black_24dp"
 
+            android:src="@drawable/ic_location_on_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,19 +60,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:ellipsize="end"
             android:maxWidth="200dp"
+
             android:maxLines="1"
             android:text="@string/ph_vehicle_label"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/route_vehicle_icon"
+            app:layout_constraintBottom_toBottomOf="@id/route_vehicle_icon"
             app:layout_constraintStart_toEndOf="@id/route_vehicle_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/route_vehicle_icon" />
 
         <TextView
-            android:id="@+id/route_distance_label"
+            android:id="@+id/route_vehicle_distance"
             style="@style/FieldDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +88,7 @@
 
 
         <TextView
-            android:id="@+id/route_time_label"
+            android:id="@+id/route_vehicle_time"
             style="@style/FieldDescription"
 
             android:layout_width="wrap_content"
