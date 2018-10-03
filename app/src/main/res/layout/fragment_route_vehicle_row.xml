@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="@+id/route_vehicle_icon" />
 
         <TextView
-            android:id="@+id/route_vehicle_distance"
+            android:id="@+id/route_vehicle_time"
             style="@style/FieldDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 
 
         <TextView
-            android:id="@+id/route_vehicle_time"
+            android:id="@+id/route_vehicle_distance"
             style="@style/FieldDescription"
 
             android:layout_width="wrap_content"

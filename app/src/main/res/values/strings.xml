@@ -94,12 +94,14 @@
     <string name="ph_activitylog_edit_participants">has added N participants</string>
     <string name="ph_activitylog_edit_vacation">has created the vacation Vacation Title</string>
     <string name="ph_stop">Stop</string>
-    <string name="ph_stop_time">hh:mm ~ hh:mm</string>
-    <string name="ph_route_location">Adress Street nn, City Name, State</string>
+    <string name="ph_stop_time" translatable="false">hh:mm ~ hh:mm</string>
+    <string name="ph_route_location">Address Street nn, City Name, State</string>
     <string name="ph_route_title">Title</string>
-    <string name="ph_vehicle_time">mm min</string>
-    <string name="ph_vehicle_distance">n.n km</string>
+    <string name="ph_vehicle_time" translatable="false">mm min</string>
+    <string name="ph_vehicle_distance" translatable="false">n.n km</string>
     <string name="ph_vehicle_label">Vehicle</string>
     <string name="cd_route_vehicle">Vehicle icon</string>
     <string name="ph_route_day">Weekday DD month YYYY</string>
+    <string name="route_stop_departure">Departure at %s</string>
+    <string name="route_stop_arrival">Arrival at %s</string>
 </resources>

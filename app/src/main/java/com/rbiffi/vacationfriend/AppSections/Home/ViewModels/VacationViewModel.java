@@ -120,7 +120,7 @@ public class VacationViewModel extends UserViewModel {
 
         Uri uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_home_white_24dp);
         Stop stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
-                Converters.timestampToDate("2018-10-01"), Time.valueOf("10:15:00"), Time.valueOf("12:30:00"),
+                Converters.timestampToDate("2018-10-01"), null, Time.valueOf("12:30:00"),
                 uri, "Note: tanta fame!");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_black_24dp);
         Vehicle vehicle = new Vehicle("Car", uri);

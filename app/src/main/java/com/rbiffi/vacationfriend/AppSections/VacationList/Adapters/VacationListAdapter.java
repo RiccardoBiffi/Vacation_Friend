@@ -50,13 +50,13 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
         View view;
         switch (viewType) {
             case VIEW_TYPE_HEADER:
-                view = inflater.inflate(R.layout.list_section_divider, parent, false);
+                view = inflater.inflate(R.layout.lists_section_divider, parent, false);
                 break;
             case VIEW_TYPE_OBJECT_VIEW:
                 view = inflater.inflate(R.layout.vacationlist_list_row, parent, false);
                 break;
             case VIEW_TYPE_FOOTER:
-                view = inflater.inflate(R.layout.vacationlist_list_footer, parent, false);
+                view = inflater.inflate(R.layout.lists_space_footer, parent, false);
                 break;
             default:
                 view = inflater.inflate(R.layout.vacationlist_list_row, parent, false);

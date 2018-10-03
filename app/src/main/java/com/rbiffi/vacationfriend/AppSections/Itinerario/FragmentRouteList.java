@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,6 @@ import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.Itinerario.Adapters.RouteAdapter;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
-import com.rbiffi.vacationfriend.Utils.NoHeaderDividerItemDecoration;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class FragmentRouteList extends Fragment {
 
     private void setupListWithAdapter() {
         routeList = getView().findViewById(R.id.routeList);
-        routeList.addItemDecoration(new NoHeaderDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
+        routeList.addItemDecoration(new DividerItemDecoration(getContext(), 0));
 
         viewModel.getRoute().observe(this, new Observer<List<Step>>() {
             @Override
@@ -53,6 +52,7 @@ public class FragmentRouteList extends Fragment {
                 routeList.setAdapter(routeAdapter);
                 routeLayout = new StickyLayoutManager(getContext(), routeAdapter);
                 routeList.setLayoutManager(routeLayout);
+                routeAdapter.setListLayout(routeLayout);
             }
         });
     }
