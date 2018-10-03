@@ -15,6 +15,7 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.RouteElement;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Step;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Stop;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vehicle;
+import com.rbiffi.vacationfriend.Utils.Converters;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,18 +25,18 @@ public class RouteAdapter
         extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder>
         implements
         StickyHeaderHandler {
-
     private static final int VIEW_TYPE_STOP_VIEW = 0;
+
     private static final int VIEW_TYPE_VEHICLE_VIEW = 1;
     private static final int VIEW_TYPE_STOP_HEADER = 2;
     private static final int VIEW_TYPE_STOP_FOOTER = 3;
     private static final int VIEW_TYPE_DAY = 4;
-
-    private int HEADERS_NUM;
+    private static final int VIEW_TYPE_FOOTER = 5;
 
     private final LayoutInflater inflater;
     private final Context context;
     private final List<RouteElement> route;
+    private RecyclerView.LayoutManager recyclerLayout;
 
     public RouteAdapter(Context context, List<Step> steps) {
         super();
@@ -43,6 +44,10 @@ public class RouteAdapter
 
         this.context = context;
         this.route = buildRouteList(steps);
+    }
+
+    public void setListLayout(RecyclerView.LayoutManager routeLayout) {
+        this.recyclerLayout = routeLayout;
     }
 
     private List<RouteElement> buildRouteList(List<Step> steps) {
@@ -61,7 +66,7 @@ public class RouteAdapter
                 result.add(day);
             }
             result.add(stop);
-            result.add(vehicle);
+            if (vehicle != null) result.add(vehicle);
         }
 
         return result;
@@ -86,6 +91,9 @@ public class RouteAdapter
             case VIEW_TYPE_DAY:
                 view = inflater.inflate(R.layout.fragment_route_day_row, parent, false);
                 break;
+            case VIEW_TYPE_FOOTER:
+                view = inflater.inflate(R.layout.lists_space_footer, parent, false);
+                break;
             default:
                 view = inflater.inflate(R.layout.fragment_route_stop_row, parent, false);
                 break;
@@ -97,16 +105,28 @@ public class RouteAdapter
     public void onBindViewHolder(RouteViewHolder holder, int position) {
         //todo prendi l'elemento in posizione position e controlla il suo tipo per capire cosa fare.
         // inoltre se è in posizione 1 e size(), sono header e footer
+
+        if (position >= route.size()) {
+            ViewGroup.LayoutParams layoutParams = holder.spaceFooter.getLayoutParams();
+            layoutParams.height += Converters.convertDpToPixel(16);
+            return;
+        }
+
         RouteElement re = route.get(position);
         if (re instanceof Stop) {
-            //if(position == 1){}
-            //if(position == route.size()-1) return VIEW_TYPE_STOP_FOOTER; // todo ogni gorno ha un footer?
             Stop stop = (Stop) re;
             holder.stopIcon.setImageURI(stop.icon);
             holder.stopLabel.setText(stop.title);
-            String arrival = stop.arrivalTime == null ? "" : stop.arrivalTime.toString();
-            String departure = stop.departureTime == null ? "" : stop.departureTime.toString();
-            holder.stopTime.setText(arrival + " ~ " + departure);
+            String arrival = stop.arrivalTime == null ? "" : Converters.timeToUserInterface(stop.arrivalTime);
+            String departure = stop.departureTime == null ? "" : Converters.timeToUserInterface(stop.departureTime);
+
+            if (arrival.isEmpty())
+                holder.stopTime.setText(String.format(context.getString(R.string.route_stop_departure), departure));
+            else if (departure.isEmpty())
+                holder.stopTime.setText(String.format(context.getString(R.string.route_stop_arrival), arrival));
+            else
+                holder.stopTime.setText(String.format("%s ~ %s", arrival, departure));
+
             holder.stopPlace.setText(stop.place);
             holder.stopMoreButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,7 +136,9 @@ public class RouteAdapter
             });
         }
         if (re instanceof RouteDay) {
-            holder.routeDay.setText(((RouteDay) re).currentDay);
+            RouteDay day = (RouteDay) re;
+            holder.routeDay.setText(day.currentDay);
+            //todo scroll al giorno odierno. Non so se è questo il posto giusto.
         }
         if (re instanceof Vehicle) {
             Vehicle vehicle = (Vehicle) re;
@@ -131,19 +153,24 @@ public class RouteAdapter
 
     @Override
     public int getItemCount() {
-        return route.size();
+        return route.size() + 1; // space footer
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (position == route.size()) return VIEW_TYPE_FOOTER;
+
         RouteElement re = route.get(position);
         if (re instanceof Stop) {
-            if (position == 1) return VIEW_TYPE_STOP_HEADER;
-            if (position == route.size() - 1)
-                return VIEW_TYPE_STOP_FOOTER; // todo ogni gorno ha un footer?
+            Stop stop = (Stop) re;
+            if (stop.arrivalTime == null) return VIEW_TYPE_STOP_HEADER;
+            if (stop.departureTime == null) {
+                return VIEW_TYPE_STOP_FOOTER; // todo ogni giorno ha un footer?
+            }
             return VIEW_TYPE_STOP_VIEW;
         }
         if (re instanceof Vehicle) return VIEW_TYPE_VEHICLE_VIEW;
+
         return VIEW_TYPE_DAY;
     }
 
@@ -171,6 +198,10 @@ public class RouteAdapter
         // Day
         private final TextView routeDay;
 
+        // Space footer
+        private final View spaceFooter;
+
+
         RouteViewHolder(View itemView) {
             super(itemView);
 
@@ -186,6 +217,7 @@ public class RouteAdapter
             vehicleTime = itemView.findViewById(R.id.route_vehicle_time);
 
             routeDay = itemView.findViewById(R.id.route_day);
+            spaceFooter = itemView.findViewById((R.id.list_space_footer));
         }
     }
 }

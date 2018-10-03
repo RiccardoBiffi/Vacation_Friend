@@ -86,4 +86,11 @@
     <string name="field_period_days">giorni</string>
     <string name="ph_lastname">Cognome</string>
     <string name="ph_stop">Destinazione</string>
+    <string name="ph_route_location">via Nome nn, Nome Città, Stato</string>
+    <string name="ph_route_title">Titolo</string>
+    <string name="ph_vehicle_label">Veicolo</string>
+    <string name="cd_route_vehicle">Icona del veicolo</string>
+    <string name="ph_route_day">Giorno GG mese AAAA</string>
+    <string name="route_stop_departure">Partenza alle %s</string>
+    <string name="route_stop_arrival">Arrivo alle %s</string>
 </resources>

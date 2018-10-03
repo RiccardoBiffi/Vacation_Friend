@@ -41,7 +41,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
         View view;
         switch (viewType) {
             case VIEW_TYPE_HEADER:
-                view = inflater.inflate(R.layout.list_section_divider, parent, false);
+                view = inflater.inflate(R.layout.lists_section_divider, parent, false);
                 break;
             case VIEW_TYPE_OBJECT_VIEW:
                 view = inflater.inflate(R.layout.fragment_home_activitylog_row, parent, false);
