@@ -28,10 +28,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
 
-        android:src="@drawable/ic_home_black_route_24dp"
-
-        app:civ_border_color="@color/colorPrimaryDark"
-        app:civ_border_width="2dp"
+        android:src="@drawable/ic_route_home_white_24dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="4dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +52,8 @@
         android:maxLines="1"
         android:text="@string/ph_route_title"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:textColor="@color/white"
+
         app:layout_constraintBottom_toTopOf="@+id/route_horizontal_barrier"
         app:layout_constraintStart_toEndOf="@id/route_vertical_barrier"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +70,8 @@
         android:layout_marginBottom="8dp"
         android:text="@string/ph_stop_time"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:textColor="@color/white"
+
         app:layout_constraintBottom_toTopOf="@+id/route_horizontal_barrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +80,12 @@
         android:id="@+id/route_more_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:paddingTop="4dp"
+        android:paddingStart="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="8dp"
 
         android:scaleType="fitCenter"
         android:src="@drawable/ic_more_vert_white_24dp"
@@ -95,7 +103,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_location_on_black_24dp"
+        android:src="@drawable/ic_location_on_white_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/route_vertical_barrier" />
 
@@ -114,6 +122,8 @@
         android:maxLines="1"
         android:text="@string/ph_route_location"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:textColor="@color/white"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/route_location_icon"
         app:layout_constraintTop_toTopOf="@id/route_location_icon" />

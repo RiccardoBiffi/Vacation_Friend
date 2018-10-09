@@ -13,7 +13,7 @@
             android:pivotX="50%"
             android:pivotY="50%">
             <shape android:shape="rectangle">
-                <solid android:color="@color/colorSecondaryLight" />
+                <solid android:color="@color/colorSecondaryDark" />
                 <size
                     android:height="22dp"
                     android:width="22dp" />
@@ -35,7 +35,7 @@
             android:pivotX="50%"
             android:pivotY="50%">
             <shape android:shape="rectangle">
-                <solid android:color="@color/colorSecondaryLight" />
+                <solid android:color="@color/colorSecondaryDark" />
                 <size
                     android:height="22dp"
                     android:width="22dp" />
@@ -52,7 +52,7 @@
         android:right="14dp">
 
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorSecondaryLight" />
+            <solid android:color="@color/colorSecondaryDark" />
             <size android:height="14dp" />
         </shape>
 

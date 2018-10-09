@@ -13,13 +13,13 @@
             android:pivotX="50%"
             android:pivotY="50%">
             <shape android:shape="rectangle">
-                <solid android:color="@color/colorPrimaryLight" />
+                <solid android:color="@color/colorSecondary" />
                 <size
                     android:height="10dp"
                     android:width="10dp" />
                 <stroke
                     android:width="1dp"
-                    android:color="@color/colorPrimaryDark" />
+                    android:color="@color/colorSecondaryDark" />
 
             </shape>
         </rotate>
@@ -32,14 +32,14 @@
         android:left="8dp">
 
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorPrimaryLight" />
+            <solid android:color="@color/colorSecondary" />
             <size
                 android:width="100dp"
                 android:height="56dp" />
             <corners android:radius="4dp" />
             <stroke
                 android:width="1dp"
-                android:color="@color/colorPrimaryDark" />
+                android:color="@color/colorSecondaryDark" />
         </shape>
 
     </item>

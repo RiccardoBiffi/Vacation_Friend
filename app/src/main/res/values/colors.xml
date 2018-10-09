@@ -8,6 +8,7 @@
     <color name="colorSecondaryDark">#bf360c</color>
     <color name="colorAccent">#64dd17</color>
 
+    <color name="white">#FFFFFF</color>
     <color name="lighter_gray">#e9e9e9</color>
     <color name="darker_gray">#e0e0e0</color>
 </resources>

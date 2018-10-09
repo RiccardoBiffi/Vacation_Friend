@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
 
-        app:layout_constraintStart_toStartOf="@id/route_icon_placeholder"
-        app:layout_constraintEnd_toEndOf="@id/route_icon_placeholder" />
+        app:layout_constraintEnd_toEndOf="@id/route_icon_placeholder"
+        app:layout_constraintStart_toStartOf="@id/route_icon_placeholder" />
 
     <View
         android:id="@+id/route_icon_placeholder"
@@ -25,16 +25,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
 
         android:background="@drawable/shape_route_vehicle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/route_street"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -43,8 +40,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
 
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/cd_route_vehicle"
@@ -62,13 +59,18 @@
 
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:ellipsize="end"
-            android:maxWidth="200dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
 
+            android:ellipsize="end"
+            android:maxWidth="196dp"
             android:maxLines="1"
             android:text="@string/ph_vehicle_label"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:textColor="@color/white"
+
             app:layout_constraintBottom_toBottomOf="@id/route_vehicle_icon"
+            app:layout_constraintEnd_toEndOf="@+id/vehicle_spacetime_barrier"
             app:layout_constraintStart_toEndOf="@id/route_vehicle_icon"
             app:layout_constraintTop_toTopOf="@+id/route_vehicle_icon" />
 
@@ -81,8 +83,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:gravity="end"
             android:text="@string/ph_vehicle_time"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:textColor="@color/white"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,14 +103,24 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
+            android:gravity="end"
+
             android:maxWidth="258dp"
             android:maxLines="1"
             android:text="@string/ph_vehicle_distance"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:textColor="@color/white"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.Barrier
+            android:id="@+id/vehicle_spacetime_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="route_vehicle_time,route_vehicle_distance" />
 
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
