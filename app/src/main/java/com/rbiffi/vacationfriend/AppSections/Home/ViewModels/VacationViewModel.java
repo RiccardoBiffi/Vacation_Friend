@@ -118,40 +118,40 @@ public class VacationViewModel extends UserViewModel {
         MutableLiveData<List<Step>> msl = new MutableLiveData<>();
         List<Step> sl = new ArrayList<>();
 
-        Uri uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_home_black_route_24dp);
+        Uri uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_home_white_24dp);
         Stop stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-01"), null, Time.valueOf("12:30:00"),
                 uri, "Note: tanta fame!");
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_black_24dp);
-        Vehicle vehicle = new Vehicle("Car", uri);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_white_24dp);
+        Vehicle vehicle = new Vehicle("Automobile", uri);
         Step step = new Step();
         step.setStopPlace(stop);
         step.setVehicleToNextStop(vehicle);
         sl.add(step);
 
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_restaurant_black_route_24dp);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_restaurant_white_24dp);
         stop = new Stop("Ristorante", "via Turismo 12, Rovigno, Croazia",
                 Converters.timestampToDate("2018-10-01"), Time.valueOf("12:45:00"), Time.valueOf("14:30:00"),
                 uri, "Gnam!");
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_walk_black_24dp);
-        vehicle = new Vehicle("Foot", uri);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_walk_white_24dp);
+        vehicle = new Vehicle("Camminata", uri);
         step = new Step();
         step.setStopPlace(stop);
         step.setVehicleToNextStop(vehicle);
         sl.add(step);
 
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_beach_access_black_route_24dp);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_beach_access_white_24dp);
         stop = new Stop("Spiaggia", "via Acquatica 97, Pola, Croazia",
                 Converters.timestampToDate("2018-10-01"), Time.valueOf("15:10:00"), Time.valueOf("19:00:00"),
                 uri, "Nuotata con scogli");
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_train_black_24dp);
-        vehicle = new Vehicle("Train", uri);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_train_white_24dp);
+        vehicle = new Vehicle("Treno", uri);
         step = new Step();
         step.setStopPlace(stop);
         step.setVehicleToNextStop(vehicle);
         sl.add(step);
 
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_hotel_black_route_24dp);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_hotel_white_24dp);
         stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-01"), Time.valueOf("22:00:00"), null,
                 uri, "Tanta nanna");
@@ -161,7 +161,7 @@ public class VacationViewModel extends UserViewModel {
         step.setVehicleToNextStop(vehicle);
         sl.add(step);
 
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_hotel_black_route_24dp);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_hotel_white_24dp);
         stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-03"), null, Time.valueOf("09:00:00"),
                 uri, "New day of fun!");

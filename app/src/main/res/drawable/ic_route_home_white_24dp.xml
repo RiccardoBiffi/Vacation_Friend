@@ -6,7 +6,7 @@
     <group>
         <path
             android:name="square"
-            android:fillColor="#FFFFFFFF"
+            android:fillColor="#FFFFFF"
             android:pathData="M0,0 L24,0 L24,24 L0,24 z" />
         <group
             android:scaleY="0.75"
@@ -14,7 +14,7 @@
             android:translateX="3"
             android:translateY="3">
             <path
-                android:fillColor="#FF000000"
+                android:fillColor="#0179BE"
                 android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z" />
         </group>
     </group>
