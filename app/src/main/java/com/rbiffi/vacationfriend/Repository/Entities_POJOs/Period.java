@@ -10,8 +10,6 @@ import java.util.Date;
 
 public class Period implements Parcelable {
 
-    // todo rendile date
-    // altrimenti da stringhe non posso fare le query come "prendi vacanze in corso"
     public Date startDate;
     public Date endDate;
 

@@ -3,7 +3,6 @@ package com.rbiffi.vacationfriend.Repository.Entities_POJOs;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Stop extends RouteElement {
@@ -17,21 +16,18 @@ public class Stop extends RouteElement {
     @NonNull
     public Date day;
 
-    public Time arrivalTime;
+    public StopTimeArrDep stopTime;
 
-    public Time departureTime;
-
-    public Uri icon;
+    public Uri stopIcon;
 
     public String notes;
 
-    public Stop(String title, String place, @NonNull Date day, Time arrivalTime, Time departureTime, Uri icon, String notes) {
+    public Stop(String title, String place, @NonNull Date day, StopTimeArrDep stopTime, Uri stopIcon, String notes) {
         this.title = title;
         this.place = place;
         this.day = day;
-        this.arrivalTime = arrivalTime;
-        this.departureTime = departureTime;
-        this.icon = icon;
+        this.stopTime = stopTime;
+        this.stopIcon = stopIcon;
         this.notes = notes;
     }
 

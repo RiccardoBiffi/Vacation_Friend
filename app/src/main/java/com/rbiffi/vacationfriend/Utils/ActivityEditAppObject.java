@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.FragmentAddParticipantsDialog;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
@@ -44,11 +45,15 @@ public abstract class ActivityEditAppObject
         implements
         IVacationFieldsEvents,
         FragmentAddParticipantsDialog.IAddParticipantsListener,
-        VacationFriendRepository.IRepositoryListener {
+        VacationFriendRepository.IRepositoryListener,
+        ChangeVacationViewModel.IProperties
+        // todo il change anche degli altri oggetti della App
+{
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
     public static final String VACATION = "_vacation";
+    public static final String ROUTE_STOP = "_routeStop";
     protected static final int PICK_IMAGE = 1;
 
     protected Toolbar toolbar;
@@ -129,7 +134,6 @@ public abstract class ActivityEditAppObject
 
     }
 
-
     protected abstract void getActivityViewModel();
 
     protected abstract void saveDataFromIntentMaybe();
@@ -160,16 +164,6 @@ public abstract class ActivityEditAppObject
         super.onSaveInstanceState(outState);
     }
 
-    public abstract String getTitleField();
-
-    public abstract String getPeriodFromField();
-
-    public abstract String getPeriodToField();
-
-    public abstract String getPlaceField();
-
-    public abstract Uri getPhotoField();
-
     protected void restoreState(Bundle savedInstanceState) {
         //todo salva in Constants le chiavi dei campi
         if (savedInstanceState != null) {
@@ -192,16 +186,6 @@ public abstract class ActivityEditAppObject
         }
         // else leggo tutto dal view model
     }
-
-    public abstract void saveTitleField(String title);
-
-    public abstract void saveDateFromField(String dateFrom);
-
-    public abstract void saveDateToField(String dateTo);
-
-    public abstract void savePlaceField(String place);
-
-    public abstract void savePhotoField(Uri photo);
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
