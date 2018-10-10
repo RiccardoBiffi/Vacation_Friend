@@ -28,10 +28,11 @@ public class RouteAdapter
     private static final int VIEW_TYPE_STOP_VIEW = 0;
 
     private static final int VIEW_TYPE_VEHICLE_VIEW = 1;
-    private static final int VIEW_TYPE_STOP_HEADER = 2;
-    private static final int VIEW_TYPE_STOP_FOOTER = 3;
-    private static final int VIEW_TYPE_DAY = 4;
-    private static final int VIEW_TYPE_FOOTER = 5;
+    private static final int VIEW_TYPE_VEHICLE_MISSING_VIEW = 2;
+    private static final int VIEW_TYPE_STOP_HEADER = 3;
+    private static final int VIEW_TYPE_STOP_FOOTER = 4;
+    private static final int VIEW_TYPE_DAY = 5;
+    private static final int VIEW_TYPE_FOOTER = 6;
 
     private final LayoutInflater inflater;
     private final Context context;
@@ -82,6 +83,9 @@ public class RouteAdapter
             case VIEW_TYPE_VEHICLE_VIEW:
                 view = inflater.inflate(R.layout.fragment_route_vehicle_row, parent, false);
                 break;
+            case VIEW_TYPE_VEHICLE_MISSING_VIEW:
+                view = inflater.inflate(R.layout.fragment_route_vehicle_missing_row, parent, false);
+                break;
             case VIEW_TYPE_STOP_HEADER:
                 view = inflater.inflate(R.layout.fragment_route_start_row, parent, false);
                 break;
@@ -108,17 +112,17 @@ public class RouteAdapter
 
         if (position >= route.size()) {
             ViewGroup.LayoutParams layoutParams = holder.spaceFooter.getLayoutParams();
-            layoutParams.height += Converters.convertDpToPixel(16);
+            layoutParams.height = (int) Converters.convertDpToPixel(88);
             return;
         }
 
         RouteElement re = route.get(position);
         if (re instanceof Stop) {
             Stop stop = (Stop) re;
-            holder.stopIcon.setImageURI(stop.icon);
+            holder.stopIcon.setImageURI(stop.stopIcon);
             holder.stopLabel.setText(stop.title);
-            String arrival = stop.arrivalTime == null ? "" : Converters.timeToUserInterface(stop.arrivalTime);
-            String departure = stop.departureTime == null ? "" : Converters.timeToUserInterface(stop.departureTime);
+            String arrival = stop.stopTime.arrivalTime == null ? "" : Converters.timeToUserInterface(stop.stopTime.arrivalTime);
+            String departure = stop.stopTime.departureTime == null ? "" : Converters.timeToUserInterface(stop.stopTime.departureTime);
 
             if (arrival.isEmpty())
                 holder.stopTime.setText(String.format(context.getString(R.string.route_stop_departure), departure));
@@ -142,12 +146,14 @@ public class RouteAdapter
         }
         if (re instanceof Vehicle) {
             Vehicle vehicle = (Vehicle) re;
-            holder.vehicleIcon.setImageURI(vehicle.icon);
-            holder.vehicleLabel.setText(vehicle.title);
+            if (vehicle.id != 0) {
+                holder.vehicleIcon.setImageURI(vehicle.icon);
+                holder.vehicleLabel.setText(vehicle.title);
 
-            // todo da leggere/calcolare in qualche modo
-            holder.vehicleTime.setText("15 min");
-            holder.vehicleDistance.setText("1.5 km");
+                // todo da leggere/calcolare in qualche modo
+                holder.vehicleTime.setText("15 min");
+                holder.vehicleDistance.setText("1.5 km");
+            }
         }
     }
 
@@ -163,13 +169,18 @@ public class RouteAdapter
         RouteElement re = route.get(position);
         if (re instanceof Stop) {
             Stop stop = (Stop) re;
-            if (stop.arrivalTime == null) return VIEW_TYPE_STOP_HEADER;
-            if (stop.departureTime == null) {
+            if (stop.stopTime.arrivalTime == null) return VIEW_TYPE_STOP_HEADER;
+            if (stop.stopTime.departureTime == null) {
                 return VIEW_TYPE_STOP_FOOTER; // todo ogni giorno ha un footer?
             }
             return VIEW_TYPE_STOP_VIEW;
         }
-        if (re instanceof Vehicle) return VIEW_TYPE_VEHICLE_VIEW;
+        if (re instanceof Vehicle) {
+            Vehicle vehicle = (Vehicle) re;
+            if (vehicle.id == 0)
+                return VIEW_TYPE_VEHICLE_MISSING_VIEW;
+            return VIEW_TYPE_VEHICLE_VIEW;
+        }
 
         return VIEW_TYPE_DAY;
     }

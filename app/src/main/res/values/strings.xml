@@ -100,8 +100,11 @@
     <string name="ph_vehicle_time" translatable="false">mm min</string>
     <string name="ph_vehicle_distance" translatable="false">n.n km</string>
     <string name="ph_vehicle_label">Vehicle</string>
-    <string name="cd_route_vehicle">Vehicle icon</string>
+    <string name="cd_route_vehicle">Vehicle stopIcon</string>
     <string name="ph_route_day">Weekday DD month YYYY</string>
     <string name="route_stop_departure">Departure at %s</string>
     <string name="route_stop_arrival">Arrival at %s</string>
+    <string name="route_choose_vehicle">Tap to choose a vehicle…</string>
+    <string name="cd_route_vehicle_missing">Missing vehicle stopIcon</string>
+    <string name="activity_title_new_routeStop">New stop</string>
 </resources>

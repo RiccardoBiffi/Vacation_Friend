@@ -30,7 +30,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
 
-        android:background="@drawable/shape_route_vehicle"
+        android:background="@drawable/shape_route_vehicle_missing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/route_street"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,79 +44,35 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="@string/cd_route_vehicle"
+            android:contentDescription="@string/cd_route_vehicle_missing"
 
-            android:src="@drawable/ic_location_on_white_24dp"
+            android:src="@drawable/ic_help_outline_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/route_vehicle_label"
-            style="@style/Fields"
+            style="@style/Subfields"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-
             android:ellipsize="end"
-            android:maxWidth="196dp"
+            android:maxWidth="248dp"
             android:maxLines="1"
-            android:text="@string/ph_vehicle_label"
+
+            android:text="@string/route_choose_vehicle"
             android:textColor="@color/white"
 
             app:layout_constraintBottom_toBottomOf="@id/route_vehicle_icon"
-            app:layout_constraintEnd_toEndOf="@+id/vehicle_spacetime_barrier"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/route_vehicle_icon"
             app:layout_constraintTop_toTopOf="@+id/route_vehicle_icon" />
-
-        <TextView
-            android:id="@+id/route_vehicle_time"
-            style="@style/FieldDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:gravity="end"
-            android:text="@string/ph_vehicle_time"
-            android:textColor="@color/white"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/route_vehicle_distance"
-            style="@style/FieldDescription"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:ellipsize="end"
-            android:gravity="end"
-
-            android:maxWidth="258dp"
-            android:maxLines="1"
-            android:text="@string/ph_vehicle_distance"
-            android:textColor="@color/white"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.constraint.Barrier
-            android:id="@+id/vehicle_spacetime_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left"
-            app:constraint_referenced_ids="route_vehicle_time,route_vehicle_distance" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -8,4 +8,5 @@ public class NewVacationViewModel extends ChangeVacationViewModel {
     public NewVacationViewModel(@NonNull Application app) {
         super(app);
     }
+
 }

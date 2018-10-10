@@ -30,6 +30,27 @@ public abstract class ChangeVacationViewModel extends AndroidViewModel {
     private List<Participant> fieldParticipants;
     private Uri fieldPhoto;
 
+    public interface IProperties {
+        String getTitleField();
+
+        String getPeriodFromField();
+
+        String getPeriodToField();
+
+        String getPlaceField();
+
+        Uri getPhotoField();
+
+        void saveTitleField(String title);
+
+        void saveDateFromField(String dateFrom);
+
+        void saveDateToField(String dateTo);
+
+        void savePlaceField(String place);
+
+        void savePhotoField(Uri photo);
+    }
 
     ChangeVacationViewModel(@NonNull Application app) {
         super(app);

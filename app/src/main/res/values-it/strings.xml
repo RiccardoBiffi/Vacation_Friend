@@ -93,4 +93,7 @@
     <string name="ph_route_day">Giorno GG mese AAAA</string>
     <string name="route_stop_departure">Partenza alle %s</string>
     <string name="route_stop_arrival">Arrivo alle %s</string>
+    <string name="route_choose_vehicle">Scegli come spostarti…</string>
+    <string name="cd_route_vehicle_missing">Icona di mezzo non specificato</string>
+    <string name="activity_title_new_routeStop">Nuova tappa</string>
 </resources>

@@ -1,8 +1,10 @@
 package com.rbiffi.vacationfriend.AppSections.Itinerario;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuBuilder;
 import android.view.LayoutInflater;
@@ -16,6 +18,10 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.R;
 
 public class FragmentRoute extends Fragment {
+
+    private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
+
+    private FloatingActionButton floatingButton;
 
     public FragmentRoute() {
         super();
@@ -41,7 +47,19 @@ public class FragmentRoute extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        floatingButton = getActivity().findViewById(R.id.floatingActionButton);
 
+        setupFloatingButton();
+    }
+
+    private void setupFloatingButton() {
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityNewStop.class);
+                startActivityForResult(intent, NEW_VACATION_ACTIVITY_RCODE);
+            }
+        });
     }
 
     @Override

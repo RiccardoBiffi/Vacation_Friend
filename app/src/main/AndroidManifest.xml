@@ -43,6 +43,11 @@
                 android:value=".AppSections.VacationList.ActivityVacationList" />
         </activity>
 
+        <activity
+            android:name=".AppSections.Itinerario.ActivityNewStop"
+            android:label="@string/activity_title_new_routeStop"
+            android:windowSoftInputMode="adjustPan" />
+
     </application>
 
 </manifest>
