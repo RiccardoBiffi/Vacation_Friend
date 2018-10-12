@@ -1,41 +1,29 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.FieldListAdapter;
-import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.NewVacationViewModel;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
-import com.rbiffi.vacationfriend.Repository.VacationRepository;
+import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
+import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
-import com.rbiffi.vacationfriend.Utils.MyDividerItemDecoration;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ActivityNewVacation
@@ -209,107 +197,52 @@ public class ActivityNewVacation
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    public void onSaveInstanceState(Bundle outState) {
+
+        // non controllo se gli elementi sono nulli perché il viewmodel li inizializza sempre
+        String titleField = getTitleField();
+        outState.putString(Constants.IN_TITLE, titleField);
+
+        String periodFromField = getPeriodFromField();
+        outState.putString(Constants.IN_PERIODFROM, periodFromField);
+
+        String periodToField = getPeriodToField();
+        outState.putString(Constants.IN_PERIODTO, periodToField);
+
+        String placeField = getPlaceField();
+        outState.putString(Constants.IN_PLACE, placeField);
+
+        Uri photoField = getPhotoField();
+        outState.putString(Constants.IN_PHOTO, photoField.toString());
+
+        // la lista di partecipanti non la salvo perché può essere corposa
+        // sarà solo nel viewmodel
+
+        super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onDateFocus(final View date, boolean hasFocus, Calendar calendar, DatePickerDialog.OnDateSetListener dateListener) {
-        if (hasFocus) {
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dateDialog = new DatePickerDialog(ActivityNewVacation.this, dateListener, year, month, day);
-            dateDialog.show();
+    protected void restoreState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            String title = savedInstanceState.getString(Constants.IN_TITLE);
+            if (title != null) saveTitleField(title);
+
+            String dateFrom = savedInstanceState.getString(Constants.IN_PERIODFROM);
+            if (dateFrom != null) savePeriodFromField(dateFrom);
+
+            String dateTo = savedInstanceState.getString(Constants.IN_PERIODTO);
+            if (dateTo != null) savePeriodToField(dateTo);
+
+            String place = savedInstanceState.getString(Constants.IN_PLACE);
+            if (place != null) savePlaceField(place);
+
+            String photo = savedInstanceState.getString(Constants.IN_PHOTO);
+            if (photo != null) savePhotoField(Uri.parse(photo));
         }
+        // else leggo tutto dal view model
     }
 
-    @Override
-    public void onAddParticipantClick(View button, List<Participant> partecipants) {
-        //todo problema ad aprire il dialog con già settati i partecipanti
-        // rivedi questo metodo, FragmentAddParticipantsDialog, ParticipantsDialogViewModel e ParticipantDialogAdapter
-        ParticipantsDialogViewModel pdvm = ViewModelProviders.of(this).get(ParticipantsDialogViewModel.class);
-        pdvm.setSelectedParticipants(partecipants);
-        FragmentAddParticipantsDialog dialogFragment = new FragmentAddParticipantsDialog();
-        dialogFragment.setSelectedParticipants(partecipants);
-        dialogFragment.show(getSupportFragmentManager(), "FragmentAddParticipantsDialog");
-    }
-
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog, List<Participant> selectedParticipants) {
-        viewModel.setFieldParticipants(selectedParticipants);
-        fieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
-        dialog.dismiss();
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
-    }
-
-    @Override
-    public void onAddPhotoClick(View button, View imageButton) {
-        vacationImageAddButton = vacationImageAddButton == null ? (Button) button : vacationImageAddButton;
-        vacationImageButton = vacationImageButton == null ? (ImageButton) imageButton : vacationImageButton;
-        if (viewModel.getFieldPhoto().toString().equals("")) {
-            vacationImageButton.setVisibility(View.INVISIBLE);
-        }
-
-        Intent intent;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            intent = new Intent();
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-        } else {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("image/*");
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE && data != null) {
-            Uri imageUri = data.getData();
-
-            //grantUriPermission(getPackageName(), imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //final int flags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
-            //getContentResolver().takePersistableUriPermission(imageUri,flags);
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                saveFieldPhotoState(imageUri);
-                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                vacationImageAddButton.setVisibility(View.GONE);
-
-                vacationImageButton.setBackground(userImage);
-                vacationImageButton.setVisibility(View.VISIBLE);
-                vacationImageButton.requestLayout();
-                vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
-
-            } catch (FileNotFoundException e) {
-                Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (resultCode == Activity.RESULT_CANCELED && requestCode == PICK_IMAGE) {
-            if (viewModel.getFieldPhoto() == null) {
-                vacationImageButton.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    @Override
-    public void saveFieldTitleState(String content) {
-        viewModel.setFieldTitle(content);
-    }
-
-    @Override
-    public void saveFieldPeriodFromState(String date) {
-        viewModel.setFieldPeriodFrom(date);
+    protected EditFieldListAdapter createFieldAdapter() {
+        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Vacation.class), viewModel);
     }
 
     @Override
@@ -328,6 +261,34 @@ public class ActivityNewVacation
 
     public void setVacationFieldToModify(long vId) {
         viewModel.getVacationDetails(vId);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE && data != null) {
+            Uri imageUri = data.getData();
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                savePhotoField(imageUri);
+                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
+                vacationImageAddButton.setVisibility(View.GONE);
+
+                vacationImageButton.setBackground(userImage);
+                vacationImageButton.setVisibility(View.VISIBLE);
+                vacationImageButton.requestLayout();
+                vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
+
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (resultCode == Activity.RESULT_CANCELED && requestCode == PICK_IMAGE) {
+            if (getPhotoField() == null) {
+                vacationImageButton.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override

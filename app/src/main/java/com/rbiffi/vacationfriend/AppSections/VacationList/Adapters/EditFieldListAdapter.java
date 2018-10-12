@@ -20,7 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityNewVacation;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
@@ -57,13 +58,13 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
     private Context appContext;
     private List<String> fieldList;
-    private ChangeVacationViewModel viewModel; // per facilitare il passaggio di dati
+    private EditAppObjectViewModel viewModel; // per facilitare il passaggio di dati
 
     private EditParticipantAdapter fieldParticipantsAdapter;
 
     private ActivityEditAppObject listener;
 
-    public EditFieldListAdapter(Context applicationContext, List<String> fieldList, ChangeVacationViewModel viewModel) {
+    public EditFieldListAdapter(Context applicationContext, List<String> fieldList, EditAppObjectViewModel viewModel) {
         inflater = LayoutInflater.from(applicationContext);
 
         this.appContext = applicationContext;
@@ -109,7 +110,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
             case Constants.F_TITLE:
                 listener.setVacationFieldTitle(holder.titleFieldView);
-                holder.titleFieldView.setText(viewModel.getFieldTitle());
+                holder.titleFieldView.setText(viewModel.getTitle());
                 holder.titleFieldView.requestFocus();
                 //todo open keyboard
                 holder.titleFieldView.addTextChangedListener(new TextWatcher() {
@@ -124,6 +125,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     @Override
                     public void afterTextChanged(Editable s) {
                         if (listener != null) {
+                            // mettilo in "common App Object properties" assieme ad altro
                             listener.saveTitleField(holder.titleFieldView.getText().toString());
                         }
                     }
@@ -151,7 +153,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodFromView, calendar);
-                        listener.saveDateFromField(holder.periodFromView.getText().toString());
+                        listener.savePeriodFromField(holder.periodFromView.getText().toString());
                         listener.checkPeriodConsistency(holder.periodFromView, holder.periodToView);
                     }
                 };
@@ -162,13 +164,13 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodToView, calendar);
-                        listener.saveDateToField(holder.periodToView.getText().toString());
-                        listener.checkPeriodConsistency(holder.periodFromView, holder.periodToView);
+                        listener.savePeriodToField(holder.periodToView.getText().toString());
+                        ((ActivityNewVacation) listener).checkPeriodConsistency(holder.periodFromView, holder.periodToView);
                     }
                 };
 
                 holder.periodFromView.setInputType(InputType.TYPE_NULL);
-                holder.periodFromView.setText(viewModel.getFieldPeriodFrom());
+                holder.periodFromView.setText(viewModel.getPeriodFrom());
                 holder.periodFromView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -188,7 +190,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 });
 
                 holder.periodToView.setInputType(InputType.TYPE_NULL);
-                holder.periodToView.setText(viewModel.getFieldPeriodTo());
+                holder.periodToView.setText(viewModel.getPeriodTo());
                 holder.periodToView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -211,7 +213,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_PLACE:
-                holder.placeView.setText(viewModel.getFieldPlace());
+                holder.placeView.setText(viewModel.getPlace());
                 holder.placeView.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -233,7 +235,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
             case Constants.F_PARTECIP:
                 fieldParticipantsAdapter = new EditParticipantAdapter(appContext, R.layout.input_partecipants_row,
-                        viewModel.getFieldParticipants());
+                        viewModel.getParticipants());
 
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
@@ -259,9 +261,9 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     }
                 });
 
-                if (!viewModel.getFieldPhoto().toString().equals("")) {
+                if (!viewModel.getPhoto().toString().equals("")) {
                     try {
-                        Uri imageUri = viewModel.getFieldPhoto();
+                        Uri imageUri = viewModel.getPhoto();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);
                         Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                         holder.photoButtonAddView.setVisibility(View.GONE);
@@ -287,7 +289,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onAddParticipantClick(v, viewModel.getFieldParticipants());
+                    listener.onAddParticipantClick(v, viewModel.getParticipants());
                 }
             }
         });
@@ -391,9 +393,6 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
         }
 
-        public EditText getTitleHolder() {
-            return this.titleFieldView;
-        }
     }
 
 }

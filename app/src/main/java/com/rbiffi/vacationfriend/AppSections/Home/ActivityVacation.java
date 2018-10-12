@@ -71,7 +71,7 @@ public class ActivityVacation
     private void saveDataFromIntentMaybe(final Bundle savedInstanceState) {
         Intent intent = getIntent();
         // Nel parcel ci sono tutti i dati della vacanza, ma a me basta mostrare subito foto e titolo
-        Vacation current = intent.getParcelableExtra("selectedVacation");
+        Vacation current = intent.getParcelableExtra(Constants.PARCEL_SELECTED_VACATION);
         if (current != null) {
             // eseguito subito e solo 1 volta alla creazione della activity
             saveImmediateNeedingDataFromParcel(current);

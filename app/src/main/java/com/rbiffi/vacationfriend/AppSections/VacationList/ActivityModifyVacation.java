@@ -3,19 +3,18 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ModifyVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.JoinVacationParticipant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Period;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
-import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
+import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
 import java.text.DateFormat;
@@ -24,10 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityModifyVacation
-        extends ActivityEditAppObject
+        extends ActivityNewVacation
         implements VacationFriendRepository.IRepositoryListener {
-
-    protected ModifyVacationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,82 +34,31 @@ public class ActivityModifyVacation
 
     @Override
     protected void getActivityViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ModifyVacationViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(EditAppObjectViewModel.class);
     }
 
     @Override
     protected void saveDataFromIntentMaybe() {
         Intent intent = getIntent();
-        // todo metti il nome del parce nelle costanti e formattalo meglio
-        // vedi ActivityEditAppObject
-        Vacation current = intent.getParcelableExtra("selectedVacation");
-        if (viewModel.getVacationId() == ModifyVacationViewModel.FIRST_EXECUTION && current != null) {
+        Vacation current = intent.getParcelableExtra(Constants.PARCEL_SELECTED_VACATION);
+        if (viewModel.getVacationId() == EditAppObjectViewModel.FIRST_EXECUTION && current != null) {
             viewModel.setVacationId(current.id);
-            viewModel.setFieldTitle(current.title);
+            viewModel.setTitle(current.title);
             DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            viewModel.setFieldPeriodFrom(format.format(current.period.startDate));
-            viewModel.setFieldPeriodTo(format.format(current.period.endDate));
-            viewModel.setFieldPlace(current.place);
+            viewModel.setPeriodFrom(format.format(current.period.startDate));
+            viewModel.setPeriodTo(format.format(current.period.endDate));
+            viewModel.setPlace(current.place);
             viewModel.loadFieldParticipants(viewModel.getVacationId()).observe(this, new Observer<List<Participant>>() {
                 @Override
                 public void onChanged(@Nullable List<Participant> participants) {
-                    viewModel.setFieldParticipants(participants);
-                    editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
+                    viewModel.setParticipants(participants);
+                    editFieldListAdapter.updateParticipants(viewModel.getParticipants());
                 }
             });
-            viewModel.setFieldPhoto(current.photo);
+            viewModel.setPhoto(current.photo);
         }
     }
 
-    @Override
-    public String getTitleField() {
-        return viewModel.getFieldTitle();
-    }
-
-    @Override
-    public String getPeriodFromField() {
-        return viewModel.getFieldPeriodFrom();
-    }
-
-    @Override
-    public String getPeriodToField() {
-        return viewModel.getFieldPeriodTo();
-    }
-
-    @Override
-    public String getPlaceField() {
-        return viewModel.getFieldPlace();
-    }
-
-    @Override
-    public Uri getPhotoField() {
-        return viewModel.getFieldPhoto();
-    }
-
-    @Override
-    public void saveTitleField(String title) {
-        viewModel.setFieldTitle(title);
-    }
-
-    @Override
-    public void saveDateFromField(String dateFrom) {
-        viewModel.setFieldPeriodFrom(dateFrom);
-    }
-
-    @Override
-    public void saveDateToField(String dateTo) {
-        viewModel.setFieldPeriodTo(dateTo);
-    }
-
-    @Override
-    public void savePlaceField(String place) {
-        viewModel.setFieldPlace(place);
-    }
-
-    @Override
-    public void savePhotoField(Uri photo) {
-        viewModel.setFieldPhoto(photo);
-    }
 
     @Override
     protected EditFieldListAdapter createFieldAdapter() {
@@ -125,43 +71,22 @@ public class ActivityModifyVacation
         confirm.setText(R.string.button_save);
     }
 
-    @Override
-    protected int checkFormValidity() {
-        if (viewModel.getFieldTitle().isEmpty()) {
-            return 0;
-        }
-
-        if (viewModel.getFieldPeriodFrom().isEmpty() ||
-                viewModel.getFieldPeriodTo().isEmpty()) {
-            return 1;
-        }
-
-        if (!checkDateConsistency(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo()))
-            return 1;
-
-        return -1;
-    }
 
     @Override
     protected void collectAndSaveObject() {
-        Period period = new Period(viewModel.getFieldPeriodFrom(), viewModel.getFieldPeriodTo());
-        Vacation builtVacation = new Vacation(viewModel.getFieldTitle(), period, viewModel.getFieldPlace(), viewModel.getFieldPhoto(), false);
+        Period period = new Period(viewModel.getPeriodFrom(), viewModel.getPeriodTo());
+        Vacation builtVacation = new Vacation(viewModel.getTitle(), period, viewModel.getPlace(), viewModel.getPhoto(), false);
         builtVacation.id = viewModel.getVacationId();
         viewModel.update(builtVacation, this);
         finish();
     }
 
-    @Override
-    protected void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants) {
-        viewModel.setFieldParticipants(selectedParticipants);
-        editFieldListAdapter.updateParticipants(viewModel.getFieldParticipants());
-    }
 
     @Override
     public void onVacationOperationComplete(long rowId) {
         // vacanza aggiornata correttamente nel DB
         List<JoinVacationParticipant> jvps = new ArrayList<>();
-        List<Participant> partecipants = viewModel.getFieldParticipants();
+        List<Participant> partecipants = viewModel.getParticipants();
         for (Participant part :
                 partecipants) {
             jvps.add(new JoinVacationParticipant(rowId, part.email));
