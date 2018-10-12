@@ -246,21 +246,32 @@ public class ActivityNewVacation
     }
 
     @Override
-    public void saveFieldPeriodToState(String date) {
-        viewModel.setFieldPeriodTo(date);
+    protected int checkFormValidity() {
+        if (viewModel.getTitle().isEmpty()) {
+            return 0;
+        }
+
+        if (viewModel.getPeriodFrom().isEmpty() ||
+                viewModel.getPeriodTo().isEmpty()) {
+            return 1;
+        }
+
+        if (!checkDateConsistency(viewModel.getPeriodFrom(), viewModel.getPeriodTo()))
+            return 1;
+
+        return -1;
     }
 
     @Override
-    public void saveFieldPlaceState(String content) {
-        viewModel.setFieldPlace(content);
+    protected void collectAndSaveObject() {
+        Period period = new Period(viewModel.getPeriodFrom(), viewModel.getPeriodTo());
+        Vacation builtVacation = new Vacation(viewModel.getTitle(), period, viewModel.getPlace(), viewModel.getPhoto(), false);
+        viewModel.insert(builtVacation, this);
     }
 
-    private void saveFieldPhotoState(Uri imageUriString) {
-        viewModel.setFieldPhoto(imageUriString);
-    }
-
-    public void setVacationFieldToModify(long vId) {
-        viewModel.getVacationDetails(vId);
+    protected void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants) {
+        viewModel.setParticipants(selectedParticipants);
+        editFieldListAdapter.updateParticipants(viewModel.getParticipants());
     }
 
     @Override
