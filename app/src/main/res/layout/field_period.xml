@@ -19,7 +19,7 @@
         android:layout_marginRight="16dp"
 
         android:contentDescription="@string/input_period_ob"
-        android:src="@drawable/ic_date_range_black_24dp"
+        android:src="@drawable/ic_field_date_range_24dp"
         app:layout_constraintBottom_toTopOf="@id/period_barrier_horizontal"
         app:layout_constraintEnd_toStartOf="@id/period_barrier_vertical"
         app:layout_constraintStart_toStartOf="parent"

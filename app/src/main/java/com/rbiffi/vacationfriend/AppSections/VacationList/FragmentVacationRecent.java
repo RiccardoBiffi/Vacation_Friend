@@ -35,6 +35,7 @@ import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
+import com.rbiffi.vacationfriend.Utils.Constants;
 
 import java.util.List;
 
@@ -153,7 +154,7 @@ public class FragmentVacationRecent
     @Override
     public void onVacationClick(Vacation vacation) {
         Intent intent = new Intent(getActivity(), ActivityVacation.class);
-        intent.putExtra("selectedVacation", vacation);
+        intent.putExtra(Constants.PARCEL_SELECTED_VACATION, vacation);
         startActivity(intent);
     }
 
@@ -196,7 +197,7 @@ public class FragmentVacationRecent
                 switch (menuItem.getItemId()) {
                     case R.id.actionModifica:
                         Intent intent = new Intent(getActivity(), ActivityModifyVacation.class);
-                        intent.putExtra("selectedVacation", viewModel.getSelectedVacation());
+                        intent.putExtra(Constants.PARCEL_SELECTED_VACATION, viewModel.getSelectedVacation());
                         startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                         return true;
 

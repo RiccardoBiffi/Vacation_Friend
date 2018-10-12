@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,19 +19,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
 import com.rbiffi.vacationfriend.AppSections.VacationList.FragmentAddParticipantsDialog;
-import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ChangeVacationViewModel;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.ParticipantsDialogViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.VacationFriendRepository;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,16 +41,15 @@ public abstract class ActivityEditAppObject
         implements
         IVacationFieldsEvents,
         FragmentAddParticipantsDialog.IAddParticipantsListener,
-        VacationFriendRepository.IRepositoryListener,
-        ChangeVacationViewModel.IProperties
-        // todo il change anche degli altri oggetti della App
-{
+        VacationFriendRepository.IRepositoryListener {
 
     // per rendere la risposta univoca a questa classe
-    public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityNewVacation.REPLY";
+    public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityEditAppObject.REPLY";
     public static final String VACATION = "_vacation";
     public static final String ROUTE_STOP = "_routeStop";
     protected static final int PICK_IMAGE = 1;
+
+    protected EditAppObjectViewModel viewModel;
 
     protected Toolbar toolbar;
 
@@ -131,61 +126,13 @@ public abstract class ActivityEditAppObject
                 }
             }
         });
-
     }
 
     protected abstract void getActivityViewModel();
 
     protected abstract void saveDataFromIntentMaybe();
 
-    public void onSaveInstanceState(Bundle outState) {
-
-        // non controllo se gli elementi sono nulli perché i viewmodel li inizializzano sempre
-        String titleField = getTitleField();
-        outState.putString("inputTitle", titleField);
-
-        String periodFromField = getPeriodFromField();
-        outState.putString("inputPeriodFrom", periodFromField);
-
-        String periodToField = getPeriodToField();
-        outState.putString("inputPeriodTo", periodToField);
-
-        String placeField = getPlaceField();
-        outState.putString("inputPlace", placeField);
-
-        Uri photoField = getPhotoField();
-        outState.putString("inputPhoto", photoField.toString());
-
-        // la lista di partecipanti non la salvo perché può essere corposa
-        // sarà solo nel viewmodel
-
-        //todo altri campi da ripristinare, devo considerarli tutti
-
-        super.onSaveInstanceState(outState);
-    }
-
-    protected void restoreState(Bundle savedInstanceState) {
-        //todo salva in Constants le chiavi dei campi
-        if (savedInstanceState != null) {
-            String title = savedInstanceState.getString("inputTitle");
-            if (title != null) saveTitleField(title);
-
-            String dateFrom = savedInstanceState.getString("inputPeriodFrom");
-            if (dateFrom != null) saveDateFromField(dateFrom);
-
-            String dateTo = savedInstanceState.getString("inputPeriodTo");
-            if (dateTo != null) saveDateToField(dateTo);
-
-            String place = savedInstanceState.getString("inputPlace");
-            if (place != null) savePlaceField(place);
-
-            String photo = savedInstanceState.getString("inputPhoto");
-            if (photo != null) savePhotoField(Uri.parse(photo));
-
-            //todo altri campi da ripristinare, devo considerarli tutti
-        }
-        // else leggo tutto dal view model
-    }
+    protected abstract void restoreState(Bundle savedInstanceState);
 
     private void setupListWithAdapter() {
         vacationFieldsList = findViewById(R.id.vacationFieldsList);
@@ -197,6 +144,7 @@ public abstract class ActivityEditAppObject
         fieldLayout = new LinearLayoutManager(getApplicationContext());
         vacationFieldsList.setLayoutManager(fieldLayout);
     }
+
 
     protected abstract EditFieldListAdapter createFieldAdapter();
 
@@ -214,6 +162,90 @@ public abstract class ActivityEditAppObject
         discard = findViewById(R.id.undoBottonAction);
     }
 
+    public String getTitleField() {
+        return viewModel.getTitle();
+    }
+
+    public void saveTitleField(String title) {
+        viewModel.setTitle(title);
+    }
+
+    public String getPeriodFromField() {
+        return viewModel.getPeriodFrom();
+    }
+
+    public void savePeriodFromField(String dateFrom) {
+        viewModel.setPeriodFrom(dateFrom);
+    }
+
+    public String getPeriodToField() {
+        return viewModel.getPeriodTo();
+    }
+
+    public void savePeriodToField(String dateTo) {
+        viewModel.setPeriodTo(dateTo);
+    }
+
+    public String getPlaceField() {
+        return viewModel.getPlace();
+    }
+
+    public void savePlaceField(String place) {
+        viewModel.setPlace(place);
+    }
+
+    public Uri getPhotoField() {
+        return viewModel.getPhoto();
+    }
+
+    public void savePhotoField(Uri photo) {
+        viewModel.setPhoto(photo);
+    }
+
+    public String getDateField() {
+        return viewModel.getDateField();
+    }
+
+    public void saveDateField(String date) {
+        viewModel.setDateField(date);
+    }
+
+    public String getTimeArrivalField() {
+        return viewModel.getTimeArrivalField();
+    }
+
+    public void saveTimeArrivalField(String arrivalTime) {
+        viewModel.setTimeArrivalField(arrivalTime);
+
+    }
+
+    public String getTimeDepartureField() {
+        return viewModel.getTimeDepartureField();
+    }
+
+    public void saveTimeDepartureField(String departureTime) {
+        viewModel.setTimeDepartureField(departureTime);
+
+    }
+
+    public Uri getIconField() {
+        return viewModel.getIconField();
+    }
+
+    public void saveIconField(Uri icon) {
+        viewModel.setIconField(icon);
+
+    }
+
+    public String getNotesField() {
+        return viewModel.getNotesField();
+    }
+
+    public void saveNotesField(String notes) {
+        viewModel.setNotesField(notes);
+
+    }
+
     protected abstract void collectAndSaveObject();
 
     @Override
@@ -229,6 +261,19 @@ public abstract class ActivityEditAppObject
     public void setVacationFieldPeriod(EditText periodFromView, EditText periodToView) {
         this.vacationFieldPeriodFrom = periodFromView;
         this.vacationFieldPeriodTo = periodToView;
+    }
+
+    protected boolean checkDateConsistency(String periodFrom, String periodTo) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        try {
+            startDate = format.parse(periodFrom);
+            endDate = format.parse(periodTo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return startDate.compareTo(endDate) <= 0;
     }
 
     @Override
@@ -268,41 +313,6 @@ public abstract class ActivityEditAppObject
         }
     }
 
-    protected boolean checkDateConsistency(String periodFrom, String periodTo) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date startDate = new Date();
-        Date endDate = new Date();
-        try {
-            startDate = format.parse(periodFrom);
-            endDate = format.parse(periodTo);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return startDate.compareTo(endDate) <= 0;
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
-        }
-    }
-
-    public static void showKeyboard(Activity activity, View view) {
-        if (view.requestFocus()) {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }
-    }
-
     @Override
     public void onAddParticipantClick(View button, List<Participant> partecipants) {
         addParticipantsButton = (Button) button;
@@ -319,8 +329,6 @@ public abstract class ActivityEditAppObject
         saveParticipantsAndUpdateAdapter(selectedParticipants);
         dialog.dismiss();
     }
-
-    protected abstract void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants);
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
@@ -349,33 +357,29 @@ public abstract class ActivityEditAppObject
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE && data != null) {
-            Uri imageUri = data.getData();
-
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                savePhotoField(imageUri);
-                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                vacationImageAddButton.setVisibility(View.GONE);
-
-                vacationImageButton.setBackground(userImage);
-                vacationImageButton.setVisibility(View.VISIBLE);
-                vacationImageButton.requestLayout();
-                vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
-
-            } catch (FileNotFoundException e) {
-                Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
-            }
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
         }
-        if (resultCode == Activity.RESULT_CANCELED && requestCode == PICK_IMAGE) {
-            if (getPhotoField() == null) {
-                vacationImageButton.setVisibility(View.GONE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+        }
+    }
+
+    public static void showKeyboard(Activity activity, View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
             }
         }
     }
+
+    protected abstract void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants);
 
     @Override
     public abstract void onVacationOperationComplete(long rowId);

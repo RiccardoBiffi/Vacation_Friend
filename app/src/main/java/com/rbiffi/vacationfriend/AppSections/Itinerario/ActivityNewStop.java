@@ -4,16 +4,18 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.rbiffi.vacationfriend.AppSections.Itinerario.ViewModels.NewStopViewModel;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
+import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Stop;
 import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
+import com.rbiffi.vacationfriend.Utils.Constants;
+import com.rbiffi.vacationfriend.Utils.FieldLists;
 
 import java.util.List;
 
-public class ActivityNewStop extends ActivityEditAppObject {
-
-    protected NewStopViewModel viewModel;
+public class ActivityNewStop
+        extends ActivityEditAppObject {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,67 +29,42 @@ public class ActivityNewStop extends ActivityEditAppObject {
 
     @Override
     protected void getActivityViewModel() {
-        viewModel = ViewModelProviders.of(this).get(NewStopViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(EditAppObjectViewModel.class);
     }
 
     @Override
     protected void saveDataFromIntentMaybe() {
-
+        // utilizzato quando l'activity chiamante passa un App object, non per il NEW
     }
 
     @Override
-    public String getTitleField() {
-        return viewModel.getFieldTitle();
-    }
+    protected void restoreState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            String title = savedInstanceState.getString(Constants.IN_TITLE);
+            if (title != null) saveTitleField(title);
 
-    @Override
-    public String getPeriodFromField() {
-        return null;
-    }
+            String place = savedInstanceState.getString(Constants.IN_PLACE);
+            if (place != null) savePlaceField(place);
 
-    @Override
-    public String getPeriodToField() {
-        return null;
-    }
+            String day = savedInstanceState.getString(Constants.IN_DATE);
+            if (day != null) saveDateField(day);
 
-    @Override
-    public String getPlaceField() {
-        return viewModel.getFieldPlace();
-    }
+            String timeArr = savedInstanceState.getString(Constants.IN_TIMEARRIVAL);
+            if (timeArr != null) saveTimeArrivalField(timeArr);
 
-    @Override
-    public Uri getPhotoField() {
-        return null;
-    }
+            String timeDep = savedInstanceState.getString(Constants.IN_TIMEDEPARTURE);
+            if (timeDep != null) saveTimeDepartureField(timeDep);
 
-    @Override
-    public void saveTitleField(String title) {
-
-    }
-
-    @Override
-    public void saveDateFromField(String dateFrom) {
-
-    }
-
-    @Override
-    public void saveDateToField(String dateTo) {
-
-    }
-
-    @Override
-    public void savePlaceField(String place) {
-
-    }
-
-    @Override
-    public void savePhotoField(Uri photo) {
-
+            String icon = savedInstanceState.getString(Constants.IN_ROUTEICON);
+            if (icon != null) saveIconField(Uri.parse(icon));
+        }
+        // else leggo tutto dal view model
     }
 
     @Override
     protected EditFieldListAdapter createFieldAdapter() {
-        return null;
+        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Stop.class), viewModel);
+
     }
 
     @Override
