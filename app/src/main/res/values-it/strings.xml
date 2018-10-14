@@ -96,4 +96,5 @@
     <string name="route_choose_vehicle">Scegli come spostarti…</string>
     <string name="cd_route_vehicle_missing">Icona di mezzo non specificato</string>
     <string name="activity_title_new_routeStop">Nuova tappa</string>
+    <string name="input_day_ob">Data*</string>
 </resources>

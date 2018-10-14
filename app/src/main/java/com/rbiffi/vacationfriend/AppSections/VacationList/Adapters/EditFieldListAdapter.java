@@ -51,7 +51,11 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
     private static final int VIEW_TYPE_PLACE = 2;
     private static final int VIEW_TYPE_PARTICIPANTS = 3;
     private static final int VIEW_TYPE_PHOTO = 4;
-    private static final int VIEW_TYPE_NOTES = 5;
+
+    private static final int VIEW_TYPE_DAY = 5;
+    private static final int VIEW_TYPE_TIME_AD = 6;
+    private static final int VIEW_TYPE_STOP_ICON = 7;
+    private static final int VIEW_TYPE_NOTES = 8;
     //...
 
     private final LayoutInflater inflater;
@@ -94,6 +98,12 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 break;
             case VIEW_TYPE_PHOTO:
                 view = inflater.inflate(R.layout.input_photo, parent, false);
+                break;
+            case VIEW_TYPE_DAY:
+                view = inflater.inflate(R.layout.input_day, parent, false);
+                break;
+            case VIEW_TYPE_NOTES:
+                view = inflater.inflate(R.layout.input_notes, parent, false);
                 break;
             default:
                 view = inflater.inflate(R.layout.input_title, parent, false);
@@ -277,6 +287,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
                 break;
 
+            //todo DAY e NOTES
 
             default:
                 // dati non pronti, placeholder
@@ -341,6 +352,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 return VIEW_TYPE_PARTICIPANTS;
             case Constants.F_PHOTO:
                 return VIEW_TYPE_PHOTO;
+            case Constants.F_DATE:
+                return VIEW_TYPE_DAY;
             case Constants.F_NOTES:
                 return VIEW_TYPE_NOTES;
             //todo e le altre
@@ -376,6 +389,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         private final Button photoButtonAddView;
         private final ImageButton photoImageButtonView;
 
+        //Todo DAY e NOTES
 
         FieldViewHolder(View itemView) {
             super(itemView);

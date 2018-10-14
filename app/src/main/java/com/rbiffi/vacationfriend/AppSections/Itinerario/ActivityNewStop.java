@@ -64,7 +64,6 @@ public class ActivityNewStop
     @Override
     protected EditFieldListAdapter createFieldAdapter() {
         return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Stop.class), viewModel);
-
     }
 
     @Override
