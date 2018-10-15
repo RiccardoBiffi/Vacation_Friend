@@ -18,7 +18,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
 
-        android:src="@drawable/ic_field_photo_24dp"
+        android:src="@drawable/ic_field_icon_24dp"
         app:layout_constraintBottom_toTopOf="@id/photo_field_barrier_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/photo_field_barrier_vertical"
