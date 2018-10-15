@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityNewVacation;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
@@ -102,6 +101,12 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             case VIEW_TYPE_DAY:
                 view = inflater.inflate(R.layout.input_day, parent, false);
                 break;
+            case VIEW_TYPE_TIME_AD:
+                view = inflater.inflate(R.layout.input_time_ad, parent, false);
+                break;
+            case VIEW_TYPE_STOP_ICON:
+                view = inflater.inflate(R.layout.input_stop_icons, parent, false);
+                break;
             case VIEW_TYPE_NOTES:
                 view = inflater.inflate(R.layout.input_notes, parent, false);
                 break;
@@ -145,7 +150,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     @Override
                     public void validate(final TextView textView, String text) {
                         if (text.isEmpty()) {
-                            textView.setError(appContext.getString(R.string.err_vacationlist_title));
+                            textView.setError(appContext.getString(R.string.err_field_title));
                         }
                     }
                 });
@@ -175,7 +180,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         updateLabel(holder.periodToView, calendar);
                         listener.savePeriodToField(holder.periodToView.getText().toString());
-                        ((ActivityNewVacation) listener).checkPeriodConsistency(holder.periodFromView, holder.periodToView);
+                        listener.checkPeriodConsistency(holder.periodFromView, holder.periodToView);
                     }
                 };
 
@@ -287,7 +292,42 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
                 break;
 
-            //todo DAY e NOTES
+            case Constants.F_DATE:
+                // listener.setVacationFieldPeriod(holder.periodFromView, holder.periodToView);
+                final Calendar calendarDay = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendarDay.set(Calendar.YEAR, year);
+                        calendarDay.set(Calendar.MONTH, month);
+                        calendarDay.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(holder.dateView, calendarDay);
+                        listener.saveDateField(holder.dateView.getText().toString());
+                    }
+                };
+
+                holder.dateView.setInputType(InputType.TYPE_NULL);
+                holder.dateView.setText(viewModel.getDateField());
+                holder.dateView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            v.performClick();
+                        } else {
+                            listener.checkDate((TextView) v);
+                        }
+                    }
+                });
+                holder.dateView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onDateFocus((TextView) v, calendarDay, dateListener);
+                    }
+                });
+
+                break;
+
+            //todo NOTES
 
             default:
                 // dati non pronti, placeholder
@@ -354,9 +394,12 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 return VIEW_TYPE_PHOTO;
             case Constants.F_DATE:
                 return VIEW_TYPE_DAY;
+            case Constants.F_TIME_AD:
+                return VIEW_TYPE_TIME_AD;
+            case Constants.F_STOP_ICON:
+                return VIEW_TYPE_STOP_ICON;
             case Constants.F_NOTES:
                 return VIEW_TYPE_NOTES;
-            //todo e le altre
             default:
                 return VIEW_TYPE_TITLE;
         }
@@ -377,7 +420,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
     public static class FieldViewHolder extends RecyclerView.ViewHolder {
 
-        public final EditText titleFieldView;
+        private final EditText titleFieldView;
 
         private final EditText periodFromView;
         private final EditText periodToView;
@@ -389,7 +432,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         private final Button photoButtonAddView;
         private final ImageButton photoImageButtonView;
 
-        //Todo DAY e NOTES
+        private final EditText dateView;
 
         FieldViewHolder(View itemView) {
             super(itemView);
@@ -405,6 +448,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             photoButtonAddView = itemView.findViewById(R.id.input_photo);
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
 
+            dateView = itemView.findViewById(R.id.input_day);
         }
 
     }

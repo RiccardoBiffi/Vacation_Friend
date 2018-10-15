@@ -20,7 +20,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
 
-        android:src="@drawable/ic_fields_notes_24dp"
+        android:src="@drawable/ic_field_notes_24dp"
         app:layout_constraintBottom_toTopOf="@id/notes_barrier_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/notes_barrier_vertical"

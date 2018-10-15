@@ -52,7 +52,7 @@
     <string name="vacationlist_header_now">Current</string>
     <string name="vacationlist_header_next">Next</string>
     <string name="vacationlist_header_previous">Previous</string>
-    <string name="err_vacationlist_title">Give a title to your vacation</string>
+    <string name="err_field_title">Give a title to the element</string>
     <string name="err_vacationlist_date_missing">Insert a date</string>
     <string name="err_vacationlist_date_wrong">The period looks wrong, check it</string>
     <string name="home_tag_summary">Summary</string>
@@ -108,4 +108,18 @@
     <string name="cd_route_vehicle_missing">Missing vehicle stopIcon</string>
     <string name="activity_title_new_routeStop">New stop</string>
     <string name="input_day_ob">Date*</string>
+    <string name="hint_notes">Add notes here…</string>
+    <string name="field_icon_ob">Stop icon</string>
+    <string name="stop_radio_house">House</string>
+    <string name="stop_radio_city">City</string>
+    <string name="stop_radio_hotel">Hotel</string>
+    <string name="stop_radio_reastaurant">Restaurant</string>
+    <string name="stop_radio_cafe">Cafe</string>
+    <string name="stop_radio_beach">Beach</string>
+    <string name="stop_radio_gas_station">Gas station</string>
+    <string name="stop_radio_generic">Generic</string>
+    <string name="time_mode_arrival">Arrival time</string>
+    <string name="time_mode_departure">Departure time</string>
+    <string name="subfield_time_departure">Leave from</string>
+    <string name="subfield_time_departure_time">at</string>
 </resources>

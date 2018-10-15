@@ -110,7 +110,7 @@ public abstract class ActivityEditAppObject
             public void run() {
                 vacationFieldsList.smoothScrollToPosition(position);
                 if (position == 0) {
-                    vacationFieldTitle.setError(getString(R.string.err_vacationlist_title));
+                    vacationFieldTitle.setError(getString(R.string.err_field_title));
                 } else if (position == 1) {
                     if (!vacationFieldPeriodFrom.getText().toString().isEmpty())
                         vacationFieldPeriodTo.setError(getString(R.string.err_vacationlist_date_wrong));
@@ -290,7 +290,7 @@ public abstract class ActivityEditAppObject
     @Override
     public void checkDate(TextView date) {
         if (date.getText().toString().isEmpty()) {
-            date.setError(getString(R.string.err_vacationlist_title));
+            date.setError(getString(R.string.err_field_title));
         } else {
             date.setError(null);
         }

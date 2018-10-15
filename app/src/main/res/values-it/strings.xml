@@ -50,7 +50,7 @@
     <string name="vacationlist_header_now">In corso</string>
     <string name="vacationlist_header_next">Prossime</string>
     <string name="vacationlist_header_previous">Concluse</string>
-    <string name="err_vacationlist_title">Dai un titolo alla tua vacanza</string>
+    <string name="err_field_title">Dai un titolo all\'elemento</string>
     <string name="err_vacationlist_date_missing">Inserisci una data</string>
     <string name="err_vacationlist_date_wrong">Il periodo non è inserito correttamente</string>
     <string name="home_tag_summary">Sommario</string>
@@ -97,4 +97,18 @@
     <string name="cd_route_vehicle_missing">Icona di mezzo non specificato</string>
     <string name="activity_title_new_routeStop">Nuova tappa</string>
     <string name="input_day_ob">Data*</string>
+    <string name="hint_notes">Aggiungi una nota…</string>
+    <string name="field_icon_ob">Icona della tappa</string>
+    <string name="stop_radio_house">Abitazione</string>
+    <string name="stop_radio_city">Città</string>
+    <string name="stop_radio_hotel">Albergo</string>
+    <string name="stop_radio_reastaurant">Ristorante</string>
+    <string name="stop_radio_cafe">Bar</string>
+    <string name="stop_radio_beach">Spiaggia</string>
+    <string name="stop_radio_gas_station">Rifornimento</string>
+    <string name="stop_radio_generic">Generico</string>
+    <string name="time_mode_arrival">Orario d\'arrivo</string>
+    <string name="time_mode_departure">Orario di partenza</string>
+    <string name="subfield_time_departure">Parti da</string>
+    <string name="subfield_time_departure_time">alle</string>
 </resources>

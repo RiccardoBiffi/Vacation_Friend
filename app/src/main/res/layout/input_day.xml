@@ -53,15 +53,15 @@
 
 
     <EditText
-        android:id="@+id/input_period_from"
+        android:id="@+id/input_day"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
 
         android:inputType="date"
         android:longClickable="false"
+        android:gravity="center_horizontal"
 
-        android:nextFocusDown="@id/input_period_to"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/day_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="@id/day_field_barrier_horizontal" />

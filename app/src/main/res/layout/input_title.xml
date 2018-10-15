@@ -2,7 +2,6 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
@@ -65,7 +64,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/title_field_barrier_vertical"
-        app:layout_constraintTop_toTopOf="@id/title_field_barrier_horizontal"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="@id/title_field_barrier_horizontal" />
 
 </android.support.constraint.ConstraintLayout>

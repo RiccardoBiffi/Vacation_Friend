@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_field_modes">
+        <item>@string/time_mode_arrival</item>
+        <item>@string/time_mode_departure</item>
+    </string-array>
+</resources>
