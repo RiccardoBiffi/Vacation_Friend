@@ -12,11 +12,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.rbiffi.vacationfriend.Utils.EditTextValidator;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -327,7 +330,25 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
                 break;
 
-            //todo NOTES
+            case Constants.F_TIME_AD:
+                List<String> timeModes = Arrays.asList(
+                        appContext.getResources().getStringArray(R.array.time_field_modes));
+                ArrayAdapter timeModesAdapter = new ArrayAdapter<>(appContext, R.layout.route_time_spinner_field,
+                        R.id.time_mode, timeModes);
+                holder.timeModeView.setAdapter(timeModesAdapter);
+
+                // così posso specificare il layout per l'elemento selezionato E per la lista
+                ArrayAdapter departurePlacesAdapter = ArrayAdapter.createFromResource(appContext,
+                        R.array.time_field_places, R.layout.route_time_spinner_subfield);
+                departurePlacesAdapter.setDropDownViewResource(R.layout.route_time_spinner_subfield);
+                holder.departurePlaceView.setAdapter(departurePlacesAdapter);
+
+                //todo manda al listener l'evento di toccare la modalità
+                break;
+
+            case Constants.F_NOTES:
+
+                break;
 
             default:
                 // dati non pronti, placeholder
@@ -434,6 +455,12 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
         private final EditText dateView;
 
+        private final Spinner timeModeView;
+        private final EditText arrivalTimeView;
+        private final Spinner departurePlaceView;
+        private final EditText departureTimeView;
+
+
         FieldViewHolder(View itemView) {
             super(itemView);
             titleFieldView = itemView.findViewById(R.id.input_title);
@@ -449,6 +476,10 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             photoImageButtonView = itemView.findViewById(R.id.input_photo_choosed);
 
             dateView = itemView.findViewById(R.id.input_day);
+            timeModeView = itemView.findViewById(R.id.spinner_time_modes);
+            arrivalTimeView = itemView.findViewById(R.id.input_arrival_time);
+            departurePlaceView = itemView.findViewById(R.id.input_time_departure_from);
+            departureTimeView = itemView.findViewById(R.id.input_time_departure_at);
         }
 
     }

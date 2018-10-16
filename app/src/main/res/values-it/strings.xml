@@ -111,4 +111,7 @@
     <string name="time_mode_departure">Orario di partenza</string>
     <string name="subfield_time_departure">Parti da</string>
     <string name="subfield_time_departure_time">alle</string>
+    <string name="demo_stop_flat">Appartamento</string>
+    <string name="demo_stop_restaurant">Ristorante</string>
+    <string name="demo_route_beach">Spiaggia</string>
 </resources>
