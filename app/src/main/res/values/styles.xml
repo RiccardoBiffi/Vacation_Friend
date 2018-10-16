@@ -53,4 +53,13 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 
+    <style name="SpinnerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">@drawable/list_divider</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="AppTheme">
+        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
+    </style>
+
 </resources>

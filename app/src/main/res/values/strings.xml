@@ -122,4 +122,8 @@
     <string name="time_mode_departure">Departure time</string>
     <string name="subfield_time_departure">Leave from</string>
     <string name="subfield_time_departure_time">at</string>
+    <string name="ph_timefield" translatable="false">Specify time mode</string>
+    <string name="demo_stop_flat">Flat</string>
+    <string name="demo_stop_restaurant">Restaurant</string>
+    <string name="demo_route_beach">Beach</string>
 </resources>

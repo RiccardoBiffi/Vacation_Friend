@@ -120,7 +120,7 @@ public class VacationViewModel extends UserViewModel {
 
         Uri uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_home_24dp);
         StopTimeArrDep st = new StopTimeArrDep(null, "12:30:00");
-        Stop stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+        Stop stop = new Stop(getApplication().getString(R.string.demo_stop_flat), "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Note: tanta fame!");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_white_24dp);
         Vehicle vehicle = new Vehicle("Automobile", uri);
@@ -132,7 +132,7 @@ public class VacationViewModel extends UserViewModel {
 
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_restaurant_24dp);
         st = new StopTimeArrDep("12:45:00", "14:30:00");
-        stop = new Stop("Ristorante", "via Turismo 12, Rovigno, Croazia",
+        stop = new Stop(getApplication().getString(R.string.demo_stop_restaurant), "via Turismo 12, Rovigno, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Gnam!");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_walk_white_24dp);
         vehicle = new Vehicle("Camminata", uri);
@@ -144,7 +144,7 @@ public class VacationViewModel extends UserViewModel {
 
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_beach_access_24dp);
         st = new StopTimeArrDep("15:10:00", "19:00:00");
-        stop = new Stop("Spiaggia", "via Acquatica 97, Pola, Croazia",
+        stop = new Stop(getApplication().getString(R.string.demo_route_beach), "via Acquatica 97, Pola, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Nuotata con scogli");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_train_white_24dp);
         vehicle = new Vehicle("Treno", uri);
@@ -167,7 +167,7 @@ public class VacationViewModel extends UserViewModel {
 
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_hotel_24dp);
         st = new StopTimeArrDep(null, "09:00:00");
-        stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+        stop = new Stop(getApplication().getString(R.string.demo_stop_flat), "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-03"), st, uri, "New day of fun!");
         vehicle = null;
         step = new Step();
