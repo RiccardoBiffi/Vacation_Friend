@@ -6,4 +6,5 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
 
-    android:text="@string/ph_timefield" />
+    android:text="@string/ph_timefield"
+    android:padding="8dp" />

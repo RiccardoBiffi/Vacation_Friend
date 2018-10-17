@@ -247,6 +247,7 @@ public class ActivityNewVacation
 
     @Override
     protected int checkFormValidity() {
+        // restituisce l'indice del primo elemento non valido, altrimenti -1
         if (viewModel.getTitle().isEmpty()) {
             return 0;
         }
