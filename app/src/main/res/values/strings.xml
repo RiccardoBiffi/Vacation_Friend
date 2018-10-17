@@ -118,8 +118,8 @@
     <string name="stop_radio_beach">Beach</string>
     <string name="stop_radio_gas_station">Gas station</string>
     <string name="stop_radio_generic">Generic</string>
-    <string name="time_mode_arrival">Arrival time</string>
-    <string name="time_mode_departure">Departure time</string>
+    <string name="time_mode_arrival">Arrival time*</string>
+    <string name="time_mode_departure">Departure time*</string>
     <string name="subfield_time_departure">Leave from</string>
     <string name="subfield_time_departure_time">at</string>
     <string name="ph_timefield" translatable="false">Specify time mode</string>

@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.Utils;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +15,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,7 +45,8 @@ public abstract class ActivityEditAppObject
         implements
         IVacationFieldsEvents,
         FragmentAddParticipantsDialog.IAddParticipantsListener,
-        VacationFriendRepository.IRepositoryListener {
+        VacationFriendRepository.IRepositoryListener,
+        OnItemSelectedListener {
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityEditAppObject.REPLY";
@@ -59,9 +64,14 @@ public abstract class ActivityEditAppObject
     protected Button vacationImageAddButton; // todo valuta se rimuoverli da qua
     protected ImageButton vacationImageButton; // fanno parte dell'adapter, photo field
     protected Button addParticipantsButton;
+
     protected TextView vacationFieldTitle;
+
     protected TextView vacationFieldPeriodFrom;
     protected TextView vacationFieldPeriodTo;
+
+    private EditText arrivalTime;
+    private ViewGroup departureTime;
 
     protected RecyclerView vacationFieldsList;
     protected EditFieldListAdapter editFieldListAdapter;
@@ -297,6 +307,25 @@ public abstract class ActivityEditAppObject
     }
 
     @Override
+    public void onTimeFocus(TextView time, Calendar calendar, TimePickerDialog.OnTimeSetListener dateListener) {
+        hideKeyboard(this);
+        time.setError(null);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog timeDialog = new TimePickerDialog(this, dateListener, hour, minute, android.text.format.DateFormat.is24HourFormat(this));
+        timeDialog.show();
+    }
+
+    @Override
+    public void checkTime(TextView time) {
+        if (time.getText().toString().isEmpty()) {
+            time.setError(getString(R.string.err_field_title));
+        } else {
+            time.setError(null);
+        }
+    }
+
+    @Override
     public void checkPeriodConsistency(TextView periodFrom, TextView periodTo) {
         if (!periodFrom.getText().toString().isEmpty() &&
                 !periodTo.getText().toString().isEmpty()
@@ -383,4 +412,34 @@ public abstract class ActivityEditAppObject
 
     @Override
     public abstract void onVacationOperationComplete(long rowId);
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // cambio a seconda della modalità scelta per inserire il tempo di una tappa
+        String selectedSpinnerItem = (String) parent.getItemAtPosition(position);
+        if (isInArrivalMode(selectedSpinnerItem)) {
+            arrivalTime.setVisibility(View.VISIBLE);
+            departureTime.setVisibility(View.GONE);
+        } else {
+            arrivalTime.setVisibility(View.INVISIBLE);
+            departureTime.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private boolean isInArrivalMode(String spinnerItem) {
+        return spinnerItem.equals(getResources().getString(R.string.time_mode_arrival));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void setArrivalTimeView(EditText arrivalTimeView) {
+        this.arrivalTime = arrivalTimeView;
+    }
+
+    public void setDepartureTimeView(ViewGroup departureGroupView) {
+        this.departureTime = departureGroupView;
+    }
 }

@@ -15,7 +15,9 @@ import com.rbiffi.vacationfriend.Utils.FieldLists;
 import java.util.List;
 
 public class ActivityNewStop
-        extends ActivityEditAppObject {
+        extends ActivityEditAppObject
+
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,19 @@ public class ActivityNewStop
 
     @Override
     protected int checkFormValidity() {
-        return 0;
+        // restituisce l'indice del primo elemento non valido, altrimenti -1
+        if (viewModel.getTitle().isEmpty()) {
+            return 0;
+        }
+
+        if (viewModel.getDateField().isEmpty()) {
+            return 2;
+        }
+
+        //if(viewModel.getTimeArrivalField() )
+        // todo devo sapere qual'è la view correntemente visualizzata. La prelevo dal viewmodel
+
+        return -1;
     }
 
     @Override
@@ -73,7 +87,7 @@ public class ActivityNewStop
 
     @Override
     protected void saveParticipantsAndUpdateAdapter(List<Participant> selectedParticipants) {
-
+        // do nothing
     }
 
     @Override

@@ -107,8 +107,8 @@
     <string name="stop_radio_beach">Spiaggia</string>
     <string name="stop_radio_gas_station">Rifornimento</string>
     <string name="stop_radio_generic">Generico</string>
-    <string name="time_mode_arrival">Orario d\'arrivo</string>
-    <string name="time_mode_departure">Orario di partenza</string>
+    <string name="time_mode_arrival">Orario d\'arrivo*</string>
+    <string name="time_mode_departure">Orario di partenza*</string>
     <string name="subfield_time_departure">Parti da</string>
     <string name="subfield_time_departure_time">alle</string>
     <string name="demo_stop_flat">Appartamento</string>

@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
@@ -32,7 +34,6 @@ import com.rbiffi.vacationfriend.Utils.EditTextValidator;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -170,7 +171,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel(holder.periodFromView, calendar);
+                        updateDateLabel(holder.periodFromView, calendar);
                         listener.savePeriodFromField(holder.periodFromView.getText().toString());
                         listener.checkPeriodConsistency(holder.periodFromView, holder.periodToView);
                     }
@@ -181,7 +182,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel(holder.periodToView, calendar);
+                        updateDateLabel(holder.periodToView, calendar);
                         listener.savePeriodToField(holder.periodToView.getText().toString());
                         listener.checkPeriodConsistency(holder.periodFromView, holder.periodToView);
                     }
@@ -295,6 +296,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
                 break;
 
+
             case Constants.F_DATE:
                 // listener.setVacationFieldPeriod(holder.periodFromView, holder.periodToView);
                 final Calendar calendarDay = Calendar.getInstance();
@@ -304,7 +306,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                         calendarDay.set(Calendar.YEAR, year);
                         calendarDay.set(Calendar.MONTH, month);
                         calendarDay.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel(holder.dateView, calendarDay);
+                        updateDateLabel(holder.dateView, calendarDay);
                         listener.saveDateField(holder.dateView.getText().toString());
                     }
                 };
@@ -330,25 +332,91 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
                 break;
 
-            case Constants.F_TIME_AD:
-                List<String> timeModes = Arrays.asList(
-                        appContext.getResources().getStringArray(R.array.time_field_modes));
-                ArrayAdapter timeModesAdapter = new ArrayAdapter<>(appContext, R.layout.route_time_spinner_field,
-                        R.id.time_mode, timeModes);
-                holder.timeModeView.setAdapter(timeModesAdapter);
 
-                // così posso specificare il layout per l'elemento selezionato E per la lista
+            case Constants.F_TIME_AD:
+                listener.setArrivalTimeView(holder.arrivalTimeView);
+                listener.setDepartureTimeView(holder.departureGroupView);
+
+                //todo salva/carica anche lo stato della view, altrimenti si resetta al cambio di config
+
+                // posso specificare il layout per l'elemento selezionato E per la lista
+                ArrayAdapter timeModesAdapter = ArrayAdapter.createFromResource(appContext,
+                        R.array.time_field_modes, R.layout.route_time_spinner_field);
+                timeModesAdapter.setDropDownViewResource(R.layout.route_time_spinner_field_dropdown);
+                holder.timeModeView.setAdapter(timeModesAdapter);
+                holder.timeModeView.setOnItemSelectedListener(listener);
+
                 ArrayAdapter departurePlacesAdapter = ArrayAdapter.createFromResource(appContext,
                         R.array.time_field_places, R.layout.route_time_spinner_subfield);
-                departurePlacesAdapter.setDropDownViewResource(R.layout.route_time_spinner_subfield);
+                departurePlacesAdapter.setDropDownViewResource(R.layout.route_time_spinner_subfield_dropdown);
                 holder.departurePlaceView.setAdapter(departurePlacesAdapter);
+                // non ascolto le selezioni dello spinner departurePlaceView
 
-                //todo manda al listener l'evento di toccare la modalità
+                final Calendar calendarTime = Calendar.getInstance();
+                final TimePickerDialog.OnTimeSetListener arrivalTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendarTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendarTime.set(Calendar.MINUTE, minute);
+                        updateTimeLabel(holder.arrivalTimeView, calendarTime);
+                        listener.saveTimeArrivalField(holder.arrivalTimeView.getText().toString());
+                    }
+                };
+
+                holder.arrivalTimeView.setInputType(InputType.TYPE_NULL);
+                holder.arrivalTimeView.setText(viewModel.getTimeArrivalField());
+                holder.arrivalTimeView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            v.performClick();
+                        } else {
+                            listener.checkTime((TextView) v);
+                        }
+                    }
+                });
+                holder.arrivalTimeView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onTimeFocus((TextView) v, calendarTime, arrivalTimeListener);
+                    }
+                });
+
+
+                final TimePickerDialog.OnTimeSetListener departureTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendarTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendarTime.set(Calendar.MINUTE, minute);
+                        updateTimeLabel(holder.departureTimeView, calendarTime);
+                        listener.saveTimeDepartureField(holder.departureTimeView.getText().toString());
+                    }
+                };
+                holder.departureTimeView.setInputType(InputType.TYPE_NULL);
+                holder.departureTimeView.setText(viewModel.getTimeDepartureField());
+                holder.departureTimeView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            v.performClick();
+                        } else {
+                            listener.checkTime((TextView) v);
+                        }
+                    }
+                });
+                holder.departureTimeView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onTimeFocus((TextView) v, calendarTime, departureTimeListener);
+                    }
+                });
                 break;
+
 
             case Constants.F_NOTES:
 
                 break;
+
 
             default:
                 // dati non pronti, placeholder
@@ -430,12 +498,20 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         fieldParticipantsAdapter.updateParticipants(fieldParticipants);
     }
 
-    private void updateLabel(View dateView, Calendar calendar) {
+    private void updateDateLabel(View dateView, Calendar calendar) {
         String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
 
         EditText dateText = (EditText) dateView;
         dateText.setText(sdf.format(calendar.getTime()));
+    }
+
+    private void updateTimeLabel(EditText arrivalTimeView, Calendar calendarTime) {
+        String myFormat = "HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
+
+        EditText dateText = (EditText) arrivalTimeView;
+        dateText.setText(sdf.format(calendarTime.getTime()));
     }
 
 
@@ -457,6 +533,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
         private final Spinner timeModeView;
         private final EditText arrivalTimeView;
+        private final ViewGroup departureGroupView;
         private final Spinner departurePlaceView;
         private final EditText departureTimeView;
 
@@ -478,6 +555,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             dateView = itemView.findViewById(R.id.input_day);
             timeModeView = itemView.findViewById(R.id.spinner_time_modes);
             arrivalTimeView = itemView.findViewById(R.id.input_arrival_time);
+            departureGroupView = itemView.findViewById(R.id.departure_viewgroup);
             departurePlaceView = itemView.findViewById(R.id.input_time_departure_from);
             departureTimeView = itemView.findViewById(R.id.input_time_departure_at);
         }
