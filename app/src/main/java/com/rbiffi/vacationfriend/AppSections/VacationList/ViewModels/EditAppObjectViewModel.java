@@ -22,6 +22,8 @@ public class EditAppObjectViewModel extends AndroidViewModel {
     private VacationFriendRepository repository;
 
     public static final long FIRST_EXECUTION = -1;
+    public static final int TIME_ARRIVAL = 0;
+    public static final int TIME_DEPARTURE = 1;
     private long modifiedVacationId;
 
     private LiveData<List<Participant>> currentParticipants;
@@ -36,6 +38,8 @@ public class EditAppObjectViewModel extends AndroidViewModel {
     private String routeDay;
     private String routeArrivalTime;
     private String routeDepartureTime;
+    private int routeDeparturePlacePosition;
+    private int routeTimeMode;
     private Uri routeIcon;
     private String stopNotes;
 
@@ -55,6 +59,8 @@ public class EditAppObjectViewModel extends AndroidViewModel {
         routeDay = "";
         routeArrivalTime = "";
         routeDepartureTime = "";
+        routeDeparturePlacePosition = 0;
+        routeTimeMode = TIME_ARRIVAL;
         routeIcon = Uri.parse("");
         stopNotes = "";
     }
@@ -158,6 +164,22 @@ public class EditAppObjectViewModel extends AndroidViewModel {
 
     public void setTimeDepartureField(String departureTime) {
         this.routeDepartureTime = departureTime;
+    }
+
+    public int getRouteDeparturePlacePosition() {
+        return routeDeparturePlacePosition;
+    }
+
+    public void setRouteDeparturePlacePosition(int routeDeparturePlacePosition) {
+        this.routeDeparturePlacePosition = routeDeparturePlacePosition;
+    }
+
+    public int getTimeMode() {
+        return routeTimeMode;
+    }
+
+    public void setRouteTimeMode(int routeTimeMode) {
+        this.routeTimeMode = routeTimeMode;
     }
 
     public Uri getIconField() {

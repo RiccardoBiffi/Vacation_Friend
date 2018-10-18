@@ -32,11 +32,14 @@ public class ActivityNewStop
         }
 
         if (viewModel.getDateField().isEmpty()) {
-            return 2;
+            return 2; // todo mostra errore
         }
 
-        //if(viewModel.getTimeArrivalField() )
-        // todo devo sapere qual'è la view correntemente visualizzata. La prelevo dal viewmodel
+        if (viewModel.getTimeMode() == EditAppObjectViewModel.TIME_ARRIVAL) {
+            if (viewModel.getTimeArrivalField().isEmpty()) return 3; // todo mostra errore
+        } else {
+            if (viewModel.getTimeDepartureField().isEmpty()) return 3; // todo mostra errore
+        }
 
         return -1;
     }
@@ -77,7 +80,7 @@ public class ActivityNewStop
 
     @Override
     protected EditFieldListAdapter createFieldAdapter() {
-        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Stop.class), viewModel);
+        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Stop.class));
     }
 
     @Override

@@ -242,7 +242,7 @@ public class ActivityNewVacation
     }
 
     protected EditFieldListAdapter createFieldAdapter() {
-        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Vacation.class), viewModel);
+        return new EditFieldListAdapter(getApplicationContext(), FieldLists.getEditFieldList(Vacation.class));
     }
 
     @Override

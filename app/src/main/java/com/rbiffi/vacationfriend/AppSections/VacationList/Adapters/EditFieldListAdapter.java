@@ -65,18 +65,16 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
     private Context appContext;
     private List<String> fieldList;
-    private EditAppObjectViewModel viewModel; // per facilitare il passaggio di dati
 
     private EditParticipantAdapter fieldParticipantsAdapter;
 
     private ActivityEditAppObject listener;
 
-    public EditFieldListAdapter(Context applicationContext, List<String> fieldList, EditAppObjectViewModel viewModel) {
+    public EditFieldListAdapter(Context applicationContext, List<String> fieldList) {
         inflater = LayoutInflater.from(applicationContext);
 
         this.appContext = applicationContext;
         this.fieldList = fieldList;
-        this.viewModel = viewModel;
     }
 
     public void setListener(ActivityEditAppObject listener) {
@@ -129,7 +127,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
             case Constants.F_TITLE:
                 listener.setVacationFieldTitle(holder.titleFieldView);
-                holder.titleFieldView.setText(viewModel.getTitle());
+                holder.titleFieldView.setText(listener.getTitleField());
                 holder.titleFieldView.requestFocus();
                 //todo open keyboard
                 holder.titleFieldView.addTextChangedListener(new TextWatcher() {
@@ -189,7 +187,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 };
 
                 holder.periodFromView.setInputType(InputType.TYPE_NULL);
-                holder.periodFromView.setText(viewModel.getPeriodFrom());
+                holder.periodFromView.setText(listener.getPeriodFromField());
                 holder.periodFromView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -209,7 +207,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 });
 
                 holder.periodToView.setInputType(InputType.TYPE_NULL);
-                holder.periodToView.setText(viewModel.getPeriodTo());
+                holder.periodToView.setText(listener.getPeriodToField());
                 holder.periodToView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -232,7 +230,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_PLACE:
-                holder.placeView.setText(viewModel.getPlace());
+                holder.placeView.setText(listener.getPlaceField());
                 holder.placeView.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -254,7 +252,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
             case Constants.F_PARTECIP:
                 fieldParticipantsAdapter = new EditParticipantAdapter(appContext, R.layout.input_partecipants_row,
-                        viewModel.getParticipants());
+                        listener.getParticipantsField());
 
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
@@ -280,9 +278,9 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     }
                 });
 
-                if (!viewModel.getPhoto().toString().equals("")) {
+                if (!listener.getPhotoField().toString().equals("")) {
                     try {
-                        Uri imageUri = viewModel.getPhoto();
+                        Uri imageUri = listener.getPhotoField();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);
                         Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
                         holder.photoButtonAddView.setVisibility(View.GONE);
@@ -312,7 +310,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 };
 
                 holder.dateView.setInputType(InputType.TYPE_NULL);
-                holder.dateView.setText(viewModel.getDateField());
+                holder.dateView.setText(listener.getDateField());
                 holder.dateView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -337,7 +335,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 listener.setArrivalTimeView(holder.arrivalTimeView);
                 listener.setDepartureTimeView(holder.departureGroupView);
 
-                //todo salva/carica anche lo stato della view, altrimenti si resetta al cambio di config
+                holder.arrivalTimeView.setText(listener.getTimeArrivalField());
+                holder.departureTimeView.setText(listener.getTimeDepartureField());
 
                 // posso specificare il layout per l'elemento selezionato E per la lista
                 ArrayAdapter timeModesAdapter = ArrayAdapter.createFromResource(appContext,
@@ -345,12 +344,14 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 timeModesAdapter.setDropDownViewResource(R.layout.route_time_spinner_field_dropdown);
                 holder.timeModeView.setAdapter(timeModesAdapter);
                 holder.timeModeView.setOnItemSelectedListener(listener);
+                showTimeMode(holder);
 
                 ArrayAdapter departurePlacesAdapter = ArrayAdapter.createFromResource(appContext,
                         R.array.time_field_places, R.layout.route_time_spinner_subfield);
                 departurePlacesAdapter.setDropDownViewResource(R.layout.route_time_spinner_subfield_dropdown);
                 holder.departurePlaceView.setAdapter(departurePlacesAdapter);
-                // non ascolto le selezioni dello spinner departurePlaceView
+                holder.departurePlaceView.setOnItemSelectedListener(listener);
+                holder.departurePlaceView.setSelection(listener.getRouteDeparturePlacePosition());
 
                 final Calendar calendarTime = Calendar.getInstance();
                 final TimePickerDialog.OnTimeSetListener arrivalTimeListener = new TimePickerDialog.OnTimeSetListener() {
@@ -364,7 +365,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 };
 
                 holder.arrivalTimeView.setInputType(InputType.TYPE_NULL);
-                holder.arrivalTimeView.setText(viewModel.getTimeArrivalField());
+                holder.arrivalTimeView.setText(listener.getTimeArrivalField());
                 holder.arrivalTimeView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -393,7 +394,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     }
                 };
                 holder.departureTimeView.setInputType(InputType.TYPE_NULL);
-                holder.departureTimeView.setText(viewModel.getTimeDepartureField());
+                holder.departureTimeView.setText(listener.getTimeDepartureField());
                 holder.departureTimeView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -413,13 +414,41 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 break;
 
 
-            case Constants.F_NOTES:
+            case Constants.F_STOP_ICON:
+                //todo salva la selezione nel viewmodel e caricala
+                break;
 
+
+            case Constants.F_NOTES:
+                //listener.setVacationFieldTitle(holder.titleFieldView);
+                holder.notesView.setText(listener.getNotesField());
+                holder.notesView.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        listener.saveNotesField(holder.notesView.getText().toString());
+                    }
+                });
                 break;
 
 
             default:
                 // dati non pronti, placeholder
+        }
+    }
+
+    private void showTimeMode(FieldViewHolder holder) {
+        if (listener.getTimeMode() == EditAppObjectViewModel.TIME_ARRIVAL) {
+            holder.timeModeView.setSelection(EditAppObjectViewModel.TIME_ARRIVAL);
+        } else {
+            holder.timeModeView.setSelection(EditAppObjectViewModel.TIME_DEPARTURE);
         }
     }
 
@@ -429,7 +458,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onAddParticipantClick(v, viewModel.getParticipants());
+                    listener.onAddParticipantClick(v, listener.getParticipantsField());
                 }
             }
         });
@@ -537,6 +566,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         private final Spinner departurePlaceView;
         private final EditText departureTimeView;
 
+        private final EditText notesView;
+
 
         FieldViewHolder(View itemView) {
             super(itemView);
@@ -558,6 +589,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             departureGroupView = itemView.findViewById(R.id.departure_viewgroup);
             departurePlaceView = itemView.findViewById(R.id.input_time_departure_from);
             departureTimeView = itemView.findViewById(R.id.input_time_departure_at);
+
+            notesView = itemView.findViewById(R.id.input_notes);
         }
 
     }
