@@ -134,6 +134,7 @@ public abstract class ActivityEditAppObject
                         vacationFieldPeriodTo.setError(getString(R.string.err_vacationlist_date_missing));
                     }
                 }
+                // todo posizioni per data e orario (però mi serve la view padre, per distinguere...)
             }
         });
     }
@@ -226,7 +227,6 @@ public abstract class ActivityEditAppObject
 
     public void saveTimeArrivalField(String arrivalTime) {
         viewModel.setTimeArrivalField(arrivalTime);
-
     }
 
     public String getTimeDepartureField() {
@@ -253,7 +253,6 @@ public abstract class ActivityEditAppObject
 
     public void saveNotesField(String notes) {
         viewModel.setNotesField(notes);
-
     }
 
     protected abstract void collectAndSaveObject();
@@ -415,14 +414,19 @@ public abstract class ActivityEditAppObject
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // cambio a seconda della modalità scelta per inserire il tempo di una tappa
-        String selectedSpinnerItem = (String) parent.getItemAtPosition(position);
-        if (isInArrivalMode(selectedSpinnerItem)) {
-            arrivalTime.setVisibility(View.VISIBLE);
-            departureTime.setVisibility(View.GONE);
-        } else {
-            arrivalTime.setVisibility(View.INVISIBLE);
-            departureTime.setVisibility(View.VISIBLE);
+        if (parent.getId() == R.id.spinner_time_modes) {
+            String selectedSpinnerItem = (String) parent.getItemAtPosition(position);
+            if (isInArrivalMode(selectedSpinnerItem)) {
+                arrivalTime.setVisibility(View.VISIBLE);
+                departureTime.setVisibility(View.GONE);
+                viewModel.setRouteTimeMode(EditAppObjectViewModel.TIME_ARRIVAL);
+            } else {
+                arrivalTime.setVisibility(View.INVISIBLE);
+                departureTime.setVisibility(View.VISIBLE);
+                viewModel.setRouteTimeMode(EditAppObjectViewModel.TIME_DEPARTURE);
+            }
+        } else { // la view è il posto di partenza
+            viewModel.setRouteDeparturePlacePosition(position);
         }
     }
 
@@ -441,5 +445,17 @@ public abstract class ActivityEditAppObject
 
     public void setDepartureTimeView(ViewGroup departureGroupView) {
         this.departureTime = departureGroupView;
+    }
+
+    public int getRouteDeparturePlacePosition() {
+        return viewModel.getRouteDeparturePlacePosition();
+    }
+
+    public List<Participant> getParticipantsField() {
+        return viewModel.getParticipants();
+    }
+
+    public int getTimeMode() {
+        return viewModel.getTimeMode();
     }
 }
