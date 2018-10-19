@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -126,7 +127,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_TITLE:
-                listener.setVacationFieldTitle(holder.titleFieldView);
+                listener.setVacationFieldTitle(holder.titleFieldView); // per mostrare gli errori
                 holder.titleFieldView.setText(listener.getTitleField());
                 holder.titleFieldView.requestFocus();
                 //todo open keyboard
@@ -296,7 +297,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_DATE:
-                // listener.setVacationFieldPeriod(holder.periodFromView, holder.periodToView);
+                listener.setVacationFieldDate(holder.dateView); // per mostrare gli errori
                 final Calendar calendarDay = Calendar.getInstance();
                 final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -332,6 +333,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_TIME_AD:
+                listener.setVacationFieldTime(holder.arrivalTimeView, holder.departureTimeView); // per mostrare gli errori
                 listener.setArrivalTimeView(holder.arrivalTimeView);
                 listener.setDepartureTimeView(holder.departureGroupView);
 
@@ -415,7 +417,14 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_STOP_ICON:
-                //todo salva la selezione nel viewmodel e caricala
+                if (listener.getStopIconField() != 0)
+                    holder.iconsRadioGroupView.check(listener.getStopIconField());
+                holder.iconsRadioGroupView.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        listener.saveStopIconField(checkedId);
+                    }
+                });
                 break;
 
 
@@ -566,6 +575,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         private final Spinner departurePlaceView;
         private final EditText departureTimeView;
 
+        private final RadioGroup iconsRadioGroupView;
+
         private final EditText notesView;
 
 
@@ -589,6 +600,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
             departureGroupView = itemView.findViewById(R.id.departure_viewgroup);
             departurePlaceView = itemView.findViewById(R.id.input_time_departure_from);
             departureTimeView = itemView.findViewById(R.id.input_time_departure_at);
+
+            iconsRadioGroupView = itemView.findViewById(R.id.icons_radio_group);
 
             notesView = itemView.findViewById(R.id.input_notes);
         }

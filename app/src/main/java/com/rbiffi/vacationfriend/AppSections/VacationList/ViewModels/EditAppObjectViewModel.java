@@ -40,7 +40,7 @@ public class EditAppObjectViewModel extends AndroidViewModel {
     private String routeDepartureTime;
     private int routeDeparturePlacePosition;
     private int routeTimeMode;
-    private Uri routeIcon;
+    private int routeIconResource;
     private String stopNotes;
 
 
@@ -61,7 +61,7 @@ public class EditAppObjectViewModel extends AndroidViewModel {
         routeDepartureTime = "";
         routeDeparturePlacePosition = 0;
         routeTimeMode = TIME_ARRIVAL;
-        routeIcon = Uri.parse("");
+        routeIconResource = 0;
         stopNotes = "";
     }
 
@@ -182,12 +182,12 @@ public class EditAppObjectViewModel extends AndroidViewModel {
         this.routeTimeMode = routeTimeMode;
     }
 
-    public Uri getIconField() {
-        return routeIcon;
+    public int getStopIconResourceField() {
+        return routeIconResource;
     }
 
-    public void setIconField(Uri icon) {
-        this.routeIcon = icon;
+    public void setStopIconResourceField(int icon) {
+        this.routeIconResource = icon;
     }
 
     public String getNotesField() {

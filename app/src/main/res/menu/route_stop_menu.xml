@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionReturn"
+        android:title="@string/op_route_return"
+        android:icon="@drawable/ic_arrow_upward_black_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionModify"
+        android:title="@string/op_modify"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionDiscuss"
+        android:title="@string/op_discuss"
+        android:icon="@drawable/ic_chat_black_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionElimina"
+        android:title="@string/op_delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        app:showAsAction="ifRoom" />
+
+</menu>

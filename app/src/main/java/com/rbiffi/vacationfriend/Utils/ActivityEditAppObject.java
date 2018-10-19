@@ -50,8 +50,6 @@ public abstract class ActivityEditAppObject
 
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityEditAppObject.REPLY";
-    public static final String VACATION = "_vacation";
-    public static final String ROUTE_STOP = "_routeStop";
     protected static final int PICK_IMAGE = 1;
 
     protected EditAppObjectViewModel viewModel;
@@ -69,6 +67,10 @@ public abstract class ActivityEditAppObject
 
     protected TextView vacationFieldPeriodFrom;
     protected TextView vacationFieldPeriodTo;
+
+    protected EditText vacationFieldDate;
+    protected EditText vacationFieldTimeArrival;
+    protected EditText vacationFieldTimeDeparture;
 
     private EditText arrivalTime;
     private ViewGroup departureTime;
@@ -92,7 +94,7 @@ public abstract class ActivityEditAppObject
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int valid = checkFormValidity();
+                int valid = checkFormValidity(); //todo restituisci un oggetto <posizione, errMsg>
                 if (isFormValid(valid))
                     collectAndSaveObject();
                 else
@@ -133,8 +135,14 @@ public abstract class ActivityEditAppObject
                         vacationFieldPeriodFrom.setError(getString(R.string.err_vacationlist_date_missing));
                         vacationFieldPeriodTo.setError(getString(R.string.err_vacationlist_date_missing));
                     }
+                } else if (position == 2) {
+                    vacationFieldDate.setError(getString(R.string.err_vacationlist_date_missing));
+                } else if (position == 3) {
+                    if (viewModel.getTimeMode() == 0)
+                        vacationFieldTimeArrival.setError(getString(R.string.err_time_missing));
+                    else
+                        vacationFieldTimeDeparture.setError(getString(R.string.err_time_missing));
                 }
-                // todo posizioni per data e orario (però mi serve la view padre, per distinguere...)
             }
         });
     }
@@ -238,13 +246,12 @@ public abstract class ActivityEditAppObject
 
     }
 
-    public Uri getIconField() {
-        return viewModel.getIconField();
+    public int getStopIconField() {
+        return viewModel.getStopIconResourceField();
     }
 
-    public void saveIconField(Uri icon) {
-        viewModel.setIconField(icon);
-
+    public void saveStopIconField(int icon) {
+        viewModel.setStopIconResourceField(icon);
     }
 
     public String getNotesField() {
@@ -270,6 +277,15 @@ public abstract class ActivityEditAppObject
     public void setVacationFieldPeriod(EditText periodFromView, EditText periodToView) {
         this.vacationFieldPeriodFrom = periodFromView;
         this.vacationFieldPeriodTo = periodToView;
+    }
+
+    public void setVacationFieldDate(EditText dateView) {
+        this.vacationFieldDate = dateView;
+    }
+
+    public void setVacationFieldTime(EditText arrivalView, EditText departureView) {
+        this.vacationFieldTimeArrival = arrivalView;
+        this.vacationFieldTimeDeparture = departureView;
     }
 
     protected boolean checkDateConsistency(String periodFrom, String periodTo) {
@@ -458,4 +474,5 @@ public abstract class ActivityEditAppObject
     public int getTimeMode() {
         return viewModel.getTimeMode();
     }
+
 }

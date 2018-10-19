@@ -1,11 +1,13 @@
 package com.rbiffi.vacationfriend.AppSections.Itinerario;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ViewModels.EditAppObjectViewModel;
+import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Stop;
 import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
@@ -18,6 +20,8 @@ public class ActivityNewStop
         extends ActivityEditAppObject
 
 {
+
+    public static final String ROUTE_STOP = "_routeStop";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +36,13 @@ public class ActivityNewStop
         }
 
         if (viewModel.getDateField().isEmpty()) {
-            return 2; // todo mostra errore
+            return 2;
         }
 
         if (viewModel.getTimeMode() == EditAppObjectViewModel.TIME_ARRIVAL) {
-            if (viewModel.getTimeArrivalField().isEmpty()) return 3; // todo mostra errore
+            if (viewModel.getTimeArrivalField().isEmpty()) return 3;
         } else {
-            if (viewModel.getTimeDepartureField().isEmpty()) return 3; // todo mostra errore
+            if (viewModel.getTimeDepartureField().isEmpty()) return 3;
         }
 
         return -1;
@@ -72,8 +76,11 @@ public class ActivityNewStop
             String timeDep = savedInstanceState.getString(Constants.IN_TIMEDEPARTURE);
             if (timeDep != null) saveTimeDepartureField(timeDep);
 
-            String icon = savedInstanceState.getString(Constants.IN_ROUTEICON);
-            if (icon != null) saveIconField(Uri.parse(icon));
+            int icon = savedInstanceState.getInt(Constants.IN_ROUTEICON);
+            if (icon != 0) saveStopIconField(icon);
+
+            String notes = savedInstanceState.getString(Constants.IN_NOTES);
+            if (notes != null) saveNotesField(notes);
         }
         // else leggo tutto dal view model
     }
@@ -85,7 +92,9 @@ public class ActivityNewStop
 
     @Override
     protected void collectAndSaveObject() {
-
+        // demo
+        //todo dovrei raccogliere i dati creando l'opportuno oggetto da salvare nell'DB
+        onVacationOperationComplete(0);
     }
 
     @Override
@@ -95,6 +104,14 @@ public class ActivityNewStop
 
     @Override
     public void onVacationOperationComplete(long rowId) {
+        //todo questo metodo dovrebbe essere chiamato dal DB a salvataggio concluso
 
+        Stop builtStop = null;
+
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(EXTRA_REPLY + ROUTE_STOP, builtStop);
+        setResult(RESULT_OK, replyIntent);
+        Toast.makeText(this, R.string.demo_new_stop, Toast.LENGTH_SHORT).show();
+        finish(); // restituisce il risultato a chi ha chiamato l'activity
     }
 }

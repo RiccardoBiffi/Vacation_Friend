@@ -1,7 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Home;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +23,17 @@ import android.widget.Toast;
 import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.VacationList.ActivityModifyVacation;
 import com.rbiffi.vacationfriend.R;
+import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
+
+import java.util.List;
 
 public class FragmentHome extends Fragment {
 
     private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
 
     private VacationViewModel viewModel;
+
+    private FragmentHomeSummary fhs;
 
     private FragmentAdapter fragmentAdapter;
     private ViewPager viewPager;
@@ -59,7 +64,6 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.tabs_home_viewpager);
@@ -118,9 +122,12 @@ public class FragmentHome extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
-            fragmentAdapter.notifyDataSetChanged();
-        }
+        viewModel.getCurrentParticipants().observe(this, new Observer<List<Participant>>() {
+            @Override
+            public void onChanged(@Nullable List<Participant> participants) {
+                fhs.setupListWithAdapter();
+            }
+        });
     }
 
     //classe interna per gestire i frammenti
@@ -134,7 +141,8 @@ public class FragmentHome extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragmentHomeSummary();
+                    fhs = new FragmentHomeSummary();
+                    return fhs;
                 case 1:
                     return new FragmentHomeChatList();
                 case 2:

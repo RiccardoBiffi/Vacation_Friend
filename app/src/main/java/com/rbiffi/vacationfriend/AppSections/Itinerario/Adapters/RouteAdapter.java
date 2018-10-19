@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
+import com.rbiffi.vacationfriend.AppSections.Itinerario.Events.IRouteClickEvents;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.RouteDay;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.RouteElement;
@@ -38,6 +39,7 @@ public class RouteAdapter
     private final Context context;
     private final List<RouteElement> route;
     private RecyclerView.LayoutManager recyclerLayout;
+    private IRouteClickEvents listener;
 
     public RouteAdapter(Context context, List<Step> steps) {
         super();
@@ -49,6 +51,10 @@ public class RouteAdapter
 
     public void setListLayout(RecyclerView.LayoutManager routeLayout) {
         this.recyclerLayout = routeLayout;
+    }
+
+    public void setListener(IRouteClickEvents listener) {
+        this.listener = listener;
     }
 
     private List<RouteElement> buildRouteList(List<Step> steps) {
@@ -118,7 +124,7 @@ public class RouteAdapter
 
         RouteElement re = route.get(position);
         if (re instanceof Stop) {
-            Stop stop = (Stop) re;
+            final Stop stop = (Stop) re;
             holder.stopIcon.setImageURI(stop.stopIcon);
             holder.stopLabel.setText(stop.title);
             String arrival = stop.stopTime.arrivalTime == null ? "" : Converters.timeToUserInterface(stop.stopTime.arrivalTime);
@@ -135,7 +141,9 @@ public class RouteAdapter
             holder.stopMoreButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo popup menù. Serve un listener e prendi ispirazione da lista vacanze
+                    if (listener != null) {
+                        listener.onOverflowClick(v, stop);
+                    }
                 }
             });
         }
@@ -150,7 +158,7 @@ public class RouteAdapter
                 holder.vehicleIcon.setImageURI(vehicle.icon);
                 holder.vehicleLabel.setText(vehicle.title);
 
-                // todo da leggere/calcolare in qualche modo
+                // todo tempi da leggere/calcolare in qualche modo
                 holder.vehicleTime.setText("15 min");
                 holder.vehicleDistance.setText("1.5 km");
             }
@@ -159,7 +167,7 @@ public class RouteAdapter
 
     @Override
     public int getItemCount() {
-        return route.size() + 1; // space footer
+        return route.size() + 1; // +1 per space footer
     }
 
     @Override
@@ -171,7 +179,7 @@ public class RouteAdapter
             Stop stop = (Stop) re;
             if (stop.stopTime.arrivalTime == null) return VIEW_TYPE_STOP_HEADER;
             if (stop.stopTime.departureTime == null) {
-                return VIEW_TYPE_STOP_FOOTER; // todo ogni giorno ha un footer?
+                return VIEW_TYPE_STOP_FOOTER;
             }
             return VIEW_TYPE_STOP_VIEW;
         }
@@ -198,7 +206,6 @@ public class RouteAdapter
         private final TextView stopTime;
         private final ImageView stopMoreButton;
         private final TextView stopPlace;
-        // todo ci possono essere problemi di id multipli tra stop, header e footer
 
         // Vehicle
         private final ImageView vehicleIcon;
