@@ -114,4 +114,8 @@
     <string name="demo_stop_flat">Appartamento</string>
     <string name="demo_stop_restaurant">Ristorante</string>
     <string name="demo_route_beach">Spiaggia</string>
+    <string name="err_time_missing">Inserisci un orario</string>
+    <string name="demo_new_stop">DEMO: tappa inserita nell\'itinerario</string>
+    <string name="op_route_return">Ritorna</string>
+    <string name="op_discuss">Discuti</string>
 </resources>

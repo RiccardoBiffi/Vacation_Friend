@@ -95,7 +95,7 @@ public class FragmentVacationRecent
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {
             // todo accedi direttamente alla vacanza appena creata
-            Vacation newVacation = data.getParcelableExtra(ActivityEditAppObject.EXTRA_REPLY + ActivityEditAppObject.VACATION);
+            Vacation newVacation = data.getParcelableExtra(ActivityEditAppObject.EXTRA_REPLY + ActivityNewVacation.VACATION);
             onVacationClick(newVacation);
         }
         if (requestCode == UPDATE_VACATION_ACTIVITY_RCODE && resultCode == Activity.RESULT_OK) {

@@ -52,6 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/icons_radio_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -61,8 +62,8 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/icon_field_barrier_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/label_icon">
+        app:layout_constraintStart_toEndOf="@id/icon_field_barrier_vertical"
+        app:layout_constraintTop_toBottomOf="@id/label_icon">
 
         <RadioButton
             android:id="@+id/icon_radio_house"

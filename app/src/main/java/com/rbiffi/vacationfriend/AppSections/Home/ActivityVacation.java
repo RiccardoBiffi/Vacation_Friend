@@ -48,6 +48,11 @@ public class ActivityVacation
     private FragmentManager fm;
     private Fragment activeFragment;
 
+    private FragmentHome fHome;
+    private FragmentRoute fRoute;
+    private FragmentExpenses fExpences;
+    private FragmentLists fLists;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +96,8 @@ public class ActivityVacation
                                 viewModel.setParticipants(participants);
 
                                 // tutti i dati della home pronti, posso caricare la view
-                                setupFragmentsAndStartHome(savedInstanceState);
+                                if (fm == null)
+                                    setupFragmentsAndStartHome(savedInstanceState);
                             }
                         });
                         viewModel.setFieldPhoto(vacation.photo);
@@ -102,6 +108,12 @@ public class ActivityVacation
             });
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void saveImmediateNeedingDataFromParcel(Vacation current) {
@@ -162,10 +174,10 @@ public class ActivityVacation
 
     @NonNull
     private FragmentHome createFragmentsAndAddToManager() {
-        FragmentHome fHome = new FragmentHome();
-        FragmentRoute fRoute = new FragmentRoute();
-        FragmentExpenses fExpences = new FragmentExpenses();
-        FragmentLists fLists = new FragmentLists();
+        fHome = new FragmentHome();
+        fRoute = new FragmentRoute();
+        fExpences = new FragmentExpenses();
+        fLists = new FragmentLists();
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.navigation_fragment_container, fHome, Constants.FTAG_HOME).hide(fHome);

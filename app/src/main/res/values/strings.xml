@@ -126,4 +126,8 @@
     <string name="demo_stop_flat">Flat</string>
     <string name="demo_stop_restaurant">Restaurant</string>
     <string name="demo_route_beach">Beach</string>
+    <string name="err_time_missing">Insert a time</string>
+    <string name="demo_new_stop">DEMO: stop inserted in route</string>
+    <string name="op_route_return">Return</string>
+    <string name="op_discuss">Discuss</string>
 </resources>

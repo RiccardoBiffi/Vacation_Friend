@@ -40,7 +40,7 @@ public class FragmentHomeSummary extends Fragment {
         setupListWithAdapter();
     }
 
-    private void setupListWithAdapter() {
+    public void setupListWithAdapter() {
         summaryList = getView().findViewById(R.id.summaryList);
         summaryList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
 
@@ -51,6 +51,5 @@ public class FragmentHomeSummary extends Fragment {
         vacationLayout = new LinearLayoutManager(getContext());
         summaryList.setLayoutManager(vacationLayout);
     }
-
 
 }

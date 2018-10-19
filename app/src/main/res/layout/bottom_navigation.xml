@@ -12,5 +12,5 @@
     app:itemIconTint="@android:color/white"
     app:itemTextColor="@android:color/white"
 
-    app:menu="@menu/bottom_menu"
+    app:menu="@menu/bottom_navigation_menu"
     />
