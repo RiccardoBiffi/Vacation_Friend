@@ -53,13 +53,22 @@
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 
-    <style name="SpinnerStyle" parent="android:style/Widget.ListView.DropDown">
-        <item name="android:divider">@drawable/list_divider</item>
+    <style name="SimpleSpinnerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">@drawable/simple_list_divider</item>
         <item name="android:dividerHeight">1dp</item>
     </style>
 
-    <style name="SpinnerTheme" parent="AppTheme">
-        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
+    <style name="SimpleSpinnerTheme" parent="AppTheme">
+        <item name="android:dropDownListViewStyle">@style/SimpleSpinnerStyle</item>
+    </style>
+
+    <style name="VehicleSpinnerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">@drawable/vehicle_list_divider</item>
+        <item name="android:dividerHeight">2dp</item>
+    </style>
+
+    <style name="VehicleSpinnerTheme" parent="AppTheme">
+        <item name="android:dropDownListViewStyle">@style/VehicleSpinnerStyle</item>
     </style>
 
 </resources>
