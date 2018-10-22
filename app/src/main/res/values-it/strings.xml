@@ -93,7 +93,7 @@
     <string name="ph_route_day">Giorno GG mese AAAA</string>
     <string name="route_stop_departure">Partenza alle %s</string>
     <string name="route_stop_arrival">Arrivo alle %s</string>
-    <string name="route_choose_vehicle">Scegli come spostarti…</string>
+    <string name="vehicle_choose">Scegli come spostarti…</string>
     <string name="cd_route_vehicle_missing">Icona di mezzo non specificato</string>
     <string name="activity_title_new_routeStop">Nuova tappa</string>
     <string name="input_day_ob">Data*</string>
@@ -118,4 +118,10 @@
     <string name="demo_new_stop">DEMO: tappa inserita nell\'itinerario</string>
     <string name="op_route_return">Ritorna</string>
     <string name="op_discuss">Discuti</string>
+    <string name="vehicle_foot">Camminata</string>
+    <string name="vehicle_bike">Bicicletta</string>
+    <string name="vehicle_car">Macchina</string>
+    <string name="vehicle_bus">Autobus</string>
+    <string name="vehicle_train">Treno</string>
+    <string name="vehicle_plane">Aereo</string>
 </resources>

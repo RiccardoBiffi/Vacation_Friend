@@ -43,7 +43,7 @@ public class FragmentHomeActivityLog extends Fragment {
 
     private void setupListWithAdapter() {
         logList = getView().findViewById(R.id.logList);
-        logList.addItemDecoration(new NoHeaderDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
+        logList.addItemDecoration(new NoHeaderDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.simple_list_divider)));
         logLayout = new LinearLayoutManager(getContext());
         logList.setLayoutManager(logLayout);
 

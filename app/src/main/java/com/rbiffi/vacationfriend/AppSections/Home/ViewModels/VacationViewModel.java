@@ -123,8 +123,8 @@ public class VacationViewModel extends UserViewModel {
         Stop stop = new Stop(getApplication().getString(R.string.demo_stop_flat), "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Note: tanta fame!");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_car_white_24dp);
-        Vehicle vehicle = new Vehicle("Automobile", uri);
-        vehicle.id = 2;
+        Vehicle vehicle = new Vehicle(getApplication().getString(R.string.vehicle_car), uri);
+        vehicle.id = 3;
         Step step = new Step();
         step.setStopPlace(stop);
         step.setVehicleToNextStop(vehicle);
@@ -134,8 +134,8 @@ public class VacationViewModel extends UserViewModel {
         st = new StopTimeArrDep("12:45:00", "14:30:00");
         stop = new Stop(getApplication().getString(R.string.demo_stop_restaurant), "via Turismo 12, Rovigno, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Gnam!");
-        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_directions_walk_white_24dp);
-        vehicle = new Vehicle("Camminata", uri);
+        uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_help_outline_white_24dp);
+        vehicle = new Vehicle(getApplication().getString(R.string.vehicle_choose), uri);
         vehicle.id = 0; // sarà l'id del vehicolo "unset"
         step = new Step();
         step.setStopPlace(stop);
@@ -147,8 +147,8 @@ public class VacationViewModel extends UserViewModel {
         stop = new Stop(getApplication().getString(R.string.demo_route_beach), "via Acquatica 97, Pola, Croazia",
                 Converters.timestampToDate("2018-10-01"), st, uri, "Nuotata con scogli");
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_train_white_24dp);
-        vehicle = new Vehicle("Treno", uri);
-        vehicle.id = 4;
+        vehicle = new Vehicle(getApplication().getString(R.string.vehicle_train), uri);
+        vehicle.id = 5;
         step = new Step();
         step.setStopPlace(stop);
         step.setVehicleToNextStop(vehicle);
@@ -156,7 +156,7 @@ public class VacationViewModel extends UserViewModel {
 
         uri = Converters.stringToUri("android.resource://com.rbiffi.vacationfriend/" + R.drawable.ic_route_hotel_24dp);
         st = new StopTimeArrDep("22:10:00", null);
-        stop = new Stop("Appartamento", "via Lanterna 45, Villaggio vacanze, Croazia",
+        stop = new Stop(getApplication().getString(R.string.demo_stop_flat), "via Lanterna 45, Villaggio vacanze, Croazia",
                 Converters.timestampToDate("2018-10-01"), st,
                 uri, "Tanta nanna");
         vehicle = null;

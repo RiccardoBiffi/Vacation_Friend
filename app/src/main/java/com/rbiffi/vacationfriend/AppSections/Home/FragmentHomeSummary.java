@@ -42,7 +42,7 @@ public class FragmentHomeSummary extends Fragment {
 
     public void setupListWithAdapter() {
         summaryList = getView().findViewById(R.id.summaryList);
-        summaryList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
+        summaryList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.simple_list_divider)));
 
 
         vacationAdapter = new ReadFieldListAdapter(getContext(), FieldLists.getReadFieldList(Vacation.class), viewModel);

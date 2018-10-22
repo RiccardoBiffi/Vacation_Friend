@@ -104,7 +104,7 @@
     <string name="ph_route_day">Weekday DD month YYYY</string>
     <string name="route_stop_departure">Departure at %s</string>
     <string name="route_stop_arrival">Arrival at %s</string>
-    <string name="route_choose_vehicle">Tap to choose a vehicle…</string>
+    <string name="vehicle_choose">Tap to choose a vehicle…</string>
     <string name="cd_route_vehicle_missing">Missing vehicle stopIcon</string>
     <string name="activity_title_new_routeStop">New stop</string>
     <string name="input_day_ob">Date*</string>
@@ -130,4 +130,10 @@
     <string name="demo_new_stop">DEMO: stop inserted in route</string>
     <string name="op_route_return">Return</string>
     <string name="op_discuss">Discuss</string>
+    <string name="vehicle_foot">Walk</string>
+    <string name="vehicle_bike">Bike</string>
+    <string name="vehicle_car">Car</string>
+    <string name="vehicle_bus">Bus</string>
+    <string name="vehicle_train">Train</string>
+    <string name="vehicle_plane">Plane</string>
 </resources>

@@ -340,17 +340,17 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 holder.arrivalTimeView.setText(listener.getTimeArrivalField());
                 holder.departureTimeView.setText(listener.getTimeDepartureField());
 
-                // posso specificare il layout per l'elemento selezionato E per la lista
+                // posso specificare il layout per l'elemento selezionato E per la lista dello spinner
                 ArrayAdapter timeModesAdapter = ArrayAdapter.createFromResource(appContext,
-                        R.array.time_field_modes, R.layout.route_time_spinner_field);
-                timeModesAdapter.setDropDownViewResource(R.layout.route_time_spinner_field_dropdown);
+                        R.array.time_field_modes, R.layout.spinner_route_time_field);
+                timeModesAdapter.setDropDownViewResource(R.layout.spinner_route_time_field_dropdown);
                 holder.timeModeView.setAdapter(timeModesAdapter);
                 holder.timeModeView.setOnItemSelectedListener(listener);
                 showTimeMode(holder);
 
                 ArrayAdapter departurePlacesAdapter = ArrayAdapter.createFromResource(appContext,
-                        R.array.time_field_places, R.layout.route_time_spinner_subfield);
-                departurePlacesAdapter.setDropDownViewResource(R.layout.route_time_spinner_subfield_dropdown);
+                        R.array.time_field_places, R.layout.spinner_route_time_subfield);
+                departurePlacesAdapter.setDropDownViewResource(R.layout.spinner_route_time_subfield_dropdown);
                 holder.departurePlaceView.setAdapter(departurePlacesAdapter);
                 holder.departurePlaceView.setOnItemSelectedListener(listener);
                 holder.departurePlaceView.setSelection(listener.getRouteDeparturePlacePosition());

@@ -43,7 +43,7 @@ public class FragmentHomeChatList extends Fragment {
 
     private void setupListWithAdapter() {
         chatList = getView().findViewById(R.id.chatList);
-        chatList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.list_divider)));
+        chatList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.simple_list_divider)));
         chatLayout = new LinearLayoutManager(getContext());
         chatList.setLayoutManager(chatLayout);
 

@@ -10,4 +10,14 @@
         <item>@string/time_mode_arrival</item>
         <item>@string/time_mode_departure</item>
     </string-array>
+
+    <string-array name="route_vehicles">
+        <item>@string/vehicle_foot</item>
+        <item>@string/vehicle_bike</item>
+        <item>@string/vehicle_car</item>
+        <item>@string/vehicle_bus</item>
+        <item>@string/vehicle_train</item>
+        <item>@string/vehicle_plane</item>
+    </string-array>
+
 </resources>
