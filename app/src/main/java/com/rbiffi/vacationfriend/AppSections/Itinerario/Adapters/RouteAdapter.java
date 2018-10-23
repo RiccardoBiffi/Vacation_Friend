@@ -1,10 +1,14 @@
 package com.rbiffi.vacationfriend.AppSections.Itinerario.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -42,6 +46,7 @@ public class RouteAdapter
     private final Context context;
     private final List<RouteElement> route;
     private final List<String> vehicles;
+    private final List<String> vehicles_missing;
 
     private RecyclerView.LayoutManager recyclerLayout;
     private IRouteClickEvents listener;
@@ -52,7 +57,10 @@ public class RouteAdapter
 
         this.context = context;
         this.route = buildRouteList(steps);
+        // lo wrappo in un ArrayList perchè altrimenti è una lista non modificabile
         this.vehicles = Arrays.asList(context.getResources().getStringArray(R.array.route_vehicles));
+        this.vehicles_missing = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.route_vehicles_missing)));
+
     }
 
     public void setListLayout(RecyclerView.LayoutManager routeLayout) {
@@ -115,7 +123,7 @@ public class RouteAdapter
     }
 
     @Override
-    public void onBindViewHolder(RouteViewHolder holder, int position) {
+    public void onBindViewHolder(final RouteViewHolder holder, int position) {
         //todo prendi l'elemento in posizione position e controlla il suo tipo per capire cosa fare.
         // inoltre se è in posizione 1 e size(), sono header e footer
 
@@ -162,57 +170,89 @@ public class RouteAdapter
                     R.id.route_vehicle_label, vehicles);
             vehicleAdapter.setDropDownViewResource(R.layout.spinner_route_vehicle_dropdown);
             holder.vehicleSpinner.setAdapter(vehicleAdapter);
+            holder.vehicleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    updateTimeAndDistance(holder, position);
+                }
 
-            if (vehicle.id != 0) { // il veicolo è selezionato
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            if (vehicle.id != 0) { // il veicolo è specificato
                 holder.vehicleViewGroup.setBackgroundResource(R.drawable.shape_route_vehicle);
-                holder.vehicleMissingGroup.setVisibility(View.GONE);
+                holder.vehicleMissingSpinner.setVisibility(View.GONE);
                 holder.vehiclePresentGroup.setVisibility(View.VISIBLE);
 
                 holder.vehicleSpinner.setSelection((int) vehicle.id - 1);
+                updateTimeAndDistance(holder, (int) vehicle.id - 1);
 
-                // todo tempi da leggere/calcolare in qualche modo
-                switch ((int) vehicle.id) {
-                    case 1:
-                        holder.vehicleTime.setText("1:20 min");
-                        holder.vehicleDistance.setText("1.5 km");
-                        break;
-                    case 2:
-                        holder.vehicleTime.setText("30 min");
-                        holder.vehicleDistance.setText("1.7 km");
-                        break;
-                    case 3:
-                        holder.vehicleTime.setText("15 min");
-                        holder.vehicleDistance.setText("2.4 km");
-                        break;
-                    case 4:
-                        holder.vehicleTime.setText("20 min");
-                        holder.vehicleDistance.setText("2.9 km");
-                        break;
-                    case 5:
-                        holder.vehicleTime.setText("10 min");
-                        holder.vehicleDistance.setText("3.4 km");
-                        break;
-                    case 6:
-                        holder.vehicleTime.setText("40 min");
-                        holder.vehicleDistance.setText("9.8 km");
-                        break;
-                    default:
-                        holder.vehicleTime.setText("15 min");
-                        holder.vehicleDistance.setText("1.5 km");
-                        break;
-                }
-            } else { // il veicolo non è scelto
-                // todo crea un adapter corretto (con hint) per lo spinner missing
-                // quando scelgo elemento, lo nasconderò a favore dell'altro
-                holder.vehicleMissingGroup.setOnClickListener(new View.OnClickListener() {
+            } else { // il veicolo non è specificato
+                ArrayAdapter<String> vehicleMissingAdapter = new VehicleAdapter(context, R.layout.spinner_route_vehicle,
+                        R.id.route_vehicle_label, vehicles_missing) {
+
                     @Override
-                    public void onClick(View v) {
-                        // todo apri popup con adapter già usato per scelta veicolo
-                        // alla scelta del veicolo, faccio show/hide e seleziono l'elemento giusto
-                        // dello spinner già presente (è solo nascosto)
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        View v = super.getDropDownView(position, convertView, parent);
+                        if (position == 0) {
+                            v.setBackgroundColor(ResourcesCompat.getColor(context.getResources(),
+                                    R.color.colorSecondary, null));
+                        }
+                        return v;
+                    }
+                };
+
+                vehicleMissingAdapter.setDropDownViewResource(R.layout.spinner_route_vehicle_dropdown);
+                holder.vehicleMissingSpinner.setAdapter(vehicleMissingAdapter);
+
+                holder.vehicleMissingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        if (position != 0) {
+                            holder.vehicleViewGroup.setBackgroundResource(R.drawable.shape_route_vehicle);
+                            holder.vehicleMissingSpinner.setVisibility(View.GONE);
+                            holder.vehiclePresentGroup.setVisibility(View.VISIBLE);
+                            holder.vehicleSpinner.setSelection(position - 1);
+                            updateTimeAndDistance(holder, position - 1);
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
                     }
                 });
             }
+        }
+    }
+
+    private void updateTimeAndDistance(RouteViewHolder holder, int position) {
+        switch (position) {
+            case 0:
+                holder.vehicleTime.setText("1:20 min");
+                holder.vehicleDistance.setText("1.5 km");
+                break;
+            case 1:
+                holder.vehicleTime.setText("30 min");
+                holder.vehicleDistance.setText("1.7 km");
+                break;
+            case 2:
+                holder.vehicleTime.setText("15 min");
+                holder.vehicleDistance.setText("2.4 km");
+                break;
+            case 3:
+                holder.vehicleTime.setText("20 min");
+                holder.vehicleDistance.setText("2.9 km");
+                break;
+            case 4:
+                holder.vehicleTime.setText("10 min");
+                holder.vehicleDistance.setText("3.4 km");
+                break;
+            default:
+                holder.vehicleTime.setText("15 min");
+                holder.vehicleDistance.setText("1.5 km");
+                break;
         }
     }
 
@@ -258,8 +298,7 @@ public class RouteAdapter
 
         // Vehicle
         private final ViewGroup vehicleViewGroup;
-        //todo rimuovi gruppo missing, uso spinner
-        private final ViewGroup vehicleMissingGroup;
+        private final Spinner vehicleMissingSpinner;
         private final ViewGroup vehiclePresentGroup;
         private final Spinner vehicleSpinner;
         private final TextView vehicleDistance;
@@ -282,7 +321,7 @@ public class RouteAdapter
             stopPlace = itemView.findViewById(R.id.route_stop_location);
 
             vehicleViewGroup = itemView.findViewById(R.id.route_vehicle_group);
-            vehicleMissingGroup = itemView.findViewById(R.id.route_vehicle_missing_group);
+            vehicleMissingSpinner = itemView.findViewById(R.id.spinner_vehicle_missing);
             vehiclePresentGroup = itemView.findViewById(R.id.route_vehicle_present_group);
             vehicleSpinner = itemView.findViewById(R.id.spinner_vehicle);
             vehicleDistance = itemView.findViewById(R.id.route_vehicle_distance);

@@ -14,9 +14,9 @@ import com.rbiffi.vacationfriend.R;
 
 import java.util.List;
 
-public class VehicleAdapter extends ArrayAdapter {
+public class VehicleAdapter extends ArrayAdapter<String> {
 
-    public VehicleAdapter(@NonNull Context context, int resource, int textViewId, @NonNull List objects) {
+    public VehicleAdapter(@NonNull Context context, int resource, int textViewId, @NonNull List<String> objects) {
         super(context, resource, objects);
     }
 
@@ -38,7 +38,7 @@ public class VehicleAdapter extends ArrayAdapter {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View row = inflater.inflate(R.layout.spinner_route_vehicle, parent, false);
         TextView label = row.findViewById(R.id.route_vehicle_label);
-        String currentVehicle = (String) getItem(position);
+        String currentVehicle = getItem(position);
         label.setText(currentVehicle);
 
         setVehicleIcon(row, currentVehicle);
@@ -51,7 +51,7 @@ public class VehicleAdapter extends ArrayAdapter {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View row = inflater.inflate(R.layout.spinner_route_vehicle_dropdown, parent, false);
         TextView label = row.findViewById(R.id.route_vehicle_label);
-        String currentVehicle = (String) getItem(position);
+        String currentVehicle = getItem(position);
         label.setText(currentVehicle);
 
         setVehicleIcon(row, currentVehicle);
@@ -75,6 +75,8 @@ public class VehicleAdapter extends ArrayAdapter {
             icon.setImageResource(R.drawable.ic_train_white_24dp);
         else if (currentVehicle.equals(getContext().getString(R.string.vehicle_plane)))
             icon.setImageResource(R.drawable.ic_directions_plane_white_24dp);
+        else
+            icon.setImageResource(R.drawable.ic_help_outline_white_24dp);
     }
 
 }
