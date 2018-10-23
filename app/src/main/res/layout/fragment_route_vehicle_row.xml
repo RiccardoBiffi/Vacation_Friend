@@ -40,57 +40,20 @@
         <!-- aggiungi un elemento alla testa, sarà il "select" tipo hint -->
         <!-- appena c'è la scelta di un elemento, nascondi e mostra altro gruppo -->
         <!-- https://android\-\-code.blogspot.com/2015/08/android-spinner-hint.html -->
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/route_vehicle_missing_group"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_vehicle_missing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+
+            android:theme="@style/VehicleSpinnerTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/route_vehicle_missing_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-
-                android:contentDescription="@string/cd_route_vehicle_missing"
-                android:src="@drawable/ic_help_outline_white_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/route_vehicle_missing_label"
-                style="@style/Subfields"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:ellipsize="end"
-
-                android:maxWidth="248dp"
-                android:maxLines="1"
-
-                android:text="@string/vehicle_choose"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/route_vehicle_missing_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/route_vehicle_missing_icon"
-                app:layout_constraintTop_toTopOf="@+id/route_vehicle_missing_icon" />
-        </android.support.constraint.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/route_vehicle_present_group"
@@ -110,7 +73,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:color/transparent"
 
                 android:theme="@style/VehicleSpinnerTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
