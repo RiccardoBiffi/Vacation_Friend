@@ -36,6 +36,10 @@
         app:layout_constraintStart_toEndOf="@id/route_street"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- todo rimuovi il gruppo e metti uno spinner nello stesso stile dell'altro -->
+        <!-- aggiungi un elemento alla testa, sarà il "select" tipo hint -->
+        <!-- appena c'è la scelta di un elemento, nascondi e mostra altro gruppo -->
+        <!-- https://android\-\-code.blogspot.com/2015/08/android-spinner-hint.html -->
         <android.support.constraint.ConstraintLayout
             android:id="@+id/route_vehicle_missing_group"
             android:layout_width="match_parent"
@@ -106,6 +110,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
 
                 android:theme="@style/VehicleSpinnerTheme"
                 app:layout_constraintBottom_toBottomOf="parent"

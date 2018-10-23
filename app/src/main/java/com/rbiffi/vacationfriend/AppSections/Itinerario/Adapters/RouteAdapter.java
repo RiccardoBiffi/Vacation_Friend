@@ -156,7 +156,7 @@ public class RouteAdapter
             //todo scroll al giorno odierno. Non so se è questo il posto giusto.
         }
         if (re instanceof Vehicle) {
-            Vehicle vehicle = (Vehicle) re;
+            final Vehicle vehicle = (Vehicle) re;
 
             ArrayAdapter vehicleAdapter = new VehicleAdapter(context, R.layout.spinner_route_vehicle,
                     R.id.route_vehicle_label, vehicles);
@@ -202,6 +202,8 @@ public class RouteAdapter
                         break;
                 }
             } else { // il veicolo non è scelto
+                // todo crea un adapter corretto (con hint) per lo spinner missing
+                // quando scelgo elemento, lo nasconderò a favore dell'altro
                 holder.vehicleMissingGroup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -256,6 +258,7 @@ public class RouteAdapter
 
         // Vehicle
         private final ViewGroup vehicleViewGroup;
+        //todo rimuovi gruppo missing, uso spinner
         private final ViewGroup vehicleMissingGroup;
         private final ViewGroup vehiclePresentGroup;
         private final Spinner vehicleSpinner;
