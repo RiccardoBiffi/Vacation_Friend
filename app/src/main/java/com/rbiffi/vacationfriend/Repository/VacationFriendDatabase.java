@@ -27,7 +27,7 @@ import com.rbiffi.vacationfriend.Utils.Converters;
                 Participant.class,
                 JoinVacationParticipant.class
         },
-        version = 19,
+        version = 20,
         exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -102,19 +102,23 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
 
         private void initializeParticipants() {
             Uri photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.blonde_woman);
-            Participant p = new Participant("test1@domani.com", photoUri, "Sara", "Manzini");
+            Participant p = new Participant("test1@domain.com", photoUri, "Sara", "Manzini");
             pDao.insert(p);
 
             photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.fine_woman);
-            p = new Participant("test2@domani.com", photoUri, "Chiara", "Rocchi");
+            p = new Participant("test2@domain.com", photoUri, "Chiara", "Rocchi");
             pDao.insert(p);
 
             photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.happy_man);
-            p = new Participant("test3@domani.com", photoUri, "Carlo", "Rossi");
+            p = new Participant("test3@domain.com", photoUri, "Carlo", "Rossi");
             pDao.insert(p);
 
             photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.businnes_man);
-            p = new Participant("test4@domani.com", photoUri, "Marco", "Scalzi");
+            p = new Participant("test4@domain.com", photoUri, "Marco", "Scalzi");
+            pDao.insert(p);
+
+            photoUri = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.black_man);
+            p = new Participant("test5@domain.com", photoUri, "Andre", "Smith");
             pDao.insert(p);
         }
     }
