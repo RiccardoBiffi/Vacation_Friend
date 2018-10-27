@@ -41,7 +41,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/lunch_at_al_faro"
                     app:layout_constraintStart_toEndOf="@id/debt_tag1"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider1"
                     app:layout_constraintStart_toEndOf="@id/debt_tag1" />
 
@@ -67,7 +67,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider1"
                     app:layout_constraintStart_toEndOf="@id/debt_date1" />
 
@@ -95,7 +95,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Sara"
+                    android:text="@string/sara"
                     app:layout_constraintBottom_toTopOf="@id/item_divider1"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon1" />
 
@@ -108,7 +108,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_10_00"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,7 +170,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/shopping_at_pola"
                     app:layout_constraintStart_toEndOf="@id/debt_tag2"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -183,7 +183,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider2"
                     app:layout_constraintStart_toEndOf="@id/debt_tag2" />
 
@@ -196,7 +196,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider2"
                     app:layout_constraintStart_toEndOf="@id/debt_date2" />
 
@@ -208,7 +208,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
 
-                    android:src="@drawable/fine_woman"
+                    android:src="@drawable/blonde_woman"
                     app:civ_border_color="@color/colorPrimaryDark"
                     app:civ_border_width="1dp"
                     app:layout_constraintBottom_toBottomOf="@id/from_person_name2"
@@ -224,7 +224,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Chiara"
+                    android:text="@string/sara"
                     app:layout_constraintBottom_toTopOf="@id/item_divider2"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon2" />
 
@@ -237,7 +237,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_5_50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,7 +287,7 @@
                     android:layout_width="8dp"
                     android:layout_height="match_parent"
 
-                    android:background="@color/colorSecondary"
+                    android:background="@color/colorPrimary"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -299,7 +299,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/beach_ticket"
                     app:layout_constraintStart_toEndOf="@id/debt_tag3"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -312,7 +312,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_21_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider3"
                     app:layout_constraintStart_toEndOf="@id/debt_tag3" />
 
@@ -325,7 +325,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider3"
                     app:layout_constraintStart_toEndOf="@id/debt_date3" />
 
@@ -353,7 +353,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Carlo"
+                    android:text="@string/carlo"
                     app:layout_constraintBottom_toTopOf="@id/item_divider3"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon3" />
 
@@ -366,9 +366,20 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_1_50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done3"
+                    style="@style/Fields"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value3"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value3"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value3"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value3" />
 
                 <ImageView
                     android:id="@+id/actions3"
@@ -416,7 +427,7 @@
                     android:layout_width="8dp"
                     android:layout_height="match_parent"
 
-                    android:background="@color/colorSecondary"
+                    android:background="@color/colorPrimary"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -428,7 +439,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/lunch_on_the_streets"
                     app:layout_constraintStart_toEndOf="@id/debt_tag4"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -441,7 +452,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_21_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider4"
                     app:layout_constraintStart_toEndOf="@id/debt_tag4" />
 
@@ -454,7 +465,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider4"
                     app:layout_constraintStart_toEndOf="@id/debt_date4" />
 
@@ -482,7 +493,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Marco"
+                    android:text="@string/marco"
                     app:layout_constraintBottom_toTopOf="@id/item_divider4"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon4" />
 
@@ -495,9 +506,20 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_6_40"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done4"
+                    style="@style/Fields"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value4"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value4"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value4"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value4" />
 
                 <ImageView
                     android:id="@+id/actions4"
@@ -545,7 +567,7 @@
                     android:layout_width="8dp"
                     android:layout_height="match_parent"
 
-                    android:background="@color/colorSecondary"
+                    android:background="@color/colorPrimary"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -557,7 +579,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/parcking_ticket_at_pola"
                     app:layout_constraintStart_toEndOf="@id/debt_tag5"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -570,7 +592,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_20_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider5"
                     app:layout_constraintStart_toEndOf="@id/debt_tag5" />
 
@@ -583,7 +605,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider5"
                     app:layout_constraintStart_toEndOf="@id/debt_date5" />
 
@@ -595,7 +617,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
 
-                    android:src="@drawable/blonde_woman"
+                    android:src="@drawable/fine_woman"
                     app:civ_border_color="@color/colorPrimaryDark"
                     app:civ_border_width="1dp"
                     app:layout_constraintBottom_toBottomOf="@+id/from_person_name5"
@@ -611,7 +633,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Anna"
+                    android:text="@string/anna"
                     app:layout_constraintBottom_toTopOf="@id/item_divider5"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon5" />
 
@@ -624,9 +646,20 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_10_00"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done5"
+                    style="@style/Fields"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value5"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value5"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value5"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value5" />
 
                 <ImageView
                     android:id="@+id/actions5"
@@ -686,7 +719,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Lunch at Al faro"
+                    android:text="@string/flat_rent"
                     app:layout_constraintStart_toEndOf="@id/debt_tag6"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -699,7 +732,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_20_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider6"
                     app:layout_constraintStart_toEndOf="@id/debt_tag6" />
 
@@ -712,7 +745,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="- from"
+                    android:text="@string/from"
                     app:layout_constraintBottom_toTopOf="@id/item_divider6"
                     app:layout_constraintStart_toEndOf="@id/debt_date6" />
 
@@ -740,7 +773,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Andre"
+                    android:text="@string/andre"
                     app:layout_constraintBottom_toTopOf="@id/item_divider6"
                     app:layout_constraintStart_toEndOf="@id/from_person_icon6" />
 
@@ -753,7 +786,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_103_35"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -815,7 +848,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="start"
-                android:text="Total debts"
+                android:text="@string/total_debts"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -832,7 +865,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="start"
-                android:text="42,60€"
+                android:text="@string/_118_25"
                 app:layout_constraintBaseline_toBaselineOf="@+id/total_debts"
                 app:layout_constraintEnd_toEndOf="parent" />
 

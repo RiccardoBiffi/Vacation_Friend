@@ -23,7 +23,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="start"
-                android:text="Today's expenses"
+                android:text="@string/today_s_expenses"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Breakfast"
+                    android:text="@string/breakfast"
                     app:layout_constraintStart_toEndOf="@id/item_tag1"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,7 +77,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="09:37"
+                    android:text="@string/_09_37"
                     app:layout_constraintBottom_toTopOf="@id/item_divider1"
                     app:layout_constraintStart_toEndOf="@id/item_tag1" />
 
@@ -90,7 +90,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="2,50€"
+                    android:text="@string/_2_50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,7 +152,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Suncream"
+                    android:text="@string/suncream"
                     app:layout_constraintStart_toEndOf="@id/item_tag2"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -165,7 +165,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="11:15"
+                    android:text="@string/_11_15"
                     app:layout_constraintBottom_toTopOf="@id/item_divider2"
                     app:layout_constraintStart_toEndOf="@id/item_tag2" />
 
@@ -178,7 +178,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:text="25,00kn"
+                    android:text="@string/_25_00kn"
 
                     app:layout_constraintBaseline_toBaselineOf="@id/expense_value2"
                     app:layout_constraintEnd_toStartOf="@+id/expense_value2"
@@ -193,11 +193,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="~3,60€"
+                    android:text="@string/_3_60"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                ♀
 
                 <ImageView
                     android:id="@+id/actions2"
@@ -256,7 +254,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Restaurant"
+                    android:text="@string/restaurant"
                     app:layout_constraintStart_toEndOf="@id/item_tag3"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -269,7 +267,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="14:02"
+                    android:text="@string/_14_02"
                     app:layout_constraintBottom_toTopOf="@id/item_divider3"
                     app:layout_constraintStart_toEndOf="@id/item_tag3" />
 
@@ -282,7 +280,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="44,00€"
+                    android:text="@string/_44_00"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -294,7 +292,7 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:text="- payed for 4 people"
+                    android:text="@string/payed_for_4_people"
                     app:layout_constraintBaseline_toBaselineOf="@id/expense_date3"
                     app:layout_constraintStart_toEndOf="@id/expense_date3" />
 
@@ -337,7 +335,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="start"
-                android:text="Previous expenses"
+                android:text="@string/previous_expenses"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/expense3" />
 
@@ -378,7 +376,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Museum ticket"
+                    android:text="@string/museum_ticket"
                     app:layout_constraintStart_toEndOf="@id/item_tag4"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -391,7 +389,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="22/08"
+                    android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider4"
                     app:layout_constraintStart_toEndOf="@id/item_tag4" />
 
@@ -404,7 +402,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="10,00€"
+                    android:text="@string/_10_00"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -466,7 +464,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Shopping"
+                    android:text="@string/shopping"
                     app:layout_constraintStart_toEndOf="@id/item_tag5"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -479,7 +477,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="21/08"
+                    android:text="@string/_21_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider5"
                     app:layout_constraintStart_toEndOf="@id/item_tag5" />
 
@@ -492,7 +490,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:text="15,35$"
+                    android:text="@string/_15_35"
 
                     app:layout_constraintBaseline_toBaselineOf="@id/expense_value5"
                     app:layout_constraintEnd_toStartOf="@+id/expense_value5"
@@ -507,7 +505,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="~13,50€"
+                    android:text="@string/_13_50"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -568,7 +566,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Parking ticket"
+                    android:text="@string/parking_ticket"
                     app:layout_constraintStart_toEndOf="@id/item_tag6"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -581,7 +579,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="22/08"
+                    android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider6"
                     app:layout_constraintStart_toEndOf="@id/item_tag6" />
 
@@ -594,7 +592,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="5,70€"
+                    android:text="@string/_5_70"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -606,7 +604,7 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:text="- payed for 3 people"
+                    android:text="@string/payed_for_3_people"
                     app:layout_constraintBaseline_toBaselineOf="@id/expense_date6"
                     app:layout_constraintStart_toEndOf="@id/expense_date6" />
 
@@ -674,7 +672,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="start"
-                android:text="Total expenses"
+                android:text="@string/total_expenses"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -689,7 +687,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="start"
-                android:text="of witch on credit"
+                android:text="@string/of_witch_on_credit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/total_expenses" />
 
@@ -705,7 +703,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="start"
-                android:text="Actual expenses"
+                android:text="@string/actual_expenses"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/credit" />
@@ -720,7 +718,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:gravity="start"
-                android:text="79,30€"
+                android:text="@string/_79_30"
                 app:layout_constraintBaseline_toBaselineOf="@+id/total_expenses"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -734,7 +732,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:gravity="start"
-                android:text="36,80€"
+                android:text="@string/_36_80"
                 app:layout_constraintBaseline_toBaselineOf="@+id/credit"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -749,7 +747,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="start"
-                android:text="42,60€"
+                android:text="@string/_42_60"
                 app:layout_constraintBaseline_toBaselineOf="@+id/effective_expenses"
                 app:layout_constraintEnd_toEndOf="parent" />
 
