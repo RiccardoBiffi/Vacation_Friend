@@ -136,4 +136,52 @@
     <string name="vehicle_bus">Bus</string>
     <string name="vehicle_train">Train</string>
     <string name="vehicle_plane">Plane</string>
+    <string name="today_s_expenses">Today\'s expenses</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="_09_37" translatable="false">09:37</string>
+    <string name="_2_50" translatable="false">2,50€</string>
+    <string name="suncream">Suncream</string>
+    <string name="_11_15" translatable="false">11:15</string>
+    <string name="_25_00kn" translatable="false">25,00kn</string>
+    <string name="_3_60" translatable="false">~3,60€</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="_14_02" translatable="false">14:02</string>
+    <string name="_44_00" translatable="false">44,00€</string>
+    <string name="payed_for_4_people">- payed for 4 people</string>
+    <string name="previous_expenses">Previous expenses</string>
+    <string name="museum_ticket">Museum ticket</string>
+    <string name="_10_00" translatable="false">10,00€</string>
+    <string name="shopping" translatable="false">Shopping</string>
+    <string name="_21_08" translatable="false">21/08</string>
+    <string name="_22_08" translatable="false">22/08</string>
+    <string name="_15_35" translatable="false">15,35$</string>
+    <string name="_13_50" translatable="false">~13,50€</string>
+    <string name="parking_ticket">Parking ticket</string>
+    <string name="_5_70" translatable="false">5,70€</string>
+    <string name="payed_for_3_people">- payed for 3 people</string>
+    <string name="total_expenses">Total expenses</string>
+    <string name="of_witch_on_credit">of witch on credit</string>
+    <string name="actual_expenses">Actual expenses</string>
+    <string name="_79_30" translatable="false">79,30€</string>
+    <string name="_36_80" translatable="false">36,80€</string>
+    <string name="_42_60" translatable="false">42,60€</string>
+    <string name="lunch_at_al_faro">Lunch at Al faro</string>
+    <string name="from">- from</string>
+    <string name="sara" translatable="false">Sara</string>
+    <string name="shopping_at_pola">Shopping at Pola</string>
+    <string name="_5_50" translatable="false">5,50€</string>
+    <string name="beach_ticket">Beach ticket</string>
+    <string name="carlo" translatable="false">Carlo</string>
+    <string name="_1_50" translatable="false">1,50€</string>
+    <string name="lunch_on_the_streets">Lunch on the streets</string>
+    <string name="marco" translatable="false">Marco</string>
+    <string name="_6_40" translatable="false">6,40€</string>
+    <string name="parcking_ticket_at_pola">Parcking ticket at Pola</string>
+    <string name="_20_08" translatable="false">20/08</string>
+    <string name="anna" translatable="false">Anna</string>
+    <string name="flat_rent">Flat rent</string>
+    <string name="andre" translatable="false">Andre</string>
+    <string name="_103_35" translatable="false">103,35€</string>
+    <string name="total_debts">Total debts</string>
+    <string name="_118_25" translatable="false">118,25€</string>
 </resources>

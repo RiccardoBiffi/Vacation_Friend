@@ -124,4 +124,24 @@
     <string name="vehicle_bus">Autobus</string>
     <string name="vehicle_train">Treno</string>
     <string name="vehicle_plane">Aereo</string>
+    <string name="today_s_expenses">Spese di oggi</string>
+    <string name="breakfast">Colazione</string>
+    <string name="suncream">Crema solare</string>
+    <string name="restaurant">Ristorante</string>
+    <string name="payed_for_4_people">- pagato per 4 persone</string>
+    <string name="previous_expenses">Spese precedenti</string>
+    <string name="museum_ticket">Ingresso al museo</string>
+    <string name="parking_ticket">Parcheggio</string>
+    <string name="payed_for_3_people">- pagato per 3 persone</string>
+    <string name="total_expenses">Spese totali</string>
+    <string name="of_witch_on_credit">di cui a credito</string>
+    <string name="actual_expenses">Spese effettive</string>
+    <string name="lunch_at_al_faro">Pranzo da Al faro</string>
+    <string name="from">- da</string>
+    <string name="shopping_at_pola">Shopping a Pola</string>
+    <string name="beach_ticket">Ingresso alla spiaggia</string>
+    <string name="lunch_on_the_streets">Pranzo per strada</string>
+    <string name="parcking_ticket_at_pola">Parcheggio a Pola</string>
+    <string name="flat_rent">Affitto appartamento</string>
+    <string name="total_debts">Debiti totali</string>
 </resources>
