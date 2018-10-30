@@ -184,4 +184,8 @@
     <string name="_103_35" translatable="false">103,35€</string>
     <string name="total_debts">Total debts</string>
     <string name="_118_25" translatable="false">118,25€</string>
+    <string name="resolution_explanation_header">Do these exchanges with the others participants to solve your debts and credits easily.</string>
+    <string name="resolution_receive">Get</string>
+    <string name="resolution_from">from</string>
+    <string name="plus" translatable="false">+</string>
 </resources>
