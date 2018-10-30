@@ -145,6 +145,8 @@
     <string name="flat_rent">Affitto appartamento</string>
     <string name="total_debts">Debiti totali</string>
     <string name="resolution_explanation_header">Fai questi scambi con gli altri partecipanti per risolvere i tuoi debiti e crediti facilmente.</string>
-    <string name="resolution_receive">Chiedi</string>
-    <string name="resolution_from">a</string>
+    <string name="resolution_receive">Ricevi</string>
+    <string name="resolution_from">da</string>
+    <string name="resolution_give">Dai</string>
+    <string name="resolution_to">a</string>
 </resources>
