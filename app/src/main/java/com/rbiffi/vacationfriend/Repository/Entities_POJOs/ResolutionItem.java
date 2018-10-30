@@ -6,7 +6,8 @@ import android.os.Parcelable;
 
 import com.rbiffi.vacationfriend.Utils.Converters;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class ResolutionItem implements Parcelable {
 
@@ -15,6 +16,14 @@ public class ResolutionItem implements Parcelable {
     private String sign;
     private String value;
     private Date date;
+
+    public ResolutionItem(Uri payerIcon, String title, String sign, String value, Date date) {
+        this.payerIcon = payerIcon;
+        this.title = title;
+        this.sign = sign;
+        this.value = value;
+        this.date = date;
+    }
 
     protected ResolutionItem(Parcel in) {
         payerIcon = in.readParcelable(Uri.class.getClassLoader());
@@ -66,6 +75,6 @@ public class ResolutionItem implements Parcelable {
 
     public String getExpenseDate() {
         String dateString = Converters.dateToUserInterface(date);
-        return dateString.substring(0, dateString.length() - 6);
+        return dateString.substring(0, dateString.length() - 5);
     }
 }

@@ -188,4 +188,6 @@
     <string name="resolution_receive">Get</string>
     <string name="resolution_from">from</string>
     <string name="plus" translatable="false">+</string>
+    <string name="resolution_give">Give</string>
+    <string name="resolution_to">to</string>
 </resources>

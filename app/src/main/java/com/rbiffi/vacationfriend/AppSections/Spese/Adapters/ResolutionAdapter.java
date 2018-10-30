@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Spese.Adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,21 @@ public class ResolutionAdapter
         holder.setActionDirection(resolution);
         holder.setPersonIcon(resolution);
         holder.setPersonName(resolution);
+        holder.setButtonListener(context);
+
+        if (resolution.getAction().equals(context.getString(R.string.resolution_give))) {
+            holder.setBackground(ContextCompat.getColor(context, R.color.colorSecondaryLight));
+        }
     }
 
     @Override
     public void onBindChildViewHolder(ResolutionItemViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        final ResolutionItem resolutionItem = ((Resolution) group).getItems().get(childIndex);
-        holder.onBind(resolutionItem);
+        Resolution r = (Resolution) group;
+        final ResolutionItem resolutionItem = r.getItems().get(childIndex);
+        holder.onBind(resolutionItem, context);
+
+        if (r.getAction().equals(context.getString(R.string.resolution_give))) {
+            holder.showNeededAction(ContextCompat.getColor(context, R.color.colorSecondaryLight));
+        }
     }
 }
