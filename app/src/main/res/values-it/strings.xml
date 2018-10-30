@@ -144,4 +144,7 @@
     <string name="parcking_ticket_at_pola">Parcheggio a Pola</string>
     <string name="flat_rent">Affitto appartamento</string>
     <string name="total_debts">Debiti totali</string>
+    <string name="resolution_explanation_header">Fai questi scambi con gli altri partecipanti per risolvere i tuoi debiti e crediti facilmente.</string>
+    <string name="resolution_receive">Chiedi</string>
+    <string name="resolution_from">a</string>
 </resources>
