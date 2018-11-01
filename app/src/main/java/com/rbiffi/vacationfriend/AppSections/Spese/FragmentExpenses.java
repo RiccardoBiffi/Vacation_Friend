@@ -3,6 +3,7 @@ package com.rbiffi.vacationfriend.AppSections.Spese;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +25,7 @@ public class FragmentExpenses extends Fragment {
     private FragmentAdapter fragmentAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private FloatingActionButton floatingButton;
 
     public FragmentExpenses() {
         super();

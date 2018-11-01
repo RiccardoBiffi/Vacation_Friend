@@ -53,10 +53,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider1"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag1" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag1"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title1" />
 
                 <TextView
                     android:id="@+id/from_label1"
@@ -112,40 +114,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/actions1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value1" />
-
                 <View
                     android:id="@+id/item_divider1"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions1" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/debt2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="85dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -182,10 +164,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_22_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider2"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag2" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag2"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title2" />
 
                 <TextView
                     android:id="@+id/from_label2"
@@ -241,33 +225,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/actions2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value2" />
-
                 <View
                     android:id="@+id/item_divider2"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions2" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -311,10 +275,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_21_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider3"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag3" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag3"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title3" />
 
                 <TextView
                     android:id="@+id/from_label3"
@@ -381,33 +347,13 @@
                     app:layout_constraintStart_toStartOf="@+id/debt_value3"
                     app:layout_constraintTop_toTopOf="@+id/debt_value3" />
 
-                <ImageView
-                    android:id="@+id/actions3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value3" />
-
                 <View
                     android:id="@+id/item_divider3"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions3" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -451,10 +397,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_21_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider4"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag4" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag4"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title4" />
 
                 <TextView
                     android:id="@+id/from_label4"
@@ -521,33 +469,13 @@
                     app:layout_constraintStart_toStartOf="@+id/debt_value4"
                     app:layout_constraintTop_toTopOf="@+id/debt_value4" />
 
-                <ImageView
-                    android:id="@+id/actions4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value4" />
-
                 <View
                     android:id="@+id/item_divider4"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions4" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -591,10 +519,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_20_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider5"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag5" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag5"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title5" />
 
                 <TextView
                     android:id="@+id/from_label5"
@@ -661,33 +591,13 @@
                     app:layout_constraintStart_toStartOf="@+id/debt_value5"
                     app:layout_constraintTop_toTopOf="@+id/debt_value5" />
 
-                <ImageView
-                    android:id="@+id/actions5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value5" />
-
                 <View
                     android:id="@+id/item_divider5"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions5" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -731,10 +641,12 @@
 
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/_20_08"
                     app:layout_constraintBottom_toTopOf="@id/item_divider6"
-                    app:layout_constraintStart_toEndOf="@id/debt_tag6" />
+                    app:layout_constraintStart_toEndOf="@id/debt_tag6"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title6" />
 
                 <TextView
                     android:id="@+id/from_label6"
@@ -790,33 +702,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/actions6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    android:focusable="true"
-
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
-
-                    android:src="@drawable/ic_more_vert_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/debt_value6" />
-
                 <View
                     android:id="@+id/item_divider6"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
 
                     android:background="@drawable/simple_list_divider"
-                    app:layout_constraintTop_toBottomOf="@id/actions6" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 

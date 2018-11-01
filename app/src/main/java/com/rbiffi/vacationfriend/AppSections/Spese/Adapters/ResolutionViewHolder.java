@@ -1,6 +1,8 @@
 package com.rbiffi.vacationfriend.AppSections.Spese.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.RotateAnimation;
@@ -97,8 +99,23 @@ public class ResolutionViewHolder extends GroupViewHolder {
                     Toast.makeText(context, "Completato...", Toast.LENGTH_SHORT).show();
                     // dovrei comunicare ad un listener che l'elemento non c'è più
                 } else {
-                    //todo crea il dialog di doppia conferma ed aggiorna il pulsante (anche colore)
-                    Toast.makeText(context, "Dialog conferma...", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builderConferma = new AlertDialog.Builder(context);
+                    builderConferma.setTitle(R.string.resolution_done_dialog_title);
+                    builderConferma.setMessage(R.string.resolution_done_dialog_message);
+                    builderConferma.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            solveButton.setText(R.string.button_wait);
+                        }
+                    });
+
+                    builderConferma.setNegativeButton(R.string.button_ignore, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    });
+
+                    builderConferma.create().show();
                 }
             }
         });
