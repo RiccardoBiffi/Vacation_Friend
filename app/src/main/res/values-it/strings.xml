@@ -149,4 +149,7 @@
     <string name="resolution_from">da</string>
     <string name="resolution_give">Dai</string>
     <string name="resolution_to">a</string>
+    <string name="resolution_done_dialog_title">Doppia conferma</string>
+    <string name="resolution_done_dialog_message">Le spese verranno risolte quando anche l\'altra persona avrà confermato.</string>
+    <string name="button_wait">Attesa...</string>
 </resources>

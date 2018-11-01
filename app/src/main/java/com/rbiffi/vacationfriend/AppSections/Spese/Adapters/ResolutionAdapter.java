@@ -61,6 +61,8 @@ public class ResolutionAdapter
 
         if (r.getAction().equals(context.getString(R.string.resolution_give))) {
             holder.showNeededAction(ContextCompat.getColor(context, R.color.colorSecondaryLight));
+        } else {
+            holder.showNeededAction(ContextCompat.getColor(context, R.color.colorPrimaryLight));
         }
     }
 }

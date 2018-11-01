@@ -190,4 +190,8 @@
     <string name="plus" translatable="false">+</string>
     <string name="resolution_give">Give</string>
     <string name="resolution_to">to</string>
+    <string name="resolution_done_dialog_title">Double confirmation</string>
+    <string name="resolution_done_dialog_message">The expenses will be resolved when the other person has confirmed, too.</string>
+    <string name="button_ok" translatable="false">Ok</string>
+    <string name="button_wait">Wait...</string>
 </resources>
