@@ -22,8 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -127,18 +125,14 @@ public class FragmentVacationRecent
                         viewModel.getVacationsPrevious().observe(FragmentVacationRecent.this, new Observer<List<Vacation>>() {
                             @Override
                             public void onChanged(@Nullable List<Vacation> vacationsPrevious) {
+                                progressBar.setVisibility(View.GONE);
                                 if (vacationsNow != null && !vacationsNow.isEmpty() ||
                                         vacationsNext != null && !vacationsNext.isEmpty() ||
                                         vacationsPrevious != null && !vacationsPrevious.isEmpty()) {
                                     emptyListTutorial.setVisibility(View.GONE);
                                 } else {
                                     emptyListTutorial.setVisibility(View.VISIBLE);
-                                    Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_arrow);
-                                    rotation.setRepeatCount(Animation.START_ON_FIRST_FRAME);
-                                    View arrow = emptyListTutorial.findViewById(R.id.ptutorial_arrow);
-                                    arrow.startAnimation(rotation);
                                 }
-                                progressBar.setVisibility(View.GONE);
                                 vacationAdapter.setAllVacations(vacationsNow, vacationsNext, vacationsPrevious);
                             }
                         });
