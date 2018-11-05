@@ -194,4 +194,8 @@
     <string name="resolution_done_dialog_message">The expenses will be resolved when the other person has confirmed, too.</string>
     <string name="button_ok" translatable="false">Ok</string>
     <string name="button_wait">Wait...</string>
+    <string name="ptutorial_lists_personal_calltoaction">Tap here to crete a new personal list!</string>
+    <string name="ptutorial_lists_personal_whatsee">Remember to bring with you your personal goods, like your toothbrush!</string>
+    <string name="ptutorial_lists_collaborative_whatsee">Get organized with others to collect goods for the whole group, like food!</string>
+    <string name="ptutorial_lists_collaborative_calltoaction">Tap here to create a new collaborative list!</string>
 </resources>

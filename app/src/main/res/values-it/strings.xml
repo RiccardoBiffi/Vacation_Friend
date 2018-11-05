@@ -152,4 +152,8 @@
     <string name="resolution_done_dialog_title">Doppia conferma</string>
     <string name="resolution_done_dialog_message">Le spese verranno risolte quando anche l\'altra persona avrà confermato.</string>
     <string name="button_wait">Attesa...</string>
+    <string name="ptutorial_lists_personal_calltoaction">Tocca qui per creare una nuova lista personale!</string>
+    <string name="ptutorial_lists_personal_whatsee">Ricorda di portare con te i tuoi beni personali, come lo spazzolino!</string>
+    <string name="ptutorial_lists_collaborative_whatsee">Organizzati con gli altri per raccogliere beni per tutto il gruppo, come il cibo!</string>
+    <string name="ptutorial_lists_collaborative_calltoaction">Tocca qui per creare una nuova lista collaborativa!</string>
 </resources>
