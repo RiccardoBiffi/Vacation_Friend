@@ -17,7 +17,6 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRoute;
@@ -232,7 +231,7 @@ public class ActivityVacation
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 // todo scroll all'inizio della schermata
-                Toast.makeText(getApplicationContext(), item.getTitle() + " reselected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), item.getTitle() + " reselected", Toast.LENGTH_SHORT).show();
             }
         });
     }

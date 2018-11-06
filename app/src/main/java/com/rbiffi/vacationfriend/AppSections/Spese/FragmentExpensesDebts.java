@@ -39,7 +39,7 @@ public class FragmentExpensesDebts extends Fragment {
         View.OnClickListener debtDetails = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Dettaglio debito", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.debt_detail, Toast.LENGTH_SHORT).show();
             }
         };
 

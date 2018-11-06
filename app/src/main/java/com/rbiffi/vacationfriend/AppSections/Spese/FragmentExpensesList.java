@@ -88,7 +88,7 @@ public class FragmentExpensesList extends Fragment {
         View.OnClickListener expenseDetails = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Dettaglio spesa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.expense_details, Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -104,7 +104,7 @@ public class FragmentExpensesList extends Fragment {
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Nuova spesa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.new_expense, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -149,7 +149,6 @@ public class FragmentExpensesList extends Fragment {
                     case R.id.actionDiscuss:
                         Toast.makeText(getContext(), getString(R.string.op_discuss), Toast.LENGTH_SHORT).show();
                         return true;
-
 
                     default:
                         return false;

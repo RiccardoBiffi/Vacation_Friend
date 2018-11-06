@@ -111,7 +111,7 @@ public class FragmentHome extends Fragment {
                 startActivityForResult(intent, UPDATE_VACATION_ACTIVITY_RCODE);
                 return true;
             case R.id.action_home_synch:
-                Toast.makeText(getContext(), getString(R.string.op_synch) + " home", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_synch) + " " + getString(R.string.home), Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra

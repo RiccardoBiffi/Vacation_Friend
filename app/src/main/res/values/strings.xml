@@ -193,9 +193,31 @@
     <string name="resolution_done_dialog_title">Double confirmation</string>
     <string name="resolution_done_dialog_message">The expenses will be resolved when the other person has confirmed, too.</string>
     <string name="button_ok" translatable="false">Ok</string>
-    <string name="button_wait">Wait...</string>
+    <string name="button_wait">Wait…</string>
     <string name="ptutorial_lists_personal_calltoaction">Tap here to crete a new personal list!</string>
     <string name="ptutorial_lists_personal_whatsee">Remember to bring with you your personal goods, like your toothbrush!</string>
     <string name="ptutorial_lists_collaborative_whatsee">Get organized with others to collect goods for the whole group, like food!</string>
     <string name="ptutorial_lists_collaborative_calltoaction">Tap here to create a new collaborative list!</string>
+    <string name="documents">Documents</string>
+    <string name="_1on2">1/2 packed</string>
+    <string name="_2on2">2/2 packed</string>
+    <string name="_1on4">1/4 packed</string>
+    <string name="beach_accessories">Beach accessories</string>
+    <string name="new_list_fe">New list for everybody activity</string>
+    <string name="list_details">List details</string>
+    <string name="completed_">Completed...</string>
+    <string name="new_list_personal">New personal list activity</string>
+    <string name="new_list_collaborative">New collaborative list activity</string>
+    <string name="new_expense">New expense</string>
+    <string name="expense_details">Expense details</string>
+    <string name="debt_detail">Debt details</string>
+    <string name="popcorn" translatable="false">Popcorn</string>
+    <string name="route">Route</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="lunch_mahnic">Lunch at Mahnic</string>
+    <string name="parking_rovigno">Parking ticket Rovigno</string>
+    <string name="dinner_pola">Dinner at Pola</string>
+    <string name="concert_rovigno">Concert at Rovigno</string>
+    <string name="umbrella_beach">Umbrella and deckchair beach</string>
+    <string name="list">List</string>
 </resources>

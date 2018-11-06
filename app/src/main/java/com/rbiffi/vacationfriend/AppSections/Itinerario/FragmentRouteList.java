@@ -107,13 +107,14 @@ public class FragmentRouteList extends Fragment implements IRouteClickEvents {
                         Toast.makeText(getActivity(), R.string.op_modify, Toast.LENGTH_SHORT).show();
                         return true;
 
+                    case R.id.actionElimina:
+                        Toast.makeText(getActivity(), R.string.op_delete, Toast.LENGTH_SHORT).show();
+                        return true;
+
                     case R.id.actionDiscuss:
                         Toast.makeText(getActivity(), R.string.op_discuss, Toast.LENGTH_SHORT).show();
                         return true;
 
-                    case R.id.actionElimina:
-                        Toast.makeText(getActivity(), R.string.op_delete, Toast.LENGTH_SHORT).show();
-                        return true;
 
                     default:
                         return false;

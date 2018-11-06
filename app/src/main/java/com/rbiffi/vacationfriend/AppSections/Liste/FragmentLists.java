@@ -90,10 +90,10 @@ public class FragmentLists extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.action_lists_sort:
-                Toast.makeText(getContext(), getString(R.string.op_sort) + " list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_sort) + " " + getString(R.string.list), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_lists_settings:
-                Toast.makeText(getContext(), getString(R.string.op_settings) + " list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_settings) + " " + getString(R.string.list), Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra
