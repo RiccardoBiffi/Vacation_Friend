@@ -61,13 +61,13 @@ public class FragmentExpensesResolution extends Fragment {
         Uri sara = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.blonde_woman);
 
         Date ago22 = Converters.timestampToDate("2018-08-22");
-        ResolutionItem resItemSara1 = new ResolutionItem(myself, "Pranzo da Mahnic", "+", "10,00€", ago22);
+        ResolutionItem resItemSara1 = new ResolutionItem(myself, getString(R.string.lunch_mahnic), "+", "10,00€", ago22);
 
         Date ago20 = Converters.timestampToDate("2018-08-20");
-        ResolutionItem resItemSara2 = new ResolutionItem(sara, "Parcheggio Rovigno", "-", "2,50€", ago20);
+        ResolutionItem resItemSara2 = new ResolutionItem(sara, getString(R.string.parking_rovigno), "-", "2,50€", ago20);
 
         Date ago19 = Converters.timestampToDate("2018-08-19");
-        ResolutionItem resItemSara3 = new ResolutionItem(sara, "Colazione", "-", "1,00€", ago19);
+        ResolutionItem resItemSara3 = new ResolutionItem(sara, getString(R.string.breakfast), "-", "1,00€", ago19);
 
         List<ResolutionItem> rilSara = new ArrayList<>();
         rilSara.add(resItemSara1);
@@ -84,8 +84,8 @@ public class FragmentExpensesResolution extends Fragment {
 
         Uri andre = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.black_man);
 
-        ResolutionItem resItemAndre1 = new ResolutionItem(andre, "Cena a Pola", "-", "18,50€", ago22);
-        ResolutionItem resItemAndre2 = new ResolutionItem(myself, "Popcorn", "+", "3,00€", ago20);
+        ResolutionItem resItemAndre1 = new ResolutionItem(andre, getString(R.string.dinner_pola), "-", "18,50€", ago22);
+        ResolutionItem resItemAndre2 = new ResolutionItem(myself, getString(R.string.popcorn), "+", "3,00€", ago20);
 
         List<ResolutionItem> rilAndre = new ArrayList<>();
         rilAndre.add(resItemAndre1);
@@ -101,9 +101,9 @@ public class FragmentExpensesResolution extends Fragment {
 
         Uri marco = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.businnes_man);
 
-        ResolutionItem resItemMarco1 = new ResolutionItem(marco, "Concerto a Rovigno", "-", "25,00€", ago20);
-        ResolutionItem resItemMarco2 = new ResolutionItem(myself, "Pranzo da Mahnic", "+", "10,00€", ago20);
-        ResolutionItem resItemMarco3 = new ResolutionItem(myself, "Ombrellone e sdraio spiaggia", "+", "9,75€", ago19);
+        ResolutionItem resItemMarco1 = new ResolutionItem(marco, getString(R.string.concert_rovigno), "-", "25,00€", ago20);
+        ResolutionItem resItemMarco2 = new ResolutionItem(myself, getString(R.string.lunch_mahnic), "+", "10,00€", ago20);
+        ResolutionItem resItemMarco3 = new ResolutionItem(myself, getString(R.string.umbrella_beach), "+", "9,75€", ago19);
 
         List<ResolutionItem> rilMarco = new ArrayList<>();
         rilMarco.add(resItemMarco1);

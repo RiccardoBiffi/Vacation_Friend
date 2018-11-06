@@ -156,4 +156,24 @@
     <string name="ptutorial_lists_personal_whatsee">Ricorda di portare con te i tuoi beni personali, come lo spazzolino!</string>
     <string name="ptutorial_lists_collaborative_whatsee">Organizzati con gli altri per raccogliere beni per tutto il gruppo, come il cibo!</string>
     <string name="ptutorial_lists_collaborative_calltoaction">Tocca qui per creare una nuova lista collaborativa!</string>
+    <string name="documents">Documenti</string>
+    <string name="_1on2">1/2 in valigia</string>
+    <string name="_2on2">2/2 in valigia</string>
+    <string name="_1on4">1/4 in valigia</string>
+    <string name="beach_accessories">Accessori spiaggia</string>
+    <string name="lunch_mahnic">Pranzo da Mahnic</string>
+    <string name="parking_rovigno">Parcheggio Rovigno</string>
+    <string name="dinner_pola">Cena a Pola</string>
+    <string name="concert_rovigno">Concerto a Rovigno</string>
+    <string name="umbrella_beach">Ombrellone e sdraio spiaggia</string>
+    <string name="new_list_fe">Nuova lista per tutti activity</string>
+    <string name="list_details">Dettagli lista</string>
+    <string name="completed_">Completato...</string>
+    <string name="new_list_personal">Nuova lista personale activity</string>
+    <string name="new_list_collaborative">Nuova lista collaborativa activity</string>
+    <string name="new_expense">Nuova spesa</string>
+    <string name="expense_details">Dettagli spesa</string>
+    <string name="debt_detail">Dettagli debito</string>
+    <string name="route">Itinerario</string>
+    <string name="list">Lista</string>
 </resources>

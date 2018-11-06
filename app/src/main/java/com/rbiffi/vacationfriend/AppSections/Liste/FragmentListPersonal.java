@@ -28,7 +28,7 @@ public class FragmentListPersonal extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "New personal list activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.new_list_personal, Toast.LENGTH_SHORT).show();
             }
         });
 

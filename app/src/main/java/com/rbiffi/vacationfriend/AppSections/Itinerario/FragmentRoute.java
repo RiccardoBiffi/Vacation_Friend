@@ -93,7 +93,7 @@ public class FragmentRoute extends Fragment {
         //nb l'evento passa prima all'activity e, se non gestito, al fragment
         switch (item.getItemId()) {
             case R.id.action_route_settings:
-                Toast.makeText(getContext(), getString(R.string.op_settings) + " route", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_settings) + " " + getString(R.string.route), Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra

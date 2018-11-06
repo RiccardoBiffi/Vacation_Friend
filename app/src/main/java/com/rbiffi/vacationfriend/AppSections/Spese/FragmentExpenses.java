@@ -92,13 +92,13 @@ public class FragmentExpenses extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.action_expenses_sort:
-                Toast.makeText(getContext(), getString(R.string.op_sort) + " spese", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_sort) + " " + getString(R.string.expenses_tag_expenses), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_expenses_filter:
-                Toast.makeText(getContext(), getString(R.string.op_filter) + " spese", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_filter) + " " + getString(R.string.expenses_tag_expenses), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_expenses_setting:
-                Toast.makeText(getContext(), getString(R.string.op_settings) + " spese", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.op_settings) + " " + getString(R.string.expenses_tag_expenses), Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 // per gestire eventuali voci di menù extra

@@ -28,7 +28,7 @@ public class FragmentListCollaborative extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "New collaborative list activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.new_list_collaborative, Toast.LENGTH_SHORT).show();
             }
         });
     }
