@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler;
 import com.rbiffi.vacationfriend.AppSections.Itinerario.Events.IRouteClickEvents;
@@ -140,6 +141,13 @@ public class RouteAdapter
             holder.stopLabel.setText(stop.title);
             String arrival = stop.stopTime.arrivalTime == null ? "" : Converters.timeToUserInterface(stop.stopTime.arrivalTime);
             String departure = stop.stopTime.departureTime == null ? "" : Converters.timeToUserInterface(stop.stopTime.departureTime);
+
+            holder.stop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, context.getString(R.string.stop_details), Toast.LENGTH_SHORT).show();
+                }
+            });
 
             if (arrival.isEmpty())
                 holder.stopTime.setText(String.format(context.getString(R.string.route_stop_departure), departure));
@@ -290,6 +298,7 @@ public class RouteAdapter
     class RouteViewHolder extends RecyclerView.ViewHolder {
 
         // Stop
+        private final ViewGroup stop;
         private final ImageView stopIcon;
         private final TextView stopLabel;
         private final TextView stopTime;
@@ -314,6 +323,7 @@ public class RouteAdapter
         RouteViewHolder(View itemView) {
             super(itemView);
 
+            stop = itemView.findViewById(R.id.route_stop);
             stopIcon = itemView.findViewById(R.id.route_stop_icon);
             stopLabel = itemView.findViewById(R.id.route_stop_label);
             stopTime = itemView.findViewById(R.id.route_stop_time);
