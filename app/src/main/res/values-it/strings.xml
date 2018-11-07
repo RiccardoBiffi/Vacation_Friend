@@ -176,4 +176,5 @@
     <string name="debt_detail">Dettagli debito</string>
     <string name="route">Itinerario</string>
     <string name="list">Lista</string>
+    <string name="stop_details">Dettagli della tappa activity</string>
 </resources>

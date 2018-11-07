@@ -220,4 +220,5 @@
     <string name="concert_rovigno">Concert at Rovigno</string>
     <string name="umbrella_beach">Umbrella and deckchair beach</string>
     <string name="list">List</string>
+    <string name="stop_details">Stop details activity</string>
 </resources>
