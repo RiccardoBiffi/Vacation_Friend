@@ -749,15 +749,15 @@
             <TextView
                 android:id="@+id/total_debts_value"
                 style="@style/Fields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="start"
                 android:text="@string/_118_25"
+                android:textColor="@color/white"
                 app:layout_constraintBaseline_toBaselineOf="@+id/total_debts"
                 app:layout_constraintEnd_toEndOf="parent" />
 
