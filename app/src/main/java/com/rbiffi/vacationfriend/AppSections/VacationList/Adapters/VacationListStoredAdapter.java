@@ -41,8 +41,6 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
 
     @Override
     public VacationStoredViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        //TODO a seconda del viewtype posso creare view diverse per gli oggetti, tipo il footer
         View view;
         switch (viewType) {
             case VIEW_TYPE_OBJECT_VIEW:

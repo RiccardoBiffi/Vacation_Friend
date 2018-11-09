@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- todo forse non lo uso, li metto tutti e bon -->
     <Button
         android:id="@+id/input_add_partic"
         android:layout_width="0dp"
@@ -16,7 +15,7 @@
         android:gravity="start|center"
 
         android:text="@string/field_partec_buttontext"
-        style="@style/AddFieldBotton"
+        style="@style/AddFieldButton"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

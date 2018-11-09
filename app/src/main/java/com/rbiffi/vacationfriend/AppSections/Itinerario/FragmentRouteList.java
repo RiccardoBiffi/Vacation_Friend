@@ -48,11 +48,11 @@ public class FragmentRouteList extends Fragment implements IRouteClickEvents {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupListWithAdapter();
+        setupListWithAdapter(view);
     }
 
-    private void setupListWithAdapter() {
-        routeList = getView().findViewById(R.id.routeList);
+    private void setupListWithAdapter(View view) {
+        routeList = view.findViewById(R.id.routeList);
         routeList.addItemDecoration(new DividerItemDecoration(getContext(), 0));
 
         viewModel.getRoute().observe(this, new Observer<List<Step>>() {
@@ -114,7 +114,6 @@ public class FragmentRouteList extends Fragment implements IRouteClickEvents {
                     case R.id.actionDiscuss:
                         Toast.makeText(getActivity(), R.string.op_discuss, Toast.LENGTH_SHORT).show();
                         return true;
-
 
                     default:
                         return false;

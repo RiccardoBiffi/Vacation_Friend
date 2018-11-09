@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/undoBottonAction"
-        style="@style/UndoBotton"
+        style="@style/UndoButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -17,7 +17,7 @@
 
     <Button
         android:id="@+id/saveBottonAction"
-        style="@style/PrimaryBotton"
+        style="@style/PrimaryButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

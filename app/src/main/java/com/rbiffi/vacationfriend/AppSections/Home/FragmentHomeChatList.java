@@ -38,11 +38,11 @@ public class FragmentHomeChatList extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupListWithAdapter();
+        setupListWithAdapter(view);
     }
 
-    private void setupListWithAdapter() {
-        chatList = getView().findViewById(R.id.chatList);
+    private void setupListWithAdapter(final View view) {
+        chatList = view.findViewById(R.id.chatList);
         chatList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.simple_list_divider)));
         chatLayout = new LinearLayoutManager(getContext());
         chatList.setLayoutManager(chatLayout);
@@ -51,7 +51,7 @@ public class FragmentHomeChatList extends Fragment {
             @Override
             public void onChanged(@Nullable List<Discussion> discussions) {
                 if (discussions == null) {
-                    getView().findViewById(R.id.empty_home_chat).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.empty_home_chat).setVisibility(View.VISIBLE);
                 } else {
                     // passa la lista all'adapter per la visualizzazione
                     chatAdapter = new ChatListAdapter(getContext(), discussions);

@@ -221,4 +221,5 @@
     <string name="umbrella_beach">Umbrella and deckchair beach</string>
     <string name="list">List</string>
     <string name="stop_details">Stop details activity</string>
+    <string name="field_partic_singol">partecipant</string>
 </resources>

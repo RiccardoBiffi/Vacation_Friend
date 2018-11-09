@@ -78,7 +78,7 @@ public class VacationFriendRepository {
     }
 
     public LiveData<List<Step>> getVacationRoute(long vId) {
-        // todo leggili dal DB o costruiscili ad hoc (ad hoc nel viewmodel, DB qui)
+        // todo lettura dal DB. Al momento sono costruiti come DEMO nel viewmodel
         return null;
     }
 

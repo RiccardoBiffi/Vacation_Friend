@@ -12,25 +12,31 @@
     </style>
     <style name="Fields" >
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/darker_gray</item>
     </style>
     <style name="Subfields" >
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/darker_gray</item>
     </style>
     <style name="FieldDescription" >
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/darker_gray</item>
     </style>
-    <style name="PrimaryBotton">
+
+    <style name="PrimaryButton">
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-    <style name="AddFieldBotton">
+
+    <style name="AddFieldButton">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
     </style>
-    <style name="UndoBotton">
+
+    <style name="UndoButton">
         <item name="android:background">@color/light_gray</item>
         <item name="android:textSize">24sp</item>
     </style>

@@ -70,7 +70,7 @@
 
     <Button
         android:id="@+id/input_photo"
-        style="@style/AddFieldBotton"
+        style="@style/AddFieldButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

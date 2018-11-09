@@ -104,11 +104,17 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
                 break;
 
             case Constants.F_PARTECIP:
-                // todo se 1 partecipante solo, metti al singolare
-                holder.partecipantNumber.setText(String.format(Locale.getDefault(),
-                        "%d %s",
-                        viewModel.getParticipants().size() + 1,
-                        context.getString(R.string.field_partic_number)));
+                if (viewModel.getParticipants().size() == 0) {
+                    holder.partecipantNumber.setText(String.format(Locale.getDefault(),
+                            "%d %s",
+                            viewModel.getParticipants().size() + 1,
+                            context.getString(R.string.field_partic_singol)));
+                } else {
+                    holder.partecipantNumber.setText(String.format(Locale.getDefault(),
+                            "%d %s",
+                            viewModel.getParticipants().size() + 1,
+                            context.getString(R.string.field_partic_number)));
+                }
 
                 fieldParticipantsAdapter = new ViewParticipantAdapter(context, viewModel);
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);
@@ -171,7 +177,6 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
 
     class SummaryViewHolder extends RecyclerView.ViewHolder {
 
-        // todo elementi di ogni view del sommario
         private final TextView periodDaysView;
         private final TextView periodFromView;
         private final TextView periodToView;
@@ -180,6 +185,8 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
 
         private TextView partecipantNumber;
         private final RecyclerView partecipantListView;
+
+        // todo view degli altri elementi del sommario
 
 
         SummaryViewHolder(View itemView) {
