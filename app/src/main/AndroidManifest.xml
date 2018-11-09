@@ -26,7 +26,7 @@
         <activity
             android:name=".AppSections.VacationList.ActivityNewVacation"
             android:label="@string/activity_title_new_vacation"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             />
 
         <activity
@@ -46,7 +46,7 @@
         <activity
             android:name=".AppSections.Itinerario.ActivityNewStop"
             android:label="@string/activity_title_new_routeStop"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan" />
 
     </application>
 

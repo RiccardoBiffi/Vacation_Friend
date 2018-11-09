@@ -122,21 +122,20 @@ public class ActivityVacation
     }
 
     protected void restoreState(Bundle savedInstanceState) {
-        //todo salva in Constants le chiavi dei campi
         if (savedInstanceState != null) {
-            String title = savedInstanceState.getString("inputTitle");
+            String title = savedInstanceState.getString(Constants.IN_TITLE);
             if (title != null) viewModel.setFieldTitle(title);
 
-            String dateFrom = savedInstanceState.getString("inputPeriodFrom");
+            String dateFrom = savedInstanceState.getString(Constants.IN_PERIODFROM);
             if (dateFrom != null) viewModel.setFieldPeriodFrom(dateFrom);
 
-            String dateTo = savedInstanceState.getString("inputPeriodTo");
+            String dateTo = savedInstanceState.getString(Constants.IN_PERIODTO);
             if (dateTo != null) viewModel.setFieldPeriodTo(dateTo);
 
-            String place = savedInstanceState.getString("inputPlace");
+            String place = savedInstanceState.getString(Constants.IN_PLACE);
             if (place != null) viewModel.setFieldPlace(place);
 
-            String photo = savedInstanceState.getString("inputPhoto");
+            String photo = savedInstanceState.getString(Constants.IN_PHOTO);
             if (photo != null) viewModel.setFieldPhoto(Uri.parse(photo));
 
             //todo altri campi da ripristinare, devo considerarli tutti
@@ -230,8 +229,7 @@ public class ActivityVacation
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                // todo scroll all'inizio della schermata
-                //Toast.makeText(getApplicationContext(), item.getTitle() + " reselected", Toast.LENGTH_SHORT).show();
+                // todo scroll all'inizio della schermata, ma anche nothing va bene
             }
         });
     }

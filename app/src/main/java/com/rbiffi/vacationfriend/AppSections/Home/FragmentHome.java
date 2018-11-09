@@ -49,6 +49,7 @@ public class FragmentHome extends Fragment {
         // you should initialize essential components of the fragment that you want to retain when
         // the fragment is paused or stopped, then resumed.
         viewModel = ViewModelProviders.of(getActivity()).get(VacationViewModel.class);
+
         setHasOptionsMenu(true); // il frammento può aggiungere voci al menù chiamando onCreateOptionsMenu
     }
 
@@ -88,6 +89,20 @@ public class FragmentHome extends Fragment {
         // todo salvare lo stato dal kill del processo
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        viewModel.getCurrentParticipants().removeObservers(this);
+        viewModel.getCurrentParticipants().observe(this, new Observer<List<Participant>>() {
+            @Override
+            public void onChanged(@Nullable List<Participant> participants) {
+                if (fhs.getView() != null)
+                    fhs.setupListWithAdapter(fhs.getView());
+            }
+        });
+    }
+
     @SuppressLint("RestrictedApi")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -103,7 +118,6 @@ public class FragmentHome extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //nb l'evento passa prima all'activity e, se non gestito, al fragment
-        // todo opzioni mostrate dalla activity, gestite dai fragment
         switch (item.getItemId()) {
             case R.id.action_home_modifica:
                 Intent intent = new Intent(getActivity(), ActivityModifyVacation.class);
@@ -117,17 +131,6 @@ public class FragmentHome extends Fragment {
                 // per gestire eventuali voci di menù extra
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        viewModel.getCurrentParticipants().observe(this, new Observer<List<Participant>>() {
-            @Override
-            public void onChanged(@Nullable List<Participant> participants) {
-                fhs.setupListWithAdapter();
-            }
-        });
     }
 
     //classe interna per gestire i frammenti

@@ -9,8 +9,6 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Discussion;
 
 import java.util.List;
 
-// todo per l'esame non la sviluppo
-
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatViewHolder> {
 
 

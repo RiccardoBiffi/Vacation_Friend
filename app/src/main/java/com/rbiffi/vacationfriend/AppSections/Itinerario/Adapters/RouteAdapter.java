@@ -125,8 +125,6 @@ public class RouteAdapter
 
     @Override
     public void onBindViewHolder(final RouteViewHolder holder, int position) {
-        //todo prendi l'elemento in posizione position e controlla il suo tipo per capire cosa fare.
-        // inoltre se è in posizione 1 e size(), sono header e footer
 
         if (position >= route.size()) {
             ViewGroup.LayoutParams layoutParams = holder.spaceFooter.getLayoutParams();
@@ -169,7 +167,7 @@ public class RouteAdapter
         if (re instanceof RouteDay) {
             RouteDay day = (RouteDay) re;
             holder.routeDay.setText(day.currentDay);
-            //todo scroll al giorno odierno. Non so se è questo il posto giusto.
+            //todo all'apertura, scroll al giorno odierno. Non so se è questo il posto giusto.
         }
         if (re instanceof Vehicle) {
             final Vehicle vehicle = (Vehicle) re;

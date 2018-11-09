@@ -85,16 +85,16 @@ public abstract class ActivityEditAppObject
         setContentView(R.layout.activity_edit_object);
 
         getActivityViewModel();
+        setupListWithAdapter();
         saveDataFromIntentMaybe();
         restoreState(savedInstanceState);
-        setupListWithAdapter();
         setupActionBar();
         setupActivityButtons();
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int valid = checkFormValidity(); //todo restituisci un oggetto <posizione, errMsg>
+                int valid = checkFormValidity(); //todo restituisci con un oggetto <posizione, errMsg>
                 if (isFormValid(valid))
                     collectAndSaveObject();
                 else

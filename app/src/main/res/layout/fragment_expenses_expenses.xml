@@ -664,46 +664,46 @@
             <TextView
                 android:id="@+id/total_expenses"
                 style="@style/Subfields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="start"
                 android:text="@string/total_expenses"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/credit"
                 style="@style/Subfields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="start"
                 android:text="@string/of_witch_on_credit"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/total_expenses" />
 
             <TextView
                 android:id="@+id/effective_expenses"
                 style="@style/Fields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:gravity="start"
                 android:text="@string/actual_expenses"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/credit" />
@@ -711,43 +711,42 @@
             <TextView
                 android:id="@+id/total_expenses_value"
                 style="@style/Subfields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="start"
                 android:text="@string/_79_30"
+                android:textColor="@color/white"
                 app:layout_constraintBaseline_toBaselineOf="@+id/total_expenses"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/credit_value"
                 style="@style/Subfields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="start"
                 android:text="@string/_36_80"
+                android:textColor="@color/white"
                 app:layout_constraintBaseline_toBaselineOf="@+id/credit"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/effective_expenses_value"
                 style="@style/Fields"
-                android:textColor="@color/white"
-
                 android:layout_width="wrap_content"
+
                 android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="start"
                 android:text="@string/_42_60"
+                android:textColor="@color/white"
                 app:layout_constraintBaseline_toBaselineOf="@+id/effective_expenses"
                 app:layout_constraintEnd_toEndOf="parent" />
 

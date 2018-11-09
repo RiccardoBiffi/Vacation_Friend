@@ -37,27 +37,23 @@ public class FragmentVacationStore
         IVacationListClickEvents,
         VacationFriendRepository.IRepositoryListener {
 
-    // todo queste 2 costanti probabilmente non servono
-    private static final int NEW_VACATION_ACTIVITY_RCODE = 1;
-    private static final int UPDATE_VACATION_ACTIVITY_RCODE = 2;
-
     private VacationListViewModel viewModel;
 
     private View emptyListTutorial;
     private ProgressBar progressBar;
 
     private RecyclerView vacationList;
-    private VacationListStoredAdapter vacationAdapter; // todo devo definirne un'altro
+    private VacationListStoredAdapter vacationAdapter;
     private RecyclerView.LayoutManager vacationLayout;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.vacationlist_fragment_archive, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         emptyListTutorial = getActivity().findViewById(R.id.empty_stored_list);
@@ -79,16 +75,14 @@ public class FragmentVacationStore
         vacationList.setLayoutManager(vacationLayout);
 
         // recupero il viewmodel che preserverà i dati anche a seguito di cambi di configurazione della activity
-        //todo devo salvare le vacanze archiviate
         viewModel = ViewModelProviders.of(getActivity()).get(VacationListViewModel.class);
 
         // osservo il livedata per reagire quando i dati cambiano
-        //todo devo osservare le vacanze archiviate
         viewModel.getStoredVacation().observe(this, new Observer<List<Vacation>>() {
             @Override
             public void onChanged(@Nullable List<Vacation> vacationLites) {
                 if (vacationLites != null && !vacationLites.isEmpty()) {
-                    //todo loader
+                    //todo mostra/nascondi il loader.
                     emptyListTutorial.setVisibility(View.GONE);
                 } else {
                     emptyListTutorial.setVisibility(View.VISIBLE);
@@ -148,7 +142,6 @@ public class FragmentVacationStore
                         builderArchivia.setTitle("Vuoi ripristinare " + vacation.title + "?");
                         builderArchivia.setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                //todo unstore vacanza
                                 viewModel.unstore(vacation.id);
                                 Toast.makeText(getContext(), vacation.title + " ripristinata", Toast.LENGTH_SHORT).show();
                             }

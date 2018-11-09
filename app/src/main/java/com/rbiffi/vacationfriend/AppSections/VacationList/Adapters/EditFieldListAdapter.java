@@ -49,7 +49,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdapter.FieldViewHolder> {
 
-    //TODO lista di interi per tutti i possibili fieldList di tutta la App
     private static final int VIEW_TYPE_TITLE = 0;
     private static final int VIEW_TYPE_PERIOD = 1;
     private static final int VIEW_TYPE_PLACE = 2;
@@ -130,7 +129,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 listener.setVacationFieldTitle(holder.titleFieldView); // per mostrare gli errori
                 holder.titleFieldView.setText(listener.getTitleField());
                 holder.titleFieldView.requestFocus();
-                //todo open keyboard
+                holder.titleFieldView.callOnClick();
+
                 holder.titleFieldView.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -150,6 +150,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                 });
 
                 holder.titleFieldView.setOnFocusChangeListener(new EditTextValidator(holder.titleFieldView) {
+
                     @Override
                     public void validate(final TextView textView, String text) {
                         if (text.isEmpty()) {

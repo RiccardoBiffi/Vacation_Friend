@@ -37,11 +37,11 @@ public class FragmentHomeSummary extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setupListWithAdapter();
+        setupListWithAdapter(view);
     }
 
-    public void setupListWithAdapter() {
-        summaryList = getView().findViewById(R.id.summaryList);
+    public void setupListWithAdapter(View view) {
+        summaryList = view.findViewById(R.id.summaryList);
         summaryList.addItemDecoration(new NoFooterDividerItemDecoration(ContextCompat.getDrawable(getContext(), R.drawable.simple_list_divider)));
 
 

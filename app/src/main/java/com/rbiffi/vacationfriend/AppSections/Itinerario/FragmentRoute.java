@@ -78,7 +78,6 @@ public class FragmentRoute extends Fragment {
     @SuppressLint("RestrictedApi")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // todo modifica il menù della action bar
         inflater.inflate(R.menu.appbar_route_menu, menu);
 
         // per rendere visibile l'icona anche nell'overflow menù
