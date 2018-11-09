@@ -44,7 +44,7 @@ public class EditAppObjectViewModel extends AndroidViewModel {
     private String stopNotes;
 
 
-    EditAppObjectViewModel(@NonNull Application app) {
+    public EditAppObjectViewModel(@NonNull Application app) {
         super(app);
         repository = VacationFriendRepository.getInstance(app);
 

@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/resolution_action_label"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -39,7 +39,7 @@
 
     <TextView
         android:id="@+id/resolution_group_value"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -53,7 +53,7 @@
 
     <TextView
         android:id="@+id/resolution_action_direction"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -82,7 +82,7 @@
 
     <TextView
         android:id="@+id/resolution_person_name"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
