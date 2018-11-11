@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/ptutorial_vacationlist_whatsee"
+            style="@style/Ptutorial"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+
+            android:layout_marginBottom="72dp"
+            android:gravity="start"
+
+            android:text="@string/ptutorial_lists_personal_whatsee"
+            app:layout_constraintBottom_toTopOf="@+id/ptutorial_vacationlist_calltoaction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ptutorial_vacationlist_calltoaction"
+            style="@style/Pcalltoaction"
+            android:layout_width="256dp"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="48dp"
+            android:text="@string/ptutorial_lists_personal_calltoaction"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/barrier4"
+            app:layout_constraintTop_toTopOf="@+id/barrier2" />
+
+        <ImageView
+            android:id="@+id/ptutorial_arrow"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/tutorial_diagonal_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/ptutorial_vacationlist_calltoaction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toEndOf="@+id/ptutorial_vacationlist_calltoaction"
+            app:layout_constraintTop_toTopOf="@+id/barrier2" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="ptutorial_arrow,ptutorial_vacationlist_calltoaction" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="ptutorial_vacationlist_whatsee" />
+
+        <include
+            android:id="@+id/lists_personal_floatingActionButton"
+            layout="@layout/util_floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="bottom|end"
+
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

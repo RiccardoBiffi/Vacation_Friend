@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ellipsize="end"
-        android:maxWidth="172dp"
+        android:maxWidth="188dp"
 
         android:maxLines="1"
         android:text="@string/lunch_on_the_streets"

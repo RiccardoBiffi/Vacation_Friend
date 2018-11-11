@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextTheme" parent="AppTheme">
+        <item name="android:textColor">@color/darker_gray</item>
+        <item name="colorControlNormal">@color/darker_gray</item>
+    </style>
+
     <style name="ParticipantShortName">
         <item name="android:textSize">14sp</item>
     </style>
@@ -19,6 +24,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/darker_gray</item>
     </style>
+
     <style name="Subfields" >
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/darker_gray</item>
@@ -34,12 +40,6 @@
         <item name="android:textColor">@color/darker_gray</item>
     </style>
 
-    <style name="PrimaryButton">
-        <item name="android:background">@color/colorAccent</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
     <style name="AddFieldButton">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:focusable">false</item>
@@ -49,6 +49,23 @@
     <style name="UndoButton">
         <item name="android:background">@color/light_gray</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="UndoButtonMedium">
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="PrimaryButton">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="PrimaryButtonMedium">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="Ptutorial">
@@ -64,9 +81,22 @@
         <item name="android:gravity">end</item>
     </style>
 
+    <style name="PtutorialMedium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PcalltoactionMedium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">end</item>
+    </style>
+
     <style name="VacationCardTitle">
         <item name="android:textSize">24sp</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="SimpleSpinnerStyle" parent="android:style/Widget.ListView.DropDown">

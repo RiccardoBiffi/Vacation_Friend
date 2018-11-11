@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp">
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
 
     <ImageView
         android:id="@+id/icon_time_ad"
@@ -54,6 +54,7 @@
     <!-- cambia da visible ad invisible per non creare problemi al layout -->
     <EditText
         android:id="@+id/input_arrival_time"
+        android:theme="@style/EditTextTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -75,6 +76,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         android:visibility="gone"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +85,7 @@
 
         <TextView
             android:id="@+id/label_time_departure_from"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -108,7 +110,7 @@
 
         <TextView
             android:id="@+id/label_time_departure_at"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
@@ -119,6 +121,7 @@
 
         <EditText
             android:id="@+id/input_time_departure_at"
+            android:theme="@style/EditTextTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 

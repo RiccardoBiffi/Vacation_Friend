@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp">
+
+    <ImageView
+        android:id="@+id/icon_field_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:src="@drawable/ic_field_title_24dp"
+        app:layout_constraintBottom_toTopOf="@id/title_barrier_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/title_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/input_title_ob" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/title_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="title,field_title"
+        app:layout_constraintStart_toEndOf="@id/icon_field_title" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/title_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="title"
+        app:layout_constraintStart_toEndOf="@id/icon_field_title" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Fields"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/field_title_ob"
+        app:layout_constraintBottom_toTopOf="@id/input_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/title_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/field_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/title_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/title_barrier_horizontal"
+        tools:ignore="LabelFor" />
+
+</android.support.constraint.ConstraintLayout>

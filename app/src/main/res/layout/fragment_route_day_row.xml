@@ -7,7 +7,7 @@
 
     android:text="@string/ph_route_day"
     android:background="@drawable/shape_route_day"
-    style="@style/Subfields"
+    style="@style/SubfieldsMedium"
     android:theme="@style/Base.V22.Theme.AppCompat.Light"
     android:textColor="@color/white"
 

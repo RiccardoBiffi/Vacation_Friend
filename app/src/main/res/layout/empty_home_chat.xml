@@ -6,24 +6,24 @@
 
     <TextView
         android:id="@+id/ptutorial_vacationlist_whatsee"
-        style="@style/Ptutorial"
+        style="@style/PtutorialMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
 
-        android:text="@string/ptutorial_chat_whatsee"
         android:gravity="start"
+        android:text="@string/ptutorial_chat_whatsee"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintVertical_bias="0.09" />
 
 
 </android.support.constraint.ConstraintLayout>

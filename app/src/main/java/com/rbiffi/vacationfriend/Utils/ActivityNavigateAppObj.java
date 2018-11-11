@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rbiffi.vacationfriend.R;
+
 public abstract class ActivityNavigateAppObj extends AppCompatActivity {
 
     protected Toolbar toolbar;
@@ -34,6 +36,7 @@ public abstract class ActivityNavigateAppObj extends AppCompatActivity {
         setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_black_24dp);
     }
 
     @NonNull

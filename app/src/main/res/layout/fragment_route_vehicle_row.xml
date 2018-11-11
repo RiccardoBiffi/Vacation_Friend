@@ -15,8 +15,8 @@
 
     <View
         android:id="@+id/route_icon_placeholder"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"

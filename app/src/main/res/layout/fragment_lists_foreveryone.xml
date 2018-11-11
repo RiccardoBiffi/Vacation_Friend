@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/list_fe_title1"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -56,7 +56,7 @@
 
                 <TextView
                     android:id="@+id/list_fe_state1"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -117,7 +117,7 @@
 
                 <TextView
                     android:id="@+id/list_fe_title2"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -136,7 +136,7 @@
 
                 <TextView
                     android:id="@+id/list_fe_state2"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 

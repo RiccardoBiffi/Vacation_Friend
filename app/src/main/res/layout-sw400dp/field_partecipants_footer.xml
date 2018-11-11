@@ -4,15 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/empty_vacation_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <Button
+        android:id="@+id/input_add_partic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
 
-        layout="@layout/empty_lists_personal"
-        android:visibility="visible"
+        android:drawableLeft="@drawable/ic_person_add_black_24dp"
+        android:drawableStart="@drawable/ic_person_add_black_24dp"
+        android:drawablePadding="8dp"
+        android:gravity="start|center"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/field_partec_buttontext"
+        style="@style/AddFieldButton"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

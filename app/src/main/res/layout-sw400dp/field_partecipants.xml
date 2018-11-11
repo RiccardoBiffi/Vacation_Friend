@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp">
+
+    <ImageView
+        android:id="@+id/icon_field_partes"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/field_partes_ob"
+
+        android:src="@drawable/ic_field_people_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/partes_barrier_horizontal"
+        app:layout_constraintEnd_toStartOf="@id/partes_barrier_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/partes_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="label_number_partes,field_partes_list"
+        app:layout_constraintStart_toEndOf="@id/icon_field_partes" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/partes_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_number_partes"
+        app:layout_constraintStart_toEndOf="@id/icon_field_partes" />
+
+    <TextView
+        android:id="@+id/label_number_partes"
+        style="@style/Fields"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/field_partes_ob"
+        app:layout_constraintBottom_toTopOf="@id/partes_barrier_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/partes_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/field_partes_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+
+        android:divider="@drawable/simple_list_divider"
+        android:footerDividersEnabled="false"
+        android:orientation="horizontal"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/partes_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/partes_barrier_horizontal" />
+
+</android.support.constraint.ConstraintLayout>
