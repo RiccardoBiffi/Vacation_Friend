@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp">
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
 
     <ImageView
         android:id="@+id/icon_icon"
@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/label_icon"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/field_icon_ob"
@@ -67,7 +67,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_house"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -82,7 +82,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_city"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -96,7 +96,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_hotel"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -110,7 +110,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_restaurant"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -124,7 +124,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_bar"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -138,7 +138,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_beach"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -152,7 +152,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_gas"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -166,7 +166,7 @@
 
         <RadioButton
             android:id="@+id/icon_radio_generic"
-            style="@style/Subfields"
+            style="@style/SubfieldsMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp">
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
 
     <ImageView
         android:id="@+id/icon_period"
@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/label_period"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/input_period_ob"
@@ -54,7 +54,7 @@
 
     <TextView
         android:id="@+id/label_period_from"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -66,6 +66,7 @@
 
     <EditText
         android:id="@+id/input_period_from"
+        android:theme="@style/EditTextTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -87,7 +88,7 @@
 
     <TextView
         android:id="@+id/label_period_to"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -100,6 +101,7 @@
 
     <EditText
         android:id="@+id/input_period_to"
+        android:theme="@style/EditTextTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

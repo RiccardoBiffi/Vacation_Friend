@@ -6,8 +6,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp"
     >
 
     <ImageView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/field_place_ob"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

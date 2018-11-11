@@ -39,7 +39,7 @@
 
     <TextView
         android:id="@+id/resolution_expense_title"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/resolution_expense_sign"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -71,7 +71,7 @@
 
     <TextView
         android:id="@+id/resolution_expense_value"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -84,7 +84,7 @@
 
     <TextView
         android:id="@+id/resolution_expense_date"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

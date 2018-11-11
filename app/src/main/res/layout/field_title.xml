@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     >
 
     <ImageView
@@ -46,7 +46,7 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/field_title_ob"

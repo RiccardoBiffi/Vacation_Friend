@@ -15,7 +15,7 @@
 
             <TextView
                 android:id="@+id/today_expenses"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
 
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -57,7 +57,7 @@
 
                 <TextView
                     android:id="@+id/expense_title1"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -70,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/expense_date1"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -83,7 +83,7 @@
 
                 <TextView
                     android:id="@+id/expense_value1"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -145,7 +145,7 @@
 
                 <TextView
                     android:id="@+id/expense_title2"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -158,7 +158,7 @@
 
                 <TextView
                     android:id="@+id/expense_date2"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -186,7 +186,7 @@
 
                 <TextView
                     android:id="@+id/expense_value2"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -247,7 +247,7 @@
 
                 <TextView
                     android:id="@+id/expense_title3"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -260,7 +260,7 @@
 
                 <TextView
                     android:id="@+id/expense_date3"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -273,7 +273,7 @@
 
                 <TextView
                     android:id="@+id/expense_value3"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -286,7 +286,7 @@
 
                 <TextView
                     android:id="@+id/expense_credits3"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -327,7 +327,7 @@
 
             <TextView
                 android:id="@+id/previous_expenses"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
 
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -369,7 +369,7 @@
 
                 <TextView
                     android:id="@+id/expense_title4"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -382,7 +382,7 @@
 
                 <TextView
                     android:id="@+id/expense_date4"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -395,7 +395,7 @@
 
                 <TextView
                     android:id="@+id/expense_value4"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -457,7 +457,7 @@
 
                 <TextView
                     android:id="@+id/expense_title5"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -470,7 +470,7 @@
 
                 <TextView
                     android:id="@+id/expense_date5"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -498,7 +498,7 @@
 
                 <TextView
                     android:id="@+id/expense_value5"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -559,7 +559,7 @@
 
                 <TextView
                     android:id="@+id/expense_title6"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -572,7 +572,7 @@
 
                 <TextView
                     android:id="@+id/expense_date6"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -585,7 +585,7 @@
 
                 <TextView
                     android:id="@+id/expense_value6"
-                    style="@style/Fields"
+                    style="@style/FieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -598,7 +598,7 @@
 
                 <TextView
                     android:id="@+id/expense_credits6"
-                    style="@style/Subfields"
+                    style="@style/SubfieldsMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -663,7 +663,7 @@
 
             <TextView
                 android:id="@+id/total_expenses"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"
@@ -678,7 +678,7 @@
 
             <TextView
                 android:id="@+id/credit"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"
@@ -693,7 +693,7 @@
 
             <TextView
                 android:id="@+id/effective_expenses"
-                style="@style/Fields"
+                style="@style/FieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"
@@ -710,7 +710,7 @@
 
             <TextView
                 android:id="@+id/total_expenses_value"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"
@@ -724,7 +724,7 @@
 
             <TextView
                 android:id="@+id/credit_value"
-                style="@style/Subfields"
+                style="@style/SubfieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"
@@ -738,7 +738,7 @@
 
             <TextView
                 android:id="@+id/effective_expenses_value"
-                style="@style/Fields"
+                style="@style/FieldsMedium"
                 android:layout_width="wrap_content"
 
                 android:layout_height="match_parent"

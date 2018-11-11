@@ -10,8 +10,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/actor_picture"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
 
         android:src="@drawable/average_man"
         app:civ_border_color="@color/colorPrimaryDark"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/activity_log_text"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

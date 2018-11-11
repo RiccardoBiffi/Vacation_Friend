@@ -5,8 +5,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp"
     >
 
     <ImageView
@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/label_total_period_days"
-        style="@style/Fields"
+        style="@style/FieldsMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/input_period_ob"
@@ -61,7 +61,7 @@
         android:gravity="end"
 
         android:text="@string/subfield_period_from"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
 
         app:layout_constraintBaseline_toBaselineOf="@id/field_period_from"
         app:layout_constraintEnd_toEndOf="@id/period_sub_barrier_vertical"
@@ -95,7 +95,7 @@
         android:gravity="end"
 
         android:text="@string/subfield_period_to"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
 
         app:layout_constraintBaseline_toBaselineOf="@id/field_period_to"
         app:layout_constraintEnd_toEndOf="@id/period_sub_barrier_vertical"
