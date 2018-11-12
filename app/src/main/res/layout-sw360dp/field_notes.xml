@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/icon_field_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:src="@drawable/ic_field_notes_24dp"
+        app:layout_constraintBottom_toTopOf="@id/notes_barrier_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/notes_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/field_notes_ob" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/notes_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="field_label_notes,field_notes"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/notes_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="field_label_notes"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <TextView
+        android:id="@+id/field_label_notes"
+        style="@style/FieldsMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/field_notes_ob"
+        app:layout_constraintBottom_toTopOf="@id/field_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/notes_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/field_notes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@android:color/white"
+
+        android:gravity="top|start"
+
+        android:lines="3"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/notes_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/notes_barrier_horizontal"
+        tools:ignore="LabelFor" />
+
+</android.support.constraint.ConstraintLayout>

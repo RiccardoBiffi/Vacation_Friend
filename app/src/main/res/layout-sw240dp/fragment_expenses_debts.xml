@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/debt_tag1"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorSecondary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title1"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/lunch_at_al_faro"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date1"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_22_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider1"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag1"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title1" />
+
+                <TextView
+                    android:id="@+id/from_label1"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/debt_date1"
+                    app:layout_constraintStart_toEndOf="@id/debt_date1" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon1"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/blonde_woman"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@id/from_person_name1"
+                    app:layout_constraintStart_toEndOf="@id/from_label1"
+                    app:layout_constraintTop_toTopOf="@id/from_person_name1" />
+
+                <TextView
+                    android:id="@+id/from_person_name1"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/sara"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/from_label1"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon1" />
+
+                <TextView
+                    android:id="@+id/debt_value1"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_10_00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/item_divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/debt1">
+
+                <View
+                    android:id="@+id/debt_tag2"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorSecondary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title2"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/shopping_at_pola"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date2"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_22_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider2"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag2"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title2" />
+
+                <TextView
+                    android:id="@+id/from_label2"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/debt_date2"
+                    app:layout_constraintStart_toEndOf="@id/debt_date2" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon2"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/blonde_woman"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@id/from_person_name2"
+                    app:layout_constraintStart_toEndOf="@id/from_label2"
+                    app:layout_constraintTop_toTopOf="@id/from_person_name2" />
+
+                <TextView
+                    android:id="@+id/from_person_name2"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/sara"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/from_label2"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon2" />
+
+                <TextView
+                    android:id="@+id/debt_value2"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_5_50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/item_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/debt2">
+
+                <View
+                    android:id="@+id/debt_tag3"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title3"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/beach_ticket"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date3"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_21_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag3"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title3" />
+
+                <TextView
+                    android:id="@+id/from_label3"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
+                    app:layout_constraintStart_toEndOf="@id/debt_date3" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon3"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/happy_man"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/from_person_name3"
+                    app:layout_constraintStart_toEndOf="@id/from_label3"
+                    app:layout_constraintTop_toTopOf="@+id/from_person_name3" />
+
+                <TextView
+                    android:id="@+id/from_person_name3"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/carlo"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon3" />
+
+                <TextView
+                    android:id="@+id/debt_value3"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_1_50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done3"
+                    style="@style/FieldsSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value3"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value3"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value3"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value3" />
+
+                <View
+                    android:id="@+id/item_divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/debt3">
+
+                <View
+                    android:id="@+id/debt_tag4"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title4"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/lunch_on_the_streets"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date4"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_21_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag4"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title4" />
+
+                <TextView
+                    android:id="@+id/from_label4"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
+                    app:layout_constraintStart_toEndOf="@id/debt_date4" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon4"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/businnes_man"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/from_person_name4"
+                    app:layout_constraintStart_toEndOf="@id/from_label4"
+                    app:layout_constraintTop_toTopOf="@+id/from_person_name4" />
+
+                <TextView
+                    android:id="@+id/from_person_name4"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/marco"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon4" />
+
+                <TextView
+                    android:id="@+id/debt_value4"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_6_40"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done4"
+                    style="@style/FieldsSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value4"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value4"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value4"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value4" />
+
+                <View
+                    android:id="@+id/item_divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/debt4">
+
+                <View
+                    android:id="@+id/debt_tag5"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title5"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/parcking_ticket_at_pola"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date5"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_20_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag5"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title5" />
+
+                <TextView
+                    android:id="@+id/from_label5"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
+                    app:layout_constraintStart_toEndOf="@id/debt_date5" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon5"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/fine_woman"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/from_person_name5"
+                    app:layout_constraintStart_toEndOf="@id/from_label5"
+                    app:layout_constraintTop_toTopOf="@+id/from_person_name5" />
+
+                <TextView
+                    android:id="@+id/from_person_name5"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/anna"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon5" />
+
+                <TextView
+                    android:id="@+id/debt_value5"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_10_00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/debt_done5"
+                    style="@style/FieldsSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/debt_value5"
+                    app:layout_constraintEnd_toEndOf="@+id/debt_value5"
+                    app:layout_constraintStart_toStartOf="@+id/debt_value5"
+                    app:layout_constraintTop_toTopOf="@+id/debt_value5" />
+
+                <View
+                    android:id="@+id/item_divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/debt6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/debt5">
+
+                <View
+                    android:id="@+id/debt_tag6"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorSecondary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_title6"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/flat_rent"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag6"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/debt_date6"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_20_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
+                    app:layout_constraintStart_toEndOf="@id/debt_tag6"
+                    app:layout_constraintTop_toBottomOf="@+id/debt_title6" />
+
+                <TextView
+                    android:id="@+id/from_label6"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/from"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
+                    app:layout_constraintStart_toEndOf="@id/debt_date6" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/from_person_icon6"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginLeft="6dp"
+
+                    android:src="@drawable/black_man"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/from_person_name6"
+                    app:layout_constraintStart_toEndOf="@id/from_label6"
+                    app:layout_constraintTop_toTopOf="@+id/from_person_name6" />
+
+                <TextView
+                    android:id="@+id/from_person_name6"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/andre"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
+                    app:layout_constraintStart_toEndOf="@id/from_person_icon6" />
+
+                <TextView
+                    android:id="@+id/debt_value6"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_103_35"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/item_divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondaryLight">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/expenses_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="snap">
+
+
+            <TextView
+                android:id="@+id/total_debts"
+                style="@style/FieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="start"
+                android:text="@string/total_debts"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/total_debts_value"
+                style="@style/FieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="start"
+                android:text="@string/_118_25"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/resolution_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryLight"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/resolution_dropdown_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+
+        android:src="@drawable/ic_keyboard_arrow_down_white_24dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/group_separator" />
+
+    <TextView
+        android:id="@+id/resolution_action_label"
+        style="@style/FieldsSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:text="@string/resolution_receive"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/resolution_dropdown_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/group_separator" />
+
+    <TextView
+        android:id="@+id/resolution_group_value"
+        style="@style/FieldsSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:text="@string/_5_70"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/group_separator"
+        app:layout_constraintEnd_toStartOf="@id/resolution_solve_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/resolution_action_direction"
+        style="@style/FieldsSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="@string/resolution_from"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/group_separator"
+        app:layout_constraintStart_toEndOf="@+id/resolution_action_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/resolution_person_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+
+        android:src="@drawable/blonde_woman"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toTopOf="@id/group_separator"
+        app:layout_constraintStart_toEndOf="@id/resolution_action_direction"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/resolution_person_name"
+        style="@style/FieldsSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+
+        android:text="@string/sara"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/group_separator"
+        app:layout_constraintStart_toEndOf="@id/resolution_person_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/resolution_solve_button"
+        style="@style/AppTheme.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/button_done"
+
+        app:layout_constraintBottom_toTopOf="@id/group_separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/group_separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

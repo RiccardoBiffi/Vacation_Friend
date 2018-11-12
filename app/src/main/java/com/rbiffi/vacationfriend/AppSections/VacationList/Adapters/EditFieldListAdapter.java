@@ -79,6 +79,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
     public void setListener(ActivityEditAppObject listener) {
         this.listener = listener;
+        fieldParticipantsAdapter = new EditParticipantAdapter(appContext, R.layout.input_partecipants_row,
+                listener.getParticipantsField());
     }
 
     @Override
@@ -253,9 +255,6 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
 
             case Constants.F_PARTECIP:
-                fieldParticipantsAdapter = new EditParticipantAdapter(appContext, R.layout.input_partecipants_row,
-                        listener.getParticipantsField());
-
                 setParticipantsListHeader(holder);
                 setParticipantsListFooter(holder);
                 holder.partecipantListView.setAdapter(fieldParticipantsAdapter);

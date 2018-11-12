@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/resolution_expense_sign"
-        style="@style/Subfields"
+        style="@style/SubfieldsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
