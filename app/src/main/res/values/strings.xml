@@ -40,7 +40,7 @@
     <string name="ptutorial_vacationlist_welcome">Welcome!</string>
     <string name="ptutorial_vacationlist_whatsee">Here you will see all your recent vacations.</string>
     <string name="ptutorial_vacationlist_calltoaction">To create a new vacation touch here!</string>
-    <string name="ptutorial_storedlist_whatsee">The stored vacations will be shown here.</string>
+    <string name="ptutorial_storedlist_whatsee">Stored vacations will be shown here.</string>
     <string name="button_confirm">Confirm</string>
     <string name="dialog_vacation_store_message">You will not be able to modify it, but you can restore it later.</string>
     <string name="dialog_vacation_delete_message">This action is irreversible.</string>

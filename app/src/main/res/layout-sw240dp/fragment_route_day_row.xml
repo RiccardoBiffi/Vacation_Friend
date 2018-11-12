@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/route_day"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:text="@string/ph_route_day"
+    android:background="@drawable/shape_route_day"
+    style="@style/SubfieldsSmall"
+    android:theme="@style/Base.V22.Theme.AppCompat.Light"
+    android:textColor="@color/white"
+
+    android:gravity="center" />

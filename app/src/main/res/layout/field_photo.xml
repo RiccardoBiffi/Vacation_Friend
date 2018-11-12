@@ -86,7 +86,7 @@
         android:gravity="start|center"
 
         android:text="@string/field_photo_buttontext"
-        style="@style/AddFieldButton"
+        style="@style/AppTheme.Button"
 
         app:layout_constraintBottom_toTopOf="@id/input_photo_choosed"
         app:layout_constraintEnd_toEndOf="parent"

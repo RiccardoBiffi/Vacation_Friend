@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/actor_picture"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+
+        android:src="@drawable/average_man"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="2dp"
+
+        app:layout_constraintBottom_toTopOf="@id/barrier_partecipants"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_log_text"
+        style="@style/SubfieldsMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:text="@string/ph_activity_description"
+        app:layout_constraintBottom_toTopOf="@id/barrier_partecipants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/actor_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_log_datetime"
+        style="@style/FieldDescription"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="@string/ph_time_of_day"
+
+        app:layout_constraintBottom_toBottomOf="@id/activity_log_text"
+        app:layout_constraintEnd_toEndOf="@id/activity_log_text"
+
+        />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier_partecipants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="activity_log_text" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/today_expenses"
+                style="@style/SubfieldsSmall"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:text="@string/today_s_expenses"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/today_expenses">
+
+                <View
+                    android:id="@+id/item_divider_sup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/item_tag1"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title1"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/breakfast"
+                    app:layout_constraintStart_toEndOf="@id/item_tag1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date1"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_09_37"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider1"
+                    app:layout_constraintStart_toEndOf="@id/item_tag1" />
+
+                <TextView
+                    android:id="@+id/expense_value1"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_2_50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/actions1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+
+                    android:src="@drawable/ic_more_vert_white_24dp"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value1" />
+
+                <View
+                    android:id="@+id/item_divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions1" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense1">
+
+                <View
+                    android:id="@+id/item_tag2"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title2"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/suncream"
+                    app:layout_constraintStart_toEndOf="@id/item_tag2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date2"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_11_15"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider2"
+                    app:layout_constraintStart_toEndOf="@id/item_tag2" />
+
+                <TextView
+                    android:id="@+id/expense_value_local_coin2"
+                    style="@style/FieldDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/_25_00kn"
+
+                    app:layout_constraintBaseline_toBaselineOf="@id/expense_value2"
+                    app:layout_constraintEnd_toStartOf="@+id/expense_value2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_value2"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_3_60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/actions2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_more_vert_white_24dp"
+
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value2" />
+
+                <View
+                    android:id="@+id/item_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions2" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense2">
+
+                <View
+                    android:id="@+id/item_tag3"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorSecondary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title3"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/restaurant"
+                    app:layout_constraintStart_toEndOf="@id/item_tag3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date3"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_14_02"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
+                    app:layout_constraintStart_toEndOf="@id/item_tag3" />
+
+                <TextView
+                    android:id="@+id/expense_value3"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_44_00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_credits3"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/payed_for_4_people"
+                    app:layout_constraintBaseline_toBaselineOf="@id/expense_date3"
+                    app:layout_constraintStart_toEndOf="@id/expense_date3" />
+
+                <ImageView
+                    android:id="@+id/actions3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_more_vert_white_24dp"
+
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value3" />
+
+                <View
+                    android:id="@+id/item_divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions3" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/previous_expenses"
+                style="@style/SubfieldsSmall"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:text="@string/previous_expenses"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense3" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/previous_expenses">
+
+                <View
+                    android:id="@+id/item_divider_sup4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/item_tag4"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title4"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/museum_ticket"
+                    app:layout_constraintStart_toEndOf="@id/item_tag4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date4"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_22_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
+                    app:layout_constraintStart_toEndOf="@id/item_tag4" />
+
+                <TextView
+                    android:id="@+id/expense_value4"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_10_00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/actions4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_more_vert_white_24dp"
+
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value4" />
+
+                <View
+                    android:id="@+id/item_divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions4" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintBottom_toTopOf="@id/list_space_footer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense6">
+
+                <View
+                    android:id="@+id/item_tag5"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title5"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/shopping"
+                    app:layout_constraintStart_toEndOf="@id/item_tag5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date5"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_21_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
+                    app:layout_constraintStart_toEndOf="@id/item_tag5" />
+
+                <TextView
+                    android:id="@+id/expense_value_local_coin5"
+                    style="@style/FieldDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/_15_35"
+
+                    app:layout_constraintBaseline_toBaselineOf="@id/expense_value5"
+                    app:layout_constraintEnd_toStartOf="@+id/expense_value5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_value5"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_13_50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/actions5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_more_vert_white_24dp"
+
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value5" />
+
+                <View
+                    android:id="@+id/item_divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions5" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expense6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense4">
+
+                <View
+                    android:id="@+id/item_tag6"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/colorSecondary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_title6"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/parking_ticket"
+                    app:layout_constraintStart_toEndOf="@id/item_tag6"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_date6"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_22_08"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
+                    app:layout_constraintStart_toEndOf="@id/item_tag6" />
+
+                <TextView
+                    android:id="@+id/expense_value6"
+                    style="@style/FieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/_5_70"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expense_credits6"
+                    style="@style/SubfieldsSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/payed_for_3_people"
+                    app:layout_constraintBaseline_toBaselineOf="@id/expense_date6"
+                    app:layout_constraintStart_toEndOf="@id/expense_date6" />
+
+                <ImageView
+                    android:id="@+id/actions6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_more_vert_white_24dp"
+
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@id/item_divider6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expense_value6" />
+
+                <View
+                    android:id="@+id/item_divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+
+                    android:background="@drawable/simple_list_divider"
+                    app:layout_constraintTop_toBottomOf="@id/actions6" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:id="@+id/list_space_footer"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expense5" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/expenses_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="snap">
+
+            <TextView
+                android:id="@+id/total_expenses"
+                style="@style/SubfieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:gravity="start"
+                android:text="@string/total_expenses"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/credit"
+                style="@style/SubfieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:gravity="start"
+                android:text="@string/of_witch_on_credit"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_expenses" />
+
+            <TextView
+                android:id="@+id/effective_expenses"
+                style="@style/FieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="start"
+                android:text="@string/actual_expenses"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/credit" />
+
+            <TextView
+                android:id="@+id/total_expenses_value"
+                style="@style/SubfieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="start"
+                android:text="@string/_79_30"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/total_expenses"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/credit_value"
+                style="@style/SubfieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="start"
+                android:text="@string/_36_80"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/credit"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/effective_expenses_value"
+                style="@style/FieldsSmall"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="start"
+                android:text="@string/_42_60"
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/effective_expenses"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        android:id="@+id/floatingActionButton"
+        layout="@layout/util_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom|end"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
+
+</android.support.design.widget.CoordinatorLayout>

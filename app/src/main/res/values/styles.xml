@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/light_gray</item>
     </style>
 
     <style name="EditTextTheme" parent="AppTheme">
@@ -25,7 +26,12 @@
         <item name="android:textColor">@color/darker_gray</item>
     </style>
 
-    <style name="Subfields" >
+    <style name="FieldsSmall">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/darker_gray</item>
+    </style>
+
+    <style name="Subfields">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/darker_gray</item>
     </style>
@@ -34,16 +40,27 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/darker_gray</item>
     </style>
+
+    <style name="SubfieldsSmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/darker_gray</item>
+    </style>
+
     <style name="FieldDescription" >
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/darker_gray</item>
     </style>
 
-    <style name="AddFieldButton">
+    <style name="FieldDescriptionSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/darker_gray</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:focusable">false</item>
-        <item name="android:focusableInTouchMode">false</item>
+        <item name="colorButtonNormal">@color/light_gray</item>
     </style>
 
     <style name="UndoButton">

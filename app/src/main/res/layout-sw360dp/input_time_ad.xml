@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
+
+    <ImageView
+        android:id="@+id/icon_time_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:src="@drawable/ic_field_time_24dp"
+        android:contentDescription="@string/field_icon_ob"
+
+        app:layout_constraintBottom_toTopOf="@id/time_field_barrier_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/time_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/time_field_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="spinner_time_modes,input_arrival_time"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/time_field_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="spinner_time_modes"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner_time_modes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:spinnerMode="dropdown"
+        android:theme="@style/SimpleSpinnerTheme"
+        app:layout_constraintBottom_toTopOf="@+id/time_field_barrier_horizontal"
+        app:layout_constraintStart_toEndOf="@id/time_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- cambia da visible ad invisible per non creare problemi al layout -->
+    <EditText
+        android:id="@+id/input_arrival_time"
+        android:theme="@style/EditTextTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:inputType="time"
+
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/time_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/time_field_barrier_horizontal" />
+
+    <!-- il gruppo passa da visible a gone -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/departure_viewgroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:visibility="gone"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/time_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/time_field_barrier_horizontal">
+
+        <TextView
+            android:id="@+id/label_time_departure_from"
+            style="@style/SubfieldsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="end"
+            android:text="@string/subfield_time_departure"
+            app:layout_constraintBottom_toBottomOf="@id/input_time_departure_from"
+            app:layout_constraintEnd_toEndOf="@id/time_field_departure_barrier_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/input_time_departure_from" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/input_time_departure_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:spinnerMode="dropdown"
+            android:theme="@style/SimpleSpinnerTheme"
+            app:layout_constraintStart_toEndOf="@id/time_field_departure_barrier_vertical"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/label_time_departure_at"
+            style="@style/SubfieldsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="end"
+            android:text="@string/subfield_time_departure_time"
+            app:layout_constraintBaseline_toBaselineOf="@id/input_time_departure_at"
+            app:layout_constraintEnd_toEndOf="@id/time_field_departure_barrier_vertical" />
+
+        <EditText
+            android:id="@+id/input_time_departure_at"
+            android:theme="@style/EditTextTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:inputType="date"
+            android:longClickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/time_field_departure_barrier_vertical"
+            app:layout_constraintTop_toBottomOf="@id/input_time_departure_from" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/time_field_departure_barrier_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="label_time_departure_from,label_time_departure_at" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

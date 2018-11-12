@@ -15,7 +15,7 @@
         android:gravity="start|center"
 
         android:text="@string/field_partec_buttontext"
-        style="@style/AddFieldButton"
+        style="@style/AppTheme.Button"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

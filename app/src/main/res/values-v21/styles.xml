@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/light_gray</item>
+    </style>
+</resources>
