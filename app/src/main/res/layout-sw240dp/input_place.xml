@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/icon_place"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:src="@drawable/ic_location_on_black_24dp"
+        app:layout_constraintBottom_toTopOf="@id/place_field_barrier_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/place_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/field_place_ob" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/place_field_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="label_place,input_place"
+        app:layout_constraintStart_toEndOf="@id/icon_place" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/place_field_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_place"
+        app:layout_constraintStart_toEndOf="@id/icon_place" />
+
+    <TextView
+        android:id="@+id/label_place"
+        style="@style/FieldsSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/field_place_ob"
+        app:layout_constraintBottom_toTopOf="@id/input_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/place_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_place"
+        style="@style/EditTextCompatTheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:layout_marginTop="8dp"
+        android:inputType="text"
+        android:maxLines="1"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/place_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="@id/place_field_barrier_horizontal"
+        tools:ignore="LabelFor" />
+
+</android.support.constraint.ConstraintLayout>
