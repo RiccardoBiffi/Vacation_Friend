@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/icon_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:src="@drawable/ic_field_icon_24dp"
+        android:contentDescription="@string/field_icon_ob"
+
+        app:layout_constraintBottom_toTopOf="@id/icon_field_barrier_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/icon_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/icon_field_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="label_icon"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/icon_field_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_icon"
+        app:layout_constraintStart_toEndOf="@id/icon_notes" />
+
+    <TextView
+        android:id="@+id/label_icon"
+        style="@style/FieldsSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/field_icon_ob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/icon_field_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/icons_radio_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_field_barrier_vertical"
+        app:layout_constraintTop_toBottomOf="@id/label_icon">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_house"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:checked="true"
+            android:drawableStart="@drawable/ic_route_radio_home_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_home_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_house" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_city"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_city_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_city_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_city" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_hotel"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_hotel_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_hotel_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_hotel" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_restaurant"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_restaurant_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_restaurant_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_reastaurant" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_bar"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_cafe_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_cafe_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_cafe" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_beach"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_beach_access_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_beach_access_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_beach" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_gas"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_gas_station_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_gas_station_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_gas_station" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/icon_radio_generic"
+            style="@style/SubfieldsSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:drawableStart="@drawable/ic_route_radio_generic_24dp"
+            android:drawableLeft="@drawable/ic_route_radio_generic_24dp"
+            android:drawablePadding="4dp"
+            app:buttonTint="@color/colorAccent"
+            android:paddingTop="8dp"
+
+            android:paddingBottom="8dp"
+            android:text="@string/stop_radio_generic" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>

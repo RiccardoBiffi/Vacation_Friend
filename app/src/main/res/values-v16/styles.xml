@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditTextCompatTheme">
+        <item name="android:textColor">@color/darker_gray</item>
+        <item name="android:background">@drawable/edittext_underline_per_kitkat</item>
+    </style>
+
+</resources>
