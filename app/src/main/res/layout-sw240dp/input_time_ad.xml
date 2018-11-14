@@ -46,7 +46,10 @@
         android:layout_height="wrap_content"
 
         android:spinnerMode="dropdown"
+        android:popupBackground="@color/white"
         android:theme="@style/SimpleSpinnerTheme"
+        android:textAlignment="textStart"
+        android:gravity="start"
         app:layout_constraintBottom_toTopOf="@+id/time_field_barrier_horizontal"
         app:layout_constraintStart_toEndOf="@id/time_field_barrier_vertical"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,6 +64,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:inputType="time"
+        android:visibility="visible"
 
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,12 +90,11 @@
         <TextView
             android:id="@+id/label_time_departure_from"
             style="@style/SubfieldsSmall"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:gravity="end"
             android:text="@string/subfield_time_departure"
-            app:layout_constraintBottom_toBottomOf="@id/input_time_departure_from"
             app:layout_constraintEnd_toEndOf="@id/time_field_departure_barrier_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/input_time_departure_from" />
@@ -101,11 +104,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:textAlignment="textStart"
+            android:gravity="start"
+
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:spinnerMode="dropdown"
             android:theme="@style/SimpleSpinnerTheme"
-            app:layout_constraintStart_toEndOf="@id/time_field_departure_barrier_vertical"
+            app:layout_constraintStart_toEndOf="@id/label_time_departure_from"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -117,7 +123,7 @@
             android:gravity="end"
             android:text="@string/subfield_time_departure_time"
             app:layout_constraintBaseline_toBaselineOf="@id/input_time_departure_at"
-            app:layout_constraintEnd_toEndOf="@id/time_field_departure_barrier_vertical" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/input_time_departure_at"
@@ -134,7 +140,7 @@
             android:longClickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/time_field_departure_barrier_vertical"
+            app:layout_constraintStart_toEndOf="@+id/label_time_departure_at"
             app:layout_constraintTop_toBottomOf="@id/input_time_departure_from" />
 
         <android.support.constraint.Barrier
