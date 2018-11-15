@@ -57,7 +57,7 @@
     <!-- cambia da visible ad invisible per non creare problemi al layout -->
     <EditText
         android:id="@+id/input_arrival_time"
-        style="@style/EditTextCompatTheme"
+        style="@style/EditText16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -127,7 +127,7 @@
 
         <EditText
             android:id="@+id/input_time_departure_at"
-            style="@style/EditTextCompatTheme"
+            style="@style/EditText16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 

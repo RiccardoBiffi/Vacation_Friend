@@ -65,9 +65,9 @@
         app:layout_constraintStart_toEndOf="@id/icon_field_barrier_vertical"
         app:layout_constraintTop_toBottomOf="@id/label_icon">
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_house"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -81,9 +81,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_house" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_city"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -97,9 +97,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_city" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_hotel"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -113,9 +113,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_hotel" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_restaurant"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -128,9 +128,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_reastaurant" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_bar"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -143,9 +143,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_cafe" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_beach"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -158,9 +158,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_beach" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_gas"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -173,9 +173,9 @@
             android:paddingBottom="8dp"
             android:text="@string/stop_radio_gas_station" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <RadioButton
             android:id="@+id/icon_radio_generic"
-            style="@style/SubfieldsSmall"
+            style="@style/RadioButtonCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
