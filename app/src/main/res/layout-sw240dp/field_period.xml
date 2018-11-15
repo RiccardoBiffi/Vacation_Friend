@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
+
+    <ImageView
+        android:id="@+id/icon_field_period"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        android:contentDescription="@string/input_period_ob"
+        android:src="@drawable/ic_field_date_range_24dp"
+        app:layout_constraintBottom_toTopOf="@id/period_barrier_horizontal"
+        app:layout_constraintEnd_toStartOf="@id/period_barrier_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/period_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="label_total_period_days,label_field_period_from"
+        app:layout_constraintStart_toEndOf="@id/icon_field_period" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/period_barrier_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_total_period_days"
+        app:layout_constraintStart_toEndOf="@id/icon_field_period" />
+
+    <TextView
+        android:id="@+id/label_total_period_days"
+        style="@style/FieldsSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/input_period_ob"
+        app:layout_constraintBottom_toTopOf="@id/period_barrier_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/period_barrier_vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label_field_period_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+
+        android:text="@string/subfield_period_from"
+        style="@style/SubfieldsSmall"
+
+        app:layout_constraintBaseline_toBaselineOf="@id/field_period_from"
+        app:layout_constraintEnd_toEndOf="@id/period_sub_barrier_vertical"
+        app:layout_constraintStart_toEndOf="@id/period_barrier_vertical" />
+
+    <TextView
+        android:id="@+id/field_period_from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        style="@style/SubfieldsMedium"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/label_field_period_from"
+        app:layout_constraintTop_toTopOf="@id/period_barrier_horizontal"
+        tools:ignore="LabelFor" />
+
+
+    <TextView
+        android:id="@+id/label_field_period_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="end"
+
+        android:text="@string/subfield_period_to"
+        style="@style/SubfieldsSmall"
+
+        app:layout_constraintBaseline_toBaselineOf="@id/field_period_to"
+        app:layout_constraintEnd_toEndOf="@id/period_sub_barrier_vertical"
+        app:layout_constraintStart_toEndOf="@id/period_barrier_vertical" />
+
+    <TextView
+        android:id="@+id/field_period_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+
+        style="@style/SubfieldsMedium"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/field_period_from"
+        app:layout_constraintTop_toBottomOf="@id/field_period_from"
+        tools:ignore="LabelFor" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/period_sub_barrier_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="field_period_from,field_period_to" />
+
+</android.support.constraint.ConstraintLayout>
