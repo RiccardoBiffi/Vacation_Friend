@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="EditTextCompatTheme">
+    <style name="EditText16">
         <item name="android:textColor">@color/darker_gray</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/edittext_underline_per_kitkat</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/background_button_default</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="RadioButtonCustom" parent="SubfieldsSmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/darker_gray</item>
+        <item name="android:button">@drawable/radio_button_v16</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 
 </resources>

@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/input_day"
-        style="@style/EditTextCompatTheme"
+        style="@style/EditText16"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
