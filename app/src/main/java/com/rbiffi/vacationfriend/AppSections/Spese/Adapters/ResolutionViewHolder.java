@@ -20,14 +20,14 @@ import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
 public class ResolutionViewHolder extends GroupViewHolder {
 
-    private ImageView arrow;
-    private TextView action;
-    private TextView groupValue;
-    private TextView actionDirection;
-    private CircleImageView personIcon;
-    private TextView personName;
-    private ViewGroup background;
-    private Button solveButton;
+    private final ImageView arrow;
+    private final TextView action;
+    private final TextView groupValue;
+    private final TextView actionDirection;
+    private final CircleImageView personIcon;
+    private final TextView personName;
+    private final ViewGroup background;
+    private final Button solveButton;
 
     public ResolutionViewHolder(View itemView) {
         super(itemView);

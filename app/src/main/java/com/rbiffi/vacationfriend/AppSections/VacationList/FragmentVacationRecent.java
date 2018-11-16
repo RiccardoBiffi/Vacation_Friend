@@ -59,7 +59,7 @@ public class FragmentVacationRecent
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // non posso passare il layout con setContentView, devo usare i parametri in input
         // l'inflater trasforma xml in codice java a run time
         //container è il padre del fragment, si arrangia lui a sostituirlo
@@ -67,7 +67,7 @@ public class FragmentVacationRecent
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         emptyListTutorial = getActivity().findViewById(R.id.empty_vacation_list);

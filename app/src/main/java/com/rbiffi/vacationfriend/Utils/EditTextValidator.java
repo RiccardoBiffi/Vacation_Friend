@@ -11,7 +11,7 @@ public abstract class EditTextValidator implements View.OnFocusChangeListener {
         this.textView = textView;
     }
 
-    public abstract void validate(TextView textView, String text);
+    protected abstract void validate(TextView textView, String text);
 
 
     @Override

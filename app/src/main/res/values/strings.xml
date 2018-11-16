@@ -147,7 +147,7 @@
     <string name="restaurant">Restaurant</string>
     <string name="_14_02" translatable="false">14:02</string>
     <string name="_44_00" translatable="false">44,00€</string>
-    <string name="payed_for_4_people">- payed for 4 people</string>
+    <string name="payed_for_4_people">- paid for 4 people</string>
     <string name="previous_expenses">Previous expenses</string>
     <string name="museum_ticket">Museum ticket</string>
     <string name="_10_00" translatable="false">10,00€</string>
@@ -158,7 +158,7 @@
     <string name="_13_50" translatable="false">~13,50€</string>
     <string name="parking_ticket">Parking ticket</string>
     <string name="_5_70" translatable="false">5,70€</string>
-    <string name="payed_for_3_people">- payed for 3 people</string>
+    <string name="payed_for_3_people">- paid for 3 people</string>
     <string name="total_expenses">Total expenses</string>
     <string name="of_witch_on_credit">of witch on credit</string>
     <string name="actual_expenses">Actual expenses</string>
@@ -205,7 +205,7 @@
     <string name="beach_accessories">Beach accessories</string>
     <string name="new_list_fe">New list for everybody activity</string>
     <string name="list_details">List details</string>
-    <string name="completed_">Completed...</string>
+    <string name="completed_">Completed…</string>
     <string name="new_list_personal">New personal list activity</string>
     <string name="new_list_collaborative">New collaborative list activity</string>
     <string name="new_expense">New expense</string>
@@ -222,4 +222,5 @@
     <string name="list">List</string>
     <string name="stop_details">Stop details activity</string>
     <string name="field_partic_singol">partecipant</string>
+    <string name="todo" translatable="false">TODO</string>
 </resources>

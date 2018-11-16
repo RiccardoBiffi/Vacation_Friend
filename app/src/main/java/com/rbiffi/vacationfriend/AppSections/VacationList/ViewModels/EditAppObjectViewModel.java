@@ -19,7 +19,7 @@ public class EditAppObjectViewModel extends AndroidViewModel {
     //warning: non salvare Activity, Fragment, View o contesti in quanto cambiano più spesso dei dati
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
 
-    private VacationFriendRepository repository;
+    private final VacationFriendRepository repository;
 
     public static final long FIRST_EXECUTION = -1;
     public static final int TIME_ARRIVAL = 0;

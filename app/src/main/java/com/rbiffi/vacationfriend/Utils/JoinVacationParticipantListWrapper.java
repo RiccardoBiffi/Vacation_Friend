@@ -8,7 +8,7 @@ import java.util.List;
 // il warning era: unchecked generics array creation for varargs parameter asynctask
 public class JoinVacationParticipantListWrapper {
 
-    private List<JoinVacationParticipant> jvpl;
+    private final List<JoinVacationParticipant> jvpl;
 
     public JoinVacationParticipantListWrapper(List<JoinVacationParticipant> jvpl) {
         this.jvpl = jvpl;

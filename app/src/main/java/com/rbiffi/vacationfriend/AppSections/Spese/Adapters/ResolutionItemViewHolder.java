@@ -14,14 +14,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResolutionItemViewHolder extends ChildViewHolder {
 
-    private ViewGroup item;
-    private CircleImageView payerIcon;
-    private TextView expenseTitle;
-    private TextView expenseSign;
-    private TextView expenseValue;
-    private TextView expenseDate;
-    private View tagStart;
-    private View tagEnd;
+    private final ViewGroup item;
+    private final CircleImageView payerIcon;
+    private final TextView expenseTitle;
+    private final TextView expenseSign;
+    private final TextView expenseValue;
+    private final TextView expenseDate;
+    private final View tagStart;
+    private final View tagEnd;
 
     public ResolutionItemViewHolder(View itemView) {
         super(itemView);

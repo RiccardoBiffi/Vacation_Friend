@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.AppSections.Liste;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -39,7 +40,7 @@ public class FragmentLists extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // The system calls this when it's time for the fragment to draw its user interface for the
         // first time. To draw a UI for your fragment, you must return a View from this method that
         // is the root of your fragment's layout. You can return null if the fragment does not provide a UI.
@@ -47,7 +48,7 @@ public class FragmentLists extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
@@ -59,14 +60,7 @@ public class FragmentLists extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        // This is usually where you should commit any changes that should be persisted beyond the
-        // current user session (because the user might not come back).
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         // todo salvare lo stato dal kill del processo
     }
@@ -101,7 +95,7 @@ public class FragmentLists extends Fragment {
     }
 
     //classe interna per gestire i frammenti
-    public class FragmentAdapter extends FragmentPagerAdapter {
+    class FragmentAdapter extends FragmentPagerAdapter {
 
         FragmentAdapter(FragmentManager fm) {
             super(fm);

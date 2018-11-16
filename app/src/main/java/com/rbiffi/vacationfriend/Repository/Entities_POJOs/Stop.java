@@ -9,12 +9,11 @@ import java.util.Date;
 
 public class Stop extends RouteElement implements Parcelable {
 
-    @NonNull
-    public long vacationId;
+    private long vacationId;
 
-    public String title;
+    public final String title;
 
-    public String place;
+    public final String place;
 
     @NonNull
     public Date day;
@@ -22,11 +21,11 @@ public class Stop extends RouteElement implements Parcelable {
     @NonNull
     public StopTimeArrDep stopTime;
 
-    public Uri stopIcon;
+    public final Uri stopIcon;
 
-    public String notes;
+    private final String notes;
 
-    public Stop(String title, String place, @NonNull Date day, StopTimeArrDep stopTime, Uri stopIcon, String notes) {
+    public Stop(String title, String place, @NonNull Date day, @NonNull StopTimeArrDep stopTime, Uri stopIcon, String notes) {
         this.title = title;
         this.place = place;
         this.day = day;

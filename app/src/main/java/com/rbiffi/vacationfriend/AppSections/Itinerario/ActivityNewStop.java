@@ -21,7 +21,7 @@ public class ActivityNewStop
 
 {
 
-    public static final String ROUTE_STOP = "_routeStop";
+    private static final String ROUTE_STOP = "_routeStop";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

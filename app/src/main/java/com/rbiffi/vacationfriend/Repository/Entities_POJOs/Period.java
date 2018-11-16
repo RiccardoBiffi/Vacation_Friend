@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Period implements Parcelable {
 
@@ -19,7 +20,7 @@ public class Period implements Parcelable {
     }
 
     public Period(String startDate, String endDate) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         try {
             this.startDate = format.parse(startDate);
             this.endDate = format.parse(endDate);
@@ -30,7 +31,7 @@ public class Period implements Parcelable {
 
     // per rendere l'oggetto Parcelable
 
-    protected Period(Parcel in) {
+    Period(Parcel in) {
         // Leggo il long e lo converto in data
         startDate = new Date(in.readLong());
         endDate = new Date(in.readLong());

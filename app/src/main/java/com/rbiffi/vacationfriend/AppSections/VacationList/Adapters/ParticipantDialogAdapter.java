@@ -20,8 +20,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParticipantDialogAdapter extends ArrayAdapter<Participant> {
 
-    private Context context;
-    private int layoutResource;
+    private final Context context;
+    private final int layoutResource;
     private List<Participant> participantList;
 
     private IParticipantDialogEvents listener;
@@ -50,6 +50,7 @@ public class ParticipantDialogAdapter extends ArrayAdapter<Participant> {
 
         // gli oggetti con cui confronto sono sempre diversi da quelli salvati poiché ottenuti dal DB
         // devo confrontarli con il loro campo univoco, ossia l'email
+        assert selected != null;
         int elementPosition = indexOf(selected, selectedParticipants);
         boolean isSelected = elementPosition >= 0;
         dialogCheckboxParticipantView.setChecked(isSelected);

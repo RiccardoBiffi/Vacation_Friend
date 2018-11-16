@@ -46,7 +46,7 @@ public class ActivityVacationList extends ActivityNavigateAppObj {
     }
 
     @NonNull
-    protected FragmentAdapter getFragmentAdapter() {
+    private FragmentAdapter getFragmentAdapter() {
         return new FragmentAdapter(getSupportFragmentManager());
     }
 

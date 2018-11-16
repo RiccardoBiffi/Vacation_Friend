@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +34,9 @@ public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipant
         this.viewModel = viewModel;
     }
 
+    @NonNull
     @Override
-    public ParticipantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ParticipantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_OBJECT:
@@ -48,7 +50,7 @@ public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipant
     }
 
     @Override
-    public void onBindViewHolder(ParticipantViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ParticipantViewHolder holder, int position) {
         if (position > 0) {
             Participant current = participants.get(position - 1);
 
@@ -75,7 +77,7 @@ public class ViewParticipantAdapter extends RecyclerView.Adapter<ViewParticipant
         private final CircleImageView profileView;
         private final TextView nameView;
 
-        public ParticipantViewHolder(View itemView) {
+        ParticipantViewHolder(View itemView) {
             super(itemView);
 
             profileView = itemView.findViewById(R.id.partecipant_field_picture);

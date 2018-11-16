@@ -30,7 +30,7 @@ public interface IJoinVacationParticipantDao {
     void insert(JoinVacationParticipant jvp);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertList(List<JoinVacationParticipant> jvps);
+    void insertList(List<JoinVacationParticipant> jvps);
 
 
     //UPDATE

@@ -20,8 +20,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditParticipantAdapter extends ArrayAdapter<Participant> {
 
-    private Context context;
-    private int layoutResource;
+    private final Context context;
+    private final int layoutResource;
     private List<Participant> participantList;
 
 
@@ -39,6 +39,7 @@ public class EditParticipantAdapter extends ArrayAdapter<Participant> {
         convertView = inflater != null ? inflater.inflate(layoutResource, parent, false) : null;
         Participant current = getItem(position);
 
+        assert convertView != null;
         CircleImageView partecipantPictureView = convertView.findViewById(R.id.partecipant_picture);
         TextView partecipantNameView = convertView.findViewById(R.id.partecipant_name);
         ImageButton removeParticipantView = convertView.findViewById(R.id.remove_partic_button);

@@ -56,7 +56,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toEndOf="@+id/ptutorial_vacationlist_calltoaction"
-            app:layout_constraintTop_toTopOf="@+id/barrier2" />
+            app:layout_constraintTop_toTopOf="@+id/barrier2"
+            android:contentDescription="TODO" />
 
         <android.support.constraint.Barrier
             android:id="@+id/barrier2"

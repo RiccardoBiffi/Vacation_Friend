@@ -68,7 +68,7 @@ public class ActivityVacation
         setContentView(R.layout.activity_navigate_app);
     }
 
-    public VacationViewModel getActivityViewModel() {
+    private VacationViewModel getActivityViewModel() {
         return ViewModelProviders.of(this).get(VacationViewModel.class);
     }
 
@@ -109,19 +109,13 @@ public class ActivityVacation
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
     private void saveImmediateNeedingDataFromParcel(Vacation current) {
         viewModel.setVacationId(current.id);
         viewModel.setFieldTitle(current.title);
         viewModel.setFieldPhoto(current.photo);
     }
 
-    protected void restoreState(Bundle savedInstanceState) {
+    private void restoreState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             String title = savedInstanceState.getString(Constants.IN_TITLE);
             if (title != null) viewModel.setFieldTitle(title);
@@ -200,11 +194,13 @@ public class ActivityVacation
                 switch (item.getItemId()) {
                     case R.id.actionHome:
                         Fragment fHome = fm.findFragmentByTag(Constants.FTAG_HOME);
+                        assert fHome != null;
                         showFragment(fHome);
                         break;
 
                     case R.id.actionItinerario:
                         Fragment fRoute = fm.findFragmentByTag(Constants.FTAG_ROUTE);
+                        assert fRoute != null;
                         showFragment(fRoute);
                         break;
 

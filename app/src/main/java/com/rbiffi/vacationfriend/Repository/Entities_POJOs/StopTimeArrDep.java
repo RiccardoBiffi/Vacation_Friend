@@ -4,8 +4,8 @@ import java.sql.Time;
 
 public class StopTimeArrDep {
 
-    public Time arrivalTime;
-    public Time departureTime;
+    public final Time arrivalTime;
+    public final Time departureTime;
 
     public StopTimeArrDep(Time arrival, Time departure) {
         this.arrivalTime = arrival;

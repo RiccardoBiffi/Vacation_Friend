@@ -47,7 +47,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
 
-        android:text="Nome Cognome"
+        android:text="@string/ph_name_lastname"
         android:gravity="center_vertical"
         android:ellipsize="end"
 

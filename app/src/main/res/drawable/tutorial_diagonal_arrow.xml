@@ -4,4 +4,4 @@
     android:pivotX="50%"
     android:pivotY="50%"
     android:toDegrees="45"
-    android:drawable="@drawable/ic_arrow_forward_24dp"></rotate>
+    android:drawable="@drawable/ic_arrow_forward_24dp" />

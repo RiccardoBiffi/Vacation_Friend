@@ -26,15 +26,15 @@ public class VacationFriendRepository {
 
 
     private static volatile VacationFriendRepository REPOSITORY = null;
-    private IVacationDao vacationDao;
+    private final IVacationDao vacationDao;
 
-    private LiveData<List<Vacation>> vacationListNow;
-    private LiveData<List<Vacation>> vacationListNext;
-    private LiveData<List<Vacation>> vacationListPrevious;
-    private LiveData<List<Vacation>> storedVacation;
-    private IParticipantDao participantDao;
-    private LiveData<List<Participant>> allParticipantList;
-    private IJoinVacationParticipantDao jVacationParticipantDao;
+    private final LiveData<List<Vacation>> vacationListNow;
+    private final LiveData<List<Vacation>> vacationListNext;
+    private final LiveData<List<Vacation>> vacationListPrevious;
+    private final LiveData<List<Vacation>> storedVacation;
+    private final IParticipantDao participantDao;
+    private final LiveData<List<Participant>> allParticipantList;
+    private final IJoinVacationParticipantDao jVacationParticipantDao;
 
     private LiveData<Vacation> currentVacation;
     private LiveData<List<Participant>> currentParticipants;
@@ -135,7 +135,7 @@ public class VacationFriendRepository {
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private static class InsertAsyncTask extends AsyncTask<Vacation, Void, Long> {
 
-        private IVacationDao asyncDao;
+        private final IVacationDao asyncDao;
 
         InsertAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;
@@ -157,7 +157,7 @@ public class VacationFriendRepository {
     // classe interna per la gestione dei task, asincroni rispetto l'UI.
     private static class DeleteAsyncTask extends AsyncTask<Long, Void, Void> {
 
-        private IVacationDao asyncDao;
+        private final IVacationDao asyncDao;
 
         DeleteAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;
@@ -173,7 +173,7 @@ public class VacationFriendRepository {
 
     private static class StoreAsyncTask extends AsyncTask<Long, Void, Void> {
 
-        private IVacationDao asyncDao;
+        private final IVacationDao asyncDao;
 
         StoreAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;
@@ -188,7 +188,7 @@ public class VacationFriendRepository {
 
     private static class UnstoreAsyncTask extends AsyncTask<Long, Void, Void> {
 
-        private IVacationDao asyncDao;
+        private final IVacationDao asyncDao;
 
         UnstoreAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;
@@ -204,7 +204,7 @@ public class VacationFriendRepository {
 
     private static class InsertListParticipantsAsyncTask extends AsyncTask<JoinVacationParticipantListWrapper, Void, Void> {
 
-        private IJoinVacationParticipantDao asyncDao;
+        private final IJoinVacationParticipantDao asyncDao;
 
         InsertListParticipantsAsyncTask(IJoinVacationParticipantDao vacationDao) {
             asyncDao = vacationDao;
@@ -220,7 +220,7 @@ public class VacationFriendRepository {
 
     private static class UpdateAsyncTask extends AsyncTask<Vacation, Void, Long> {
 
-        private IVacationDao asyncDao;
+        private final IVacationDao asyncDao;
 
         UpdateAsyncTask(IVacationDao vacationDao) {
             asyncDao = vacationDao;

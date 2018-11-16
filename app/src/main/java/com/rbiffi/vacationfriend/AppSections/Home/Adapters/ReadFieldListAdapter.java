@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Home.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,9 +41,9 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     private static final int VIEW_TYPE_PHOTO = 4;
     private static final int VIEW_TYPE_NOTES = 5;
 
-    private Context context;
-    private VacationViewModel viewModel;
-    private List<String> fieldList;
+    private final Context context;
+    private final VacationViewModel viewModel;
+    private final List<String> fieldList;
 
     private final LayoutInflater inflater;
     private IVacationListClickEvents listener;
@@ -65,8 +66,9 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
         return valuedFields;
     }
 
+    @NonNull
     @Override
-    public SummaryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SummaryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_PERIOD:
@@ -86,7 +88,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     }
 
     @Override
-    public void onBindViewHolder(SummaryViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull SummaryViewHolder holder, final int position) {
         final String field = fieldList.get(position);
         switch (field) {
             case Constants.F_PERIOD:
@@ -138,7 +140,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
     }
 
     private Date formattedStringToDate(String value) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date();
         try {
             date = value == null ? null : format.parse(value);
@@ -183,7 +185,7 @@ public class ReadFieldListAdapter extends RecyclerView.Adapter<ReadFieldListAdap
 
         private final TextView placeView;
 
-        private TextView partecipantNumber;
+        private final TextView partecipantNumber;
         private final RecyclerView partecipantListView;
 
         // todo view degli altri elementi del sommario
