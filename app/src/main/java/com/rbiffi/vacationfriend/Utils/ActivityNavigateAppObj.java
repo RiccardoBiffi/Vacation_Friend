@@ -31,7 +31,7 @@ public abstract class ActivityNavigateAppObj extends AppCompatActivity {
     protected abstract void setActivityContentView();
 
 
-    protected void setupActionBar() {
+    private void setupActionBar() {
         toolbar = getToolbarView();
         setSupportActionBar(toolbar); // trasforma la toolbar in una action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

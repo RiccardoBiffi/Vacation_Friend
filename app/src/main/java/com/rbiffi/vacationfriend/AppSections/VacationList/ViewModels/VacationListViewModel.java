@@ -15,13 +15,13 @@ public class VacationListViewModel extends AndroidViewModel {
     //warning: non salvare Activity, Fragment, View o contesti in quanto cambiano più spesso dei dati
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
 
-    private VacationFriendRepository repository;
+    private final VacationFriendRepository repository;
 
-    private LiveData<List<Vacation>> vacationsNow;
-    private LiveData<List<Vacation>> vacationsNext;
-    private LiveData<List<Vacation>> vacationsPrevious;
+    private final LiveData<List<Vacation>> vacationsNow;
+    private final LiveData<List<Vacation>> vacationsNext;
+    private final LiveData<List<Vacation>> vacationsPrevious;
 
-    private LiveData<List<Vacation>> storedVacation;
+    private final LiveData<List<Vacation>> storedVacation;
     private Vacation selected;
 
     public VacationListViewModel(@NonNull Application app) {

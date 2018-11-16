@@ -99,7 +99,6 @@
         android:layout_height="wrap_content"
 
         android:text="@string/button_done"
-        android:background="@drawable/abc_btn_default_mtrl_shape"
         app:layout_constraintBottom_toTopOf="@id/group_separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

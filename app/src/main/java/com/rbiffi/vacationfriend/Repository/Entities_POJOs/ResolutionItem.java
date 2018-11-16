@@ -11,10 +11,10 @@ import java.util.Date;
 
 public class ResolutionItem implements Parcelable {
 
-    private Uri payerIcon;
-    private String title;
-    private String sign;
-    private String value;
+    private final Uri payerIcon;
+    private final String title;
+    private final String sign;
+    private final String value;
     private Date date;
 
     public ResolutionItem(Uri payerIcon, String title, String sign, String value, Date date) {
@@ -25,7 +25,7 @@ public class ResolutionItem implements Parcelable {
         this.date = date;
     }
 
-    protected ResolutionItem(Parcel in) {
+    private ResolutionItem(Parcel in) {
         payerIcon = in.readParcelable(Uri.class.getClassLoader());
         title = in.readString();
         sign = in.readString();
@@ -75,6 +75,7 @@ public class ResolutionItem implements Parcelable {
 
     public String getExpenseDate() {
         String dateString = Converters.dateToUserInterface(date);
+        assert dateString != null;
         return dateString.substring(0, dateString.length() - 5);
     }
 }

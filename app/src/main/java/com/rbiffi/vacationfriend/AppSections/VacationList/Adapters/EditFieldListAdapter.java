@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
@@ -63,8 +64,8 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
 
     private final LayoutInflater inflater;
 
-    private Context appContext;
-    private List<String> fieldList;
+    private final Context appContext;
+    private final List<String> fieldList;
 
     private EditParticipantAdapter fieldParticipantsAdapter;
 
@@ -122,7 +123,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
     }
 
     @Override
-    public void onBindViewHolder(final FieldViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FieldViewHolder holder, int position) {
         final String field = fieldList.get(position);
         switch (field) {
 
@@ -548,8 +549,7 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
         String myFormat = "HH:mm";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALY);
 
-        EditText dateText = (EditText) arrivalTimeView;
-        dateText.setText(sdf.format(calendarTime.getTime()));
+        arrivalTimeView.setText(sdf.format(calendarTime.getTime()));
     }
 
 

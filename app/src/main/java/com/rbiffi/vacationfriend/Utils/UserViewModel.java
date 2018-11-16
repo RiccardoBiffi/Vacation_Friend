@@ -12,9 +12,9 @@ import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Participant;
 
 public abstract class UserViewModel extends AndroidViewModel {
 
-    protected Participant myself;
+    private final Participant myself;
 
-    public UserViewModel(@NonNull Application application) {
+    protected UserViewModel(@NonNull Application application) {
         super(application);
 
         this.myself = new Participant(application.getString(R.string.ph_user_email),

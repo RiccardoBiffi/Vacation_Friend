@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class ActivityEditAppObject
         extends AppCompatActivity
@@ -54,10 +55,10 @@ public abstract class ActivityEditAppObject
 
     protected EditAppObjectViewModel viewModel;
 
-    protected Toolbar toolbar;
+    private Toolbar toolbar;
 
     protected Button confirm;
-    protected Button discard;
+    private Button discard;
 
     protected Button vacationImageAddButton; // todo valuta se rimuoverli da qua
     protected ImageButton vacationImageButton; // fanno parte dell'adapter, photo field
@@ -177,8 +178,8 @@ public abstract class ActivityEditAppObject
     }
 
     protected void setupActivityButtons() {
-        confirm = findViewById(R.id.saveBottonAction);
-        discard = findViewById(R.id.undoBottonAction);
+        confirm = findViewById(R.id.saveButtonAction);
+        discard = findViewById(R.id.undoButtonAction);
     }
 
     public String getTitleField() {
@@ -289,7 +290,7 @@ public abstract class ActivityEditAppObject
     }
 
     protected boolean checkDateConsistency(String periodFrom, String periodTo) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date startDate = new Date();
         Date endDate = new Date();
         try {
@@ -411,15 +412,6 @@ public abstract class ActivityEditAppObject
         }
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
-        }
-    }
-
-    public static void showKeyboard(Activity activity, View view) {
-        if (view.requestFocus()) {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-            }
         }
     }
 

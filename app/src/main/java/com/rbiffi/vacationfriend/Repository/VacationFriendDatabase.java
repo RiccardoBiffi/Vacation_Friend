@@ -34,7 +34,7 @@ import com.rbiffi.vacationfriend.Utils.Converters;
 public abstract class VacationFriendDatabase extends RoomDatabase {
 
     private static VacationFriendDatabase INSTANCE;
-    private static RoomDatabase.Callback roomDbCallback = new Callback() {
+    private static final RoomDatabase.Callback roomDbCallback = new Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);

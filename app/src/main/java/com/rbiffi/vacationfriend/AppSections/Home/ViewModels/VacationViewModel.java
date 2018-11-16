@@ -25,7 +25,7 @@ import java.util.List;
 
 public class VacationViewModel extends UserViewModel {
 
-    private VacationFriendRepository repository;
+    private final VacationFriendRepository repository;
 
     // oggetti aggiornati dal DB quando modificati
     private LiveData<Vacation> currentVacation;

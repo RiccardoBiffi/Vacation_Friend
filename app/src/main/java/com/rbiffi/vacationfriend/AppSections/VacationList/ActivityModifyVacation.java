@@ -3,7 +3,6 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
@@ -21,15 +20,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ActivityModifyVacation
         extends ActivityNewVacation
         implements VacationFriendRepository.IRepositoryListener {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
 
     @Override
@@ -44,7 +39,7 @@ public class ActivityModifyVacation
         if (viewModel.getVacationId() == EditAppObjectViewModel.FIRST_EXECUTION && current != null) {
             viewModel.setVacationId(current.id);
             viewModel.setTitle(current.title);
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             viewModel.setPeriodFrom(format.format(current.period.startDate));
             viewModel.setPeriodTo(format.format(current.period.endDate));
             viewModel.setPlace(current.place);

@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Home.Adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,8 +38,9 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
         this.activityLogs = discussions;
     }
 
+    @NonNull
     @Override
-    public LogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_HEADER:
@@ -54,7 +57,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
     }
 
     @Override
-    public void onBindViewHolder(LogViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LogViewHolder holder, int position) {
         if (position == 0) {
             holder.sectionHeaderView.setText(R.string.activitylog_header_today);
         } else {
@@ -67,7 +70,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
     }
 
     private CharSequence showTimeOfDay(Date logDateTime) {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return dateFormat.format(logDateTime);
     }
 
@@ -89,7 +92,7 @@ public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewH
         private final TextView logDateTimeView;
         private final TextView sectionHeaderView;
 
-        public LogViewHolder(View itemView) {
+        LogViewHolder(View itemView) {
             super(itemView);
 
             actorPhotoView = itemView.findViewById(R.id.actor_picture);

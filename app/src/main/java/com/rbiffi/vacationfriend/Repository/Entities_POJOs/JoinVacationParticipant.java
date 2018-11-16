@@ -30,12 +30,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                         childColumns = "userEmail")
         })
 public class JoinVacationParticipant {
-    @NonNull
+
     public final long vacationId;
     @NonNull
     public final String userEmail;
 
-    public JoinVacationParticipant(long vacationId, String userEmail) {
+    public JoinVacationParticipant(long vacationId, @NonNull String userEmail) {
         this.vacationId = vacationId;
         this.userEmail = userEmail;
     }

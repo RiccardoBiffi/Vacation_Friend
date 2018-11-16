@@ -10,7 +10,7 @@ import java.util.Locale;
 public class RouteDay
         extends RouteElement
         implements StickyHeader {
-    public String currentDay;
+    public final String currentDay;
 
     public RouteDay(Date currentStopDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.getDefault());

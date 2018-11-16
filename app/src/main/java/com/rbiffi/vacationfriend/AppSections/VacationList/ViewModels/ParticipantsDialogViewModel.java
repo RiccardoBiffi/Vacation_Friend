@@ -17,9 +17,9 @@ public class ParticipantsDialogViewModel extends AndroidViewModel {
     //nb: il ViewModel non sostituisce l'istanza salvata da onSaveInstanceState perché non sopravvive al kill del processo
     //Salva la lista dei partecipanti presa dal DB e quali sono stati selezionati dall'utente
 
-    private VacationFriendRepository repository;
+    private final VacationFriendRepository repository;
 
-    private LiveData<List<Participant>> allPartecipants;
+    private final LiveData<List<Participant>> allPartecipants;
     private List<Participant> selectedParticipants;
 
     public ParticipantsDialogViewModel(@NonNull Application app) {

@@ -94,8 +94,9 @@ public class RouteAdapter
         return result;
     }
 
+    @NonNull
     @Override
-    public RouteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RouteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_STOP_VIEW:
@@ -124,7 +125,7 @@ public class RouteAdapter
     }
 
     @Override
-    public void onBindViewHolder(final RouteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RouteViewHolder holder, int position) {
 
         if (position >= route.size()) {
             ViewGroup.LayoutParams layoutParams = holder.spaceFooter.getLayoutParams();

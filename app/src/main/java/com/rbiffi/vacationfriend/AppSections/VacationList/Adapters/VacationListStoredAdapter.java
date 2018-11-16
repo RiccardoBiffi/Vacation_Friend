@@ -3,6 +3,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
     private static final int VIEW_TYPE_FOOTER = 2;
     private final LayoutInflater inflater;
-    private Context context;
+    private final Context context;
     private IVacationListClickEvents listener;
     private List<Vacation> vacationList;
 
@@ -39,8 +40,9 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
                 context.getResources().getResourceEntryName(resID));
     }
 
+    @NonNull
     @Override
-    public VacationStoredViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VacationStoredViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_OBJECT_VIEW:
@@ -57,7 +59,7 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
     }
 
     @Override
-    public void onBindViewHolder(VacationStoredViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VacationStoredViewHolder holder, int position) {
         if (position != vacationList.size()) {
             //rimpiazza i dati ed assegna i click per la posizione corrente
             final Vacation current = vacationList.get(position);

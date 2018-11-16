@@ -59,8 +59,8 @@ public class FragmentAddParticipantsDialog
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.edit_participants_dialog, null);
         ListView lv = v.findViewById(R.id.dialog_allparticipant_list);
-        Button undoButton = v.findViewById(R.id.undoBottonAction);
-        Button confirmButton = v.findViewById(R.id.saveBottonAction);
+        Button undoButton = v.findViewById(R.id.undoButtonAction);
+        Button confirmButton = v.findViewById(R.id.saveButtonAction);
         final ProgressBar progressCircle = v.findViewById(R.id.dialog_participants_progressbar);
         final View footer = inflater.inflate(R.layout.edit_participants_dialog_footer, null);
         Button inviteButton = footer.findViewById(R.id.dialog_invite_button);

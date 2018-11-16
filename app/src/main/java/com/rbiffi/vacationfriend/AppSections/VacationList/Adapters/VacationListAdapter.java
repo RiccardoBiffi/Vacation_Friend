@@ -3,6 +3,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     private static final int VIEW_TYPE_HEADER = 3;
 
     private final LayoutInflater inflater;
-    private Context context;
+    private final Context context;
     private IVacationListClickEvents listener;
 
     private List<Vacation> vacationListNow;
@@ -45,8 +46,9 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
                 context.getResources().getResourceEntryName(resID));
     }
 
+    @NonNull
     @Override
-    public VacationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VacationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case VIEW_TYPE_HEADER:
@@ -66,7 +68,7 @@ public class VacationListAdapter extends RecyclerView.Adapter<VacationListAdapte
     }
 
     @Override
-    public void onBindViewHolder(VacationViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VacationViewHolder holder, int position) {
         if (isHeader(position)) {
             if (position == 0) {
                 if (vacationListNow.size() == 0 && vacationListNext.size() == 0) {
