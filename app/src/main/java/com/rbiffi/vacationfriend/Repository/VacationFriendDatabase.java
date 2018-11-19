@@ -85,14 +85,21 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
 
         private void initializeVacations() {
             Period p = new Period("27/12/2018", "4/01/2019");
-            Uri photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo5);
-            Vacation v = new Vacation("Capodanno 2018", p, "Collina, Forni Avoltri", photo, false);
+            Uri photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo7);
+            Vacation v = new Vacation("Capodanno 2018", p, "Collina, Forni Avoltri", photo, true);
             long id = vDao.insert(v);
             jvpDao.insert(new JoinVacationParticipant(id, "test1@domain.com"));
             jvpDao.insert(new JoinVacationParticipant(id, "test6@domain.com"));
             jvpDao.insert(new JoinVacationParticipant(id, "test3@domain.com"));
             jvpDao.insert(new JoinVacationParticipant(id, "test5@domain.com"));
 
+            p = new Period("25/08/2018", "02/09/2018");
+            photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
+            v = new Vacation("Vacanze in Croazia 2018", p, "Rovigno, Croazia", photo, false);
+            id = vDao.insert(v);
+            jvpDao.insert(new JoinVacationParticipant(id, "test1@domain.com"));
+            jvpDao.insert(new JoinVacationParticipant(id, "test3@domain.com"));
+            jvpDao.insert(new JoinVacationParticipant(id, "test6@domain.com"));
 
             p = new Period("27/08/2019", "05/09/2019");
             photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo6);
@@ -104,15 +111,6 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
             jvpDao.insert(new JoinVacationParticipant(id, "test4@domain.com"));
             jvpDao.insert(new JoinVacationParticipant(id, "test5@domain.com"));
             jvpDao.insert(new JoinVacationParticipant(id, "test6@domain.com"));
-
-            p = new Period("25/08/2018", "02/09/2018");
-            photo = Uri.parse("android.resource://com.rbiffi.vacationfriend/" + R.drawable.vacation_photo);
-            v = new Vacation("Vacanze in Croazia 2018", p, "Rovigno, Croazia", photo, true);
-            id = vDao.insert(v);
-            jvpDao.insert(new JoinVacationParticipant(id, "test1@domain.com"));
-            jvpDao.insert(new JoinVacationParticipant(id, "test3@domain.com"));
-            jvpDao.insert(new JoinVacationParticipant(id, "test6@domain.com"));
-
         }
 
         private void initializeParticipants() {

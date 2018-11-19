@@ -223,4 +223,5 @@
     <string name="stop_details">Stop details activity</string>
     <string name="field_partic_singol">partecipant</string>
     <string name="todo" translatable="false">TODO</string>
+    <string name="start_invite_participants_activity">Invite contacts Activity</string>
 </resources>

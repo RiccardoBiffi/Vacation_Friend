@@ -4,6 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -284,9 +287,13 @@ public class EditFieldListAdapter extends RecyclerView.Adapter<EditFieldListAdap
                     try {
                         Uri imageUri = listener.getPhotoField();
                         InputStream inputStream = appContext.getContentResolver().openInputStream(imageUri);
-                        Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                        holder.photoButtonAddView.setVisibility(View.GONE);
 
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 2; // comprimo di un fattore di 2 l'immagine (dovrei mettere un IF
+                        Bitmap imageBit = BitmapFactory.decodeStream(inputStream, null, options);
+                        Drawable userImage = new BitmapDrawable(appContext.getResources(), imageBit);
+
+                        holder.photoButtonAddView.setVisibility(View.GONE);
                         holder.photoImageButtonView.setBackground(userImage);
                         holder.photoImageButtonView.setVisibility(View.VISIBLE);
                     } catch (FileNotFoundException e) {
