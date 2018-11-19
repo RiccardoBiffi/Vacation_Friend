@@ -2,6 +2,10 @@ package com.rbiffi.vacationfriend.AppSections.VacationList.Adapters;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationListClickEvents;
 import com.rbiffi.vacationfriend.R;
 import com.rbiffi.vacationfriend.Repository.Entities_POJOs.Vacation;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationListStoredAdapter.VacationStoredViewHolder> {
@@ -74,7 +80,21 @@ public class VacationListStoredAdapter extends RecyclerView.Adapter<VacationList
             });
 
             Uri photoUri = !current.photo.toString().equals("") ? current.photo : resourceToUri(context, R.drawable.vacation_default_photo);
-            holder.vacationImageView.setImageURI(photoUri);
+            try {
+                InputStream inputStream = context.getContentResolver().openInputStream(photoUri);
+                if (inputStream.available() <= 2097152) { // immagine più piccola di 2MB
+                    holder.vacationImageView.setImageURI(photoUri);
+                } else {
+                    int compressionFactor = inputStream.available() <= 4194304 ? 2 : 4;
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = compressionFactor; // comprimo di un fattore di 2 o 4 l'immagine
+                    Bitmap imageBit = BitmapFactory.decodeStream(inputStream, null, options);
+                    Drawable userImage = new BitmapDrawable(context.getResources(), imageBit);
+                    holder.vacationImageView.setImageDrawable(userImage);
+                }
+            } catch (Exception fnf) {
+                Toast.makeText(context, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
+            }
             holder.vacationImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
