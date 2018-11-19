@@ -3,6 +3,10 @@ package com.rbiffi.vacationfriend.AppSections.Home;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +21,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.Home.ViewModels.VacationViewModel;
 import com.rbiffi.vacationfriend.AppSections.Itinerario.FragmentRoute;
@@ -30,6 +35,7 @@ import com.rbiffi.vacationfriend.Utils.ActivityNavigateAppObj;
 import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.Utils.Converters;
 
+import java.io.InputStream;
 import java.util.List;
 
 // classe che contiene e gestisce i frammenti collegati alla navigazione primaria dell'app
@@ -149,7 +155,24 @@ public class ActivityVacation
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setTitle(viewModel.getFieldTitle());
         vacationPhoto = findViewById(R.id.vacation_collapsing_image);
-        vacationPhoto.setImageURI(viewModel.getFieldPhoto());
+
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(viewModel.getFieldPhoto());
+            if (inputStream.available() <= 2097152) { // immagine più piccola di 2MB
+                Drawable userImage = Drawable.createFromStream(inputStream, viewModel.getFieldPhoto().toString());
+                vacationPhoto.setBackground(userImage);
+            } else {
+                int compressionFactor = inputStream.available() <= 4194304 ? 2 : 4;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = compressionFactor; // comprimo di un fattore di 2 o 4 l'immagine
+                Bitmap imageBit = BitmapFactory.decodeStream(inputStream, null, options);
+                Drawable userImage = new BitmapDrawable(getResources(), imageBit);
+                vacationPhoto.setBackground(userImage);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void setupFragmentsAndStartHome(Bundle savedInstanceState) {

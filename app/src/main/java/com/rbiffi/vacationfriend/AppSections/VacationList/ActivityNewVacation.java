@@ -3,6 +3,9 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +24,6 @@ import com.rbiffi.vacationfriend.Utils.ActivityEditAppObject;
 import com.rbiffi.vacationfriend.Utils.Constants;
 import com.rbiffi.vacationfriend.Utils.FieldLists;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -284,20 +286,28 @@ public class ActivityNewVacation
             try {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
                 savePhotoField(imageUri);
-                Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
-                vacationImageAddButton.setVisibility(View.GONE);
+                if (inputStream.available() <= 2097152) { // immagine più piccola di 2MB
+                    Drawable userImage = Drawable.createFromStream(inputStream, imageUri.toString());
+                    vacationImageButton.setBackground(userImage);
+                } else {
+                    int compressionFactor = inputStream.available() <= 4194304 ? 2 : 4;
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = compressionFactor; // comprimo di un fattore di 2 o 4 l'immagine
+                    Bitmap imageBit = BitmapFactory.decodeStream(inputStream, null, options);
+                    Drawable userBitmap = new BitmapDrawable(getResources(), imageBit);
 
-                vacationImageButton.setBackground(userImage);
+                    vacationImageButton.setBackground(userBitmap);
+                }
+                vacationImageAddButton.setVisibility(View.GONE);
                 vacationImageButton.setVisibility(View.VISIBLE);
                 vacationImageButton.requestLayout();
                 vacationImageButton.getParent().requestChildFocus(vacationImageButton, vacationImageButton);
-
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 Toast.makeText(this, R.string.err_photo_not_found, Toast.LENGTH_SHORT).show();
             }
         }
         if (resultCode == Activity.RESULT_CANCELED && requestCode == PICK_IMAGE) {
-            if (getPhotoField() == null) {
+            if (getPhotoField().toString().isEmpty()) {
                 vacationImageButton.setVisibility(View.GONE);
             }
         }

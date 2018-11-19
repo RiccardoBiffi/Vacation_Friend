@@ -70,7 +70,7 @@ public class FragmentAddParticipantsDialog
         inviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Start InviteContactsActivity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.start_invite_participants_activity), Toast.LENGTH_SHORT).show();
             }
         });
 

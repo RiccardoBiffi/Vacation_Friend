@@ -244,7 +244,6 @@ public abstract class ActivityEditAppObject
 
     public void saveTimeDepartureField(String departureTime) {
         viewModel.setTimeDepartureField(departureTime);
-
     }
 
     public int getStopIconField() {
