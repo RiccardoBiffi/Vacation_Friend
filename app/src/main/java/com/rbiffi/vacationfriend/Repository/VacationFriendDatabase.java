@@ -34,10 +34,10 @@ import com.rbiffi.vacationfriend.Utils.Converters;
 public abstract class VacationFriendDatabase extends RoomDatabase {
 
     private static VacationFriendDatabase INSTANCE;
-    private static final RoomDatabase.Callback roomDbCallback = new Callback() {
+    private static final RoomDatabase.Callback roomDbInitialization = new Callback() {
         @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
             new PopulateDbAsync(INSTANCE).execute();
         }
     };
@@ -49,7 +49,7 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(), VacationFriendDatabase.class, "VacationDB")
                             .fallbackToDestructiveMigration()
-                            .addCallback(roomDbCallback)
+                            .addCallback(roomDbInitialization)
                             .build();
                 }
             }
@@ -59,7 +59,6 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
 
     public abstract IVacationDao getVacationDao();
     public abstract IParticipantDao getParticipantDao();
-
     public abstract IJoinVacationParticipantDao getJoinVacationParticipantDao();
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -76,8 +75,6 @@ public abstract class VacationFriendDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... vacations) {
-            vDao.deleteAll();
-
             initializeParticipants();
             initializeVacations();
             return null;
