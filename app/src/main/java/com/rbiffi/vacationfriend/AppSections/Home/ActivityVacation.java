@@ -2,6 +2,8 @@ package com.rbiffi.vacationfriend.AppSections.Home;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -106,8 +108,6 @@ public class ActivityVacation
                             }
                         });
                         viewModel.setFieldPhoto(vacation.photo);
-
-                        setupTitleAndPicture();
                     }
                 }
             });
@@ -118,7 +118,15 @@ public class ActivityVacation
     private void saveImmediateNeedingDataFromParcel(Vacation current) {
         viewModel.setVacationId(current.id);
         viewModel.setFieldTitle(current.title);
-        viewModel.setFieldPhoto(current.photo);
+        Uri photoUri = !current.photo.toString().equals("") ? current.photo : resourceToUri(getApplicationContext(), R.drawable.vacation_default_photo);
+        viewModel.setFieldPhoto(photoUri);
+    }
+
+    private static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID));
     }
 
     private void restoreState(Bundle savedInstanceState) {
