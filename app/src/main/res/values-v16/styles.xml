@@ -11,6 +11,14 @@
         <item name="android:background">@drawable/background_button_default</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:minHeight">40dip</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="AppTheme.Button.Confirm" parent="AppTheme.Button">
+        <item name="android:background">@drawable/background_button_confirm</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="RadioButtonCustom" parent="SubfieldsSmall">

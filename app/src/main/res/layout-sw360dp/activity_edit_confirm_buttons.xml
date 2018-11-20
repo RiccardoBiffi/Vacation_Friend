@@ -5,22 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:background="@color/colorPrimary"
+    android:padding="2dp"
     app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
         android:id="@+id/undoButtonAction"
-        style="@style/UndoButtonMedium"
+        style="@style/AppTheme.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/button_ignore" />
+        android:text="@string/button_ignore"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/saveButtonAction"
-        style="@style/PrimaryButtonMedium"
+        style="@style/AppTheme.Button.Confirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/button_create" />
+        android:text="@string/button_create"
+        android:textSize="18sp" />
 
 </LinearLayout>
