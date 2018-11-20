@@ -93,7 +93,7 @@
     <string name="ph_route_day">Giorno GG mese AAAA</string>
     <string name="route_stop_departure">Partenza alle %s</string>
     <string name="route_stop_arrival">Arrivo alle %s</string>
-    <string name="vehicle_choose">Scegli come spostarti…</string>
+    <string name="vehicle_choose">Scegli come spostarti</string>
     <string name="cd_route_vehicle_missing">Icona di mezzo non specificato</string>
     <string name="activity_title_new_routeStop">Nuova tappa</string>
     <string name="input_day_ob">Data*</string>
@@ -151,7 +151,7 @@
     <string name="resolution_to">a</string>
     <string name="resolution_done_dialog_title">Doppia conferma</string>
     <string name="resolution_done_dialog_message">Le spese verranno risolte quando anche l\'altra persona avrà confermato.</string>
-    <string name="button_wait">Attesa…</string>
+    <string name="button_wait">Attesa</string>
     <string name="ptutorial_lists_personal_calltoaction">Tocca qui per creare una nuova lista personale!</string>
     <string name="ptutorial_lists_personal_whatsee">Ricorda di portare con te i tuoi beni personali, come lo spazzolino!</string>
     <string name="ptutorial_lists_collaborative_whatsee">Organizzati con gli altri per raccogliere beni per tutto il gruppo, come il cibo!</string>
@@ -168,7 +168,7 @@
     <string name="umbrella_beach">Ombrellone e sdraio spiaggia</string>
     <string name="new_list_fe">Nuova lista per tutti activity</string>
     <string name="list_details">Dettagli lista</string>
-    <string name="completed_">Completato…</string>
+    <string name="completed_">Completato</string>
     <string name="new_list_personal">Nuova lista personale activity</string>
     <string name="new_list_collaborative">Nuova lista collaborativa activity</string>
     <string name="new_expense">Nuova spesa</string>

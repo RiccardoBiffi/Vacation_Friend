@@ -104,7 +104,7 @@
     <string name="ph_route_day">Weekday DD month YYYY</string>
     <string name="route_stop_departure">Departure at %s</string>
     <string name="route_stop_arrival">Arrival at %s</string>
-    <string name="vehicle_choose">Tap to choose a vehicle…</string>
+    <string name="vehicle_choose">Tap to choose a vehicle</string>
     <string name="cd_route_vehicle_missing">Missing vehicle stopIcon</string>
     <string name="activity_title_new_routeStop">New stop</string>
     <string name="input_day_ob">Date*</string>
@@ -193,7 +193,7 @@
     <string name="resolution_done_dialog_title">Double confirmation</string>
     <string name="resolution_done_dialog_message">The expenses will be resolved when the other person has confirmed, too.</string>
     <string name="button_ok" translatable="false">Ok</string>
-    <string name="button_wait">Wait…</string>
+    <string name="button_wait">Wait</string>
     <string name="ptutorial_lists_personal_calltoaction">Tap here to crete a new personal list!</string>
     <string name="ptutorial_lists_personal_whatsee">Remember to bring with you your personal goods, like your toothbrush!</string>
     <string name="ptutorial_lists_collaborative_whatsee">Get organized with others to collect goods for the whole group, like food!</string>
@@ -205,7 +205,7 @@
     <string name="beach_accessories">Beach accessories</string>
     <string name="new_list_fe">New list for everybody activity</string>
     <string name="list_details">List details</string>
-    <string name="completed_">Completed…</string>
+    <string name="completed_">Completed</string>
     <string name="new_list_personal">New personal list activity</string>
     <string name="new_list_collaborative">New collaborative list activity</string>
     <string name="new_expense">New expense</string>

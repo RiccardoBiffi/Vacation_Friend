@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/colorPrimary"
-    android:padding="4dp"
     app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
@@ -16,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/button_ignore"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/saveButtonAction"
@@ -25,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/button_create"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
