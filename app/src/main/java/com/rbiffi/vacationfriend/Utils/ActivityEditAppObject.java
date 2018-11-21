@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
@@ -52,6 +53,8 @@ public abstract class ActivityEditAppObject
     // per rendere la risposta univoca a questa classe
     public static final String EXTRA_REPLY = "com.rbiffi.vacationfriend.ActivityEditAppObject.REPLY";
     protected static final int PICK_IMAGE = 1;
+
+    protected String initialFieldState;
 
     protected EditAppObjectViewModel viewModel;
 
@@ -88,6 +91,7 @@ public abstract class ActivityEditAppObject
         getActivityViewModel();
         setupListWithAdapter();
         saveDataFromIntentMaybe();
+        initialFieldState = getFieldState();
         restoreState(savedInstanceState);
         setupActionBar();
         setupActivityButtons();
@@ -106,9 +110,15 @@ public abstract class ActivityEditAppObject
         discard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (!initialFieldState.equals(getFieldState())) {
+                    //todo apri un dialog che avvisa delle modifiche e chiede se proseguire
+                    //todo applica la stessa logica nel caso in sui l'utente preme il pulsante indietro
+                    Toast.makeText(ActivityEditAppObject.this, "Ci sono modifiche, DIALOG", Toast.LENGTH_SHORT).show();
+                } else
+                    finish();
             }
         });
+
     }
 
     private boolean isFormValid(int valid) {
@@ -151,6 +161,8 @@ public abstract class ActivityEditAppObject
     protected abstract void getActivityViewModel();
 
     protected abstract void saveDataFromIntentMaybe();
+
+    protected abstract String getFieldState();
 
     protected abstract void restoreState(Bundle savedInstanceState);
 

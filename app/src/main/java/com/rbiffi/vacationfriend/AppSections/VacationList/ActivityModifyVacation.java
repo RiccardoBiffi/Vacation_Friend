@@ -47,6 +47,7 @@ public class ActivityModifyVacation
                 @Override
                 public void onChanged(@Nullable List<Participant> participants) {
                     viewModel.setParticipants(participants);
+                    initialFieldState += viewModel.getParticipants().toString();
                     editFieldListAdapter.updateParticipants(viewModel.getParticipants());
                 }
             });
@@ -54,6 +55,17 @@ public class ActivityModifyVacation
         }
     }
 
+    @Override
+    protected String getFieldState() {
+        String result = "";
+        result += viewModel.getTitle();
+        result += viewModel.getPeriodFrom();
+        result += viewModel.getPeriodTo();
+        result += viewModel.getPlace();
+        result += viewModel.getPhoto().toString();
+        result += viewModel.getParticipants().isEmpty() ? "" : viewModel.getParticipants().toString();
+        return result;
+    }
 
     @Override
     protected EditFieldListAdapter createFieldAdapter() {

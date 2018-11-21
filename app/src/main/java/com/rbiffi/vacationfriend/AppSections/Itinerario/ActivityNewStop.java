@@ -18,7 +18,6 @@ import java.util.List;
 
 public class ActivityNewStop
         extends ActivityEditAppObject
-
 {
 
     private static final String ROUTE_STOP = "_routeStop";
@@ -56,6 +55,24 @@ public class ActivityNewStop
     @Override
     protected void saveDataFromIntentMaybe() {
         // utilizzato quando l'activity chiamante passa un App object, non per il NEW
+    }
+
+    @Override
+    protected String getFieldState() {
+        String result = "";
+        result += viewModel.getTitle();
+        result += viewModel.getPlace();
+        result += viewModel.getDateField();
+        result += viewModel.getTimeMode();
+        if (viewModel.getTimeMode() == EditAppObjectViewModel.TIME_ARRIVAL) {
+            result += viewModel.getTimeArrivalField();
+        } else {
+            result += viewModel.getTimeDepartureField();
+            result += viewModel.getRouteDeparturePlacePosition();
+        }
+        result += viewModel.getStopIconResourceField();
+        result += viewModel.getNotesField();
+        return result;
     }
 
     @Override

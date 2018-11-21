@@ -199,6 +199,18 @@ public class ActivityNewVacation
         }
     }
 
+    @Override
+    protected String getFieldState() {
+        String result = "";
+        result += viewModel.getTitle();
+        result += viewModel.getPeriodFrom();
+        result += viewModel.getPeriodTo();
+        result += viewModel.getPlace();
+        result += viewModel.getParticipants().toString();
+        result += viewModel.getPhoto().toString();
+        return result;
+    }
+
     public void onSaveInstanceState(Bundle outState) {
 
         // non controllo se gli elementi sono nulli perché il viewmodel li inizializza sempre
