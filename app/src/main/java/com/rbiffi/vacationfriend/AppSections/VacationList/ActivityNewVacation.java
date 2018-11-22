@@ -2,6 +2,7 @@ package com.rbiffi.vacationfriend.AppSections.VacationList;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

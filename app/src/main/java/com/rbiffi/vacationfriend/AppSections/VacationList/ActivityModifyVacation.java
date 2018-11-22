@@ -26,7 +26,6 @@ public class ActivityModifyVacation
         extends ActivityNewVacation
         implements VacationFriendRepository.IRepositoryListener {
 
-
     @Override
     protected void getActivityViewModel() {
         viewModel = ViewModelProviders.of(this).get(EditAppObjectViewModel.class);
