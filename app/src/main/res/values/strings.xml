@@ -224,4 +224,8 @@
     <string name="field_partic_singol">partecipant</string>
     <string name="todo" translatable="false">TODO</string>
     <string name="start_invite_participants_activity">Invite contacts Activity</string>
+    <string name="ignore_changes_title">Ignore the changes</string>
+    <string name="ignore_changes_message">Do you want to exit? You\'ll lose the changes made.</string>
+    <string name="button_exit">Exit</string>
+    <string name="button_continue_edit">Continue editing</string>
 </resources>

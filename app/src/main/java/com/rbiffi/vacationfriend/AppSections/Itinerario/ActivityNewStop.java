@@ -1,6 +1,7 @@
 package com.rbiffi.vacationfriend.AppSections.Itinerario;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -25,6 +26,11 @@ public class ActivityNewStop
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected Context getRunningActivityContext() {
+        return ActivityNewStop.this;
     }
 
     @Override

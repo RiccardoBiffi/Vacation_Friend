@@ -1,9 +1,12 @@
 package com.rbiffi.vacationfriend.Utils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -23,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rbiffi.vacationfriend.AppSections.VacationList.Adapters.EditFieldListAdapter;
 import com.rbiffi.vacationfriend.AppSections.VacationList.Events.IVacationFieldsEvents;
@@ -110,16 +112,36 @@ public abstract class ActivityEditAppObject
         discard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!initialFieldState.equals(getFieldState())) {
-                    //todo apri un dialog che avvisa delle modifiche e chiede se proseguire
-                    //todo applica la stessa logica nel caso in sui l'utente preme il pulsante indietro
-                    Toast.makeText(ActivityEditAppObject.this, "Ci sono modifiche, DIALOG", Toast.LENGTH_SHORT).show();
-                } else
-                    finish();
+                finish();
             }
         });
-
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!initialFieldState.equals(getFieldState())) {
+            AlertDialog.Builder builderConferma = new AlertDialog.Builder(getRunningActivityContext());
+            builderConferma.setMessage(R.string.ignore_changes_message);
+            builderConferma.setPositiveButton(R.string.button_exit, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    backToPreviousActivity();
+                }
+            });
+
+            builderConferma.setNegativeButton(R.string.button_continue_edit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do nothing
+                }
+            });
+            builderConferma.create().show();
+
+        } else {
+            backToPreviousActivity();
+        }
+    }
+
+    protected abstract Context getRunningActivityContext();
 
     private boolean isFormValid(int valid) {
         return valid < 0;
@@ -278,7 +300,31 @@ public abstract class ActivityEditAppObject
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        if (!initialFieldState.equals(getFieldState())) {
+            AlertDialog.Builder builderConferma = new AlertDialog.Builder(getRunningActivityContext());
+            builderConferma.setMessage(R.string.ignore_changes_message);
+            builderConferma.setPositiveButton(R.string.button_exit, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    backToPreviousActivity();
+                }
+            });
+
+            builderConferma.setNegativeButton(R.string.button_continue_edit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do nothing
+                }
+            });
+
+            builderConferma.create().show();
+        } else {
+            return backToPreviousActivity();
+        }
+        return false;
+    }
+
+    private boolean backToPreviousActivity() {
+        super.onBackPressed();
         return true;
     }
 
@@ -455,7 +501,6 @@ public abstract class ActivityEditAppObject
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public void setArrivalTimeView(EditText arrivalTimeView) {

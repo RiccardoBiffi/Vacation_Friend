@@ -97,7 +97,7 @@ public class ResolutionViewHolder extends GroupViewHolder {
             public void onClick(View v) {
                 if (action.getText().equals(context.getString(R.string.resolution_receive))) {
                     Toast.makeText(context, R.string.completed_, Toast.LENGTH_SHORT).show();
-                    // dovrei comunicare ad un listener che l'elemento non c'è più
+                    // dovrei comunicare ad un listener che l'elemento è completato
                 } else {
                     AlertDialog.Builder builderConferma = new AlertDialog.Builder(context);
                     builderConferma.setTitle(R.string.resolution_done_dialog_title);
