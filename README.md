@@ -1,5 +1,9 @@
 # Vacation_Friend
-App per l'esame di Progettazione Applicazioni Mobili.
+Codice completo dell'app per l'esame di Progettazione Applicazioni Mobili 2017-18.
+
+Docente: Stefano Burigat
+
+Studente: Riccardo Biffi - matricola 107699
 
 L’applicazione Vacation Friend permette di organizzare con semplicità ed efficacia molti aspetti delle proprie vacanze collaborando da remoto con gli amici. È rivolta ai giovani tra i 16 ed i 30 anni e, in generale, a tutti coloro a cui piace organizzare le proprie vacanze. L’applicazione vuole dare la possibilità di rilassarsi e divertirsi al meglio organizzando tutti i dettagli del viaggio in un posto solo, sincronizzandoli anche offline.
 
